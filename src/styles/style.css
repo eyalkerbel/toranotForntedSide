@@ -1,0 +1,568 @@
+/* all pages */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+html {
+  height: 100%;
+}
+body {
+  background-color: ghostwhite;
+  height: 100%;
+}
+.height100 {
+  height: 100%;
+}
+.maincontainer {
+  width: 80%;
+  display: flex;
+  margin: auto;
+  padding: 65px 2.5% 2.5% 2.5%;
+  flex-direction: column;
+  padding-bottom: 0;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  min-height: 100% !important;
+}
+
+.container {
+  padding: 5%;
+  background-color: green;
+}
+
+.header-container {
+  text-align: center;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+
+.header {
+  color: teal;
+  margin-bottom: 15px;
+  font-size: 3rem;
+}
+
+.divider {
+  width: 100%;
+  border-bottom: solid lightgray 1px;
+}
+
+/* homepage */
+.infocard {
+  display: flex;
+  background-color: ghostwhite !important;
+  width: 28%;
+  border-radius: 10px !important;
+  text-align: center;
+  justify-content: center;
+  border: solid 1px teal;
+  min-height: 30vh;
+  /* padding-right: 2%;
+  padding-left: 2%; */
+  flex-direction: column !important;
+}
+
+.MuiTouchRipple-root {
+  color: teal !important;
+}
+
+.MuiCardActionArea-root {
+  height: 100% !important;
+  padding-right: 2% !important;
+  padding-left: 2% !important;
+}
+.infocard-container1 {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: center;
+  margin-bottom: 4%;
+}
+.infocard-container2 {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: center;
+  /* margin-bottom: 3%; */
+}
+
+.icons {
+  font-size: 80px !important;
+  color: teal !important;
+  margin-top: 5%;
+}
+
+.infocard h1 {
+  color: teal;
+}
+
+.cc3 p {
+  margin-bottom: 5%;
+  font-size: 1rem;
+}
+
+/* sidebar */
+.MuiDrawer-paper {
+  background-color: white !important;
+  width: 250px !important;
+}
+
+.MuiToolbar-root {
+  background: teal;
+  height: 20px !important;
+}
+
+.header1 {
+  display: flex;
+  flex-direction: row !important;
+  background-color: teal !important;
+}
+
+.homemadetoolbar {
+  flex: 1;
+  height: 55px;
+  background-color: teal;
+  padding-left: 24px;
+  padding-right: 24px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+.homemadetoolbar2 {
+  flex: 1;
+  height: 55px;
+  background-color: teal;
+  padding-left: 24px;
+  padding-right: 24px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.backarrow {
+  position: relative;
+  right: 200px;
+}
+
+.mainlogo {
+  width: 200px;
+  margin: 30px auto 20px auto;
+}
+
+.mainlogo2 {
+  width: 300px;
+  margin: 20px auto 0 auto;
+}
+
+.cc2 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.listd {
+  color: teal !important;
+  /* text-align: center !important; */
+  /* justify-content: center !important; */
+  padding: 10px !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.icons2 {
+  margin-left: 10px;
+}
+
+/* media query all */
+@media screen and (max-width: 768px) {
+  .infocard-container1 {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+  .infocard-container2 {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .infocard {
+    width: auto;
+    margin-bottom: 10px;
+  }
+  .maincontainer {
+    width: 100%;
+  }
+  .MuiCardActionArea-root {
+    min-height: 30vh !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .maincontainer {
+    width: 100%;
+  }
+}
+/* tfasim */
+
+.download-list {
+  padding: 15px !important;
+}
+
+.download-list-heading {
+  color: white;
+  justify-content: center !important;
+  background-color: teal;
+  padding: 15px !important;
+}
+
+.icons3 {
+  color: teal;
+  margin-left: 20px;
+}
+
+.MuiExpansionPanelSummary-content {
+  align-items: center;
+}
+
+.icons4 {
+  font-size: 50px !important;
+  color: teal;
+  margin-left: 20px;
+}
+
+.panels h1 {
+  color: teal;
+}
+
+.panels p {
+  /* margin-right: 70px !important; */
+  font-size: 1.3rem;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.bibi {
+  background-color: white;
+  border-radius: 5px;
+  /* border: solid 1px teal; */
+  margin: 0;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.MuiTabs-indicator {
+  background-color: teal !important;
+}
+
+.MuiTab-root {
+  width: 50% !important;
+  max-width: 100% !important;
+  font-size: 1.4rem !important;
+}
+
+.MuiTableRow-root {
+  display: flex !important;
+}
+.MuiTableCell-root {
+  padding: 14px 14px 14px 14px !important;
+  flex: 1;
+}
+/* .MuiPickersModal-dialogRoot {
+  color: red !important;
+  background-color: red !important;
+} */
+
+.MuiPickersDay-daySelected {
+  background-color: teal !important;
+}
+
+.MuiPickersToolbar-toolbar {
+  background-color: teal !important;
+}
+
+.MuiButton-textPrimary {
+  color: teal !important;
+}
+
+.MuiInput-underline:after {
+  border-bottom-color: teal !important;
+}
+
+.MuiInputBase-input {
+  cursor: pointer;
+  padding: 10px !important;
+  text-align: center;
+  /* flex: 1 !important; */
+}
+
+.haadafotholder {
+  display: flex !important;
+  width: 100%;
+}
+
+.blob {
+  flex: 1 !important;
+}
+
+.labelo {
+  color: grey;
+}
+
+.blobi {
+  flex: 1;
+  text-align: center;
+  color: grey;
+}
+
+.MuiMenuItem-root {
+  padding: 0 !important;
+}
+
+.fobi1 {
+  background-color: teal !important;
+  margin-left: 10px !important;
+}
+.fobi2 {
+  background-color: #d32f2f !important;
+  margin-right: 10px !important;
+}
+
+/* login */
+
+.input1 {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: teal 1px solid;
+  /* width: 90%; */
+}
+
+.inputfailed {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid red;
+  /* width: 90%; */
+}
+
+.loginholder {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 10px;
+  /* justify-content: space-around; */
+  background-color: white !important;
+  text-align: center;
+  /* margin-top: 20vh; */
+}
+
+.backcolor {
+  background-color: teal;
+  opacity: 0.5;
+}
+.loginbackground {
+  display: flex;
+  width: 100vw;
+  background-image: url("../images/19HarborDefenseBtAqaba-min.jpg");
+  background-size: cover;
+  height: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginholder h1 {
+  color: teal;
+  font-size: 3rem;
+}
+
+@media (max-width: 600px) {
+  .loginholder {
+    width: 80%;
+  }
+}
+@media (min-width: 600px) and (max-width: 900px) {
+  .loginholder {
+    width: 50%;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .loginholder {
+    width: 25%;
+    min-height: 300px;
+  }
+}
+
+
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: grey;
+  opacity: 1; /* Firefox */
+}
+
+/* dont know yet */
+
+.MuiButton-contained {
+  background-color: teal !important;
+  width: 130px;
+  height: 50px;
+}
+
+.loading-page {
+  display: flex;
+  width: 100vw;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiCircularProgress-root {
+  color: teal !important;
+}
+
+/* .MuiIconButton-root{
+  color: ghostwhite !important;
+} */
+
+/* smhmirot table */
+
+.tableheaders {
+  border: 1px solid black;
+}
+
+.lefttext .MuiInputBase-input{
+  text-align: left !important;
+}
+
+.shmirotheaders {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.3rem
+}
+
+
+
+.shmirotdivs {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+@media (max-width: 600px) {
+  .shmirotheaders {
+    display: none;
+}
+
+
+
+.shmirotdivs {
+  display: "flex";
+  width: 100%;
+  flex-direction: column;
+}
+
+}
+
+.diffselect {
+  font-size: 1.4rem !important;
+  color: teal !important;
+}
+
+@media (max-width: 800px) {
+  .MuiTab-root {
+    font-size: 1.2rem !important;
+  }
+  .diffselect {
+    font-size: 1.2rem !important;
+  }
+  
+  
+}
+
+.shmirotToran {
+  background-color: teal;
+  border-radius: 4px; 
+  flex: 1; 
+  color: white;
+  padding: 2px; 
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75)
+}
+
+.shmirotAtooda {
+  background-color: #B76EB8;
+  border-radius: 4px; 
+  flex: 1; 
+  color: white;
+  padding: 2px; 
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75)
+}
+
+.deleteShmiraButton {
+  width: 30px !important;
+  height: 30px !important;
+  min-height: 0 !important;
+  background-color: #d32f2f !important;
+  margin-right:2px !important;
+}
+
+.shmirotDataHolder {
+  display: flex;
+  align-items: center;
+  margin: 3px 0 3px 0;
+}
+
+.shmirotHeader{
+  border: solid 1px teal;
+  flex: 1; 
+  flex-direction: column;
+  display: flex;
+}
+
+.cellDate {
+  text-align: right;
+  color: grey;
+}
+
+.emptyCell {
+  border: solid 1px teal;
+  flex: 1;
+  border-spacing: 0;
+  min-height: 12vh;
+  padding: 5px;
+}
+@media (max-width: 600px) {
+  .emptyCell {
+    border: none;
+    flex: 1;
+    border-spacing: unset;
+    min-height: 0;
+    padding: 0;
+  }
+  
+}
+
+.shmirotCell {
+  border: solid 1px teal;
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  min-height: 12vh;
+  padding: 5px;
+}
+
+.shmirotHeadersContainer{
+  width: 100%;
+  text-align: center;
+  border: teal 1px solid;
+  margin-top: 10px;
+  overflow: hidden;
+}

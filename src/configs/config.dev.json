@@ -1,0 +1,15 @@
+{
+    "API": {
+        "REGISTERUSER": "https://dev-nemoidf.azurewebsites.net/api/registeruser",
+        "CHECKUSER": "https://dev-nemoidf.azurewebsites.net/api/checkuser",
+        "CREATEUSER": "https://dev-nemoidf.azurewebsites.net/api/createuser",
+        "CREATETORANUT": "https://dev-nemoidf.azurewebsites.net/api/getusersandtoranuts",
+        "SETHAADAFOT": "https://dev-nemoidf.azurewebsites.net/api/sethaadafot",
+        "GETHAADAFOT": "https://dev-nemoidf.azurewebsites.net/api/gethaadafot",
+        "GETHAADAFOTBYUSER": "https://dev-nemoidf.azurewebsites.net/api/gethaadafotbyuser",
+        "GETTHISMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getthismonthstoranuts",
+        "GETNEXTMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getnextmonthstoranuts",
+        "GETALLTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getallthismonthstoranuts"
+    },
+    "MAINAPI": "https://dev-nemoidf.azurewebsites.net/api"
+}

@@ -1,0 +1,15 @@
+{
+    "API": {
+        "REGISTERUSER": "http://localhost:5000/api/registeruser",
+        "CHECKUSER": "http://localhost:5000/api/checkuser",
+        "CREATEUSER": "http://localhost:5000/api/createuser",
+        "CREATETORANUT": "http://localhost:5000/api/getusersandtoranuts",
+        "SETHAADAFOT": "http://localhost:5000/api/sethaadafot",
+        "GETHAADAFOT": "http://localhost:5000/api/gethaadafot",
+        "GETHAADAFOTBYUSER": "http://localhost:5000/api/gethaadafotbyuser",
+        "GETTHISMONTHSTORANUTS": "http://localhost:5000/api/getthismonthstoranuts",
+        "GETNEXTMONTHSTORANUTS": "http://localhost:5000/api/getnextmonthstoranuts",
+        "GETALLTORANUTS": "http://localhost:5000/api/getallthismonthstoranuts"
+    },
+    "MAINAPI": "http://localhost:5000/api"
+}
