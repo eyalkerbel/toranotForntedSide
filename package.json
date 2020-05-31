@@ -16,7 +16,6 @@
     "react-scripts": "^3.4.1",
     "react-window": "^1.8.5"
   },
-  "proxy": "http://localhost:5000/",
   "scripts": {
     "start": "set REACT_APP_ENV=prd&& react-scripts start",
     "build": "set REACT_APP_ENV=prd&& react-scripts build",
@@ -40,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.13.7"
   }
 }
