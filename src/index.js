@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <div className="height100">
-    <Switcher />
+    jdjd
   </div>,
   document.getElementById("root")
 );
