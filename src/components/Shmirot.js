@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import LoadingPage from "./LoadingPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import CONFIG from "../configs/env"
+//import CONFIG from "../configs/env"
 
 
 export default class Shmirot extends React.Component {
@@ -222,18 +222,18 @@ export default class Shmirot extends React.Component {
         )
       });
     }
-    fetch(CONFIG.API.GETTHISMONTHSTORANUTS, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: "Bearer " + localStorage.getItem("jwt")
-      }
-    })
-      .then(data => data.json())
-      .then(jsoned => this.getFormattedDate(jsoned))
-      .catch(err => {
-        this.setState({ fetched: true });
-      });
+    // fetch(CONFIG.API.GETTHISMONTHSTORANUTS, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json;charset=utf-8",
+    //     Authorization: "Bearer " + localStorage.getItem("jwt")
+    //   }
+    // })
+    //   .then(data => data.json())
+    //   .then(jsoned => this.getFormattedDate(jsoned))
+    //   .catch(err => {
+    //     this.setState({ fetched: true });
+    //   });
   }
 
   fetchyfetch3 = num => {
