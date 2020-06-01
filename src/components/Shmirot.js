@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import LoadingPage from "./LoadingPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
-//import CONFIG from "../configs/env"
+import CONFIG from "../configs/env"
 
 
 export default class Shmirot extends React.Component {
