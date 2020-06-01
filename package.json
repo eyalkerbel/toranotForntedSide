@@ -1,7 +1,9 @@
 {
   "name": "appi",
   "version": "0.1.0",
-  "private": true,
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
   "dependencies": {
     "@date-io/date-fns": "^1.3.11",
     "@material-ui/core": "^4.4.0",
@@ -20,10 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "set REACT_APP_ENV=dev&& react-scripts start",
-    "prd": "set REACT_APP_ENV=prd&& react-scripts start",
-    "local": "set REACT_APP_ENV=local&& react-scripts start"
+    "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": "react-app"
