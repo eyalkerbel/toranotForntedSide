@@ -21,7 +21,7 @@ export default class Login extends React.Component {
       this.setState({ isLoaded: true });
       var sendableJson = JSON.stringify(this.state.loginCred);
       console.log(CONFIG);
-      console.log("start",);
+      console.log("start",CONFIG.API.CHECKUSER);
       fetch(CONFIG.API.CHECKUSER, {
         method: "POST",
         headers: {
