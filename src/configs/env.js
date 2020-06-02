@@ -12,7 +12,7 @@ function envmaker() {
         return CONFIGDEV;
     }
     else if (process.env.REACT_APP_ENV === "prd") {
-        conosole.log("config production");
+        console.log("config production");
         return CONFIGPRD;
     }
     else if (process.env.REACT_APP_ENV === "local") {
