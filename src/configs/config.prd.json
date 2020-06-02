@@ -1,15 +1,15 @@
 {
     "API": {
-        "REGISTERUSER": "https://toranotapi.herokuapp.com/registeruser",
-        "CHECKUSER": "https://toranotapi.herokuapp.com/checkuser",
+        "REGISTERUSER": "https://toranotapi.herokuapp.com/api/registeruser",
+        "CHECKUSER": "https://toranotapi.herokuapp.com/api/checkuser",
         "CREATEUSER": "https://toranotapi.herokuapp.com/api/createuser",
-        "CREATETORANUT": "https://toranotapi.herokuapp.com/getusersandtoranuts",
-        "SETHAADAFOT": "https://toranotapi.herokuapp.com/sethaadafot",
-        "GETHAADAFOT": "https://toranotapi.herokuapp.com/gethaadafot",
-        "GETHAADAFOTBYUSER": "https://toranotapi.herokuapp.com/gethaadafotbyuser",
-        "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/getthismonthstoranuts",
-        "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/getallthismonthstoranuts"
+        "CREATETORANUT": "https://toranotapi.herokuapp.com/api/getusersandtoranuts",
+        "SETHAADAFOT": "https://toranotapi.herokuapp.com/api/sethaadafot",
+        "GETHAADAFOT": "https://toranotapi.herokuapp.com/api/gethaadafot",
+        "GETHAADAFOTBYUSER": "https://toranotapi.herokuapp.com/api/gethaadafotbyuser",
+        "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getthismonthstoranuts",
+        "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getnextmonthstoranuts",
+        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts"
     },
     "MAINAPI": "https://toranotapi.herokuapp.com"
 }
