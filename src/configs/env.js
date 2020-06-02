@@ -5,7 +5,7 @@ import CONFIGLOCAL from './config.local.json'
 function envmaker() {
     console.log(process.env.REACT_APP_ENV);
 
-    const envi = process.env.REACT_APP_ENV;
+    const envi = "prd";
 
     console.log("ss",envi)
     if (envi === "dev") {
