@@ -19,6 +19,7 @@ function envmaker() {
         return CONFIGLOCAL;
     }
     else {
+        console.log("da");
         return "ENVFAIL"
     }
 }
