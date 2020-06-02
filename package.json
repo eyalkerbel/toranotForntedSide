@@ -19,10 +19,13 @@
     "react-window": "^1.8.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "set REACT_APP_ENV=local&& react-scripts start",
+    "build": "set REACT_APP_ENV=prd&& react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "set REACT_APP_ENV=dev&& react-scripts start",
+    "prd": "set REACT_APP_ENV=prd&& react-scripts start",
+    "local": "set REACT_APP_ENV=local&& react-scripts start"
     
   },
   "eslintConfig": {

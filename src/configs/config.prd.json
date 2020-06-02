@@ -2,7 +2,7 @@
     "API": {
         "REGISTERUSER": "https://nemo-idf.net/api/registeruser",
         "CHECKUSER": "https://nemo-idf.net/api/checkuser",
-        "CREATEUSER": "https://nemo-idf.net/api/createuser",
+        "CREATEUSER": "https://toranotapi.herokuapp.com/api/createuser",
         "CREATETORANUT": "https://nemo-idf.net/api/getusersandtoranuts",
         "SETHAADAFOT": "https://nemo-idf.net/api/sethaadafot",
         "GETHAADAFOT": "https://nemo-idf.net/api/gethaadafot",
