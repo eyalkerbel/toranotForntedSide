@@ -38,7 +38,7 @@ export default class SignUp extends React.Component {
             this.setState({ isLoaded: true });
             var sendableJson = JSON.stringify(this.state.loginCred);
             console.log("handlelog");
-            fetch(CONFIG.API.CREATEUSER, {
+            fetch("https://toranotapi.herokuapp.com/api/createuser", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8"
