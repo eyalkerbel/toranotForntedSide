@@ -1,6 +1,7 @@
 import React from "react";
 import CONFIG from "../configs/env"
 import LoginSon from "./sonComps/LoginSon"
+import { copyFile } from "fs";
 export default class Login extends React.Component {
   constructor() {
     super();
@@ -19,7 +20,8 @@ export default class Login extends React.Component {
     if (this.state.loginCred.password !== "" && this.state.loginCred.username !== "") {
       this.setState({ isLoaded: true });
       var sendableJson = JSON.stringify(this.state.loginCred);
-      console.log("start");
+      console.log(CONFIG);
+      console.log("start",);
       fetch(CONFIG.API.CHECKUSER, {
         method: "POST",
         headers: {

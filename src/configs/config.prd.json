@@ -1,15 +1,15 @@
 {
     "API": {
-        "REGISTERUSER": "https://nemo-idf.net/api/registeruser",
-        "CHECKUSER": "https://nemo-idf.net/api/checkuser",
+        "REGISTERUSER": "https://toranotapi.herokuapp.com/registeruser",
+        "CHECKUSER": "https://toranotapi.herokuapp.com/checkuser",
         "CREATEUSER": "https://toranotapi.herokuapp.com/api/createuser",
-        "CREATETORANUT": "https://nemo-idf.net/api/getusersandtoranuts",
-        "SETHAADAFOT": "https://nemo-idf.net/api/sethaadafot",
-        "GETHAADAFOT": "https://nemo-idf.net/api/gethaadafot",
-        "GETHAADAFOTBYUSER": "https://nemo-idf.net/api/gethaadafotbyuser",
-        "GETTHISMONTHSTORANUTS": "https://nemo-idf.net/api/getthismonthstoranuts",
-        "GETNEXTMONTHSTORANUTS": "https://nemo-idf.net/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://nemo-idf.net/api/getallthismonthstoranuts"
+        "CREATETORANUT": "https://toranotapi.herokuapp.com/getusersandtoranuts",
+        "SETHAADAFOT": "https://toranotapi.herokuapp.com/sethaadafot",
+        "GETHAADAFOT": "https://toranotapi.herokuapp.com/gethaadafot",
+        "GETHAADAFOTBYUSER": "https://toranotapi.herokuapp.com/gethaadafotbyuser",
+        "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/getthismonthstoranuts",
+        "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/getnextmonthstoranuts",
+        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/getallthismonthstoranuts"
     },
-    "MAINAPI": "https://nemo-idf.net/api"
+    "MAINAPI": "https://toranotapi.herokuapp.com"
 }
