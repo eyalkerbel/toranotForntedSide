@@ -14,10 +14,15 @@
     "react": "^16.9.0",
     "react-date-picker": "^7.8.1",
     "react-dom": "^16.9.0",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.4.1",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
+  "proxy": "http://localhost:5000/",
   "scripts": {
     "start": "set REACT_APP_ENV=prd&& react-scripts start",
     "build": "set REACT_APP_ENV=prd&& react-scripts build",
@@ -26,7 +31,6 @@
     "dev": "set REACT_APP_ENV=dev&& react-scripts start",
     "prd": "set REACT_APP_ENV=prd&& react-scripts start",
     "local": "set REACT_APP_ENV=local&& react-scripts start"
-    
   },
   "eslintConfig": {
     "extends": "react-app"

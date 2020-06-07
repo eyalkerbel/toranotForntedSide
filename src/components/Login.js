@@ -2,17 +2,20 @@ import React from "react";
 import CONFIG from "../configs/env"
 import LoginSon from "./sonComps/LoginSon"
 import { copyFile } from "fs";
-export default class Login extends React.Component {
+import { connect } from "react-redux";
+import {loginAction} from "../Actions/loginAction";
+ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       loginCred: {
         username: "",
-        password: ""
+        password: "",
       },
       redirectstate: false,
       isLoaded: false,
-      BorderColorState: "input1"
+      BorderColorState: "input1",
+      userDetails:""
     };
   }
 
@@ -36,8 +39,10 @@ export default class Login extends React.Component {
             "permissionlvl",
             jsoned.newpayload.permissionlvl
           );
+          this.setState({userDetails:jsoned.details});
+          this.props.loginUser(this.state.loginCred.username,"",this.state.loginCred.password);
         })
-        .then(jsoned => this.setState({ redirectstate: true }))
+        .then(jsoned => this.setState({redirectstate: true}))
         .catch(error => this.handleFailedLogin());
     }
     else {
@@ -80,6 +85,7 @@ export default class Login extends React.Component {
   componentDidUpdate() {
     if (this.state.redirectstate) {
       window.location.reload()
+
     }
   }
   render() {
@@ -91,4 +97,13 @@ export default class Login extends React.Component {
         BorderColorState={this.state.BorderColorState} />
     );
   }
+
+  
+  
 }
+const mapDispatchToProps = dispatch => ({
+  loginUser: (user,sn,password) => dispatch(loginAction(user,sn,password))
+})
+
+
+export default connect(null, mapDispatchToProps)(Login);

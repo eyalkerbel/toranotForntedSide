@@ -37,8 +37,8 @@ export default class SignUp extends React.Component {
         if (this.state.loginCred.password === this.state.loginCred.password2 && result.error === null) {
             this.setState({ isLoaded: true });
             var sendableJson = JSON.stringify(this.state.loginCred);
-            console.log("handlelog");
-            fetch("https://toranotapi.herokuapp.com/api/createuser", {
+            console.log("handlelog",sendableJson);
+            fetch(CONFIG.API.CREATEUSER, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8"
@@ -47,6 +47,7 @@ export default class SignUp extends React.Component {
             })
                 .then(data => data.json())
                 .then(jsoned => {
+                    this.props.getUserDatails(this.state.loginCred);
                     this.setState({ success: true })
                 })
                 .catch(error => this.handleFailedLogin());

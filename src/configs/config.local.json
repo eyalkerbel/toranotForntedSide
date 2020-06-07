@@ -9,7 +9,8 @@
         "GETHAADAFOTBYUSER": "http://localhost:5000/api/gethaadafotbyuser",
         "GETTHISMONTHSTORANUTS": "http://localhost:5000/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "http://localhost:5000/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "http://localhost:5000/api/getallthismonthstoranuts"
+        "GETALLTORANUTS": "http://localhost:5000/api/getallthismonthstoranuts",
+        "GETPERSONDATA": "http://localhost:5000/api/getpersondata"
     },
     "MAINAPI": "http://localhost:5000/api"
 }

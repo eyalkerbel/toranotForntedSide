@@ -9,7 +9,8 @@
         "GETHAADAFOTBYUSER": "https://toranotapi.herokuapp.com/api/gethaadafotbyuser",
         "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts"
+        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts",
+        "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata"
     },
     "MAINAPI": "https://toranotapi.herokuapp.com"
 }

@@ -19,8 +19,13 @@ export default class Switcher extends React.Component {
   constructor() {
     super();
 
-    this.state = { log: false, redirectState: true };
+    this.state = { log: false,
+       redirectState: true,
+      userDetails:""
+     };
+  
     this.handleLogin = this.handleLogin.bind(this);
+    this.getUserDatails = this.getUserDatails.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +35,11 @@ export default class Switcher extends React.Component {
       this.setState({ log: true, permissionlvl: per });
     }
   }
+  async getUserDatails(jsonData) {
+   console.log("switcher",jsonData);
+  this.setState({userDetails:jsonData});
+  }
+
   handleLogin() {
     if (this.state.log === true) {
       return (
@@ -40,7 +50,7 @@ export default class Switcher extends React.Component {
             {/* <Route path="/tfasim" component={Tfasim} /> */}
             <Route path="/haadafot" component={HaadafotSwitcher} />
             <Route path="/contacts" component={Contacts} />
-            <Route path="/personal" component={Personal} />
+            <Route path="/personal" render={() => <Personal userDetails={this.state.userDetails} /> } />
             <Route path="/shmirot" component={Shmirot} />
             <Route path="/shmirottable" component={ShmirotTable} />
             <Route path="/info" component={Info} />
@@ -54,8 +64,8 @@ export default class Switcher extends React.Component {
       return (
         <BrowserRouter>
           <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
+            <Route path="/signup" render={() => <SignUp getUserDatails={this.getUserDatails} />} />
+            <Route path="/login" render={() => <Login getUserDatails={this.getUserDatails}  />} />
             <Route exact component={RedirectorLogin} />
           </Switch>
         </BrowserRouter>
