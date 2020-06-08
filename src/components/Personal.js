@@ -42,7 +42,7 @@ const useStyles = theme => ({
   }
 
   componentWillMount() {
-    console.log("componentWillMount personal");
+    console.log("componentWillMount personal is");
     fetch(CONFIG.API.GETPERSONDATA, {
       method: "POST",
       headers: {

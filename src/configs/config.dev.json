@@ -9,7 +9,8 @@
         "GETHAADAFOTBYUSER": "https://dev-nemoidf.azurewebsites.net/api/gethaadafotbyuser",
         "GETTHISMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getallthismonthstoranuts"
+        "GETALLTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getallthismonthstoranuts",
+        "GETPERSONDATA": "https://dev-nemoidf.azurewebsites.net/api/getpersondata"
     },
     "MAINAPI": "https://dev-nemoidf.azurewebsites.net/api"
 }
