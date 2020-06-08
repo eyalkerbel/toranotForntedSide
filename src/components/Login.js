@@ -24,7 +24,7 @@ import {loginAction} from "../Actions/loginAction";
       this.setState({ isLoaded: true });
       var sendableJson = JSON.stringify(this.state.loginCred);
       console.log(CONFIG);
-      console.log("start",CONFIG.API.CHECKUSER);
+      console.log("starti",CONFIG.API.CHECKUSER);
       fetch(CONFIG.API.CHECKUSER, {
         method: "POST",
         headers: {
