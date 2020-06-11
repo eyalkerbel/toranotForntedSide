@@ -6,7 +6,7 @@ import CONFIG from "../configs/env"
 export default class ShmirotTableComp extends React.Component {
 
     InjectDayOfWeekForHaadafa = (arrina) => {
-        console.log("shmirotTableCompinject",this.props.fetchedHaadafot)
+      //  console.log("shmirotTableCompinject",this.props.fetchedHaadafot)
 
         const haadafot = this.props.fetchedHaadafot
         haadafot.forEach(el => {
@@ -26,7 +26,7 @@ export default class ShmirotTableComp extends React.Component {
     }
 
     createMainArri = (num) => {
-        console.log("shmirotTableComp",this.props.fetchedHaadafot)
+     //   console.log("shmirotTableComp",this.props.fetchedHaadafot)
         var temp = this.props.fetchedArri[num];
         var tempArri = [];
         temp.forEach(el => {
