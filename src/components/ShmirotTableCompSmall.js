@@ -7,6 +7,7 @@ export default class ShmirotTableCompSmall extends React.Component {
     createMainArri = (num) => {
         var temp = this.props.fetchedArri[num];
         var tempArri = [];
+        if(temp != undefined) {
         temp.forEach(el => {
             var date = new Date(el.date)
             var dayOfWeek = date.getDay()
@@ -29,6 +30,7 @@ export default class ShmirotTableCompSmall extends React.Component {
 
             }
         })
+    }
         return (this.createTableBody(tempArri)
         )
     }

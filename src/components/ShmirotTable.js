@@ -38,6 +38,7 @@ export default class ShmirotTable extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
+        console.log("UNSAFE_componentWillMount");
         this.fetchyfetch();
     }
 

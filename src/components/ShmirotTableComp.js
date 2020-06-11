@@ -6,6 +6,8 @@ import CONFIG from "../configs/env"
 export default class ShmirotTableComp extends React.Component {
 
     InjectDayOfWeekForHaadafa = (arrina) => {
+        console.log("shmirotTableCompinject",this.props.fetchedHaadafot)
+
         const haadafot = this.props.fetchedHaadafot
         haadafot.forEach(el => {
             let date1 = new Date(el.begindate)
@@ -24,6 +26,7 @@ export default class ShmirotTableComp extends React.Component {
     }
 
     createMainArri = (num) => {
+        console.log("shmirotTableComp",this.props.fetchedHaadafot)
         var temp = this.props.fetchedArri[num];
         var tempArri = [];
         temp.forEach(el => {
@@ -49,8 +52,7 @@ export default class ShmirotTableComp extends React.Component {
 
             }
         })
-        return (this.createTableBody(tempArri)
-        )
+        return (this.createTableBody(tempArri))
     }
 
     getLstDayOfMonth = (date) => {
@@ -110,8 +112,7 @@ export default class ShmirotTableComp extends React.Component {
             };
             x++;
         }
-        return (this.InjectDayOfWeekForHaadafa(arri2)
-        )
+        return (this.InjectDayOfWeekForHaadafa(arri2))
     }
 
     preSend = (numOfDay, selectedUser, type, toran) => {
@@ -188,14 +189,13 @@ export default class ShmirotTableComp extends React.Component {
                     if (typeof arri2[g].haadafaDay != 'undefined') {
                         status = true
                     }
-                    rowArri[x] = <div key={x}
-                        style={{ backgroundColor: status ? "lightblue" : "white" }} className="shmirotCell">
+                    rowArri[x] = <div key={x} style={{ backgroundColor: status ? "lightblue" : "white" }} className="shmirotCell" >
                         <span className="cellDate">
                             {arri2[g].num}
                         </span>
                         {arri2[g].names}
                         <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >Add</Button>
-                    </div >;
+                    </div>;
                 }
                 else if (started === false) {
                     rowArri[x] = <div key={x} className="emptyCell"><span></span></div>;

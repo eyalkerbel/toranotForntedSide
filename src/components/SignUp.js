@@ -38,10 +38,11 @@ export default class SignUp extends React.Component {
             this.setState({ isLoaded: true });
             var sendableJson = JSON.stringify(this.state.loginCred);
             console.log("handlelog",sendableJson);
-            fetch(CONFIG.API.CREATEUSER, {
+            fetch(CONFIG.API.REGISTERUSER, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json;charset=utf-8"
+                    "Content-Type": "application/json;charset=utf-8",
+                    Authorization: "Bearer " + localStorage.getItem("jwt")
                 },
                 body: sendableJson
             })
