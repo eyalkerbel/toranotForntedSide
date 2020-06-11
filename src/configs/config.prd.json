@@ -12,5 +12,5 @@
         "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts",
         "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata"
     },
-    "MAINAPI": "https://toranotapi.herokuapp.com"
+    "MAINAPI": "https://toranotapi.herokuapp.com/api"
 }
