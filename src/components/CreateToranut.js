@@ -23,7 +23,9 @@ export default class CreateToranut extends React.Component {
             selectValue: 0,
             tabValue: 0,
             toran: 0,
-            fetchedHaadafot: []
+            fetchedHaadafot: [],
+            piorityArray: [],
+            fetchPiority: []
         };
     }
 
@@ -43,11 +45,13 @@ export default class CreateToranut extends React.Component {
 
     selectUser = (el) => {
         this.setState({ selectedUser: el })
-        this.fetchHaadafa(el)
+        this.fetchHaadafa(el);
+       this.fetchPiority(el);
     }
 
     UNSAFE_componentWillMount() {
         this.fetchyfetch();
+        this.fotchyfetch();
     }
 
     fetchyfetch() {
@@ -62,6 +66,20 @@ export default class CreateToranut extends React.Component {
             .then(dat => this.forFetch(dat))
             .catch(err => console.log(err));
     }
+    fotchyfetch() {
+        fetch(CONFIG.API.GETPIORITY, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                Authorization: "Bearer " + localStorage.getItem("jwt")
+            }
+        })
+            .then(data =>  data.json())
+            .then(dat => this.forFetchTwho(dat))
+            .catch(err => console.log(err));
+    }
+
+    
 
     fetchHaadafa = (userid) => {
         var stringed = JSON.stringify(userid)
@@ -74,27 +92,85 @@ export default class CreateToranut extends React.Component {
             body: stringed
         })
             .then(data => data.json())
-            .then(jsoned => this.setState({ fetchedHaadafot: jsoned }))
+            .then(jsoned => {
+                console.log("haadfot",jsoned);
+                this.setState({ fetchedHaadafot: jsoned });
+                }
+            )
             .catch(err => console.log(err));
     }
 
+    fetchPiority = (userid) => {
+        console.log("fetchPiorityasladindssndsdskdsksd",userid);
+     //   var stringed = JSON.stringify(userid,this.state.piorityArray);
+        var stringed = {
+            userid:userid,
+            piority: this.state.piorityArray
+        };
+        var p = JSON.stringify(stringed);
+        console.log("p",p);
+        fetch(CONFIG.API.GETPIORITYBYUSER, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                Authorization: "Bearer " + localStorage.getItem("jwt")
+            },
+            body: p
+        })
+            .then(data => data.json())
+            .then(jsoned =>  this.setState({ fetchPiority: jsoned }))
+            .catch(err => console.log(err));
+    }
+
+
+
     forFetch(data) {
-        this.setState({ fetchedArri: data });
+        var user;
+        if(this.state.fetchedArri[0] != undefined) {
+        this.setState({ fetchedArri: data});
+      //  algoritemHaadafot(this.state.fetchedArri[3]);
+
+    }
+    else {
+        this.setState({ fetchedArri: data});
+    }
         this.setState({ loaded: true });
     }
+    forFetchTwho(data) {
+        var user;
+      //  console.log("hello");
+        if(this.state.paiorityArray != undefined) {
+        //    console.log("do waht you want",data);
+        this.setState({ piorityArray: data});
+      //  algoritemHaadafot(this.state.fetchedArri[3]);
+
+    }
+    else {
+        console.log("dsijds",data);
+        this.setState({ piorityArray: data});
+    }
+     //   this.setState({ loaded: true });
+    }
+   
+
 
     createTable = () => {
         var arri = this.state.fetchedArri.slice(0);
+        console.log("{this.state.fetchedHaadafot",this.state.fetchedHaadafot);
         arri.shift()
         return (
             <ShmirotTableComp
+               fotchyfetch={this.fotchyfetch.bind(this)}
                 fetchyfetch={this.fetchyfetch.bind(this)}
                 fetchedHaadafot={this.state.fetchedHaadafot}
                 selectedUser={this.state.selectedUser}
                 fetchedArri={arri}
                 tabValue={this.state.tabValue}
                 selectValue={this.state.selectValue}
-                toran={this.state.toran} />
+                toran={this.state.toran}
+                 userList ={this.state.fetchedArri[0]}
+                 selectUser={this.selectUser}
+                piorityArray={this.state.fetchPiority} />
         )
     }
 

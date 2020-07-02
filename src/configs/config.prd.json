@@ -10,7 +10,12 @@
         "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getnextmonthstoranuts",
         "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts",
-        "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata"
+        "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata",
+        "GETALLHAADAFOT": "https://toranotapi.herokuapp.com/api/getallhaadafot",
+        "GETPIORITY" : "https://toranotapi.herokuapp.com/api/getpiority",
+        "GETPIORITYBYUSER" : "https://toranotapi.herokuapp.com/api/getpioritybyuser" 
+
+
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"
 }

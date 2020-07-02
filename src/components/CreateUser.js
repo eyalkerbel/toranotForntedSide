@@ -88,7 +88,8 @@ export default class CreateUser extends React.Component {
             name: this.state.name,
             userid: this.state.userid,
             permissionlvl: this.state.permissionlvl,
-            type: this.state.type
+            type: this.state.type,
+            points: 0
         }
         fetch(CONFIG.API.CREATEUSER, {
             method: "POST",

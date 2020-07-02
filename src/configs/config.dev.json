@@ -10,7 +10,11 @@
         "GETTHISMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getnextmonthstoranuts",
         "GETALLTORANUTS": "https://dev-nemoidf.azurewebsites.net/api/getallthismonthstoranuts",
-        "GETPERSONDATA": "https://dev-nemoidf.azurewebsites.net/api/getpersondata"
+        "GETPERSONDATA": "https://dev-nemoidf.azurewebsites.net/api/getpersondata",
+        "GETALLHAADAFOT": "https://dev-nemoidf.azurewebsites.net/api/getallhaadafot",
+        "GETPIORITY" : "https://dev-nemoidf.azurewebsites.net/api/getpiority",
+        "GETPIORITYBYUSER" : "https://dev-nemoidf.azurewebsites.net/api/getpioritybyuser" 
+
     },
     "MAINAPI": "https://dev-nemoidf.azurewebsites.net/api"
 }

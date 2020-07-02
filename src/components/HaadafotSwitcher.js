@@ -16,22 +16,28 @@ export default class HaadafotSwitcher extends React.Component {
         this.sendDataToServer = this.sendDataToServer.bind(this);
         this.forFetch = this.forFetch.bind(this);
         this.getDataFromSon = this.getDataFromSon.bind(this);
-        this.createStaticFetchedHaadafot = this.createStaticFetchedHaadafot.bind(
-            this
-        );
+        this.createStaticFetchedHaadafot = this.createStaticFetchedHaadafot.bind(this);
+        this.addDeleteArray = this.addDeleteArray.bind(this);
+
         this.state = {
             arri: [],
             loaded: false,
             childrenData: [],
             compCount: 0,
             dayCount: 0,
-            showPlus: false
+            showPlus: false,
+            arriDelete: [],
+            arrayMapIndex: [],
+            isNeedToChange:false,
+            
         };
     }
+
+
+
     getDiff = () => {
         let final = 0;
-        // console.log(this.state.childrenData)
-        this.state.childrenData.forEach(item => {
+      this.state.childrenData.forEach(item => {
             let begin = new Date(item.begindate)
             let end = new Date(item.enddate)
             let sub = end.getTime() - begin.getTime()
@@ -48,11 +54,50 @@ export default class HaadafotSwitcher extends React.Component {
             this.setState({ showPlus: false })
         }
     }
-    getDataFromSon(x, y, count, g) {
-        var obi = { begindate: x, enddate: y, type: g };
+   async getDataFromSon(x, y, count, g,checked) { //here we talk with component
+    if(this.state.isNeedToChange == false) {
+        console.log("getDataFromSon",x, "" , count);
         var tempi = this.state.childrenData;
-        tempi[count] = obi;
-        this.setState({ childrenData: tempi }, () => this.getDiff());
+
+        var tempiArray = this.state.arri;
+      //  if(this.state.isNeedToChange) {
+        var index = this.state.arrayMapIndex.indexOf(count);
+        console.log("before", tempi ," arri" , tempiArray  );
+        if(checked) {
+            console.log("pass");
+           if(index !== -1) {
+        this.setState({isNeedToChange:true});
+          tempiArray.splice(index,1);
+          tempi.splice(index,1);
+            // var tempiArrayT = [];
+            // var tempiT = [];
+            // for(var i=0;i<tempiArray.length-1;i++) {
+            //     if(i < index) {
+            //         tempiArrayT[i] = tempiArray[i];
+            //         tempiT[i] = tempi[i];
+            //     } else {
+            //         tempiArrayT[i] = tempiArray[i+1];
+            //         tempiT[i] = tempi[i+1];
+            //     }
+            // }
+
+
+            await this.increaseArrayByIndex(index);
+            console.log("after", tempi ," arri" , tempiArray);
+        //    this.setState({ childrenData: tempiT,arri:tempiArrayT}, () => this.getDiff());
+   
+           }
+        } else {
+            var obi = { begindate: x, enddate: y, type: g };
+            console.log("arraymap" ,  this.state.arrayMapIndex , "count" , count );
+            console.log("index" , index , "obj" , obi.begindate);
+            tempi[index] = obi;
+
+        }
+        this.setState({ childrenData: tempi,arri:tempiArray,isNeedToChange:false}, () => this.getDiff());
+
+     //   }
+    }
     }
 
     UNSAFE_componentWillMount() {
@@ -92,16 +137,38 @@ export default class HaadafotSwitcher extends React.Component {
     }
 
     forFetch(data) {
+        console.log(data);
         this.setState({ fetchedArri: data });
         this.setState({ loaded: true });
         this.createStaticFetchedHaadafot();
         // this.getDiff()
 
     }
+    setArray(size) {
+        var array = [];
+        for(var i=0;i<size;i++) {
+            array[i] = i;
+        }
+        this.setState({arrayMapIndex:array})
+    }
+    increaseArrayByIndex(index) {
+        console.log("start increase");
+
+        var array = this.state.arrayMapIndex;
+       // console.log("index" , index ,"arraylength", this.state.arrayMapIndex);
+        for(var i=index;i<this.state.arrayMapIndex.length;i++) {
+            array[i] = array[i] + 1;
+        }
+        this.state.arrayMapIndex.pop();
+       // console.log(this.state.arrayMapIndex);
+        this.setState({arrayMapIndex:array});
+        console.log("finish increase");
+    }
 
     createStaticFetchedHaadafot() {
         var fetched = this.state.fetchedArri;
         var tempi = this.state.arri;
+        this.setArray(fetched.length);
         fetched.forEach((element, i) => {
             tempi.push(
                 <Haadafot
@@ -110,6 +177,7 @@ export default class HaadafotSwitcher extends React.Component {
                     getDataFromSon={this.getDataFromSon}
                     compCount={this.state.compCount}
                     dayCount={this.state.dayCount}
+                    addDeleteArray={this.addDeleteArray}
                 />
             );
             var x = this.state.compCount + 1;
@@ -122,33 +190,75 @@ export default class HaadafotSwitcher extends React.Component {
     componentDidMount() {
         this.getDiff()
     }
+
+    addDeleteArray(value,checked) {
+        var array =[];
+        array = this.state.arriDelete;
+        console.log("addDeleteArray",value , " , " , checked);
+        if(checked == true) {
+        array.push(value);
+        } else {
+        const index = array.indexOf(value);
+        if(index == -1) {
+            console.log("erorr");
+        } else {
+            array.splice(index, 1);
+         } }
+         console.log("delete array",array);
+         this.setState({arriDelete:array});
+    }
+    increaseArray() {
+        var array = this.state.arrayMapIndex;
+        array[array.length] = array[array.length-1] + 1;
+        this.setState({arrayMapIndex:array});
+    }
     forMethod() {
         var tempi = this.state.arri;
+        this.increaseArray();
         tempi.push(
             <Haadafot
                 getDataFromSon={this.getDataFromSon}
                 compCount={this.state.compCount}
                 dayCount={this.state.dayCount}
+                addDeleteArray={this.addDeleteArray}
             />
         );
+
         var x = this.state.compCount + 1;
         this.setState({ compCount: x });
-
+        console.log("tempi add", tempi);
         this.setState({ arri: tempi });
 
     }
     deleteMethod() {
         var tempi = this.state.arri;
-        tempi.pop();
-        this.setState({ arri: tempi });
 
+       // tempi.pop();
+       // this.setState({ arri: tempi });
         var tempi2 = this.state.childrenData;
-        tempi2.pop();
-        this.setState({ childrenData: tempi2 }, () => this.getDiff()
-        );
+      //  tempi2.pop();
+     // console.log("tempi2" , tempi2);
+        
+       // console.log("ready arridelte",this.state.arriDelete);
+      //  console.log("map index array",this.state.arrayMapIndex);
+    //    for(var i=0;i<this.state.arriDelete.length;i++) {
+    //        //var index = tempi2.indexOf(arriDelete[i]);
+    //        var value = this.state.arriDelete[i];
+          
+
+    //    }
+
+        // this.state.arriDelete.forEach(element => {
+        //    //tempi2[element] = null;
+        //    var index = tempi2.indexOf(haadafotUser[i]);
+        //    if (index !== -1) newCounter.splice(index, 1);
+        // });
+        console.log("after" , tempi ,"tmpi", tempi);
+        this.setState({ childrenData: tempi2,arri: tempi }, () => this.getDiff());
     }
 
     render() {
+      //  {console.log("arri" , this.state.arri)}
         return (
             <Fragment>
                 {this.state.loaded ? (

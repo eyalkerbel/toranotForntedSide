@@ -5,15 +5,21 @@ import DateFnsUtils from "@date-io/date-fns";
 import { he } from "date-fns/locale";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import Checkbox from '@material-ui/core/Checkbox';
 
 export default class Haadafot extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       selectedDate1: new Date().setHours(0, 0, 0, 0),
       selectedDate2: new Date().setHours(0, 0, 0, 0),
       values: 10,
-      reason: "ishi"
+      reason: "ishi",
+      isChecked: false,
+      selectStart: false,
+      selectEnd: false,
+      isDeleted: false
     };
     this.handleclicks = this.handleclicks.bind(this);
     this.handledate1 = this.handledate1.bind(this);
@@ -22,9 +28,11 @@ export default class Haadafot extends React.Component {
   }
 
   componentDidMount() {
+    console.log("componentDidMount",this.props.compCount);
     this.sendToParent();
   }
   UNSAFE_componentWillMount() {
+    console.log("copmcount",this.props.compCount)
     if (this.props.data != null) {
       this.setState({ selectedDate1: this.props.data.begindate });
       this.setState({ selectedDate2: this.props.data.enddate });
@@ -46,6 +54,7 @@ export default class Haadafot extends React.Component {
     }
   }
   componentDidUpdate() {
+    console.log("componentDidUPdate",this.props.compCount);
     this.sendToParent();
   }
   sendToParent() {
@@ -53,7 +62,14 @@ export default class Haadafot extends React.Component {
     var y = this.state.selectedDate2;
     var count = this.props.compCount;
     var g = this.state.reason;
-    this.props.getDataFromSon(x, y, count, g)
+    var isChecked = this.state.isChecked;
+    console.log("send to parent");
+
+    
+    this.props.getDataFromSon(x, y, count, g, isChecked);
+    if(this.state.isChecked == true) {
+    this.setState({isChecked:false});
+    }
   }
 
   handleclicks(num) {
@@ -81,11 +97,11 @@ export default class Haadafot extends React.Component {
     let f1 = 8 - final
     console.log(f1)
 
-    if (this.props.dayCount < 0 || f1 < 0) {
+    if ((this.props.dayCount < 0 || f1 < 0) && this.state.selectEnd) {
       this.setState({ selectedDate1: new Date().setHours(0, 0, 0, 0), selectedDate2: new Date().setHours(0, 0, 0, 0) });
       alert("חרגת מכמות מקסימלית של אילוצים")
     } else {
-      this.setState({ selectedDate1: day });
+      this.setState({ selectedDate1: day,selectStart: true });
     }
 
   }
@@ -98,13 +114,21 @@ export default class Haadafot extends React.Component {
     let f1 = 8 - final
     console.log(f1)
 
-    if (this.props.dayCount < 0 || f1 < 0) {
+    if ((this.props.dayCount < 0 || f1 < 0) && this.state.selectStart) {
       this.setState({ selectedDate2: new Date().setHours(0, 0, 0, 0), selectedDate1: new Date().setHours(0, 0, 0, 0) });
       alert("חרגת מכמות מקסימלית של אילוצים")
     } else {
       this.setState({ selectedDate2: day });
     }
   }
+  toggleChange = () => {
+    
+   // this.props.addDeleteArray(this.props.compCount,!this.state.isChecked);
+    this.setState({
+      isChecked: !this.state.isChecked,
+    });
+  }
+
   render() {
     return (
       <Paper>
@@ -113,7 +137,12 @@ export default class Haadafot extends React.Component {
           <p className="blobi">תאריך סיום</p>
           <p className="blobi">סוג אילוץ</p>
         </div>
+       
         <div className="haadafotholder">
+        <input type="checkbox"
+          checked={this.state.isChecked}
+          onChange={this.toggleChange}
+        />
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={he}>
             <DatePicker
               value={this.state.selectedDate1}
