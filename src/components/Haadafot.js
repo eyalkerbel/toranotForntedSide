@@ -6,6 +6,7 @@ import { he } from "date-fns/locale";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Checkbox from '@material-ui/core/Checkbox';
+import Fab from "@material-ui/core/Fab";
 
 export default class Haadafot extends React.Component {
   
@@ -28,11 +29,9 @@ export default class Haadafot extends React.Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount",this.props.compCount);
     this.sendToParent();
   }
   UNSAFE_componentWillMount() {
-    console.log("copmcount",this.props.compCount)
     if (this.props.data != null) {
       this.setState({ selectedDate1: this.props.data.begindate });
       this.setState({ selectedDate2: this.props.data.enddate });
@@ -54,8 +53,11 @@ export default class Haadafot extends React.Component {
     }
   }
   componentDidUpdate() {
-    console.log("componentDidUPdate",this.props.compCount);
+    if(this.state.isChecked == false) {
     this.sendToParent();
+    } else {
+      this.props.saveDelete(this.props.compCount);
+    }
   }
   sendToParent() {
     var x = this.state.selectedDate1;
@@ -63,7 +65,6 @@ export default class Haadafot extends React.Component {
     var count = this.props.compCount;
     var g = this.state.reason;
     var isChecked = this.state.isChecked;
-    console.log("send to parent");
 
     
     this.props.getDataFromSon(x, y, count, g, isChecked);
@@ -125,12 +126,18 @@ export default class Haadafot extends React.Component {
     
    // this.props.addDeleteArray(this.props.compCount,!this.state.isChecked);
     this.setState({
-      isChecked: !this.state.isChecked,
+      isChecked: true,
     });
   }
-
+  
+  // <input type="checkbox"
+  //   checked={this.state.isChecked}
+  //   onChange={this.toggleChange}
+  // />
   render() {
     return (
+      <div>
+      {this.state.isChecked == false? (
       <Paper>
         <div className="haadafotholder">
           <p className="blobi">תאריך תחילה</p>
@@ -139,10 +146,11 @@ export default class Haadafot extends React.Component {
         </div>
        
         <div className="haadafotholder">
-        <input type="checkbox"
-          checked={this.state.isChecked}
-          onChange={this.toggleChange}
-        />
+        <div>
+        <Fab size="small" onClick={() => this.toggleChange()}>
+          <i className="material-icons">delete</i>
+          </Fab>
+          </div>
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={he}>
             <DatePicker
               value={this.state.selectedDate1}
@@ -221,7 +229,9 @@ export default class Haadafot extends React.Component {
             </MenuItem>
           </Select>
         </div>
-      </Paper>
+      </Paper>) : null 
+      }
+      </div>
     );
   }
 }

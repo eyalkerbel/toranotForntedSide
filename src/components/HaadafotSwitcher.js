@@ -17,7 +17,7 @@ export default class HaadafotSwitcher extends React.Component {
         this.forFetch = this.forFetch.bind(this);
         this.getDataFromSon = this.getDataFromSon.bind(this);
         this.createStaticFetchedHaadafot = this.createStaticFetchedHaadafot.bind(this);
-        this.addDeleteArray = this.addDeleteArray.bind(this);
+        this.saveDelete = this.saveDelete.bind(this);
 
         this.state = {
             arri: [],
@@ -54,49 +54,40 @@ export default class HaadafotSwitcher extends React.Component {
             this.setState({ showPlus: false })
         }
     }
+
+    async dataExistInArray(x,y) {
+        var temp = this.state.childrenData;
+        console.log("childern", temp);
+        let beginDateX = new Date(x);
+        let endDateY = new Date(y);
+        let newBegin = beginDateX.getDate();
+        let newEnd = endDateY.getDate();
+        for(var i=0;i<temp.length-1;i++) {
+            var element = temp[i];
+            let beginDate = new Date(element.begindate);
+            let endDate = new Date(element.enddate);
+            let beginChildren = beginDate.getDate();
+            let endChildren = endDate.getDate();
+            console.log("begin" , beginChildren , "end" , endChildren , "new" , newBegin , "after", newEnd);    
+            if((newBegin >= beginChildren && newBegin <= endChildren) || (newEnd >= beginChildren && newEnd <= newEnd) || (newBegin <= beginChildren && newEnd >= endChildren)){
+                console.log("true");
+                return true;
+            }
+            }
+            return false;
+    } 
    async getDataFromSon(x, y, count, g,checked) { //here we talk with component
-    if(this.state.isNeedToChange == false) {
-        console.log("getDataFromSon",x, "" , count);
-        var tempi = this.state.childrenData;
-
-        var tempiArray = this.state.arri;
-      //  if(this.state.isNeedToChange) {
-        var index = this.state.arrayMapIndex.indexOf(count);
-        console.log("before", tempi ," arri" , tempiArray  );
-        if(checked) {
-            console.log("pass");
-           if(index !== -1) {
-        this.setState({isNeedToChange:true});
-          tempiArray.splice(index,1);
-          tempi.splice(index,1);
-            // var tempiArrayT = [];
-            // var tempiT = [];
-            // for(var i=0;i<tempiArray.length-1;i++) {
-            //     if(i < index) {
-            //         tempiArrayT[i] = tempiArray[i];
-            //         tempiT[i] = tempi[i];
-            //     } else {
-            //         tempiArrayT[i] = tempiArray[i+1];
-            //         tempiT[i] = tempi[i+1];
-            //     }
-            // }
+    var obi = { begindate: x, enddate: y, type: g };
 
 
-            await this.increaseArrayByIndex(index);
-            console.log("after", tempi ," arri" , tempiArray);
-        //    this.setState({ childrenData: tempiT,arri:tempiArrayT}, () => this.getDiff());
-   
-           }
-        } else {
-            var obi = { begindate: x, enddate: y, type: g };
-            console.log("arraymap" ,  this.state.arrayMapIndex , "count" , count );
-            console.log("index" , index , "obj" , obi.begindate);
-            tempi[index] = obi;
-
-        }
-        this.setState({ childrenData: tempi,arri:tempiArray,isNeedToChange:false}, () => this.getDiff());
-
-     //   }
+    var tempi = this.state.childrenData;
+    var isexits = await this.dataExistInArray(x,y);
+    console.log("isexits" , isexits);
+    if(isexits) {
+        alert("פעמיים אותו הדבר");
+    } else {
+    tempi[count] = obi;
+    this.setState({ childrenData: tempi }, () => this.getDiff());
     }
     }
 
@@ -152,7 +143,6 @@ export default class HaadafotSwitcher extends React.Component {
         this.setState({arrayMapIndex:array})
     }
     increaseArrayByIndex(index) {
-        console.log("start increase");
 
         var array = this.state.arrayMapIndex;
        // console.log("index" , index ,"arraylength", this.state.arrayMapIndex);
@@ -162,7 +152,6 @@ export default class HaadafotSwitcher extends React.Component {
         this.state.arrayMapIndex.pop();
        // console.log(this.state.arrayMapIndex);
         this.setState({arrayMapIndex:array});
-        console.log("finish increase");
     }
 
     createStaticFetchedHaadafot() {
@@ -177,7 +166,7 @@ export default class HaadafotSwitcher extends React.Component {
                     getDataFromSon={this.getDataFromSon}
                     compCount={this.state.compCount}
                     dayCount={this.state.dayCount}
-                    addDeleteArray={this.addDeleteArray}
+                    saveDelete={this.saveDelete}
                 />
             );
             var x = this.state.compCount + 1;
@@ -191,21 +180,17 @@ export default class HaadafotSwitcher extends React.Component {
         this.getDiff()
     }
 
-    addDeleteArray(value,checked) {
-        var array =[];
-        array = this.state.arriDelete;
-        console.log("addDeleteArray",value , " , " , checked);
-        if(checked == true) {
-        array.push(value);
-        } else {
-        const index = array.indexOf(value);
-        if(index == -1) {
-            console.log("erorr");
-        } else {
-            array.splice(index, 1);
-         } }
-         console.log("delete array",array);
-         this.setState({arriDelete:array});
+    saveDelete(value) {
+        var temp = this.state.childrenData;
+        var myIndex;
+       this.state.childrenData.forEach(function(element, index) {
+        if(element.compCount == value) {
+        myIndex = index;
+        }
+    });
+       temp.splice(myIndex,1);
+       console.log("childernData" , temp);
+       this.setState({childrenData:temp} ,() => this.getDiff());
     }
     increaseArray() {
         var array = this.state.arrayMapIndex;
@@ -220,40 +205,18 @@ export default class HaadafotSwitcher extends React.Component {
                 getDataFromSon={this.getDataFromSon}
                 compCount={this.state.compCount}
                 dayCount={this.state.dayCount}
-                addDeleteArray={this.addDeleteArray}
+                saveDelete ={this.saveDelete}
             />
         );
 
         var x = this.state.compCount + 1;
         this.setState({ compCount: x });
-        console.log("tempi add", tempi);
         this.setState({ arri: tempi });
 
     }
     deleteMethod() {
         var tempi = this.state.arri;
-
-       // tempi.pop();
-       // this.setState({ arri: tempi });
         var tempi2 = this.state.childrenData;
-      //  tempi2.pop();
-     // console.log("tempi2" , tempi2);
-        
-       // console.log("ready arridelte",this.state.arriDelete);
-      //  console.log("map index array",this.state.arrayMapIndex);
-    //    for(var i=0;i<this.state.arriDelete.length;i++) {
-    //        //var index = tempi2.indexOf(arriDelete[i]);
-    //        var value = this.state.arriDelete[i];
-          
-
-    //    }
-
-        // this.state.arriDelete.forEach(element => {
-        //    //tempi2[element] = null;
-        //    var index = tempi2.indexOf(haadafotUser[i]);
-        //    if (index !== -1) newCounter.splice(index, 1);
-        // });
-        console.log("after" , tempi ,"tmpi", tempi);
         this.setState({ childrenData: tempi2,arri: tempi }, () => this.getDiff());
     }
 
@@ -285,27 +248,20 @@ export default class HaadafotSwitcher extends React.Component {
                             >
                                 <i className="material-icons">add</i>
                             </Fab>
-                            <Fab
+                            {/* <Fab 
                                 onClick={() => this.deleteMethod()}
                                 className="fobi2"
                                 style={{}}
                             >
                                 <i className="material-icons">delete</i>
-                            </Fab>
-                        </div>
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                marginTop: "20px"
-                            }}
-                        >
+                            </Fab> */}
                             <Button
                                 variant="contained"
                                 onClick={() => this.sendDataToServer()}
                             >
                                 שמור
               </Button>
+
                         </div>
                     </Paper>
                 ) : (

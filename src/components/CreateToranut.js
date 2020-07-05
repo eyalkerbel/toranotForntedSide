@@ -7,11 +7,9 @@ import List from '@material-ui/core/List';
 import ShmirotTableComp from './ShmirotTableComp'
 import TabComp from './TabComp'
 import UserListComp from './UserListComp'
-
 import CONFIG from "../configs/env"
+import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
-
-import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 
 export default class CreateToranut extends React.Component {
     constructor() {
@@ -93,7 +91,7 @@ export default class CreateToranut extends React.Component {
         })
             .then(data => data.json())
             .then(jsoned => {
-                console.log("haadfot",jsoned);
+             ///   console.log("haadfot",jsoned);
                 this.setState({ fetchedHaadafot: jsoned });
                 }
             )
@@ -101,14 +99,14 @@ export default class CreateToranut extends React.Component {
     }
 
     fetchPiority = (userid) => {
-        console.log("fetchPiorityasladindssndsdskdsksd",userid);
-     //   var stringed = JSON.stringify(userid,this.state.piorityArray);
+       // console.log("fetchPiorityasladindssndsdskdsksd",userid);
+       console.log("fetchPiority" , this.state.piorityArray,userid);
         var stringed = {
             userid:userid,
             piority: this.state.piorityArray
         };
         var p = JSON.stringify(stringed);
-        console.log("p",p);
+        //console.log("p",p);
         fetch(CONFIG.API.GETPIORITYBYUSER, {
             method: "POST",
             headers: {
@@ -128,8 +126,6 @@ export default class CreateToranut extends React.Component {
         var user;
         if(this.state.fetchedArri[0] != undefined) {
         this.setState({ fetchedArri: data});
-      //  algoritemHaadafot(this.state.fetchedArri[3]);
-
     }
     else {
         this.setState({ fetchedArri: data});
@@ -138,18 +134,13 @@ export default class CreateToranut extends React.Component {
     }
     forFetchTwho(data) {
         var user;
-      //  console.log("hello");
         if(this.state.paiorityArray != undefined) {
-        //    console.log("do waht you want",data);
         this.setState({ piorityArray: data});
-      //  algoritemHaadafot(this.state.fetchedArri[3]);
-
     }
     else {
-        console.log("dsijds",data);
+        console.log("forFetchTwho",data);
         this.setState({ piorityArray: data});
     }
-     //   this.setState({ loaded: true });
     }
    
 
@@ -170,7 +161,8 @@ export default class CreateToranut extends React.Component {
                 toran={this.state.toran}
                  userList ={this.state.fetchedArri[0]}
                  selectUser={this.selectUser}
-                piorityArray={this.state.fetchPiority} />
+                piorityArray={this.state.fetchPiority}
+                fetchPiority={this.fetchPiority} />
         )
     }
 
