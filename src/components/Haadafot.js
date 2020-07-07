@@ -140,17 +140,16 @@ export default class Haadafot extends React.Component {
       {this.state.isChecked == false? (
       <Paper>
         <div className="haadafotholder">
-          <p className="blobi">תאריך תחילה</p>
-          <p className="blobi">תאריך סיום</p>
-          <p className="blobi">סוג אילוץ</p>
+          <p className="blobi">   תאריך תחילה</p>
+          <p className="blobi">   תאריך סיום</p>
+          <p className="blobi">   סוג אילוץ</p>
         </div>
-       
-        <div className="haadafotholder">
-        <div>
-        <Fab size="small" onClick={() => this.toggleChange()}>
+        <div className="sidebutton">
+        <Fab style={{marginButton:'20'}} size="small" onClick={() => this.toggleChange()}>
           <i className="material-icons">delete</i>
           </Fab>
           </div>
+        <div className="haadafotholder">
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={he}>
             <DatePicker
               value={this.state.selectedDate1}

@@ -199,12 +199,10 @@ export default class ShmirotTableComp extends React.Component {
                 Authorization: "Bearer " + localStorage.getItem("jwt")
             },
             body: JSON.stringify(obi)
-        }).then((jsoned) => {
+        }).then(data => data.json()).then((jsoned) => {
+            console.log("jsoned" , jsoned);
             this.props.fetchyfetch();
-            this.props.fotchyfetch();
-            console.log("obi" , obi.userid)
-            this.props.fetchPiority(obi.userid);
-          //  this.props.selectUser(user);
+            this.props.fotchyfetch(obi.userid);
         });
     }
 

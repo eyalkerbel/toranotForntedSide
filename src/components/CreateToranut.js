@@ -64,7 +64,7 @@ export default class CreateToranut extends React.Component {
             .then(dat => this.forFetch(dat))
             .catch(err => console.log(err));
     }
-    fotchyfetch() {
+    fotchyfetch(userid) {
         fetch(CONFIG.API.GETPIORITY, {
             method: "POST",
             headers: {
@@ -73,7 +73,7 @@ export default class CreateToranut extends React.Component {
             }
         })
             .then(data =>  data.json())
-            .then(dat => this.forFetchTwho(dat))
+            .then(dat => this.forFetchTwho(dat,userid))
             .catch(err => console.log(err));
     }
 
@@ -132,14 +132,15 @@ export default class CreateToranut extends React.Component {
     }
         this.setState({ loaded: true });
     }
-    forFetchTwho(data) {
+    forFetchTwho(data,id) {
         var user;
         if(this.state.paiorityArray != undefined) {
         this.setState({ piorityArray: data});
     }
     else {
-        console.log("forFetchTwho",data);
+        console.log("forFetchTwho",data , "id" , id);
         this.setState({ piorityArray: data});
+        this.fetchPiority(id);
     }
     }
    

@@ -33,15 +33,16 @@ export default class HaadafotSwitcher extends React.Component {
         };
     }
 
-
-
+    
     getDiff = () => {
         let final = 0;
       this.state.childrenData.forEach(item => {
+          if(item != null) {
             let begin = new Date(item.begindate)
             let end = new Date(item.enddate)
             let sub = end.getTime() - begin.getTime()
             final += (sub / (1000 * 3600 * 24)) + 1
+          }
         })
         let f1 = 8 - final
         this.setState({ dayCount: f1 }, () => this.limiter()
@@ -64,26 +65,28 @@ export default class HaadafotSwitcher extends React.Component {
         let newEnd = endDateY.getDate();
         for(var i=0;i<temp.length-1;i++) {
             var element = temp[i];
+            if(element != null) {
             let beginDate = new Date(element.begindate);
             let endDate = new Date(element.enddate);
             let beginChildren = beginDate.getDate();
             let endChildren = endDate.getDate();
-            console.log("begin" , beginChildren , "end" , endChildren , "new" , newBegin , "after", newEnd);    
-            if((newBegin >= beginChildren && newBegin <= endChildren) || (newEnd >= beginChildren && newEnd <= newEnd) || (newBegin <= beginChildren && newEnd >= endChildren)){
-                console.log("true");
+            if((newBegin >= beginChildren && newBegin <= endChildren) || (newEnd >= beginChildren && newEnd <= endChildren) || (newBegin <= beginChildren && newEnd >= endChildren)){
+                console.log("begin" , beginChildren , "end" , endChildren , "new" , newBegin , "after", newEnd);    
+                console.log("true" , i);
                 return true;
             }
+        }
             }
             return false;
     } 
    async getDataFromSon(x, y, count, g,checked) { //here we talk with component
     var obi = { begindate: x, enddate: y, type: g };
 
-
     var tempi = this.state.childrenData;
+    console.log("tempi " , tempi);
     var isexits = await this.dataExistInArray(x,y);
     console.log("isexits" , isexits);
-    if(isexits) {
+   if(isexits) {
         alert("פעמיים אותו הדבר");
     } else {
     tempi[count] = obi;
@@ -97,7 +100,9 @@ export default class HaadafotSwitcher extends React.Component {
 
     sendDataToServer() {
         // this.setState({ loaded: false });
-        var dat = this.state.childrenData;
+        var dattemp = this.state.childrenData;
+        var dat = dattemp.filter(elemnet => elemnet != null ); 
+
         fetch(CONFIG.API.SETHAADAFOT, {
             method: "POST",
             headers: {
@@ -183,14 +188,24 @@ export default class HaadafotSwitcher extends React.Component {
     saveDelete(value) {
         var temp = this.state.childrenData;
         var myIndex;
-       this.state.childrenData.forEach(function(element, index) {
-        if(element.compCount == value) {
-        myIndex = index;
+        if(temp.length == 1) {
+            console.log("hii");
+            temp = [];
         }
-    });
-       temp.splice(myIndex,1);
-       console.log("childernData" , temp);
-       this.setState({childrenData:temp} ,() => this.getDiff());
+        temp[value] = null;
+    //     } else {
+    //    this.state.temp.forEach(function(element, index) {
+    //        console.log("elemnt" , element);
+    //     if(element.compCount == value) {
+    //     myIndex = index;
+    //     }
+ //   });
+   // console.log("value" , value , "index", myIndex);
+      // temp.splice(myIndex,1);
+      temp[myIndex] = null;
+     //}
+    console.log("childernData" , temp);
+    this.setState({childrenData:temp} ,() => this.getDiff()); 
     }
     increaseArray() {
         var array = this.state.arrayMapIndex;

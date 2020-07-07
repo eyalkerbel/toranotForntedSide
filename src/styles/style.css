@@ -303,6 +303,13 @@ a {
 .haadafotholder {
   display: flex !important;
   width: 100%;
+  z-index:2;
+}
+
+.sidebutton {
+  position: absolute;
+    z-index:1;
+    transform: translate(-10%, -10%); 
 }
 
 .blob {
@@ -315,6 +322,11 @@ a {
 
 .blobi {
   flex: 1;
+  text-align: center;
+  color: grey;
+}
+.blobiT {
+  flex: 0.5;
   text-align: center;
   color: grey;
 }
