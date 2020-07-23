@@ -11,7 +11,9 @@ import TableRow from "@material-ui/core/TableRow";
 import LoadingPage from "./LoadingPage";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CONFIG from "../configs/env"
-
+import ExchangeItem from "./ExchangeItem";
+import shortid from 'shortid';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default class Shmirot extends React.Component {
   constructor() {
@@ -25,23 +27,77 @@ export default class Shmirot extends React.Component {
     this.handletabs = this.handletabs.bind(this);
     this.fetchyfetch = this.fetchyfetch.bind(this);
     this.renderTableData = this.renderTableData.bind(this);
+    this.approveChange = this.approveChange.bind(this);
+  }
+
+
+
+  approveChange(indexi,indexj) {
+    var temp = this.state.arri;
+    var items = [];
+ //   console.log("indexs" , indexj);
+    var item = this.state.arri[indexi].exchangesArray[indexj];
+    items.push(item);
+  //  console.log("item" , item);
+    var DateToDelte = item.formattedDate;
+    var temp = [];
+    for(var i=0;i<this.state.arri.length;i++) {
+      temp[i] = this.state.arri[i];
+      if(indexi == i) {
+        temp[i].exchangesArray = items;
+        temp[i].doneDeal = true;
+      }
+      
+    }
+    console.log("item" , temp);
+    this.setState({arri:temp});
   }
 
   renderTableData() {
+    console.log("renderingtable" , this.state.arri);
     var arrRender = [];
     for (var i = 0; i < this.state.arri.length; i++) {
+      if(this.state.arri[i].exchangesArray.length == 0) {
+        var obi = {
+          obiData: (
+            <TableRow key={shortid.generate()}>
+              <TableCell key={shortid.generate()}>
+              <Table><TableBody>
+                <TableRow key={shortid.generate()}>
+              <TableCell key={shortid.generate()} align="center">{this.state.arri[i].formattedDate}</TableCell>
+                <TableCell key={shortid.generate()}  align="center">{this.state.arri[i].dayOfWeek}</TableCell>
+                </TableRow>
+                </TableBody></Table>
+                </TableCell>
+                <TableCell key={shortid.generate()}>
+                  <TableRow key={shortid.generate()}><TableCell key={shortid.generate()} align="center">בקרוב</TableCell></TableRow>
+                 </TableCell>
+                </TableRow>)
+        };
+        arrRender.push(obi.obiData);
+      }
+     // console.log("exchangeArray" , this.state.arri[i].exchangesArray);
+      for(var j=0;j<this.state.arri[i].exchangesArray.length;j++) {
       var obi = {
         obiData: (
-          <TableRow>
-            <TableCell align="center">{this.state.arri[i].type}</TableCell>
-            <TableCell align="center">
-              {this.state.arri[i].formattedDate}
-            </TableCell>
-            <TableCell align="center">{this.state.arri[i].dayOfWeek}</TableCell>
-          </TableRow>
+          <TableRow key={shortid.generate()}>
+            <TableCell key={shortid.generate()}>
+            <Table><TableBody>
+              <TableRow key={shortid.generate()}>
+            <TableCell key={shortid.generate()} align="center">{this.state.arri[i].formattedDate}</TableCell>
+              <TableCell id="tablepadding" key={shortid.generate()}  align="center">{this.state.arri[i].dayOfWeek}
+              <ArrowBackIcon id="arrow-right" style={{fill:"red"}} /></TableCell>
+              </TableRow>
+              </TableBody></Table>
+              </TableCell>
+              <TableCell key={shortid.generate()}>
+              {this.state.arri[i].hasChange == true?"coming soon" : <ExchangeItem doneDeal={this.state.arri[i].doneDeal} key={i} exchangeData={this.state.arri[i].exchangesArray[j]} approveChange={this.approveChange} indexArri={i} indexExchange={j} />}
+               </TableCell>
+              </TableRow>
         )
       };
       arrRender.push(obi.obiData);
+    }
     }
 
     return arrRender;
@@ -52,9 +108,12 @@ export default class Shmirot extends React.Component {
   }
 
   getFormattedDate(jsoned) {
+    var toranot = jsoned[0];
+    var exchanges = jsoned[1];
+   // console.log("date", toranot , "," , exchanges);
     var arri = [];
-    for (var i = 0; i < jsoned.length; i++) {
-      var todayTime = new Date(jsoned[i].date);
+    for (var i = 0; i < toranot.length; i++) {
+      var todayTime = new Date(toranot[i].date);
       var month = todayTime.getMonth() + 1;
       var day = todayTime.getDate();
       var year = todayTime.getFullYear();
@@ -87,8 +146,8 @@ export default class Shmirot extends React.Component {
           break;
       }
       var TranslateType = 0;
-      if (jsoned[i].toran === 0) {
-        switch (jsoned[i].type) {
+      if (toranot[i].toran === 0) {
+        switch (toranot[i].type) {
           case 0:
             TranslateType = "סמל תורן בפנים";
             break;
@@ -115,7 +174,7 @@ export default class Shmirot extends React.Component {
         }
 
       } else {
-        switch (jsoned[i].type) {
+        switch (toranot[i].type) {
           case 0:
             TranslateType = "עתודה של סמל תורן בפנים";
             break;
@@ -141,14 +200,53 @@ export default class Shmirot extends React.Component {
             break;
         }
       }
-      var obi = {
-        dayOfWeek: dayHe,
-        type: TranslateType,
-        formattedDate: formattedDate
-      };
-
-      arri.push(obi);
+      let requestDate = false;
+      var changeDate;
+      var obi;
+     // console.log("pop")
+      var temps = [];
+      for(var j=0;j<exchanges.length;j++) {
+        if(exchanges[j].newDate.id == toranot[i]._id) {
+          requestDate = true;
+          changeDate = exchanges[j].oldDate;
+       //   console.log("changeDate" , changeDate);
+          var todayTime = new Date(changeDate.date);
+          var month = todayTime.getMonth() + 1;
+      var day = todayTime.getDate();
+      var year = todayTime.getFullYear();
+      var formattedDateU = day + "/" + month + "/" + year;
+        temps.push({changeDate:changeDate,formattedDate:formattedDateU})
+      // obi = {
+      //   dayOfWeek: dayHe,
+      //   type: TranslateType,
+      //   formattedDate: formattedDate,
+      //   requestDate: true,
+      //   changeDate: changeDate,
+      //   formattedDateUser:formattedDateU,
+      //   hasChange: false
+      //     }
+      //     arri.push(obi);
+      //   }
+      }
     }
+    console.log("temps" , temps);
+         obi = {
+            dayOfWeek: dayHe,
+           type: TranslateType,
+           formattedDate: formattedDate,
+           requestDate: false
+         };
+          if(requestDate == true) {
+              obi["exchangesArray"] = temps;
+              obi["requestDate"] = true;
+              obi["doneDeal"] = false;
+          }
+        
+        console.log("obi" , obi);
+      arri.push(obi);
+         }
+    
+    console.log("arri" , arri);
     this.setState({ arri: arri });
     this.setState({ fetched: true });
   }
@@ -174,6 +272,7 @@ export default class Shmirot extends React.Component {
                 }}
               >
                 <AppBar position="static" style={{ backgroundColor: "white" }}>
+                
                   <Tabs
                     style={{
                       backgroundColor: "white",
@@ -222,14 +321,13 @@ export default class Shmirot extends React.Component {
         )
       });
     }
-    fetch(CONFIG.API.GETTHISMONTHSTORANUTS, {
+    fetch(CONFIG.API.GETEXCHANGESANDTORANOT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         Authorization: "Bearer " + localStorage.getItem("jwt")
       }
-    })
-      .then(data => data.json())
+    }).then(data => data.json())
       .then(jsoned => this.getFormattedDate(jsoned))
       .catch(err => {
         this.setState({ fetched: true });
@@ -374,10 +472,26 @@ export default class Shmirot extends React.Component {
                 </AppBar>
                 <Table>
                   <TableHead>
-                    <TableRow align="center">
-                      <TableCell align="center">סוג תורנות</TableCell>
-                      <TableCell align="center">תאריך</TableCell>
-                      <TableCell align="center">יום בשבוע</TableCell>
+                  <TableRow key={shortid.generate()} align="center">
+                    <TableCell key={shortid.generate()} align="center">שמירות שלי</TableCell>
+                    <TableCell key={shortid.generate()} align="center">בקשה להחלפה</TableCell>
+                </TableRow>
+                    <TableRow key={shortid.generate()} align="center">
+                    <TableCell key={shortid.generate()}>
+                    <Table><TableBody>
+                    <TableRow key={shortid.generate()}>
+                      <TableCell key={shortid.generate()} align="center">תאריך</TableCell>
+                      <TableCell key={shortid.generate()} align="center">יום בשבוע</TableCell>
+                      </TableRow>
+                      </TableBody></Table>
+                      </TableCell>
+                      <TableCell>
+                      <Table><TableBody>
+                      <TableRow key={shortid.generate()}>
+                      <TableCell key={shortid.generate()} align="center">ביקש להחליף</TableCell>
+                      </TableRow>
+                      </TableBody></Table>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>{this.renderTableData()}</TableBody>
