@@ -145,7 +145,7 @@ export default class Haadafot extends React.Component {
           <p className="blobi">   סוג אילוץ</p>
         </div>
         <div className="sidebutton">
-        <Fab style={{marginButton:'20'}} size="small" onClick={() => this.toggleChange()}>
+        <Fab size="small" onClick={() => this.toggleChange()}>
           <i className="material-icons">delete</i>
           </Fab>
           </div>

@@ -17,4 +17,4 @@ const user = (state = INITIAL_STATE, action) => {
 
   }
   
-  export default user;
+  module.exports = user;

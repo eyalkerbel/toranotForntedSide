@@ -13,7 +13,13 @@
         "GETPERSONDATA": "http://localhost:5000/api/getpersondata",
         "GETALLHAADAFOT": "http://localhost:5000/api/getallhaadafot",
         "GETPIORITY" : "http://localhost:5000/api/getpiority",
-        "GETPIORITYBYUSER" : "http://localhost:5000/api/getpioritybyuser" 
+        "GETPIORITYBYUSER" : "http://localhost:5000/api/getpioritybyuser",
+        "SENDMESSAGE" : "http://localhost:5000/api/sendmessage",
+        "GETMESSAGEBYID" : "http://localhost:5000/api/getmessagebyid",
+        "GETNOTIFACTION": "http://localhost:5000/api/getnotifaction",
+        "ADDTORANOTCHNAGE":"http://localhost:5000/api/addtoranotchange",
+        "GETEXCHANGESANDTORANOT": "http://localhost:5000/api/getexchangesandtoranot",
+        "APPROVEEXCHANGEUSER": "http://localhost:5000/api/approveexchange"
     },
     "MAINAPI": "http://localhost:5000/api"
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Fab } from "@material-ui/core";
-
+import {connect} from "react-redux";
 import CONFIG from "../configs/env"
 import user from "../Reducers/UserReducer";
-
-export default class ShmirotTableComp extends React.Component {
+import {SetNotification} from "../Actions/setNotificationAction"
+ class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,7 @@ export default class ShmirotTableComp extends React.Component {
     //     console.log("arrine",arrina);
         const haadafot = this.props.fetchedHaadafot;
         const piority = this.props.piorityArray;
-        console.log("piority", this.props.piorityArray);
+      //  console.log("piority", this.props.piorityArray);
         // console.log("haadfot",haadafot);
         // console.log("piority",piority);
        // this.algoritemHaadafot(haadafot);
@@ -186,6 +186,7 @@ export default class ShmirotTableComp extends React.Component {
 
     send = (obi) => {
         var user;
+    //   this.props.addNotification(obi.date);
         var ThisOrNext = null;
         if (this.props.tabValue === 0) {
             ThisOrNext = "settoranutthismonth";
@@ -200,7 +201,6 @@ export default class ShmirotTableComp extends React.Component {
             },
             body: JSON.stringify(obi)
         }).then(data => data.json()).then((jsoned) => {
-            console.log("jsoned" , jsoned);
             this.props.fetchyfetch();
             this.props.fotchyfetch(obi.userid);
         });
@@ -213,6 +213,7 @@ export default class ShmirotTableComp extends React.Component {
 
     deleteToranut = (user) => {
         var ThisOrNext = null
+        console.log("delete " , user);
         if (this.props.tabValue === 0) {
             ThisOrNext = "deletetoranutthismonth";
         } else if (this.props.tabValue === 1) {
@@ -301,3 +302,8 @@ export default class ShmirotTableComp extends React.Component {
         );
     }
 }
+const mapDispatchToProps = dispatch => ({
+    addNotification:(date) => dispatch(SetNotification(date)),
+})
+
+export default connect(null,mapDispatchToProps)(ShmirotTableComp);

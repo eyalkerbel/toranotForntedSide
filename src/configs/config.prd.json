@@ -13,9 +13,13 @@
         "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata",
         "GETALLHAADAFOT": "https://toranotapi.herokuapp.com/api/getallhaadafot",
         "GETPIORITY" : "https://toranotapi.herokuapp.com/api/getpiority",
-        "GETPIORITYBYUSER" : "https://toranotapi.herokuapp.com/api/getpioritybyuser" 
-
-
+        "GETPIORITYBYUSER" : "https://toranotapi.herokuapp.com/api/getpioritybyuser",
+        "SENDMESSAGE" : "https://toranotapi.herokuapp.com/api/sendmessage",
+        "GETMESSAGEBYID" : "https://toranotapi.herokuapp.com/api/getmessagebyid",
+        "GETNOTIFACTION": "https://toranotapi.herokuapp.com/api/getnotifaction",
+        "ADDTORANOTCHNAGE":"https://toranotapi.herokuapp.com/api/addtoranotchange",
+        "GETEXCHANGESANDTORANOT": "https://toranotapi.herokuapp.com/api/getexchangesandtoranot",
+        "APPROVEEXCHANGEUSER": "https://toranotapi.herokuapp.com/api/approveecxhange"
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"
 }

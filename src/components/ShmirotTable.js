@@ -13,10 +13,13 @@ export default class ShmirotTable extends React.Component {
         this.state = {
             loaded: false,
             fetchedArri: [],
+            fetchMyToranot: [],
             selectedUser: { name: "בחר משתמש" },
             selectValue: 0,
             tabValue: 0,
-            toran: 0
+            toran: 0,
+            oldData: null,
+            newData: null,
         };
     }
 
@@ -40,6 +43,7 @@ export default class ShmirotTable extends React.Component {
     UNSAFE_componentWillMount() {
         console.log("UNSAFE_componentWillMount");
         this.fetchyfetch();
+     //   this.fetchToranot();
     }
 
     fetchyfetch() {
@@ -54,16 +58,25 @@ export default class ShmirotTable extends React.Component {
             .then(dat => this.forFetch(dat))
             .catch(err => console.log(err));
     }
+  
 
     forFetch(data) {
-        this.setState({ fetchedArri: data });
-        this.setState({ loaded: true });
+        fetch(CONFIG.API.GETTHISMONTHSTORANUTS, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              Authorization: "Bearer " + localStorage.getItem("jwt")
+            }
+          })
+            .then(data => data.json()).then(jsoned => this.setState({fetchMyToranot:jsoned,loaded: true,fetchedArri: data}));
     }
+ 
 
     createTable = () => {
         var arri = this.state.fetchedArri.slice(0);
+        console.log("arri" , arri ,"my toranot" , this.state.fetchMyToranot );
         return (
-            <ShmirotTableCompSmall fetchyfetch={this.fetchyfetch.bind(this)} selectedUser={this.state.selectedUser} fetchedArri={arri} tabValue={this.state.tabValue} selectValue={this.state.selectValue} toran={this.state.toran} />
+            <ShmirotTableCompSmall sendData={this.sendData} fetchMyToranot={this.state.fetchMyToranot} fetchyfetch={this.fetchyfetch.bind(this)} selectedUser={this.state.selectedUser} fetchedArri={arri} tabValue={this.state.tabValue} selectValue={this.state.selectValue} toran={this.state.toran} />
         )
     }
 
@@ -72,7 +85,7 @@ export default class ShmirotTable extends React.Component {
             <Fragment>
                 {this.state.loaded ? (
                     <Paper className="maincontainer" >
-                        <div className="header-container">
+                        <div className="header-container-new">
                             <h1 className="header">לוח שמירות</h1>
                             <div className="divider" />
                         </div>

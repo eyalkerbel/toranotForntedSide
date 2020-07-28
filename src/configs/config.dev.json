@@ -13,7 +13,12 @@
         "GETPERSONDATA": "https://dev-nemoidf.azurewebsites.net/api/getpersondata",
         "GETALLHAADAFOT": "https://dev-nemoidf.azurewebsites.net/api/getallhaadafot",
         "GETPIORITY" : "https://dev-nemoidf.azurewebsites.net/api/getpiority",
-        "GETPIORITYBYUSER" : "https://dev-nemoidf.azurewebsites.net/api/getpioritybyuser" 
+        "GETPIORITYBYUSER" : "https://dev-nemoidf.azurewebsites.net/api/getpioritybyuser",
+        "GETMESSAGEBYID" : "https://dev-nemoidf.azurewebsites.net/api/getmessagebyid",
+        "GETNOTIFACTION": "https://dev-nemoidf.azurewebsites.net/api/getnotifaction",
+        "ADDTORANOTCHNAGE":"https://dev-nemoidf.azurewebsites.net/api/addtoranotchange",
+        "GETEXCHANGESANDTORANOT": "https://dev-nemoidf.azurewebsites.net/api/getexchangesandtoranot",
+        "APPROVEEXCHANGEUSER": "https://dev-nemoidf.azurewebsites.net/api/approveecxhange"
 
     },
     "MAINAPI": "https://dev-nemoidf.azurewebsites.net/api"

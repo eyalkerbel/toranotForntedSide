@@ -100,13 +100,12 @@ export default class CreateToranut extends React.Component {
 
     fetchPiority = (userid) => {
        // console.log("fetchPiorityasladindssndsdskdsksd",userid);
-       console.log("fetchPiority" , this.state.piorityArray,userid);
         var stringed = {
             userid:userid,
             piority: this.state.piorityArray
         };
         var p = JSON.stringify(stringed);
-        //console.log("p",p);
+        console.log("fetchPiority" , p);
         fetch(CONFIG.API.GETPIORITYBYUSER, {
             method: "POST",
             headers: {
@@ -148,7 +147,7 @@ export default class CreateToranut extends React.Component {
 
     createTable = () => {
         var arri = this.state.fetchedArri.slice(0);
-        console.log("{this.state.fetchedHaadafot",this.state.fetchedHaadafot);
+     //   console.log("{this.state.fetchedHaadafot",this.state.fetchedHaadafot);
         arri.shift()
         return (
             <ShmirotTableComp

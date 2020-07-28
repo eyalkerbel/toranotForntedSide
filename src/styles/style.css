@@ -25,6 +25,38 @@ body {
   box-sizing: border-box;
   min-height: 100% !important;
 }
+#tablepadding{
+   padding-bottom: 0 !important;
+  /* padding-top: "2px"; */ 
+  overflow:visible;
+}
+#arrow-right {
+  padding-bottom: 0 !important;
+  float:left;
+  /* position:absolute;
+  right: 700px; */
+  /* position: absolute; */
+  /* right: 710px; */
+  /* transform: translateX(-8px); */
+  transform: translate(-30px,-18px);
+
+}
+#arrow-left {
+  padding-bottom: 0 !important;
+  float:right;
+  transform: translate(30px,7px);
+
+
+  /* position:absolute;
+  right: 740px; */
+}
+
+#icon-change{
+  padding-bottom: 0 !important;
+  float:right;
+  position:absolute;
+  right: 720px;
+}
 
 .container {
   padding: 5%;
@@ -37,6 +69,115 @@ body {
   flex-direction: column;
   margin-bottom: 3%;
 }
+.header-container-new {
+  text-align: center;
+  width: 100%;
+  flex-direction: column;
+}
+.header-input {
+width: 70%;
+height: 100%;
+margin-top: auto;
+margin-bottom: auto;
+position: relative;
+}
+
+.header-textarea {
+  width: 70%;
+  height: 50%;
+  width: 70%;
+  height: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  top: 25%;
+  margin-right: 15px;
+  }
+
+
+.field-head {
+  width:100%;
+  height: 80px;
+  /* margin-top: 12px; */
+  padding: 5px;
+}
+
+.field-body {
+  width: 100%;
+  height: 120px;
+  margin-top: 30px;
+  padding: 5px;
+}
+.field-recivers {
+  width: 100%;
+  height: 120px;
+  margin-top: 30px;
+  padding: 5px;
+}
+
+
+
+.label-form {
+  width: 60px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  top: -50%;
+}
+.label-select {
+  width: 60px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ 
+}
+.select-recivers{
+  width: 30%;
+  margin-right: 70px;
+}
+
+.container-checkbox {
+   border:2px solid #ccc; width:300px; height: 100px; overflow-y: scroll;
+   }
+   .mail-list {
+    height: 260px;
+    width: 100%;
+  }
+  .mail-headers {
+    height: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction:row !important;
+    text-align: center;
+  }
+   
+
+  .mail-data {
+    height: 100%;
+    width: 100%;
+  }
+
+  .mail-single {
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction:row !important;
+    border: outset;
+    border-radius: 5px;
+  }
+
+
+  .mail-sender {
+    flex:1;
+  }
+  .mail-title {
+    flex: 3;
+    text-align: right;
+  }
 
 .header {
   color: teal;
@@ -47,6 +188,12 @@ body {
 .divider {
   width: 100%;
   border-bottom: solid lightgray 1px;
+}
+.form-bottom {
+  margin-top: 8px;
+  width: 50%;
+  position: relative;
+  right: 35%;
 }
 
 /* homepage */
@@ -334,6 +481,8 @@ a {
 .MuiMenuItem-root {
   padding: 0 !important;
 }
+
+
 
 .fobi1 {
   background-color: teal !important;

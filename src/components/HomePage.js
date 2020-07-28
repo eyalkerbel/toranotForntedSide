@@ -1,12 +1,78 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "material-icons";
 import Card from "@material-ui/core/Card";
 import { Paper, CardActionArea } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-
+import {NotificationManager,NotificationContainer} from 'react-notifications';
+import CONFIG from "../configs/env";
+import LoadingPage from "./LoadingPage";
+import { Redirect } from 'react-router-dom';
+import Notifications from './Notifications';
 export default class HomePage extends React.Component {
+ constructor(props) {
+   super(props);
+   this.state = {
+     info: [],
+     loading:true,
+     exchanges: []
+   }
+ }
+ componentWillMount() {
+  fetch(CONFIG.API.GETNOTIFACTION, {
+  method:"POST",
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+    Authorization: "Bearer " + localStorage.getItem("jwt")
+}}).then(dat => dat.json()).then(data => this.handleNoti(data));
+}
+handleNoti(dataAll) {
+var temp = [];
+let message;
+let tempJson = "";
+var data = dataAll[0];
+for(var i=0;i<data.length;i++) {
+  if(data[i].seen == false) {
+var date = data[i].data;
+var dats =  new Date(date);
+if(data[i].action == "place") {
+     message = "manager place you on date" + dats.getDate();
+  }
+ if(data[i].action == "delete") {
+ message = "manager remove you on date" + dats.getDate();
+}
+
+console.log("message",message)
+  temp.push(message);
+}
+}
+var data2 = dataAll[1];
+var temp2 = []; 
+let mess;
+for(var i=0;i<data2.length;i++) {
+  if(data2[i].seen == false) {
+    console.log("hola");
+var oldDate = data2[i].oldDate.date;
+var newDate = data2[i].newDate.date;
+var datsOld = new Date(oldDate);
+var datsNew = new Date(newDate);
+mess = data2[i].oldDate.name  + " ask change, his toranot " + datsOld.getDate() + " with yours" + datsNew.getDate();
+temp2.push(mess);
+}
+}
+console.log("notis" , temp , temp2);
+this.setState({info:temp,loading:false,exchanges:temp2});
+}
+
+
+
   render() {
+    {console.log(this.state.info , "s" , this.state.exchanges)}
     return (
+      <Fragment>
+      <Notifications info={this.state.info} exchanges={this.state.exchanges} />
+      {console.log(this.state.loading)}
+      {/* {this.state.loading == false ? */}
+      {true? 
       <Paper className="maincontainer">
         <div className="header-container">
           <h1 className="header">מערכת לניהול שמירות</h1>
@@ -100,7 +166,12 @@ export default class HomePage extends React.Component {
             </NavLink>
           </Card>
         </div>
-      </Paper>
+        {/* <button className='btn btn-danger'
+          onClick={this.createNotification('error')}>Error
+        </button> */}
+      </Paper>:<LoadingPage /> }
+      </Fragment>
+      
     );
   }
 }
