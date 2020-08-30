@@ -15,11 +15,11 @@ import CONFIG from "../configs/env";
     createNotification() {
         for(var i=0;i<this.props.info.length;i++) {
             if(this.props.exchanges[i].seen == "false")
-        NotificationManager.info(this.props.info[i],"action:",2000,() => {this.ReadAndDispaly(i)
+        NotificationManager.info(this.props.info[i],"action:",3000,() => {this.ReadAndDispaly(i)
         });
         }
         for(var i=0;i<this.props.exchanges.length;i++) {
-            NotificationManager.info(this.props.exchanges[i],"action:",2000,() => {this.ReadAndDispaly2(i)
+            NotificationManager.info(this.props.exchanges[i],"action:",3000,() => {this.ReadAndDispaly2(i)
             });
             }
          }
@@ -27,7 +27,11 @@ import CONFIG from "../configs/env";
         this.props.history.push('/shmirot');
       }
       ReadAndDispaly2(index) {
-        this.props.history.push('/mail');
+        console.log("pppp");
+        this.props.history.push({  
+          pathname: '/shmirot',
+        state: {urlExchange: true}
+        });
       }
 
       render() {

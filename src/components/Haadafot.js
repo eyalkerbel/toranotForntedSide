@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Checkbox from '@material-ui/core/Checkbox';
 import Fab from "@material-ui/core/Fab";
+import { setMonth } from "date-fns";
 
 export default class Haadafot extends React.Component {
   
@@ -20,7 +21,8 @@ export default class Haadafot extends React.Component {
       isChecked: false,
       selectStart: false,
       selectEnd: false,
-      isDeleted: false
+      isDeleted: false,
+      sEnd:false
     };
     this.handleclicks = this.handleclicks.bind(this);
     this.handledate1 = this.handledate1.bind(this);
@@ -29,7 +31,12 @@ export default class Haadafot extends React.Component {
   }
 
   componentDidMount() {
-    this.sendToParent();
+  //   var currentDate = new Date();
+  //   currentDate.setMonth(currentDate.getMonth()+1);
+  //   currentDate.setDate(1);
+
+  //   this.setState({selectedDate1:currentDate,selectedDate2:currentDate});
+  //  this.sendToParent();
   }
   UNSAFE_componentWillMount() {
     if (this.props.data != null) {
@@ -50,6 +57,12 @@ export default class Haadafot extends React.Component {
         default:
           break;
       }
+    } else {
+      var currentDate = new Date();
+    currentDate.setMonth(currentDate.getMonth()+1);
+    currentDate.setDate(1);
+
+    this.setState({selectedDate1:currentDate,selectedDate2:currentDate});
     }
   }
   componentDidUpdate() {
@@ -58,6 +71,7 @@ export default class Haadafot extends React.Component {
     } else {
       this.props.saveDelete(this.props.compCount);
     }
+  
   }
   sendToParent() {
     var x = this.state.selectedDate1;
@@ -66,8 +80,9 @@ export default class Haadafot extends React.Component {
     var g = this.state.reason;
     var isChecked = this.state.isChecked;
 
-    
+    if((this.state.sEnd == true && this.state.selectStart == true) || (this.state.isChecked==true)) {
     this.props.getDataFromSon(x, y, count, g, isChecked);
+    }
     if(this.state.isChecked == true) {
     this.setState({isChecked:false});
     }
@@ -89,6 +104,20 @@ export default class Haadafot extends React.Component {
     }
   }
 
+   resetItem() {
+    var currentDate = new Date();
+    currentDate.setMonth(currentDate.getMonth()+1);
+    currentDate.setDate(1);
+this.setState({selectedDate1:currentDate,selectedDate2:currentDate, 
+   values: 10,
+  reason: "ishi",
+  isChecked: false,
+  selectStart: false,
+  selectEnd: false,
+  isDeleted: false,
+  sEnd:false});
+  }
+
   handledate1(day) {
     let final = 0;
     let begin = new Date(day)
@@ -97,9 +126,11 @@ export default class Haadafot extends React.Component {
     final += (sub / (1000 * 3600 * 24)) + 1
     let f1 = 8 - final
     console.log(f1)
-
-    if ((this.props.dayCount < 0 || f1 < 0) && this.state.selectEnd) {
-      this.setState({ selectedDate1: new Date().setHours(0, 0, 0, 0), selectedDate2: new Date().setHours(0, 0, 0, 0) });
+    //&& this.state.selectEnd
+    if ((this.props.dayCount < 0 || f1 < 0) && this.state.sEnd == true ) {
+    this.resetItem();
+    //  this.setState({isChecked:true});
+     // this.setState({ selectedDate1: new Date().setHours(0, 0, 0, 0), selectedDate2: new Date().setHours(0, 0, 0, 0) });
       alert("חרגת מכמות מקסימלית של אילוצים")
     } else {
       this.setState({ selectedDate1: day,selectStart: true });
@@ -113,13 +144,16 @@ export default class Haadafot extends React.Component {
     let sub = end.getTime() - begin.getTime()
     final += (sub / (1000 * 3600 * 24)) + 1
     let f1 = 8 - final
+    
     console.log(f1)
 
-    if ((this.props.dayCount < 0 || f1 < 0) && this.state.selectStart) {
-      this.setState({ selectedDate2: new Date().setHours(0, 0, 0, 0), selectedDate1: new Date().setHours(0, 0, 0, 0) });
+    if ((this.props.dayCount < final || f1 < 0) && this.state.selectStart) {
+      this.resetItem();
+   // this.setState({isChecked:true});
+    //  this.setState({ selectedDate2: new Date().setHours(0, 0, 0, 0), selectedDate1: new Date().setHours(0, 0, 0, 0) });
       alert("חרגת מכמות מקסימלית של אילוצים")
     } else {
-      this.setState({ selectedDate2: day });
+      this.setState({ selectedDate2: day,sEnd:true });
     }
   }
   toggleChange = () => {

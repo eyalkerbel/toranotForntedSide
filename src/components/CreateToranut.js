@@ -17,7 +17,8 @@ export default class CreateToranut extends React.Component {
         this.state = {
             loaded: false,
             fetchedArri: [],
-            selectedUser: { name: "בחר משתמש" },
+             selectedUser: { name: "בחר משתמש" },
+            // selectedUser: "בחר משתמש",
             selectValue: 0,
             tabValue: 0,
             toran: 0,

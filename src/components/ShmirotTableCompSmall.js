@@ -10,16 +10,17 @@ export default class ShmirotTableCompSmall extends React.Component {
             ChosenSubstitute: false,
             oldDate: null,
             newDate: null,
-            status: ""
+            status: "",
+            message: ""
         };
         this.cleanData = this.cleanData.bind(this);
         this.sendDataToServer = this.sendDataToServer.bind(this);
     }
 
     createMainArri = (num) => {
-        var temp = this.props.fetchedArri[num];
-        var tempMy = this.props.fetchMyToranot;
-        console.log("tempMy" , tempMy);
+        var temp = this.props.fetchedArri[num][0];
+        var tempMy = this.props.fetchedArri[num][1];
+       console.log("tempMy" , temp);
         var tempArri = [];
         if(temp != undefined && tempMy != undefined) {
         temp.forEach(el => {
@@ -37,8 +38,9 @@ export default class ShmirotTableCompSmall extends React.Component {
             var userid = el.userid
             var id = el._id
             var toran = el.toran
+            var userStauts = el.userStatus;
             var obi = {
-                date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, isMine
+                date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, isMine,userStauts
             }
             if (this.props.selectValue === parseInt(type)) {
                 if (tempArri[dayOfMonth] == null) {
@@ -51,6 +53,7 @@ export default class ShmirotTableCompSmall extends React.Component {
             }
         })
     }
+    //console.log("tempArri" , tempArri);
         return (this.createTableBody(tempArri)
         )
     }
@@ -59,47 +62,20 @@ export default class ShmirotTableCompSmall extends React.Component {
         return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
     }
     pickProblemDate(date) {
-        console.log("pickProblemDgtae", this.state);
-        console.log("newData",this.state.newDate);
-        if(this.state.newDate != null) {
-            alert("need or to send or to cancel")
-        }
-        else {
-        this.setState({ChosenSubstitute:true,oldDate:date});
-        }
+        this.props.pickMine(date);
+
+    }
+    unPickProblemDate(date) {
+        this.props.unPickMine(date);
     }
     pickReplaceDate(date) {
-        console.log("pick" , date);
-        this.setState({ChosenSubstitute:false,newDate:date});
-        console.log("s" , this.state.newDate);
-    }
+    this.props.pickOther(date);
+     }
+     unPickReplaceDate(date) {
+         this.props.unPickOther(date);
+     }
     sendDataToServer() {
-        if(this.state.oldDate != null && this.state.newDate != null) {
-        this.setState({status:"send a request"});
-        console.log("send to server" , this.state.oldDate , "and ", this.state.newDate);
-        // let data = {
-        //     header: "want to change",
-        //     body:  "i want to change my  " + this.state.oldDate.dayOfMonth +  "with yours " +  this.state.newDate.dayOfMonth,
-        //     names:  [this.state.newDate.name]
-        //   };
-        let data = {
-          oldDate: this.state.oldDate,
-          newDate: this.state.newDate,
-          status: "asking",
-          seen:false
-        }
-          this.setState({oldData:null,newDate:null});
-          fetch(CONFIG.API.ADDTORANOTCHNAGE, {
-            method:"POST",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              Authorization: "Bearer " + localStorage.getItem("jwt")
-          },
-          body: JSON.stringify(data)
-          }).then(data => data.json())
-          .then(dat => console.log("finish"))
-          .catch(err => console.log(err));
-        }
+
     }
     cleanData() {
         this.setState({oldData:null,newDate:null,ChosenSubstitute:false,status:"clean all data"});
@@ -107,6 +83,9 @@ export default class ShmirotTableCompSmall extends React.Component {
 
 
     createTableBody = (tempArri) => {
+        if(this.props.newData != null) {
+       // console.log("newDated" , this.props.newData.date);
+        }
         var d = new Date();
         if (this.props.tabValue === 1) {
             d.setMonth(d.getMonth() + 1)
@@ -115,47 +94,94 @@ export default class ShmirotTableCompSmall extends React.Component {
         var dayOfWeek2 = d.getDay()
         var arri2 = [];
         var x = 1;
-        console.log("chosen" , this.state.ChosenSubstitute);
         var lastDay = this.getLstDayOfMonth(d);
         for (var i = dayOfWeek2; i < lastDay + dayOfWeek2; i++) {
             var tempi2 = []
             if (tempArri[x] != null) {
                 for (var g = 0; g < tempArri[x].length; g++) {
-                    let user = tempArri[x][g]
+                    let user = tempArri[x][g];
+                    var backgroundColor;
+                    console.log("mycolor " , backgroundColor);
+
+                    switch(tempArri[x][g].userStauts) {
+                        case "nothappy":
+                            backgroundColor = "red";
+                            break;
+                        case "happy":
+                            backgroundColor = "green";
+                            break;
+                        default:
+                            backgroundColor = "teal";
+                            break;
+                    }
                     if (user.toran === 0) {
                         let xio = tempi2.pop()
+                        if(this.props.exchangeStatus == "others") {
+                             var ok=false;
+                            if(user.isMine == false) {
+                                if(this.props.newData != null && this.props.newData.date.getDate() == x) {
+                                     ok = true;
+                                }
+                            tempi2.push(
+                            <div style={{ display: "flex",flexDirection: "column", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
+                                <span style={{width:"60%",backgroundColor: backgroundColor, borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
+                                    {tempArri[x][g].name}
+                                </span>
+                            <span style={{marginTop:"5px"}}>
+                            {ok==true? <Button  onClick={() => this.unPickReplaceDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal",paddingRight: "0px",paddingLeft: "0px" }}>בטל בחירה</Button>  
+                                 : <Button onClick={() => this.pickReplaceDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }}>בחר</Button>}
+                                </span>
+                               
+                            </div>)
+                            tempi2.push(xio)
+                            }
+                        } else if(this.props.exchangeStatus == "my") {
+                            var ok=false;
+                            if(user.isMine == true) {
+                                if(this.props.oldData != null && this.props.oldData.date.getDate() == x) {
+                                    ok = true;
+                               }
+                            tempi2.push(
+                                        <div style={{ display: "flex",flexDirection: "column", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
+                                            <span style={{ width:"60%",backgroundColor: backgroundColor, borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
+                                               Me
+                                            </span>
+                                            <span style={{marginTop:"5px"}}>
+                                            {ok==true? <Button  onClick={() => this.unבחרProblemDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal",paddingRight: "0px",paddingLeft: "0px"}}>בטל בחירה</Button>  
+                                              :<Button size="small" variant="outlined" onClick={() => this.pickProblemDate(user)} style={{ border: "solid 1px teal", color: "teal" }}>בחר</Button>}
+                                            </span> 
+                                       
+                                        </div>)
+                        
+                        }
+                    } else {
                         if(user.isMine == false) {
                         tempi2.push(
                             <div style={{ display: "flex",flexDirection: "column", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
-                                <span style={{ width:"60%",backgroundColor: "teal", borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
+                                <span style={{ width:"60%",backgroundColor: backgroundColor, borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
                                     {tempArri[x][g].name}
                                 </span>
-                                {this.state.ChosenSubstitute == true? <span style={{marginTop:"5px"}}>
-                                <Button  onClick={() => this.pickReplaceDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }}>replace</Button>
-                                </span> : null}
-                               
-                            </div>)
-                        tempi2.push(xio)
-                        } else {
+                                </div>)
+                        }
+                        else {
                             tempi2.push(
                                 <div style={{ display: "flex",flexDirection: "column", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
                                     <span style={{ width:"60%",backgroundColor: "teal", borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
                                        Me
                                     </span>
-                                    {this.state.ChosenSubstitute == false?<span style={{marginTop:"5px"}}>
-                                    <Button variant="outlined" onClick={() => this.pickProblemDate(user)} style={{ border: "solid 1px teal", color: "teal" }}>change</Button>
-                                    </span> : null}
-                               
-                                </div>)
+                                    </div>)
                         }
+                    }
+                    
                     } else {
                         tempi2.push(
                             <div style={{ display: "flex", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
-                                <span style={{ backgroundColor: "#B76EB8", borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
+                                <span style={{ backgroundColor: backgroundColor, borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
                                     {tempArri[x][g].name}
                                 </span>
                             </div>)
                     }
+                    //"#B76EB8"
 
                 }
             }
@@ -226,16 +252,18 @@ export default class ShmirotTableCompSmall extends React.Component {
                     })
                     }
                 </div>
-                {this.state.ChosenSubstitute==false && this.state.newDate!= null?  <div className="form-bottom" >
-                    <div style={{textAlign: "center"}}>{this.state.status} </div>
-             <Button className="fobi1" onClick={this.sendDataToServer} >
+                {this.state.ChosenSubstitute==false && this.state.newDate!= null?
+                <div style={{textAlign: "center"}}>
+                    <textarea className="textarea-exchange" type="text" placeholder="צרף הודעה" onChange={(e) => {this.setState({message:e.target.value})}} />
+                  <div className="form-bottom">
+                     <Button className="fobi1" onClick={this.sendDataToServer} >
              <i className="material-icons">send</i>
             </Button>
             <Button className="fobi2" onClick={this.cleanData} >
          <i className="material-icons">cancel</i>
         </Button>
-        
-            </div>:"click for change with someone"}
+         </div>
+            </div>:null}
                
             </div>
         );

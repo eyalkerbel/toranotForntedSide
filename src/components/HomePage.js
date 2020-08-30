@@ -30,15 +30,16 @@ var temp = [];
 let message;
 let tempJson = "";
 var data = dataAll[0];
+console.log("data3" , data);
 for(var i=0;i<data.length;i++) {
   if(data[i].seen == false) {
 var date = data[i].data;
 var dats =  new Date(date);
 if(data[i].action == "place") {
-     message = "manager place you on date" + dats.getDate();
+     message = "מנהל שיבץ אותך בתורונות" + dats.getDate();
   }
  if(data[i].action == "delete") {
- message = "manager remove you on date" + dats.getDate();
+ message = "מנהל ביטל את תרנותך בתורנות" + dats.getDate();
 }
 
 console.log("message",message)
@@ -46,6 +47,7 @@ console.log("message",message)
 }
 }
 var data2 = dataAll[1];
+console.log("data32",data2);
 var temp2 = []; 
 let mess;
 for(var i=0;i<data2.length;i++) {
@@ -79,6 +81,20 @@ this.setState({info:temp,loading:false,exchanges:temp2});
           <div className="divider" />
         </div>
         <div className="infocard-container1">
+        {localStorage.getItem("permissionlvl") === "admin"? 
+        <Card className="infocard">
+            <NavLink
+              style={{ color: "initial", height: "100%", padding: "initial" }}
+              to="/approve_change"
+            >
+              <CardActionArea className="cc3">
+                <i className="material-icons icons">calendar_today</i>
+                <h1>אישורי החלפות</h1>
+                <p>כל האישורי ההחלפות של משתמשים</p>
+              </CardActionArea>
+            </NavLink>
+          </Card>
+          :
           <Card className="infocard">
             <NavLink
               style={{ color: "initial", height: "100%", padding: "initial" }}
@@ -90,7 +106,7 @@ this.setState({info:temp,loading:false,exchanges:temp2});
                 <p>התורנויות שלך לחודש ולחודש הבא.</p>
               </CardActionArea>
             </NavLink>
-          </Card>
+          </Card>}
           <Card className="infocard">
             <NavLink
               style={{ color: "initial", height: "100%", padding: "initial" }}

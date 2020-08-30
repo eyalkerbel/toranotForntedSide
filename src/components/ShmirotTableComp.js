@@ -16,6 +16,8 @@ import {SetNotification} from "../Actions/setNotificationAction"
     InjectDayOfWeekForHaadafa = (arrina) => {
     //    console.log("shmirotTableCompinject",this.props.fetchedHaadafot)
     //     console.log("arrine",arrina);
+    console.log("selectedValue" , this.props.selectedUser.name);
+    if(this.props.selectedUser.name != "בחר משתמש" ){
         const haadafot = this.props.fetchedHaadafot;
         const piority = this.props.piorityArray;
       //  console.log("piority", this.props.piorityArray);
@@ -40,7 +42,7 @@ import {SetNotification} from "../Actions/setNotificationAction"
                     }
                 }
              });
-
+            }
             // piority.forEach(el3 => {
             //     var arr = 
             // });
@@ -213,7 +215,7 @@ import {SetNotification} from "../Actions/setNotificationAction"
 
     deleteToranut = (user) => {
         var ThisOrNext = null
-        console.log("delete " , user);
+    //    console.log("delete " , user);
         if (this.props.tabValue === 0) {
             ThisOrNext = "deletetoranutthismonth";
         } else if (this.props.tabValue === 1) {

@@ -19,7 +19,9 @@ import ShmirotChanges from "./ShmirotChanges";
 import MyShmirot from "./MyShmirot";
 import AnswerChanges from "./AnswerChanges";
 import { FORMERR } from "dns";
-export default class Shmirot extends React.Component {
+import { withRouter } from 'react-router-dom';
+
+class Shmirot extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -29,7 +31,8 @@ export default class Shmirot extends React.Component {
       arri: [],
       exchanges: [],
       blop: <LoadingPage />,
-      fetchArray: []
+      fetchArray: [],
+      urlExchange: false
     };
     this.handletabs = this.handletabs.bind(this);
     this.fetchyfetch = this.fetchyfetch.bind(this);
@@ -149,200 +152,6 @@ export default class Shmirot extends React.Component {
       });
   }
 fetchData(jsoned) {
-  // console.log("fetchData",jsoned[2]);
-  // var exchanges = jsoned[3];
-  // var mineExchanges = jsoned[2];
-  // var tempFinal = [];
-  // var arri = [];
-  // var getFormattedDatearri = [];
-  // var tempExhcanges = [[]];
-  // var indexMonth;
-  // for(var i=0; i<mineExchanges.length;i++) {
-  //   var todayTime3 = new Date(mineExchanges[i].oldDate.date);
-  //   var month3 = todayTime3.getMonth() + 1;
-  //   var currentMomth = new Date().getMonth();
-  //   if(currentMomth == todayTime3.getMonth() ) {
-  //     indexMonth = 0;  
-  //   } else {
-  //     indexMonth = 1;
-  //   }
-
-  //   var day3 = todayTime3.getDate();
-  //   var year3 = todayTime3.getFullYear();
-  //   var formattedDate3 = day3 + "/" + month3 + "/" + year3;
-  //   var dayofweek3 = todayTime3.getDay();
-  //   var dayHe3 = 0;
-
-  //   switch (dayofweek3) {
-  //     case 0:
-  //       dayHe3 = "ראשון";
-  //       break;
-  //     case 1:
-  //       dayHe3 = "שני";
-  //       break;
-  //     case 2:
-  //       dayHe3 = "שלישי";
-  //       break;
-  //     case 3:
-  //       dayHe3 = "רביעי";
-  //       break;
-  //     case 4:
-  //       dayHe3 = "חמישי";
-  //       break;
-  //     case 5:
-  //       dayHe3= "שישי";
-  //       break;
-  //     case 6:
-  //       dayHe3 = "שבת";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   var todayTime2 = new Date(mineExchanges[i].newDate.date);
-  //   var month2 = todayTime2.getMonth() + 1;
-  //   var day2 = todayTime2.getDate();
-  //   var year2 = todayTime2.getFullYear();
-  //   var formattedDate2 = day2 + "/" + month2 + "/" + year2;
-
-  //  var exchange = {
-  //    oldDateFormat: formattedDate3,
-  //    dayHe: dayHe3,
-  //    name: mineExchanges[i].newDate.name,
-  //    newDateForamt: formattedDate2,
-  //    status: mineExchanges[i].status
-  //  }
-  //  tempExhcanges[indexMonth].push(exchange);
-
-  // }
-
-// console.log("foo");
-//   for(var k=0;k<2;k++) {
-//  var toranot = jsoned[k];
-//   arri = [];
-//   var getFormattedDatearri = [];
-//   for (var i = 0; i < toranot.length; i++) {
-//     var todayTime = new Date(toranot[i].date);
-//     var month = todayTime.getMonth() + 1;
-//     var day = todayTime.getDate();
-//     var year = todayTime.getFullYear();
-//     var formattedDate = day + "/" + month + "/" + year;
-//     var dayofweek = todayTime.getDay();
-//     var dayHe = 0;
-//     switch (dayofweek) {
-//       case 0:
-//         dayHe = "ראשון";
-//         break;
-//       case 1:
-//         dayHe = "שני";
-//         break;
-//       case 2:
-//         dayHe = "שלישי";
-//         break;
-//       case 3:
-//         dayHe = "רביעי";
-//         break;
-//       case 4:
-//         dayHe = "חמישי";
-//         break;
-//       case 5:
-//         dayHe = "שישי";
-//         break;
-//       case 6:
-//         dayHe = "שבת";
-//         break;
-//       default:
-//         break;
-//     }
-//     var TranslateType = 0;
-//     if (toranot[i].toran === 0) {
-//       switch (toranot[i].type) {
-//         case 0:
-//           TranslateType = "סמל תורן בפנים";
-//           break;
-//         case 1:
-//           TranslateType = "קצין תורן בפנים";
-//           break;
-//         case 2:
-//           TranslateType = "חייל חובה חוץ";
-//           break;
-//         case 3:
-//           TranslateType = "נגד שער";
-//           break;
-//         case 4:
-//           TranslateType = "ע' קצין תורן";
-//           break;
-//         case 5:
-//           TranslateType = "קצין תורן";
-//           break;
-//         case 6:
-//           TranslateType = "מפקד תורן";
-//           break;
-//         default:
-//           break;
-//       }
-
-//     } else {
-//       switch (toranot[i].type) {
-//         case 0:
-//           TranslateType = "עתודה של סמל תורן בפנים";
-//           break;
-//         case 1:
-//           TranslateType = "עתודה של קצין תורן בפנים";
-//           break;
-//         case 2:
-//           TranslateType = "עתודה של חייל חובה חוץ";
-//           break;
-//         case 3:
-//           TranslateType = "עתודה של נגד שער";
-//           break;
-//         case 4:
-//           TranslateType = "עתודה של ע' קצין תורן";
-//           break;
-//         case 5:
-//           TranslateType = "עתודה של קצין תורן";
-//           break;
-//         case 6:
-//           TranslateType = "עתודה של מפקד תורן";
-//           break;
-//         default:
-//           break;
-//       }
-//     }
-//     let requestDate = false;
-//     var changeDate;
-//     var obi;
-//     var temps = [];
-//     for(var j=0;j<exchanges.length;j++) {
-//       if(exchanges[j].newDate.id == toranot[i]._id) {
-//         requestDate = true;
-//         changeDate = exchanges[j].oldDate;
-//         var todayTime = new Date(changeDate.date);
-//         var month = todayTime.getMonth() + 1;
-//     var day = todayTime.getDate();
-//     var year = todayTime.getFullYear();
-//     var formattedDateU = day + "/" + month + "/" + year;
-//       temps.push({changeDate:changeDate,formattedDate:formattedDateU,indexExchange:j})
-//     }
-//   }
-//        obi = {
-//           dayOfWeek: dayHe,
-//          type: TranslateType,
-//          formattedDate: formattedDate,
-//          requestDate: false
-//        };
-//         if(requestDate == true) {
-//             obi["exchangesArray"] = temps;
-//             obi["requestDate"] = true;
-//             obi["doneDeal"] = false;
-//         }
-      
-//     arri.push(obi);
-
-       
-//       }
-// tempFinal[k] = arri;
-// }
-//this.setState({arri:tempFinal,exchanges:tempExhcanges,fetched:true,fetchArray:jsoned});
 this.setState({fetchArray:jsoned,fetched:true});
 }
 
@@ -405,6 +214,11 @@ this.setState({fetchArray:jsoned,fetched:true});
     if(this.state.fetched == false) {
     this.fetchyfetch();
     }
+    if(this.props.location.state != undefined) {
+    if(this.props.location.state.urlExchange == true) {
+      this.setState({selectValue:1});
+    }
+  }
   }
   bubbleSelect = (num) => {
     this.setState({ selectValue: num })
@@ -413,18 +227,24 @@ getDataFromSon(fetchArray2) {
   console.log("fetcharray2" , fetchArray2);
   this.setState({fetchArray:fetchArray2});
 }
+getDataFromAnswer() {
+  
+  // this.fetchyfetch(1);
+}
 
   renderByValue() {
-    {console.log("tabii" , this.state.tabvalue)}
+    {console.log("tabii" , this.state.fetchArray)}
+
+    // if(this.state.urlExchange == true) {
+    //   return(<ShmirotChanges updateParent={this.getDataFromSon} approveChange={this.approveChange} fetchArray={this.state.fetchArray} tabValue={this.state.tabvalue} />);
+    // }
     switch(this.state.selectValue) {
       case 0:
         return(<MyShmirot arri={this.state.fetchArray[this.state.tabvalue]} tabValue={this.state.tabvalue} />);
-
       case 1:
            return(<ShmirotChanges updateParent={this.getDataFromSon} approveChange={this.approveChange} fetchArray={this.state.fetchArray} tabValue={this.state.tabvalue} />);
-
       case 2:
-            return (<AnswerChanges fetchArray={this.state.fetchArray} tabValue={this.state.tabvalue} />);
+            return (<AnswerChanges fetchArray={this.state.fetchArray} tabValue={this.state.tabvalue} updateAnswer={this.getDataFromAnswer} />);
       default:
             return(<MyShmirot arri={this.state.fetchArray[this.state.tabvalue]} tabValue={this.state.tabvalue} />);
     }
@@ -456,3 +276,4 @@ getDataFromSon(fetchArray2) {
     );
   }
 }
+export default withRouter(Shmirot);

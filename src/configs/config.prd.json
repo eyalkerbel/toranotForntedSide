@@ -19,7 +19,12 @@
         "GETNOTIFACTION": "https://toranotapi.herokuapp.com/api/getnotifaction",
         "ADDTORANOTCHNAGE":"https://toranotapi.herokuapp.com/api/addtoranotchange",
         "GETEXCHANGESANDTORANOT": "https://toranotapi.herokuapp.com/api/getexchangesandtoranot",
-        "APPROVEEXCHANGEUSER": "https://toranotapi.herokuapp.com/api/approveecxhange"
+        "APPROVEEXCHANGEUSER": "https://toranotapi.herokuapp.com/api/approveecxhange",
+        "GETEXCHANGEAPPROVE" : "https://toranotapi.herokuapp.com/api/getexchangeapprove",
+        "UPDATEEXCHANGEANAGER": "https://toranotapi.herokuapp.com/api/updateexchangemanager",
+        "SENDMESSAGEAGAIN": "https://toranotapi.herokuapp.com/api/sendmessageagain",
+        "SENDSTATUSSHMIROT":  "https://toranotapi.herokuapp.com/api/sendstatusshmirot"
+
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"
 }

@@ -18,8 +18,11 @@
         "GETNOTIFACTION": "https://dev-nemoidf.azurewebsites.net/api/getnotifaction",
         "ADDTORANOTCHNAGE":"https://dev-nemoidf.azurewebsites.net/api/addtoranotchange",
         "GETEXCHANGESANDTORANOT": "https://dev-nemoidf.azurewebsites.net/api/getexchangesandtoranot",
-        "APPROVEEXCHANGEUSER": "https://dev-nemoidf.azurewebsites.net/api/approveecxhange"
-
+        "APPROVEEXCHANGEUSER": "https://dev-nemoidf.azurewebsites.net/api/approveecxhange",
+        "GETEXCHANGEAPPROVE" : "https://dev-nemoidf.azurewebsites.net/api/getexchangeapprove",
+        "UPDATEEXCHANGEANAGER": "https://dev-nemoidf.azurewebsites.net/api/updateexchangemanager",
+        "SENDMESSAGEAGAIN": "https://dev-nemoidf.azurewebsites.net/api/sendmessageagain",
+        "SENDSTATUSSHMIROT":  "https://dev-nemoidf.azurewebsites.net/api/sendstatusshmirot"
     },
     "MAINAPI": "https://dev-nemoidf.azurewebsites.net/api"
 }

@@ -19,7 +19,11 @@
         "GETNOTIFACTION": "http://localhost:5000/api/getnotifaction",
         "ADDTORANOTCHNAGE":"http://localhost:5000/api/addtoranotchange",
         "GETEXCHANGESANDTORANOT": "http://localhost:5000/api/getexchangesandtoranot",
-        "APPROVEEXCHANGEUSER": "http://localhost:5000/api/approveexchange"
+        "APPROVEEXCHANGEUSER": "http://localhost:5000/api/approveexchange",
+        "GETEXCHANGEAPPROVE" : "http://localhost:5000/api/getexchangeapprove",
+        "UPDATEEXCHANGEANAGER": "http://localhost:5000/api/updateexchangemanager",
+        "SENDMESSAGEAGAIN": "http://localhost:5000/api/sendmessageagain",
+        "SENDSTATUSSHMIROT":  "http://localhost:5000/api/sendstatusshmirot"
     },
     "MAINAPI": "http://localhost:5000/api"
 }

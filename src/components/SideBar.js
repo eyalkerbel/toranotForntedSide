@@ -173,6 +173,17 @@ export default class SideBar extends React.Component {
                 <h2>בית</h2>
               </ListItem>
             </NavLink>
+            {localStorage.getItem("permissionlvl") === "admin"?
+            <NavLink to="/approve_change">
+              <ListItem
+                className="listd"
+                button
+                onClick={() => this.handleSideBar()}>
+                <i className="material-icons icons2">calendar_today</i>
+                <h2>אישורי החלפות</h2>
+              </ListItem>
+            </NavLink> 
+            :
             <NavLink to="/shmirot">
               <ListItem
                 className="listd"
@@ -182,7 +193,7 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">calendar_today</i>
                 <h2>שמירות שלי</h2>
               </ListItem>
-            </NavLink>
+            </NavLink>}
             <NavLink to="/shmirottable">
               <ListItem
                 className="listd"
@@ -231,16 +242,6 @@ export default class SideBar extends React.Component {
               >
                 <i className="material-icons icons2">contacts</i>
                 <h2>אנשי קשר</h2>
-              </ListItem>
-            </NavLink>
-            <NavLink to="/exchange">
-              <ListItem
-                className="listd"
-                button
-                onClick={() => this.handleSideBar()}
-              >
-                <i className="material-icons icons2">change</i>
-                <h2>בדוק חילופים</h2>
               </ListItem>
             </NavLink>
             <NavLink to="/sendmessage">
