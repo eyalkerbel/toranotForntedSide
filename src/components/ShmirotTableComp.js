@@ -3,7 +3,7 @@ import { Button, Fab } from "@material-ui/core";
 import {connect} from "react-redux";
 import CONFIG from "../configs/env"
 import user from "../Reducers/UserReducer";
-import {SetNotification} from "../Actions/setNotificationAction"
+ import {SetNotification} from "../Actions/setNotificationAction"
  class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
