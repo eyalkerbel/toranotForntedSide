@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Fab } from "@material-ui/core";
 import {connect} from "react-redux";
 import CONFIG from "../configs/env"
-import user from "../Reducers/UserReducer";
+// import user from "../Reducers/UserReducer";
  import {SetNotification} from "../Actions/setNotificationAction"
  class ShmirotTableComp extends React.Component {
     constructor(props) {
@@ -304,8 +304,8 @@ import user from "../Reducers/UserReducer";
         );
     }
 }
-const mapDispatchToProps = dispatch => ({
-    addNotification:(date) => dispatch(SetNotification(date)),
-})
+// const mapDispatchToProps = dispatch => ({
+//     addNotification:(date) => dispatch(SetNotification(date)),
+// })
 
 export default connect(null,mapDispatchToProps)(ShmirotTableComp);
