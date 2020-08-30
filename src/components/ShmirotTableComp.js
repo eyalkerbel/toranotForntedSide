@@ -308,4 +308,4 @@ import CONFIG from "../configs/env"
 //     addNotification:(date) => dispatch(SetNotification(date)),
 // })
 
-export default connect(null,mapDispatchToProps)(ShmirotTableComp);
+export default connect(null,null)(ShmirotTableComp);
