@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 // import user from './UserReducer';
 // import notification from './notifactionReducer';
+const INITIAL_STATE = {};
 
 const notification = (state = [{}], action) => {
     switch(action.type) {
