@@ -11,7 +11,7 @@ import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
-import user from "../Reducers/UserReducer";
+//import user from "../Reducers/UserReducer";
 import CONFIG from "../configs/env";
 import LoadingPage from "./LoadingPage";
 const styles = theme => ({

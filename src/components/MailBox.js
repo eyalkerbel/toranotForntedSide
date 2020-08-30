@@ -2,7 +2,7 @@ import React, {Fragment } from "react";
 import Paper from "@material-ui/core/Paper";
 import CONFIG from "../configs/env";
 import LoadingPage from "./LoadingPage";
-import { id, da } from "date-fns/locale";
+// import { id, da } from "date-fns/locale";
 import Mail from "./Mail";
 
 export default class MailBox extends React.Component {

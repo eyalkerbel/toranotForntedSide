@@ -41,7 +41,6 @@ export default class Switcher extends React.Component {
 
     componentWillMount() {
       console.log("componentWillMount Swticher");
-      this.getMessage();
     }
    
   ReadAndDispaly(i) {
@@ -49,16 +48,16 @@ export default class Switcher extends React.Component {
     return <Redirect to="/mail" />
 
   }
-  getMessage() {
-    fetch(CONFIG.API.GETNOTIFACTION, {
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: "Bearer " + localStorage.getItem("jwt")
-    }}).then(dat => dat.json()).then(data => this.handleNoti(data));
-}
-handleNoti(dataAll) {
-  }
+//   getMessage() {
+//     fetch(CONFIG.API.GETNOTIFACTION, {
+//       method:"POST",
+//       headers: {
+//         "Content-Type": "application/json;charset=utf-8",
+//         Authorization: "Bearer " + localStorage.getItem("jwt")
+//     }}).then(dat => dat.json()).then(data => this.handleNoti(data));
+// }
+// handleNoti(dataAll) {
+//   }
 
 
   componentDidMount() {
