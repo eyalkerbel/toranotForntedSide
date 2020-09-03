@@ -1,5 +1,5 @@
 import CONFIGDEV from './config.dev.json'
-//import CONFIGPRD from './config.prd.json'
+import CONFIGPRD from './config.prd.json'
 import CONFIGLOCAL from './config.local.json'
 
 function envmaker() {

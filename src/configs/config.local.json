@@ -23,7 +23,9 @@
         "GETEXCHANGEAPPROVE" : "http://localhost:5000/api/getexchangeapprove",
         "UPDATEEXCHANGEANAGER": "http://localhost:5000/api/updateexchangemanager",
         "SENDMESSAGEAGAIN": "http://localhost:5000/api/sendmessageagain",
-        "SENDSTATUSSHMIROT":  "http://localhost:5000/api/sendstatusshmirot"
+        "SENDSTATUSSHMIROT":  "http://localhost:5000/api/sendstatusshmirot",
+        "CANCELREQUEST": "http://localhost:5000/api/cancelrequest"
+
     },
     "MAINAPI": "http://localhost:5000/api"
 }

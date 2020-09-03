@@ -23,7 +23,9 @@
         "GETEXCHANGEAPPROVE" : "https://toranotapi.herokuapp.com/api/getexchangeapprove",
         "UPDATEEXCHANGEANAGER": "https://toranotapi.herokuapp.com/api/updateexchangemanager",
         "SENDMESSAGEAGAIN": "https://toranotapi.herokuapp.com/api/sendmessageagain",
-        "SENDSTATUSSHMIROT":  "https://toranotapi.herokuapp.com/api/sendstatusshmirot"
+        "SENDSTATUSSHMIROT":  "https://toranotapi.herokuapp.com/api/sendstatusshmirot",
+        "CANCELREQUEST": "https://toranotapi.herokuapp.com/api/cancelrequest"
+
 
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"
