@@ -1,5 +1,5 @@
 import CONFIGDEV from './config.dev.json'
-import CONFIGPRD from './config.prd.json'
+//import CONFIGPRD from './config.prd.json'
 import CONFIGLOCAL from './config.local.json'
 
 function envmaker() {
@@ -13,7 +13,7 @@ function envmaker() {
     }
     else if (process.env.REACT_APP_ENV === "prd") {
         console.log("config production");
-        return CONFIGPRD;
+     //   return CONFIGPRD;
     }
     else if (process.env.REACT_APP_ENV === "local") {
         console.log("local production");
