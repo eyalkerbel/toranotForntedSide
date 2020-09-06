@@ -17,7 +17,8 @@ function envmaker() {
     }
     else if (process.env.REACT_APP_ENV === "local") {
         console.log("local production");
-        return CONFIGLOCAL;
+        return CONFIGDEV;
+      //  return CONFIGLOCAL;
     }
     else {
         console.log("da");
