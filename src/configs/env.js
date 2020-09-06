@@ -16,7 +16,7 @@ function envmaker() {
            return CONFIGPRD;
     }
     else if (process.env.REACT_APP_ENV === "local") {
-        console.log("local but production");
+        console.log("local but2 production");
         return CONFIGDEV;
       //  return CONFIGLOCAL;
     }
