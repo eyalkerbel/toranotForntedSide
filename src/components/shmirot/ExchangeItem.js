@@ -63,10 +63,7 @@ const styles = theme => ({
   };
 
  declineChange() {
-    // this.setState({open2:true,isAgree:false});
-
-    this.props.madeADecision(false);
-
+    this.props.madeADecision(false,this.props.index,this.props.exchangeData);
  }
 approveChange() {
   //  console.log("indexExc",this.props.indexEch);

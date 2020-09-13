@@ -147,7 +147,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                                                Me
                                             </span>
                                             <span style={{marginTop:"5px"}}>
-                                            {ok==true? <Button  onClick={() => this.unבחרProblemDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal",paddingRight: "0px",paddingLeft: "0px"}}>בטל בחירה</Button>  
+                                            {ok==true? <Button  onClick={() => this.unPickProblemDate(user)} variant="outlined" style={{ border: "solid 1px teal", color: "teal",paddingRight: "0px",paddingLeft: "0px"}}>בטל בחירה</Button>  
                                               :<Button size="small" variant="outlined" onClick={() => this.pickProblemDate(user)} style={{ border: "solid 1px teal", color: "teal" }}>בחר</Button>}
                                             </span> 
                                        
@@ -235,14 +235,15 @@ export default class ShmirotTableCompSmall extends React.Component {
             <div style={{ width: "100%" }}>
                 <div style={{ width: "100%", textAlign: "center", border: "teal 1px solid", marginTop: "10px", borderRadius: "", overflow: "hidden", padding: "" }}>
                     <div className="shmirotheaders">
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>ראשון</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>שני</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>שלישי</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>רביעי</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>חמישי</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>שישי</div>
-                        <div style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex" }}>שבת</div>
+                        <div className="shmirotheaders-items">ראשון</div>
+                        <div className="shmirotheaders-items">שני</div>
+                        <div className="shmirotheaders-items">שלישי</div>
+                        <div className="shmirotheaders-items">רביעי</div>
+                        <div className="shmirotheaders-items">חמישי</div>
+                        <div className="shmirotheaders-items">שישי</div>
+                        <div className="shmirotheaders-items">שבת</div>
                     </div>
+                    <div className="shmirotdivs-wrapper">
                     {this.createMainArri(this.props.tabValue).map((el, i) => {
                         return (
                             <div className="shmirotdivs" key={i}>
@@ -251,6 +252,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                         )
                     })
                     }
+                    </div>
                 </div>
                 {this.state.ChosenSubstitute==false && this.state.newDate!= null?
                 <div style={{textAlign: "center"}}>

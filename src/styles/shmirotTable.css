@@ -1,0 +1,148 @@
+.maincontainer {
+  width: 80%;
+  display: flex;
+  margin: auto;
+  padding: 65px 2.5% 2.5% 2.5%;
+  flex-direction: column;
+  padding-bottom: 0;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  min-height: 100% !important;
+}
+
+.shmirot-table-content{
+  display: flex;
+   width: 100%;
+  margin-bottom: 20px;
+   position: relative;
+}
+#shmirot-table-approve{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  
+  #shmirot-table-cancel{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .div-botton {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    align-self: flex-end;
+    width: 100%;  
+  }
+
+  .shmirotheaders {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.1rem
+}
+.shmirotheaders-items {
+   border: solid 1px teal;
+   flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+@media (max-width: 100px) {
+  .shmirotheaders {
+    display: none;
+}
+
+.shmirotHeader{
+  border: solid 1px teal;
+  flex: 1; 
+  flex-direction: column;
+  display: flex;
+}
+
+
+
+
+.shmirotdivs {
+  display: "flex";
+  width: 100%;
+  flex-direction: column;
+}
+
+}
+
+.shmirotdivs {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  /* flex-direction: row; */
+}
+
+#shmirot-table-slide {
+    position: relative;
+    flex: 1;
+    border: 2px solid teal;
+     margin-top: 10px;
+}
+
+.maincontainer {
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .maincontainer {
+    width: 100%;
+  }
+
+}
+@media only screen and (max-width:430px) {
+  .shmirotheaders-items{
+    width: 14.285%;
+    /* flex: 0 0; */
+  }
+}
+
+.emptyCell {
+  border: solid 1px teal;
+  flex: 1;
+  border-spacing: 0;
+  min-height: 12vh;
+  padding: 5px;
+}
+/* @media (max-width: 600px) {
+  .emptyCell {
+    border: none;
+    flex: 1;
+    border-spacing: unset;
+    min-height: 0;
+    padding: 0;
+  }
+  
+} */
+
+.shmirotCell {
+  border: solid 1px teal;
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  min-height: 12vh;
+  padding: 5px;
+}
+.shmirotHeadersContainer{
+  width: 100%;
+  text-align: center;
+  border: teal 1px solid;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+
+.fobi1 {
+  background-color: teal !important;
+  margin-left: 10px !important;
+}
+.fobi2 {
+  background-color: #d32f2f !important;
+  margin-right: 10px !important;
+}

@@ -1,0 +1,68 @@
+.loginbackground {
+    /* display: flex;
+    width: 100%;
+    height: 100%;
+    background-size: cover; 
+     justify-content: center;
+    align-items: center;
+    background-image: url("../images/19HarborDefenseBtAqaba-min.jpg"); */
+
+    display: flex;
+    width: 100vw;
+    background-image: url("../images/19HarborDefenseBtAqaba-min.jpg");
+    /* background-size: cover; */
+    background-size: 100% 100%;
+
+    height: inherit;
+    justify-content: center;
+    align-items: center; 
+    
+  }
+
+.div-all {
+    width: 100%;
+    height: 100%;
+  }
+
+  .loginholder {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 10px;
+    /* justify-content: space-around; */
+    background-color: white !important;
+    text-align: center;
+    /* margin-top: 20vh; */
+  }
+
+  .loginholder h1 {
+    color: teal;
+    font-size: 3rem;
+  }
+  
+  @media (max-width: 600px) {
+    .loginholder {
+      width: 80%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 900px) {
+    .loginholder {
+      width: 50%;
+    }
+  }
+  
+  @media (min-width: 900px) and (max-width: 1200px) {
+    .loginholder {
+      width: 25%;
+      min-height: 300px;
+      background-size: 100% 100%;
+
+    }
+  }
+
+  .mainlogo2 {
+    width: 300px;
+    margin: 20px auto 0 auto;
+    background-size: 100% 100%;
+
+  }

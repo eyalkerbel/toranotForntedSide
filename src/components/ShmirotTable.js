@@ -20,6 +20,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
     cancelButton: {
         background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(238,9,11,1) 0%, rgba(255,0,0,1) 100%, rgba(121,9,9,1) 100%)",
         borderRadius: 35,
+        maxWidth: '30px',
+         maxHeight: '30px',
+        minWidth: '50px',
+        minHeight: '30px',
+        marginRight:"30px"
         
     },
     approveButton: {
@@ -94,7 +99,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
+                Authorization: "Bearer " + localStorage.getItem("jwt"),
             }
         })
             .then(data => data.json())
@@ -158,7 +163,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
                     method:"POST",
                     headers: {
                       "Content-Type": "application/json;charset=utf-8",
-                      Authorization: "Bearer " + localStorage.getItem("jwt")
+                      Authorization: "Bearer " + localStorage.getItem("jwt"),
                   },
                   body: JSON.stringify(data)
                   }).then(data => data.json())
@@ -185,15 +190,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
                         <div>
                             <TabCompSmall bubbleTabs={this.bubbleTabs} bubbleSelect={this.bubbleSelect} tabValue={this.state.tabValue} selectValue={this.state.selectValue} />
                         </div>
-                        <div style={{ display: "flex", width: "100%", marginBottom: "20px",position: "relative" }}>
-                            <div style={{flex: "1", border: "2px solid teal", marginTop: "10px" }}>
+                        <div className="shmirot-table-content">
+                            <div id="shmirot-table-slide" >
                             {console.log(this.state.fetchMyToranot , "mytoraunto")}
                             {(this.state.fetchedArri[this.state.tabValue][1].length == 0)? null : <Button size="small" variant="contained" onClick={this.pickMyToranot} color="secondary">בחר משמרת שלך</Button>}
                             {this.state.oldData!=null? <Button size="medium" style={{marginTop: "10px"}} variant="contained" onClick={this.pickOtherToranot} color="primary">החלף משמרת אחרת</Button> : null }
-                            <div className="div-botton" >
-                     <Button className={classes.approveButton} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '50px', minHeight: '30px'}} variant="contained" color="primary" size="small" onClick={this.handleClickOpen} >סיים</Button>
-
-                            <Button className={classes.cancelButton} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '50px', minHeight: '30px',marginRight:"30px"}} variant="contained" color="primary" size="small" onClick={() => this.setState({exchangeStatus:null,oldData:null,newData:null})}  >בטל</Button>
+                            <div className="div-botton">
+                                <Button id="shmirot-table-approve" className={classes.approveButton} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '50px', minHeight: '30px'}} variant="contained" color="primary" size="small" onClick={this.handleClickOpen} >סיים</Button>
+                                <Button id="shmirot-table-cancel" className={classes.cancelButton}  variant="contained" color="primary" size="small" onClick={() => this.setState({exchangeStatus:null,oldData:null,newData:null})}  >בטל</Button>
                             </div>
                             </div>
                             <div style={{ flex: "7" }}>
@@ -215,10 +219,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
         </DialogContent>
         <DialogActions>
           <Button onClick={this.sendChange} color="primary">
-            finish
+            סיים
           </Button>
           <Button onClick={() => this.setState({open:false})} color="primary">
-            close
+            בטל
           </Button>
         </DialogActions>
       </Dialog>

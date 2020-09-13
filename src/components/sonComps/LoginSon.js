@@ -7,17 +7,21 @@ import { NavLink } from "react-router-dom";
 export default function LoginSon(props) {
     return (
         <Fragment>
-            {props.isLoaded ? (
+        <div className="div-all">
+        {props.isLoaded ? (
                 <LoadingPage />
             ) : (
                     <div className="loginbackground">
                         <Card className="loginholder">
                             {/* <h1>התחבר לנמו</h1> */}
+                            <div className="wrapper-mainlog2">
                             <img
                                 className="mainlogo2"
                                 src={require("../../images/logoNemo2.png")}
                                 alt=""
                             ></img>
+                            </div>
+                            {/* <div className="wrapper-inputs"> */}
                             <input
                                 style={{ marginTop: "30px" }}
                                 onChange={props.handeChange1}
@@ -44,6 +48,7 @@ export default function LoginSon(props) {
                                     }
                                 }}
                             ></input>
+                            {/* </div> */}
                             <Button
                                 id="submitbtn"
                                 style={{
@@ -67,7 +72,7 @@ export default function LoginSon(props) {
                         </Card>
                     </div>
                 )}
-        </Fragment>
-
+                </div>
+                </Fragment>
     )
 }

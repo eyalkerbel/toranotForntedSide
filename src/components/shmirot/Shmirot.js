@@ -39,6 +39,7 @@ class Shmirot extends React.Component {
     this.renderTableData = this.renderTableData.bind(this);
     this.approveChange = this.approveChange.bind(this);
     this.getDataFromSon = this.getDataFromSon.bind(this);
+    this.getDataFromAnswer = this.getDataFromAnswer.bind(this);
   }
 
 
@@ -138,7 +139,7 @@ class Shmirot extends React.Component {
  
 
   fetchyfetch(num) {
-   
+   console.log("fetchfetchgood");
     fetch(CONFIG.API.GETEXCHANGESANDTORANOT, {
       method: "POST",
       headers: {
@@ -152,6 +153,7 @@ class Shmirot extends React.Component {
       });
   }
 fetchData(jsoned) {
+  console.log("jsoned" , jsoned);
 this.setState({fetchArray:jsoned,fetched:true});
 }
 
@@ -227,8 +229,9 @@ getDataFromSon(fetchArray2) {
   console.log("fetcharray2" , fetchArray2);
   this.setState({fetchArray:fetchArray2});
 }
-getDataFromAnswer() {
-  
+getDataFromAnswer(temp) {
+  console.log("temp" , temp);
+  this.setState({fetchArray:temp});
   // this.fetchyfetch(1);
 }
 

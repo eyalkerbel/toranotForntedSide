@@ -63,8 +63,12 @@ const styles = theme => ({
 }
 componentDidMount() {
   console.log("mountc" , this.props.fetchArray);
-    this.fetchData();
+    this.fetchData(this.props);
 }
+// componentWillReceiveProps(nextProps) {
+//   console.log("mountc" , nextProps);
+//     this.fetchData(nextProps);
+// }
    handleClose() {
     this.setState({open:false});
   }
@@ -100,17 +104,92 @@ componentDidMount() {
       body: JSON.stringify({message,item,sendTo})
     }).then(dat => dat.json).then(data => console.log("aas"));
   }
-  cancelRequest() {
+   cancelRequest() {
+    var item = this.state.currentItem;
+    var status =  this.returnStatusByItem(item);
+
     this.setState({open:false});  
+    fetch(CONFIG.API.CANCELREQUEST , {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({item})
+    }).then(dat => console.log("exchanges" , this.state.exchanges));
+
   }
 
-fetchData() {
+deleteItem(itemTodelete) {
+  var index = this.state.exchanges.indexOf(itemTodelete);
+  var tempAll = this.props.fetchArray;
+  var temp = this.state.exchanges;
+   temp.splice(index,1);
+  tempAll[2].splice(index,1);
+  console.log("afterte" , tempAll , index);
+     this.setState({exchanges:temp});
+
+  this.props.updateAnswer(tempAll);
+}
+makeItemAskingSecond(itemToAsk) {
+  var index = this.state.exchanges.indexOf(itemToAsk);
+  var tempAll = this.props.fetchArray;
+  var temp = this.state.exchanges;
+
+  tempAll[4][index]["status"] = "asking";
+  tempAll[3].push(tempAll[4][index]);
+  temp[index]["notShow"] = true;
+  console.log("notshows" , temp);
+  this.props.updateAnswer(tempAll);
+  this.setState({exchanges:temp});
+}
+makeItemAskingMe(itemToAsk) {
+  var index = this.state.exchanges.indexOf(itemToAsk);
+  var tempAll = this.props.fetchArray;
+  var temp = this.state.exchanges;
+
+  tempAll[2][index]["status"] = "mainlycancel";
+  temp[index]["notShow"] = true;
+  console.log("notshows" , temp);
+  this.props.updateAnswer(tempAll);
+  this.setState({exchanges:temp});
+
+}
+
+
+  returnStatusByItem(item) {
+    var status = "";
+    if(item.status == "asking") {
+        status = "delete";
+        this.deleteItem(item);
+      }
+    if((item.status == "agree" || item.status == "reject")) {
+        if(item.mainly == "me") {
+            status = "mainlycancel";
+            this.makeItemAskingMe(item);
+        } else {
+            status = "asking";
+            this.makeItemAskingSecond(item);
+
+            }    
+      }
+    if((item.status == "decline" && item.status =="convincing")) {
+        if(item.mainly == "me") {
+            status = "mainlycancelapprove";
+        } else {
+            status = "asking";
+            }    
+      }
+      return status;
+  }
+
+fetchData(currentProps) {
     var getFormattedDatearri = [];
     var tempExhcanges = [];
     var indexMonth;
-    console.log("fetch ",this.props);
-    var mineExchanges = this.props.fetchArray[2];
-    var askToAnswerChanges = this.props.fetchArray[4];
+    console.log("fetch ",currentProps);
+    var mineExchanges = currentProps.fetchArray[2];
+    var askToAnswerChanges = currentProps.fetchArray[4];
 
     console.log("mineExchange" , mineExchanges , "ASK" ,askToAnswerChanges);
     for(var i=0; i<mineExchanges.length;i++) {
@@ -161,6 +240,7 @@ fetchData() {
         var formattedDate2 = day2 + "/" + month2 + "/" + year2;
         
        var exchange = {
+         key: i,
          mainly: "me",
          myDateFormat: formattedDate3,
          myDay: dayHe3,
@@ -242,7 +322,7 @@ fetchData() {
 
     }
 
-
+      console.log("finish compontnneexprops" , tempExhcanges);
       this.setState({exchanges:tempExhcanges});
 
 }
@@ -250,13 +330,14 @@ fetchData() {
 
 
 renderDialog(status,item) {
-  var status = item.status;
-  console.log("status" , status);
-    this.setState({open:true,currentItem:item,dialogStatus:status});  
+ // var status = item.status;
+  console.log("DDDDD" , status);
+  this.setState({open:true,currentItem:item,dialogStatus:status});  
 }
 
 
 renderTableData() {
+  console.log("renderAnserr",this.state.exchanges);
 
     var arrRender = [];
     var monthToday = new Date().getMonth();
@@ -265,6 +346,8 @@ renderTableData() {
     if(this.state.exchanges != null) {
     for (var i = 0; i < this.state.exchanges.length; i++) {
         var month = this.state.exchanges[i].month;
+      ///  console.log("not show",this.state.exchanges[i].notShow);
+        if(this.state.exchanges[i].notShow != true) {
         if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  {
           var obi = {
             obiData: (
@@ -276,11 +359,11 @@ renderTableData() {
 
 }
     }
+    }
 return arrRender;
 }
 
 render() {
-
     return (
         <Table id="table-style"> 
                   <TableHead>
@@ -313,6 +396,7 @@ render() {
                   <TableBody>{this.renderTableData()}
                   </TableBody>
       {/* {this.renderDialogs()} */}
+      {console.log("dailogStatus" , this.state.dialogStatus)}
       <DailogAnswer currentItem={this.state.currentItem} cancelRequest={this.cancelRequest}  open={this.state.open}  sendMessge={this.sendMessage} sendToManager={this.sendToManager}  handleClose={this.handleClose} dailogStatus={this.state.dialogStatus} />
       </Table>
 

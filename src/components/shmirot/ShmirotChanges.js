@@ -204,6 +204,7 @@ fetchData() {
     var tempFetch = this.props.fetchArray;
     var toranot = this.props.fetchArray[this.props.tabValue];
     var exchanges = this.props.fetchArray[3];
+    console.log("requesst" , exchanges);
     var arri = [];
     var temp = [];
     var monthToday = new Date().getMonth();

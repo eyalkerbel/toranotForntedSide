@@ -4,7 +4,7 @@ import CONFIG from "../configs/env";
 import LoadingPage from "./LoadingPage";
 // import { id, da } from "date-fns/locale";
 import Mail from "./Mail";
-
+//assak
 export default class MailBox extends React.Component {
     constructor(){
     super();

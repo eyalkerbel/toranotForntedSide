@@ -307,11 +307,11 @@ rendBodyDailogCancel() {
 }
 
 render() {
-    console.log("current" , this.props.currentItem);
+    console.log("current" , this.props.dailogStatus);
     return (
         // this.props.currentItem != null?
   <div>
-  {this.props.dailogStatus== "send"?
+  {this.props.dailogStatus== "continue"?
 this.renderBodyDialogSend() : this.rendBodyDailogCancel()}
 </div> );
 }

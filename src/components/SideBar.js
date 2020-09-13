@@ -71,21 +71,21 @@ export default class SideBar extends React.Component {
       }}).then(dat => dat.json()).then(data => this.handleNoti(data));
   }
   handleNoti(data) {
-   // console.log("handleNoti")
-    var temp = [];
-    let message;
-    let tempJson = "";
-    for(var i=0;i<data.length;i++) {
-    var date = data[i].date;
-      var dats =  new Date(date);
-     // console.log("data",dats.getDate());
-      if(data[i].action == "place") {
-           message = "manager place you on date" + dats.getDate();
-        }
-       if(data[i].action == "delete") {
-       message = "manager remove you on date" + dats.getDate();
+    // console.log("handleNoti",data)
+    // var temp = [];
+    // let message;
+    // let tempJson = "";
+    // for(var i=0;i<data.length;i++) {
+    // var date = data[i].date;
+    //   var dats =  new Date(date);
+    //   console.log("data",dats.getDate());
+    //   if(data[i].action == "place") {
+    //        message = "manager place you on date" + dats.getDate();
+    //     }
+    //    if(data[i].action == "delete") {
+    //    message = "manager remove you on date" + dats.getDate();
        
-     }
+    //  }
     //  tempJson = {
     //    id: i,
     //    title:"change",
@@ -100,8 +100,9 @@ export default class SideBar extends React.Component {
     //  temp.push(tempJson);
     //  console.log("message",message)
     
-    }
+   // }
    // console.log("noti" , temp);
+ var temp = [];
     this.setState({noti:temp,loading:false});
   }
 

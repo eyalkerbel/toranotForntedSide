@@ -12,17 +12,7 @@ body {
   height: 100%;
 }
 
-.maincontainer {
-  width: 80%;
-  display: flex;
-  margin: auto;
-  padding: 65px 2.5% 2.5% 2.5%;
-  flex-direction: column;
-  padding-bottom: 0;
-  border-radius: 0 !important;
-  box-sizing: border-box;
-  min-height: 100% !important;
-}
+
 #table-style{
   table-layout:fixed;
 }
@@ -66,10 +56,11 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 40px;
- 
- 
+  height: 40px; 
 }
+
+
+
 .name-div {
   padding-right: 8px;
   margin-bottom:auto;
@@ -133,13 +124,8 @@ body {
   flex-direction: column;
   margin-bottom: 3%;
 }
-.div-botton {
-  position: absolute;
-  bottom: 0;
-  text-align: left;
-  /* align-self: flex-end; */
 
-}
+
 .cancel-button {
  
 }
@@ -399,10 +385,7 @@ position: relative;
   margin: 30px auto 20px auto;
 }
 
-.mainlogo2 {
-  width: 300px;
-  margin: 20px auto 0 auto;
-}
+
 
 .cc2 {
   display: flex;
@@ -440,19 +423,13 @@ a {
     width: auto;
     margin-bottom: 10px;
   }
-  .maincontainer {
-    width: 100%;
-  }
+  
   .MuiCardActionArea-root {
     min-height: 30vh !important;
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .maincontainer {
-    width: 100%;
-  }
-}
+
 /* tfasim */
 
 .download-list {
@@ -581,17 +558,6 @@ a {
   padding: 0 !important;
 }
 
-
-
-.fobi1 {
-  background-color: teal !important;
-  margin-left: 10px !important;
-}
-.fobi2 {
-  background-color: #d32f2f !important;
-  margin-right: 10px !important;
-}
-
 /* login */
 
 .input1 {
@@ -610,54 +576,15 @@ a {
   /* width: 90%; */
 }
 
-.loginholder {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  padding: 10px;
-  /* justify-content: space-around; */
-  background-color: white !important;
-  text-align: center;
-  /* margin-top: 20vh; */
-}
+
 
 .backcolor {
   background-color: teal;
   opacity: 0.5;
 }
-.loginbackground {
-  display: flex;
-  width: 100vw;
-  background-image: url("../images/19HarborDefenseBtAqaba-min.jpg");
-  background-size: cover;
-  height: inherit;
-  justify-content: center;
-  align-items: center;
-}
 
-.loginholder h1 {
-  color: teal;
-  font-size: 3rem;
-}
 
-@media (max-width: 600px) {
-  .loginholder {
-    width: 80%;
-  }
-}
-@media (min-width: 600px) and (max-width: 900px) {
-  .loginholder {
-    width: 50%;
-  }
-}
 
-@media (min-width: 900px) and (max-width: 1200px) {
-  .loginholder {
-    width: 25%;
-    min-height: 300px;
-  }
-}
 
 
 
@@ -701,36 +628,13 @@ a {
   text-align: left !important;
 }
 
-.shmirotheaders {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    font-weight: 600;
-    font-size: 1.3rem
-}
 
 
 
-.shmirotdivs {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-}
-
-@media (max-width: 100px) {
-  .shmirotheaders {
-    display: none;
-}
 
 
 
-.shmirotdivs {
-  display: "flex";
-  width: 100%;
-  flex-direction: column;
-}
 
-}
 
 .diffselect {
   font-size: 1.4rem !important;
@@ -780,49 +684,12 @@ a {
   margin: 3px 0 3px 0;
 }
 
-.shmirotHeader{
-  border: solid 1px teal;
-  flex: 1; 
-  flex-direction: column;
-  display: flex;
-}
+
 
 .cellDate {
   text-align: right;
   color: grey;
 }
 
-.emptyCell {
-  border: solid 1px teal;
-  flex: 1;
-  border-spacing: 0;
-  min-height: 12vh;
-  padding: 5px;
-}
-@media (max-width: 600px) {
-  .emptyCell {
-    border: none;
-    flex: 1;
-    border-spacing: unset;
-    min-height: 0;
-    padding: 0;
-  }
-  
-}
 
-.shmirotCell {
-  border: solid 1px teal;
-  flex: 1;
-  flex-direction: column;
-  display: flex;
-  min-height: 12vh;
-  padding: 5px;
-}
 
-.shmirotHeadersContainer{
-  width: 100%;
-  text-align: center;
-  border: teal 1px solid;
-  margin-top: 10px;
-  overflow: hidden;
-}

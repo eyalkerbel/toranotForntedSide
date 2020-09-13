@@ -65,14 +65,8 @@ const styles = theme => ({
 
 
     handleClickOpen() {
-      //  this.setState({open:true});
-      //this.props.openDilog();
       this.props.fatherOpenDialog("continue",this.props.item);
-
       };
-    //    handleClose() {
-    //     this.setState({open:false});
-    //   };
     renderIconsUser(status,statusSendAgain) {
       const { classes } = this.props;
 
@@ -80,6 +74,11 @@ const styles = theme => ({
          return(
                   <TableCell id="tablepadding" key={shortid.generate()} align="center">
                 <HelpIcon />
+                <div id="button-regret">
+                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
+         התחרטתי
+        </Button>  
+        </div>
                 </TableCell>);
       }
       console.log("status" , status);
@@ -89,12 +88,22 @@ const styles = theme => ({
                   <TableCell id="tablepadding" key={shortid.generate()} align="center">
                 <HelpIcon />
                 <HelpIcon />
+                <div id="button-regret">
+                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
+         התחרטתי
+        </Button>  
+        </div>
                 </TableCell>);
             case "reject":
                 return (
                   <TableCell id="tablepadding" key={shortid.generate()} align="center">
                 <BlockIcon id="icon-disagree" style={{fill:"red"}} />
                 <HelpIcon />
+                <div id="button-regret">
+                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
+         התחרטתי
+        </Button>  
+        </div>  
                 </TableCell>);
             default:
               

@@ -30,7 +30,10 @@ var temp = [];
 let message;
 let tempJson = "";
 var data = dataAll[0];
+var temp2 = []; 
+
 console.log("data3" , data);
+
 for(var i=0;i<data.length;i++) {
   if(data[i].seen == false) {
 var date = data[i].data;
@@ -46,9 +49,11 @@ console.log("message",message)
   temp.push(message);
 }
 }
+  console.log("[[w");
+  data2 = [];
+
 var data2 = dataAll[1];
 console.log("data32",data2);
-var temp2 = []; 
 let mess;
 for(var i=0;i<data2.length;i++) {
   if(data2[i].seen == false) {
@@ -61,6 +66,7 @@ mess = data2[i].oldDate.name  + " ask change, his toranot " + datsOld.getDate() 
 temp2.push(mess);
 }
 }
+
 console.log("notis" , temp , temp2);
 this.setState({info:temp,loading:false,exchanges:temp2});
 }
