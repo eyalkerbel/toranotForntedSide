@@ -33,12 +33,13 @@ export default class ShmirotTableCompSmall extends React.Component {
             var date = new Date(el.date)
             var dayOfWeek = date.getDay()
             var dayOfMonth = date.getDate()
-            var type = el.type
-            var name = el.name
-            var userid = el.userid
+            var type = el.userDetails.type
+            var name = el.userDetails.name
+            var userid = el.userDetails.userid
             var id = el._id
             var toran = el.toran
             var userStauts = el.userStatus;
+          //  var userDetails = el.userDetails;
             var obi = {
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, isMine,userStauts
             }
@@ -100,8 +101,8 @@ export default class ShmirotTableCompSmall extends React.Component {
             if (tempArri[x] != null) {
                 for (var g = 0; g < tempArri[x].length; g++) {
                     let user = tempArri[x][g];
+                    console.log("userData" , user);
                     var backgroundColor;
-                    console.log("mycolor " , backgroundColor);
 
                     switch(tempArri[x][g].userStauts) {
                         case "nothappy":
@@ -114,6 +115,8 @@ export default class ShmirotTableCompSmall extends React.Component {
                             backgroundColor = "teal";
                             break;
                     }
+                    console.log("mycolor " , backgroundColor);
+
                     if (user.toran === 0) {
                         let xio = tempi2.pop()
                         if(this.props.exchangeStatus == "others") {
@@ -166,7 +169,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                         else {
                             tempi2.push(
                                 <div style={{ display: "flex",flexDirection: "column", alignItems: "center", margin: "3px 0 3px 0" }} key={g}>
-                                    <span style={{ width:"60%",backgroundColor: "teal", borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
+                                    <span style={{ width:"60%",backgroundColor: backgroundColor, borderRadius: "4px", flex: "1", color: "white", padding: "2px", boxShadow: "1px 1px 3px 0px rgba(0,0,0,0.75)" }}>
                                        Me
                                     </span>
                                     </div>)
@@ -181,7 +184,6 @@ export default class ShmirotTableCompSmall extends React.Component {
                                 </span>
                             </div>)
                     }
-                    //"#B76EB8"
 
                 }
             }
@@ -209,7 +211,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                     started2 = true
                     started = true;
                     rowArri[x] = <div key={x}
-                        style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex", minHeight: "12vh", padding: "5px" }}>
+                        style={{ border: "solid 1px teal", flex: "1", flexDirection: "column", display: "flex", minHeight: "8vh", padding: "5px" }}>
                         <span style={{ textAlign: "right", color: "grey" }}>
                             {arri2[g].num}
                         </span>
@@ -227,6 +229,7 @@ export default class ShmirotTableCompSmall extends React.Component {
             }
             allRowArri[i] = rowArri;
         }
+        console.log("allROWarri" , allRowArri);
         return allRowArri
     }
 

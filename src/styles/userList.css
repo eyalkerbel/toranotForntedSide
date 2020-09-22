@@ -1,0 +1,23 @@
+.check-box-user {
+    width: 30%;
+    float: right;
+}
+.container-for-users {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.name-all-user {
+    position: absolute; /* 4. Add this. */
+    top: 50%; /* 5. Add this. */
+    left: 50%; /* 6. Add this. */
+    transform: translate(-50%, -50%); /* 7. Add this. */
+    text-align: center; /* 8. Add this if you want the text to be centered. */
+}
+
+.scroll
+{
+    height: 300px;
+    overflow-y: scroll;
+}

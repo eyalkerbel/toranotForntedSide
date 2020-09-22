@@ -16,6 +16,8 @@ body {
 #table-style{
   table-layout:fixed;
 }
+
+
 #tablepadding{
    padding-bottom: 0 !important;
   /* padding-top: "2px"; */ 

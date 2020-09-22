@@ -134,6 +134,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
  
 
     createTable = () => {
+        console.log("fetchedArri" , this.state.fetchedArri);
         var arri = this.state.fetchedArri.slice(0);
         console.log("arri" , arri ,"my toranot" , this.state );
       console.log("p" ,this.state.exchangeStatus);
@@ -195,10 +196,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
                             {console.log(this.state.fetchMyToranot , "mytoraunto")}
                             {(this.state.fetchedArri[this.state.tabValue][1].length == 0)? null : <Button size="small" variant="contained" onClick={this.pickMyToranot} color="secondary">בחר משמרת שלך</Button>}
                             {this.state.oldData!=null? <Button size="medium" style={{marginTop: "10px"}} variant="contained" onClick={this.pickOtherToranot} color="primary">החלף משמרת אחרת</Button> : null }
-                            <div className="div-botton">
+                            {this.state.oldData != null && this.state.newData != null? 
+                                <div>
                                 <Button id="shmirot-table-approve" className={classes.approveButton} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '50px', minHeight: '30px'}} variant="contained" color="primary" size="small" onClick={this.handleClickOpen} >סיים</Button>
                                 <Button id="shmirot-table-cancel" className={classes.cancelButton}  variant="contained" color="primary" size="small" onClick={() => this.setState({exchangeStatus:null,oldData:null,newData:null})}  >בטל</Button>
-                            </div>
+                                </div> : null}
                             </div>
                             <div style={{ flex: "7" }}>
                                 {this.createTable()}

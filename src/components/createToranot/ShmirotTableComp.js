@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Fab } from "@material-ui/core";
 import {connect} from "react-redux";
-import CONFIG from "../configs/env"
+import CONFIG from "../../configs/env"
 // import user from "../Reducers/UserReducer";
- import {SetNotification} from "../Actions/setNotificationAction"
+ import {SetNotification} from "../../Actions/setNotificationAction"
  class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
@@ -80,18 +80,18 @@ import CONFIG from "../configs/env"
            var date = new Date(el.date)
             var dayOfWeek = date.getDay()
             var dayOfMonth = date.getDate()
-            var type = el.type
-            var name = el.name
-            var userid = el.userid
+            var type = el.userDetails.type
+            var name = el.userDetails.name
+            var userid = el.userDetails.userid
             var id = el._id
-            var toran = el.toran
-            var points = el.points;
+            var toran = el.toran;
+            var points = el.userDetails.points;
             var chosen = false
             var obi = {
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points
             }
             //conosle.log("fetched" , )
-         //  console.log("object",obi);
+          console.log("objectr",obi.name);
             if (this.props.selectValue === parseInt(type)) {
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
@@ -129,7 +129,6 @@ import CONFIG from "../configs/env"
                 for (var g = 0; g < tempArri[x].length; g++) {
 
                     let user = tempArri[x][g];
-                  // console.log("userafterDelete" , user);
                     if (user.toran === 0) {
                         let xio = tempi2.pop()
 
@@ -190,6 +189,7 @@ import CONFIG from "../configs/env"
         var user;
     //   this.props.addNotification(obi.date);
         var ThisOrNext = null;
+        console.log("database");
         if (this.props.tabValue === 0) {
             ThisOrNext = "settoranutthismonth";
         } else if (this.props.tabValue === 1) {
@@ -215,7 +215,7 @@ import CONFIG from "../configs/env"
 
     deleteToranut = (user) => {
         var ThisOrNext = null
-    //    console.log("delete " , user);
+        console.log("delete " , user);
         if (this.props.tabValue === 0) {
             ThisOrNext = "deletetoranutthismonth";
         } else if (this.props.tabValue === 1) {
@@ -284,13 +284,13 @@ import CONFIG from "../configs/env"
             <div style={{ width: "100%" }}>
                 <div className="shmirotHeadersContainer">
                     <div className="shmirotheaders">
-                        <div className="shmirotHeader"><span>ראשון</span></div>
-                        <div className="shmirotHeader">שני</div>
-                        <div className="shmirotHeader">שלישי</div>
-                        <div className="shmirotHeader">רביעי</div>
-                        <div className="shmirotHeader">חמישי</div>
-                        <div className="shmirotHeader">שישי</div>
-                        <div className="shmirotHeader">שבת</div>
+                        <div className="shmirotheaders-items"><span>ראשון</span></div>
+                        <div className="shmirotheaders-items">שני</div>
+                        <div className="shmirotheaders-items">שלישי</div>
+                        <div className="shmirotheaders-items">רביעי</div>
+                        <div className="shmirotheaders-items">חמישי</div>
+                        <div className="shmirotheaders-items">שישי</div>
+                        <div className="shmirotheaders-items">שבת</div>
                     </div>
                     {this.createMainArri(this.props.tabValue).map((el, i) => {
                         return (

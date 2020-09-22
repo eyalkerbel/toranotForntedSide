@@ -14,13 +14,14 @@ import CreateUser from "./components/CreateUser";
 import RedirectorLogin from "./components/RedirectorLogin"
 import RedirectorHome from "./components/RedirectorHome"
 import ShmirotTable from "./components/ShmirotTable";
-import CreateToranut from "./components/CreateToranut";
+import CreateToranut from "./components/createToranot/CreateToranut";
 import SendMessage from "./components/SendMessage";
 import MailBox from "./components/MailBox";
 import {NotificationManager,NotificationContainer} from 'react-notifications';
 import CONFIG from "./configs/env";
 import Notifications from '../src/components/Notifications';
 import ExchangeApprove from "./components/Approve/ExchageApprove";
+import PickUsers from "./components/Users/PickUsers";
 export default class Switcher extends React.Component {
   constructor() {
     super();
@@ -93,6 +94,7 @@ export default class Switcher extends React.Component {
             <Route path="/sendmessage" render={() => <SendMessage permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/approve_change" render={() => <ExchangeApprove permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/mail" render={() => <MailBox permissionlvl={this.state.permissionlvl} /> } />
+            <Route path="/pickusers" render={() => <PickUsers permissionlvl={this.state.permissionlvl} />} />
             <Route exact component={RedirectorHome} />
             <NotificationContainer />
           </Switch>

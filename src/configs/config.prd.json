@@ -9,7 +9,7 @@
         "GETHAADAFOTBYUSER": "https://toranotapi.herokuapp.com/api/gethaadafotbyuser",
         "GETTHISMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://toranotapi.herokuapp.com/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getallthismonthstoranuts",
+        "GETALLTORANUTS": "https://toranotapi.herokuapp.com/api/getalltoranuts",
         "GETPERSONDATA": "https://toranotapi.herokuapp.com/api/getpersondata",
         "GETALLHAADAFOT": "https://toranotapi.herokuapp.com/api/getallhaadafot",
         "GETPIORITY" : "https://toranotapi.herokuapp.com/api/getpiority",
@@ -24,7 +24,10 @@
         "UPDATEEXCHANGEANAGER": "https://toranotapi.herokuapp.com/api/updateexchangemanager",
         "SENDMESSAGEAGAIN": "https://toranotapi.herokuapp.com/api/sendmessageagain",
         "SENDSTATUSSHMIROT":  "https://toranotapi.herokuapp.com/api/sendstatusshmirot",
-        "CANCELREQUEST": "https://toranotapi.herokuapp.com/api/cancelrequest"
+        "CANCELREQUEST": "https://toranotapi.herokuapp.com/api/cancelrequest",
+        "GETALLUSERS": "https://toranotapi.herokuapp.com/api/getallusers",
+        "SENDCURRENTTORANIM": "https://toranotapi.herokuapp.com/api/sendcurrenttoranim"
+
 
 
     },

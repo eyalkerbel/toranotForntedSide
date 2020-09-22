@@ -30,7 +30,7 @@ constructor(props) {
     this.getFormattedDate = this.getFormattedDate.bind(this);
 }
 
-componentWillMount() {
+componentDidMount() {
     console.log("component did mount" , this.props.tabValue);
     this.getFormattedDate();
 }
@@ -63,6 +63,7 @@ getFormattedDate() {
     var temp = [];
     console.log("t" , this.props.arri);
     var toranot = this.props.arri;
+    console.log("toranot" , toranot);
     for (var i = 0; i < toranot.length; i++) {
         var todayTime = new Date(toranot[i].date);
         var month = todayTime.getMonth() + 1;
@@ -99,7 +100,8 @@ getFormattedDate() {
         }
         var TranslateType = 0;
         if (toranot[i].toran === 0) {
-          switch (toranot[i].type) {
+          console.log("toranotp" ,toranot[i].userDetails.type);
+          switch (toranot[i].userDetails.type) {
             case 0:
               TranslateType = "סמל תורן בפנים";
               break;
@@ -126,7 +128,7 @@ getFormattedDate() {
           }
     
         } else {
-          switch (toranot[i].type) {
+          switch (toranot[i].userDetails.type) {
             case 0:
               TranslateType = "עתודה של סמל תורן בפנים";
               break;
@@ -152,7 +154,7 @@ getFormattedDate() {
               break;
           }
         }
-        console.log("arri this", toranot[i].userStatus);
+        console.log("arri this",TranslateType);
         // if(this.state.arri[i] != undefined) {
          //  console.log("sta" , this.state.arri[i].userStatus);
       //   switch(toranot[i].userStatus) {
@@ -171,7 +173,8 @@ getFormattedDate() {
            dayOfWeek: dayHe,
            type: TranslateType,
            formattedDate: formattedDate,
-           userStatus:toranot[i].userStatus
+           userStatus:toranot[i].userStatus,
+           month:month-1
          };
          temp.push(obi);
 
@@ -215,116 +218,21 @@ getFromSonClick(index,num) {
 
       var obi;
       var temp = [];
-      // console.log("t" , this.props.arri);
-      // var toranot = this.props.arri;
-      // for (var i = 0; i < toranot.length; i++) {
-      //     var todayTime = new Date(toranot[i].date);
-      //     var month = todayTime.getMonth() + 1;
-      //     var day = todayTime.getDate();
-      //     var year = todayTime.getFullYear();
-      //     var formattedDate = day + "/" + month + "/" + year;
-      //     var dayofweek = todayTime.getDay();
-      //     var dayHe = 0;
-      //     switch (dayofweek) {
-      //       case 0:
-      //         dayHe = "ראשון";
-      //         break;
-      //       case 1:
-      //         dayHe = "שני";
-      //         break;
-      //       case 2:
-      //         dayHe = "שלישי";
-      //         break;
-      //       case 3:
-      //         dayHe = "רביעי";
-      //         break;
-      //       case 4:
-      //         dayHe = "חמישי";
-      //         break;
-      //       case 5:
-      //         dayHe = "שישי";
-      //         break;
-      //       case 6:
-      //         dayHe = "שבת";
-      //         break;
-      //       default:
-      //         break;
-      //     }
-      //     var TranslateType = 0;
-      //     if (toranot[i].toran === 0) {
-      //       switch (toranot[i].type) {
-      //         case 0:
-      //           TranslateType = "סמל תורן בפנים";
-      //           break;
-      //         case 1:
-      //           TranslateType = "קצין תורן בפנים";
-      //           break;
-      //         case 2:
-      //           TranslateType = "חייל חובה חוץ";
-      //           break;
-      //         case 3:
-      //           TranslateType = "נגד שער";
-      //           break;
-      //         case 4:
-      //           TranslateType = "ע' קצין תורן";
-      //           break;
-      //         case 5:
-      //           TranslateType = "קצין תורן";
-      //           break;
-      //         case 6:
-      //           TranslateType = "מפקד תורן";
-      //           break;
-      //         default:
-      //           break;
-      //       }
-      
-      //     } else {
-      //       switch (toranot[i].type) {
-      //         case 0:
-      //           TranslateType = "עתודה של סמל תורן בפנים";
-      //           break;
-      //         case 1:
-      //           TranslateType = "עתודה של קצין תורן בפנים";
-      //           break;
-      //         case 2:
-      //           TranslateType = "עתודה של חייל חובה חוץ";
-      //           break;
-      //         case 3:
-      //           TranslateType = "עתודה של נגד שער";
-      //           break;
-      //         case 4:
-      //           TranslateType = "עתודה של ע' קצין תורן";
-      //           break;
-      //         case 5:
-      //           TranslateType = "עתודה של קצין תורן";
-      //           break;
-      //         case 6:
-      //           TranslateType = "עתודה של מפקד תורן";
-      //           break;
-      //         default:
-      //           break;
-      //       }
-      //     }
-  
-      //     obi = {
-      //         dayOfWeek: dayHe,
-      //        type: TranslateType,
-      //        formattedDate: formattedDate,
-      //      };
-      //      temp.push(obi);
-  
-      //     }
-
-
-         var arrRender = [];
+      var arrRender = [];
+      var monthToday = new Date().getMonth();
       //   console.log("props" , this.props);
         for (var i = 0; i <this.state.arri.length; i++) {
+          var month = this.state.arri[i].month;
+
+          if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  {
+
             var obi = {
               obiData: (
                   <MyShmirotItem index={i} item={this.state.arri[i]} updateParnetClick={this.getFromSonClick} />)            
             };
             arrRender.push(obi.obiData);
           }
+        }
           return arrRender;
         }
     
@@ -332,6 +240,7 @@ getFromSonClick(index,num) {
   
     
   render() {
+    console.log("rendershmirot");
       return (
 
         <Table> 

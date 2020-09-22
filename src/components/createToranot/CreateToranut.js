@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import Paper from "@material-ui/core/Paper";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "../LoadingPage";
 
 import List from '@material-ui/core/List';
 
 import ShmirotTableComp from './ShmirotTableComp'
-import TabComp from './TabComp'
-import UserListComp from './UserListComp'
-import CONFIG from "../configs/env"
+import TabComp from '../TabComp'
+import UserListComp from '../UserListComp'
+import CONFIG from "../../configs/env"
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
 
@@ -124,7 +124,7 @@ export default class CreateToranut extends React.Component {
 
     forFetch(data) {
         var user;
-        if(this.state.fetchedArri[0] != undefined) {
+        if(this.state.fetchedArri[this.state.tabValue] != undefined) {
         this.setState({ fetchedArri: data});
     }
     else {
@@ -147,8 +147,8 @@ export default class CreateToranut extends React.Component {
 
 
     createTable = () => {
-        var arri = this.state.fetchedArri.slice(0);
-     //   console.log("{this.state.fetchedHaadafot",this.state.fetchedHaadafot);
+        var arri = this.state.fetchedArri.slice(1);
+        console.log("part of array",arri);
         arri.shift()
         return (
             <ShmirotTableComp
@@ -160,7 +160,7 @@ export default class CreateToranut extends React.Component {
                 tabValue={this.state.tabValue}
                 selectValue={this.state.selectValue}
                 toran={this.state.toran}
-                 userList ={this.state.fetchedArri[0]}
+                 userList ={this.state.fetchedArri[this.state.tabValue]}
                  selectUser={this.selectUser}
                 piorityArray={this.state.fetchPiority}
                 fetchPiority={this.fetchPiority} />
@@ -182,7 +182,7 @@ export default class CreateToranut extends React.Component {
                         <div style={{ display: "flex", width: "100%", marginBottom: "20px" }}>
                             <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px" }}>
                                 <List style={{ height: "60vh", overflow: "auto", direction: "ltr", borderBottom: "2px solid teal" }}>
-                                    <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} arri={this.state.fetchedArri[0]} />
+                                    <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} arri={this.state.fetchedArri[this.state.tabValue]} />
                                 </List>
                                 <RadioGroup defaultValue="0" aria-label="regular" name="customized-radios">
                                     <FormControlLabel onClick={() => this.radioHandler(0)} value="0" control={<Radio />} label="תורן" />

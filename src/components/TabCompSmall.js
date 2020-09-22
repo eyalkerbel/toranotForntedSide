@@ -16,6 +16,7 @@ export default class TabCompSmall extends React.Component {
     }
 
     render() {
+        console.log('props' ,this.props);
         return (
             <AppBar position="static" style={{ backgroundColor: "white", display: "flex", flexDirection: "row" }}>
                 <Select value={this.props.selectValue} onChange={this.handleSelect} style={{ flex: "2" }} className="diffselect">

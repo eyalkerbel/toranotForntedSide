@@ -9,7 +9,7 @@
         "GETHAADAFOTBYUSER": "https://nemoapi.azurewebsites.net/api/gethaadafotbyuser",
         "GETTHISMONTHSTORANUTS": "https://nemoapi.azurewebsites.net/api/getthismonthstoranuts",
         "GETNEXTMONTHSTORANUTS": "https://nemoapi.azurewebsites.net/api/getnextmonthstoranuts",
-        "GETALLTORANUTS": "https://nemoapi.azurewebsites.net/api/getallthismonthstoranuts",
+        "GETALLTORANUTS": "https://nemoapi.azurewebsites.net/api/getalltoranuts",
         "GETPERSONDATA": "https://nemoapi.azurewebsites.net/api/getpersondata",
         "GETALLHAADAFOT": "https://nemoapi.azurewebsites.net/api/getallhaadafot",
         "GETPIORITY" : "https://nemoapi.azurewebsites.net/api/getpiority",
@@ -23,7 +23,11 @@
         "UPDATEEXCHANGEANAGER": "https://nemoapi.azurewebsites.net/api/updateexchangemanager",
         "SENDMESSAGEAGAIN": "https://nemoapi.azurewebsites.net/api/sendmessageagain",
         "SENDSTATUSSHMIROT":  "https://nemoapi.azurewebsites.net/api/sendstatusshmirot",
-        "CANCELREQUEST": "https://nemoapi.azurewebsites.net/api/cancelrequest"
+        "CANCELREQUEST": "https://nemoapi.azurewebsites.net/api/cancelrequest",
+        "GETALLUSERS": "https://nemoapi.azurewebsites.net/api/getallusers",
+        "SENDCURRENTTORANIM": "https://nemoapi.azurewebsites.net/api/sendcurrenttoranim"
+
+
     },
     "MAINAPI": "https://nemoapi.azurewebsites.net/api"
 }

@@ -30,6 +30,16 @@ export default class SideBar extends React.Component {
       this.setState({
         dafi:
           <Fragment>
+            <NavLink to="/pickusers">
+              <ListItem
+                className="listd"
+                button
+                onClick={() => this.handleSideBar()}
+              >
+                <i className="material-icons icons2">person_add</i>
+                <h2>בחר משתמשים</h2>
+              </ListItem>
+            </NavLink>
             <NavLink to="/createuser">
               <ListItem
                 className="listd"

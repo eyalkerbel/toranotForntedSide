@@ -8,7 +8,8 @@ function envmaker() {
     const envi = "prd";
 
     console.log("ss",envi)
-    if (envi === "dev") {
+    if (process.env.REACT_APP_ENV === "dev") {
+        console.log("test dev");
         return CONFIGDEV;
     }
     else if (process.env.REACT_APP_ENV === "prd") {
@@ -17,8 +18,8 @@ function envmaker() {
     }
     else if (process.env.REACT_APP_ENV === "local") {
         console.log("local but2 production");
-        return CONFIGDEV;
-      //  return CONFIGLOCAL;
+       // return CONFIGDEV;
+        return CONFIGLOCAL;
     }
     else {
         console.log("da");

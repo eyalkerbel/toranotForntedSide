@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/style.css";
+import "./styles/shmirotTable.css";
+import "./styles/login.css";
+import "./styles/userList.css";
+import "./styles/searchBar.css";
 import Switcher from "./Switcher";
 import * as serviceWorker from './serviceWorker';
 import user from './Reducers/UserReducer'

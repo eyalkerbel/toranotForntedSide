@@ -258,7 +258,8 @@ fetchData(currentProps) {
     
       }
     for(var j=0;j<askToAnswerChanges.length;j++) {
-      var todayTime3 = new Date(askToAnswerChanges[i].newDate.date);
+      console.log("askS" , askToAnswerChanges[i] , i );
+      var todayTime3 = new Date(askToAnswerChanges[j].newDate.date);
       var month3 = todayTime3.getMonth() + 1;
       var currentMomth = new Date().getMonth();
       if(currentMomth == todayTime3.getMonth() ) {
@@ -298,7 +299,7 @@ fetchData(currentProps) {
         default:
           break;
       }
-      var todayTime2 = new Date(askToAnswerChanges[i].oldDate.date);
+      var todayTime2 = new Date(askToAnswerChanges[j].oldDate.date);
       var month2 = todayTime2.getMonth() + 1;
       var day2 = todayTime2.getDate();
       var year2 = todayTime2.getFullYear();
@@ -308,14 +309,14 @@ fetchData(currentProps) {
        mainly: "friend",
        myDateFormat: formattedDate3,
        myDay: dayHe3,
-       friendName: askToAnswerChanges[i].oldDate.name,
+       friendName: askToAnswerChanges[j].oldDate.name,
        friendDateForamt: formattedDate2,
-       status: askToAnswerChanges[i].status,
+       status: askToAnswerChanges[j].status,
        month:month2 - 1,
-       friendMessage:askToAnswerChanges[i].oldMessage,
-       myMessage: askToAnswerChanges[i].newMessage,
-       managerMessage: askToAnswerChanges[i].managerMessage,
-       id: askToAnswerChanges[i]._id,
+       friendMessage:askToAnswerChanges[j].oldMessage,
+       myMessage: askToAnswerChanges[j].newMessage,
+       managerMessage: askToAnswerChanges[j].managerMessage,
+       id: askToAnswerChanges[j]._id,
        statusSendAgain: false,
      }
      tempExhcanges.push(exchange);
