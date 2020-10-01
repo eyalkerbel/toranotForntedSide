@@ -53,7 +53,7 @@ render() {
             <DialogContentText id="alert-dialog-slide-description">
           <div className="conainer-div-peact">
             <div className="name-div">
-                {this.props.exchangeData.oldDate.name}
+                {this.props.exchangeData.toranotOld.userDetails.name}
            </div>
            <div className="content-message-div">
                 {this.props.exchangeData.oldMessage}

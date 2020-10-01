@@ -15,6 +15,7 @@ export default class ItemUser extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentWillMount() {
+        console.log("itempUserProps" , this.props);
         // console.log("shalom" ,this.props);
     }
     // UNSAFE_componentWillReceiveProps(props) {
@@ -41,7 +42,7 @@ export default class ItemUser extends React.Component {
                             <Checkbox checked={this.props.checkBoxStatus} onChange={this.handleChange} inputProps={{ 'aria-label': 'primary checkbox' }}  />
                         </div>   
                             <div className="name-all-user">
-                                {this.props.item.name}
+                                {this.props.item.userDetails.name}
                         </div>
                         </div>
 

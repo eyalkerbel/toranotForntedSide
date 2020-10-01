@@ -26,7 +26,10 @@
         "SENDSTATUSSHMIROT":  "http://localhost:5000/api/sendstatusshmirot",
         "CANCELREQUEST": "http://localhost:5000/api/cancelrequest",
         "GETALLUSERS": "http://localhost:5000/api/getallusers",
-        "SENDCURRENTTORANIM": "http://localhost:5000/api/sendcurrenttoranim"
+        "SENDCURRENTTORANIM": "http://localhost:5000/api/sendcurrenttoranim",
+        "DELETENOTIFICATION":  "http://localhost:5000/api/deletenotifications",
+        "SETTORANOT": "http://localhost:5000/api/settoranot",
+        "DELETETORANOT": "http://localhost:5000/api/deletetoranot"
 
 
     },

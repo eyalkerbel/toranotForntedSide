@@ -140,12 +140,18 @@ class Shmirot extends React.Component {
 
   fetchyfetch(num) {
    console.log("fetchfetchgood");
+  //  var obi = {
+  //    indexDeleteNotifcation = this.state.selectValue
+  //  }
     fetch(CONFIG.API.GETEXCHANGESANDTORANOT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         Authorization: "Bearer " + localStorage.getItem("jwt")
-      }
+      },
+      body: JSON.stringify({
+        indexDeleteNotifcation: this.state.selectValue
+      })
     }).then(data => data.json())
       .then(jsoned => this.fetchData(jsoned))
       .catch(err => {
@@ -213,14 +219,18 @@ this.setState({fetchArray:jsoned,fetched:true});
   };
 
   componentWillMount() {
-    if(this.state.fetched == false) {
-    this.fetchyfetch();
-    }
+    // if(this.state.fetched == false) {
+    // this.fetchyfetch();
+    // }
     if(this.props.location.state != undefined) {
     if(this.props.location.state.urlExchange == true) {
-      this.setState({selectValue:1});
+      
+      this.setState({selectValue:this.props.location.state.index});
     }
   }
+  if(this.state.fetched == false) {
+    this.fetchyfetch();
+    }
   }
   bubbleSelect = (num) => {
     this.setState({ selectValue: num })
@@ -243,7 +253,7 @@ getDataFromAnswer(temp) {
     // }
     switch(this.state.selectValue) {
       case 0:
-        return(<MyShmirot arri={this.state.fetchArray[this.state.tabvalue]} tabValue={this.state.tabvalue} />);
+        return(<MyShmirot arri={this.state.fetchArray} tabValue={this.state.tabvalue} />);
       case 1:
            return(<ShmirotChanges updateParent={this.getDataFromSon} approveChange={this.approveChange} fetchArray={this.state.fetchArray} tabValue={this.state.tabvalue} />);
       case 2:

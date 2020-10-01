@@ -70,16 +70,16 @@ export default class SideBar extends React.Component {
 
   UNSAFE_componentWillMount() {
     this.adminIf()
-    this.getMessage()
+    // this.getMessage()
   }
-   getMessage() {
-      fetch(CONFIG.API.GETNOTIFACTION, {
-        method:"POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: "Bearer " + localStorage.getItem("jwt")
-      }}).then(dat => dat.json()).then(data => this.handleNoti(data));
-  }
+  //  getMessage() {
+  //     fetch(CONFIG.API.GETNOTIFACTION, {
+  //       method:"POST",
+  //       headers: {
+  //         "Content-Type": "application/json;charset=utf-8",
+  //         Authorization: "Bearer " + localStorage.getItem("jwt")
+  //     }}).then(dat => dat.json()).then(data => this.handleNoti(data));
+  // }
   handleNoti(data) {
     // console.log("handleNoti",data)
     // var temp = [];

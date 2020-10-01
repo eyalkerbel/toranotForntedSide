@@ -43,6 +43,7 @@ sendMessge() {
    this.props.sendMessge(this.state.message);
 }
 sendToManagerFirst() {
+  console.log("send");
     this.props.sendToManager(this.state.message,true);
 }
 cancelRequest() {

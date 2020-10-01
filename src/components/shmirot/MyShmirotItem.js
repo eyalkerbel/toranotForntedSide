@@ -18,7 +18,7 @@ export default class MyShmirotItem extends React.Component {
     }
 
     handleclicks(num) {
-      this.props.updateParnetClick(this.props.index,num);
+      this.props.updateParnetClick(this.props.index,num,this.props.indexAll);
     }
 
     renderSelect() {
@@ -96,94 +96,6 @@ export default class MyShmirotItem extends React.Component {
 
 
     render() {
-        // var todayTime = new Date(this.props.item.date);
-        // var month = todayTime.getMonth() + 1;
-        // var day = todayTime.getDate();
-        // var year = todayTime.getFullYear();
-        // var formattedDate = day + "/" + month + "/" + year;
-        // var dayofweek = todayTime.getDay();
-        // var dayHe = 0;
-        // switch (dayofweek) {
-        //   case 0:
-        //     dayHe = "ראשון";
-        //     break;
-        //   case 1:
-        //     dayHe = "שני";
-        //     break;
-        //   case 2:
-        //     dayHe = "שלישי";
-        //     break;
-        //   case 3:
-        //     dayHe = "רביעי";
-        //     break;
-        //   case 4:
-        //     dayHe = "חמישי";
-        //     break;
-        //   case 5:
-        //     dayHe = "שישי";
-        //     break;
-        //   case 6:
-        //     dayHe = "שבת";
-        //     break;
-        //   default:
-        //     break;
-        // }
-        // var TranslateType = 0;
-        // if (this.props.item.toran === 0) {
-        //   switch (this.props.item.type) {
-        //     case 0:
-        //       TranslateType = "סמל תורן בפנים";
-        //       break;
-        //     case 1:
-        //       TranslateType = "קצין תורן בפנים";
-        //       break;
-        //     case 2:
-        //       TranslateType = "חייל חובה חוץ";
-        //       break;
-        //     case 3:
-        //       TranslateType = "נגד שער";
-        //       break;
-        //     case 4:
-        //       TranslateType = "ע' קצין תורן";
-        //       break;
-        //     case 5:
-        //       TranslateType = "קצין תורן";
-        //       break;
-        //     case 6:
-        //       TranslateType = "מפקד תורן";
-        //       break;
-        //     default:
-        //       break;
-        //   }
-    
-        // } else {
-        //   switch (this.props.item.type) {
-        //     case 0:
-        //       TranslateType = "עתודה של סמל תורן בפנים";
-        //       break;
-        //     case 1:
-        //       TranslateType = "עתודה של קצין תורן בפנים";
-        //       break;
-        //     case 2:
-        //       TranslateType = "עתודה של חייל חובה חוץ";
-        //       break;
-        //     case 3:
-        //       TranslateType = "עתודה של נגד שער";
-        //       break;
-        //     case 4:
-        //       TranslateType = "עתודה של ע' קצין תורן";
-        //       break;
-        //     case 5:
-        //       TranslateType = "עתודה של קצין תורן";
-        //       break;
-        //     case 6:
-        //       TranslateType = "עתודה של מפקד תורן";
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // }
-
       
 
  console.log("props" , this.props);

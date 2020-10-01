@@ -39,7 +39,7 @@ renderBody() {
 
   <div className="conainer-div-peact">
     <div className="name-div">
-      {this.props.item.oldDate.name}
+      {this.props.item.toranotOld.userDetails.name}
     </div>
     <div className="content-message-div">
     {this.props.item.oldMessage}
@@ -50,7 +50,7 @@ renderBody() {
   
   <div className="conainer-div-peact">
     <div className="name-div">
-      {this.props.item.newDate.name}
+      {this.props.item.toranotNew.userDetails.name}
     </div>
     <div className="content-message-div">
     {this.props.item.newMessage}

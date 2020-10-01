@@ -153,8 +153,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
         if(this.state.oldData != null && this.state.newData != null) {
                 this.setState({status:"send a request"});
                 let data = {
-                  oldDate: this.state.oldData,
-                  newDate: this.state.newData,
+                  toranotIdOld: this.state.oldData.id,
+                  toranotIdNew: this.state.newData.id,
                   status: "asking",
                   oldMessage: this.state.message,
                   seen:false

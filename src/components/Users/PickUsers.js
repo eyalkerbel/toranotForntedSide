@@ -80,8 +80,9 @@ export default class PickUsers extends React.Component {
     sendDataToServer() {
       //  this.setState({arraySavingChanges: []});
       var arrayUsers = this.state.arraySavingChanges;
-      console.log("userList" , this.state.arrayUsers);
-      var  arrayUsersJson = {arrayUsers:arrayUsers}
+      console.log("userList" , this.state.arrayUsers , arrayUsers );
+      var  arrayUsersJson = {arrayUsers:arrayUsers};
+      this.setState({arraySavingChanges: []});
         fetch(CONFIG.API.SENDCURRENTTORANIM , {
             method: "POST",
             headers: {

@@ -28,47 +28,105 @@ export default class HomePage extends React.Component {
 handleNoti(dataAll) {
 var temp = [];
 let message;
+let action;
 let tempJson = "";
 var data = dataAll[0];
 var temp2 = []; 
 
+console.log("data" , dataAll);
+
 console.log("data3" , data);
 
+if (localStorage.getItem("permissionlvl") === "admin") {
+  for(var i=0;i<data.length;i++) {
+    if(data[i].action == "askManager") {
+      message =  data[i].exchangeObject.toranotOldObject.userDetails.name + " ו " + data[i].exchangeObject.toranotNewObject.userDetails.name + " רוצים להחליף אחד עם השני ";
+      action = "ApproveManager";
+   }
+   var notiObject = {
+  action:action,
+  message:message
+};
+
+console.log("message",notiObject)
+  temp.push(notiObject);
+} 
+
+} else {
 for(var i=0;i<data.length;i++) {
   if(data[i].seen == false) {
-var date = data[i].data;
-var dats =  new Date(date);
-if(data[i].action == "place") {
-     message = "מנהל שיבץ אותך בתורונות" + dats.getDate();
+
+var date = data[i].toranot.date;
+var todayTime = new Date(data[i].toranot.date);
+var month = todayTime.getMonth() + 1;
+var day = todayTime.getDate();
+var year = todayTime.getFullYear();
+var formattedDate = day + "/" + month + "/" + year;
+
+var dats = new Date(date);
+if(data[i].action == "addToranot") {
+     message = " מנהל שיבץ אותך בתאריך ה" +formattedDate;
+     action = "myShmirot";
   }
- if(data[i].action == "delete") {
- message = "מנהל ביטל את תרנותך בתורנות" + dats.getDate();
+ if(data[i].action == "deleteToranot") {
+  message = " מנהל שיבץ אותך בתאריך ה " + formattedDate;
+  action = "myShmirot";
+}
+if(data[i].action == "wantExchange") {
+    message = data[i].userDetails.name + " ביקש להתחלף איתך עם התאריך " +  formattedDate;
+    action = "wantExchange";
+  } 
+if(data[i].action == "toranApprove") {
+  message = data[i].userDetails.name + " הסכים להחליף איתך בתאריך "  +  formattedDate;
+  action = "answerExchange";
+}
+if(data[i].action == "toranReject") {
+  message = data[i].userDetails.name + " דחה את ההחלפה בתאריך " +  formattedDate;
+  action = "answerExchange";
+}
+if(data[i].action == "managerApprove") {
+  message = " מנהל אישר את ההחלפה שלך בתאריך" + formattedDate +  " עם " +  data[i].userDetails.name;
+  action = "answerExchange";
+}
+if(data[i].action == "managerReject") {
+  message = " מנהל דחה את ההחלפה שלך בתאריך " + formattedDate +  " עם " +  data[i].userDetails.name;
+  action = "answerExchange";
 }
 
-console.log("message",message)
-  temp.push(message);
-}
-}
-  console.log("[[w");
-  data2 = [];
+var notiObject = {
+  action:action,
+  message:message
+};
 
-var data2 = dataAll[1];
-console.log("data32",data2);
-let mess;
-for(var i=0;i<data2.length;i++) {
-  if(data2[i].seen == false) {
-    console.log("hola");
-var oldDate = data2[i].oldDate.date;
-var newDate = data2[i].newDate.date;
-var datsOld = new Date(oldDate);
-var datsNew = new Date(newDate);
-mess = data2[i].oldDate.name  + " ask change, his toranot " + datsOld.getDate() + " with yours" + datsNew.getDate();
-temp2.push(mess);
+console.log("message",notiObject)
+  temp.push(notiObject);
 }
 }
+}
+
+
+
+this.setState({info:temp,loading:false});
+  //console.log("[[w");
+  //data2 = [];
+
+// var data2 = dataAll[1];
+// console.log("data32",data2);
+// let mess;
+// for(var i=0;i<data2.length;i++) {
+//   if(data2[i].seen == false) {
+//     console.log("hola");
+// var oldDate = data2[i].toranotOld.date;
+// var newDate = data2[i].toranotNew.date;
+// var datsOld = new Date(oldDate);
+// var datsNew = new Date(newDate);
+// mess = data2[i].oldDate.name  + " ask change, his toranot " + datsOld.getDate() + " with yours" + datsNew.getDate();
+// temp2.push(mess);
+// }
+// }
 
 console.log("notis" , temp , temp2);
-this.setState({info:temp,loading:false,exchanges:temp2});
+//this.setState({info:temp,loading:false,exchanges:temp2});
 }
 
 

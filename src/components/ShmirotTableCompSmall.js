@@ -39,6 +39,7 @@ export default class ShmirotTableCompSmall extends React.Component {
             var id = el._id
             var toran = el.toran
             var userStauts = el.userStatus;
+         //   var toranotId = el.userDetails._id
           //  var userDetails = el.userDetails;
             var obi = {
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, isMine,userStauts

@@ -40,8 +40,20 @@ constructor(props) {
 
 componentDidMount() {
     console.log("shmirotChnages");
+    this.goToDB();
     this.fetchData();
 }
+goToDB() {
+  fetch(CONFIG.API.DELETENOTIFICATION, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      Authorization: "Bearer " + localStorage.getItem("jwt")
+    },
+   body: JSON.stringify({indexDeleting: 1})
+  });
+}
+
 handleClose(){
   this.setState({open:false,message:null,ifCurrentAgree: null,currentIndex: null,exchangeData:null});
   }
@@ -85,9 +97,15 @@ handleClose(){
     declineChange(indexExchange,newMessage) {
 
    var index = this.state.arri[indexExchange].index;
-   var temp = this.state.fetchArray;
+   console.log("indexDeline" , indexExchange,  this.props.fetchArray);
+   var temp = this.props.fetchArray;
+   if(temp[3].length == 1) {
+     temp[3] = [];
+   } else {
    temp[3].splice(index,1);
-    console.log("fetchArray" , temp);
+   }
+  //temp[3].splice(indexExchange,1);
+    console.log("afterDecline" , temp);
 
    this.props.updateParent(temp);
         
@@ -211,25 +229,26 @@ fetchData() {
     var getFormattedDatearri = [];
     for(var j=0;j<exchanges.length;j++) {
         var doneDeal = undefined;
-        var todayTime = new Date(exchanges[j].oldDate.date);
+        var todayTime = new Date(exchanges[j].toranotOld.date);
         var month = todayTime.getMonth();
         console.log("month" , monthToday , "," , (month) ,"index" ,  this.props.tabValue);
         if(exchanges[j].doneDeal == "yes"){
             doneDeal = true;
         }
-        if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  {
+        // if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  { //todo
             // console.log("month" , monthToday , "," , (month) ,"index" ,  this.props.tabValue);
         if(exchanges[j].status == "asking") {
-            var userDate = this.getFormatt(exchanges[j].oldDate.date);
-            var myDate = this.getFormatt(exchanges[j].newDate.date);
-            var dayHe = this.getNameDay(exchanges[j].newDate.date);
-            var name = exchanges[j].oldDate.name;
+            var userDate = this.getFormatt(exchanges[j].toranotOld.date);
+            var myDate = this.getFormatt(exchanges[j].toranotNew.date);
+            var dayHe = this.getNameDay(exchanges[j].toranotNew.date);
+            console.log("oooos",exchanges[j].toranotOld.userDetails);
+            var name = exchanges[j].toranotOld.userDetails.name;
             // console.log("oldmessage" , exchanges[j].oldMessage);
             //  temps.push({changeDate:changeDate,formattedDate:formattedDateU,indexExchange:j})
-            arri.push({month:month,userDate:userDate,myDate:myDate,dayHe:dayHe,name:name,doneDeal:doneDeal,newDate:exchanges[j].newDate,oldDate:exchanges[j].oldDate,index:j,oldMessage:exchanges[j].oldMessage});;
+            arri.push({_id:exchanges[j]._id,month:month,userDate:userDate,myDate:myDate,dayHe:dayHe,name:name,doneDeal:doneDeal,toranotNew:exchanges[j].toranotNew,toranotOld:exchanges[j].toranotOld,index:j,oldMessage:exchanges[j].oldMessage});;
             }
           }
-        }
+       // } // todo
 
    // console.log("arri" , arri);
           this.setState({arri:arri,exchanges:exchanges,fetchArray:tempFetch});
@@ -242,7 +261,7 @@ fetchData() {
         for (var i = 0; i < this.state.arri.length; i++) {
             // var todayTime = new Date(this.state.arri[i].myDate);
              var month = this.state.arri[i].month;
-    
+
             if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  {
           var obi = {
             obiData: (
@@ -295,6 +314,9 @@ render() {
                       <Table><TableBody>
                       <TableRow key={shortid.generate()}>
                       <TableCell key={shortid.generate()} align="center">ביקש להחליף</TableCell>
+                      <TableCell key={shortid.generate()} align="center">התאריך שלו</TableCell>
+                      <TableCell key={shortid.generate()} align="center">החלטה</TableCell>
+
                       </TableRow>
                       </TableBody></Table>
                       </TableCell>

@@ -64,11 +64,24 @@ const styles = theme => ({
 componentDidMount() {
   console.log("mountc" , this.props.fetchArray);
     this.fetchData(this.props);
+    this.goToDB();
 }
 // componentWillReceiveProps(nextProps) {
 //   console.log("mountc" , nextProps);
 //     this.fetchData(nextProps);
 // }
+
+goToDB() {
+  fetch(CONFIG.API.DELETENOTIFICATION, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      Authorization: "Bearer " + localStorage.getItem("jwt")
+    },
+   body: JSON.stringify({indexDeleting: 2})
+  });
+}
+
    handleClose() {
     this.setState({open:false});
   }
@@ -94,6 +107,7 @@ componentDidMount() {
   sendToManager(message) {
     var item = this.state.currentItem;
     var index = this.state.exchanges.indexOf(item);
+    this.setState({open:false});
     var sendTo = "manager";
     fetch(CONFIG.API.SENDMESSAGEAGAIN , {
       method: "POST",
@@ -193,7 +207,7 @@ fetchData(currentProps) {
 
     console.log("mineExchange" , mineExchanges , "ASK" ,askToAnswerChanges);
     for(var i=0; i<mineExchanges.length;i++) {
-        var todayTime3 = new Date(mineExchanges[i].oldDate.date);
+        var todayTime3 = new Date(mineExchanges[i].toranotOld.date);
         var month3 = todayTime3.getMonth() + 1;
         var currentMomth = new Date().getMonth();
         if(currentMomth == todayTime3.getMonth() ) {
@@ -233,7 +247,7 @@ fetchData(currentProps) {
           default:
             break;
         }
-        var todayTime2 = new Date(mineExchanges[i].newDate.date);
+        var todayTime2 = new Date(mineExchanges[i].toranotNew.date);
         var month2 = todayTime2.getMonth() + 1;
         var day2 = todayTime2.getDate();
         var year2 = todayTime2.getFullYear();
@@ -244,7 +258,7 @@ fetchData(currentProps) {
          mainly: "me",
          myDateFormat: formattedDate3,
          myDay: dayHe3,
-         friendName: mineExchanges[i].newDate.name,
+         friendName: mineExchanges[i].toranotNew.userDetails.name,
          friendDateForamt: formattedDate2,
          status: mineExchanges[i].status,
          month:month2 - 1,
@@ -259,7 +273,7 @@ fetchData(currentProps) {
       }
     for(var j=0;j<askToAnswerChanges.length;j++) {
       console.log("askS" , askToAnswerChanges[i] , i );
-      var todayTime3 = new Date(askToAnswerChanges[j].newDate.date);
+      var todayTime3 = new Date(askToAnswerChanges[j].toranotNew.date);
       var month3 = todayTime3.getMonth() + 1;
       var currentMomth = new Date().getMonth();
       if(currentMomth == todayTime3.getMonth() ) {
@@ -299,7 +313,7 @@ fetchData(currentProps) {
         default:
           break;
       }
-      var todayTime2 = new Date(askToAnswerChanges[j].oldDate.date);
+      var todayTime2 = new Date(askToAnswerChanges[j].toranotOld.date);
       var month2 = todayTime2.getMonth() + 1;
       var day2 = todayTime2.getDate();
       var year2 = todayTime2.getFullYear();
@@ -309,7 +323,7 @@ fetchData(currentProps) {
        mainly: "friend",
        myDateFormat: formattedDate3,
        myDay: dayHe3,
-       friendName: askToAnswerChanges[j].oldDate.name,
+       friendName: askToAnswerChanges[j].toranotOld.userDetails.name,
        friendDateForamt: formattedDate2,
        status: askToAnswerChanges[j].status,
        month:month2 - 1,
@@ -398,7 +412,7 @@ render() {
                   </TableBody>
       {/* {this.renderDialogs()} */}
       {console.log("dailogStatus" , this.state.dialogStatus)}
-      <DailogAnswer currentItem={this.state.currentItem} cancelRequest={this.cancelRequest}  open={this.state.open}  sendMessge={this.sendMessage} sendToManager={this.sendToManager}  handleClose={this.handleClose} dailogStatus={this.state.dialogStatus} />
+      <DailogAnswer currentItem={this.state.currentItem} cancelRequest={this.cancelRequest} open={this.state.open} sendMessge={this.sendMessage} sendToManager={this.sendToManager}  handleClose={this.handleClose} dailogStatus={this.state.dialogStatus} />
       </Table>
 
     );

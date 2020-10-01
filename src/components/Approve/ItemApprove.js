@@ -131,16 +131,16 @@ return  day + "/" + month + "/" + year;
     render() {
       console.log("itemApprove render",this.props.item);
         const { classes } = this.props;
-        var oldDay = this.getNameDay(this.props.item.oldDate.date);
-        var newDay = this.getNameDay(this.props.item.newDate.date);
+        var oldDay = this.getNameDay(this.props.item.toranotOld.date);
+        var newDay = this.getNameDay(this.props.item.toranotNew.date);
         var fo
         return(
             <TableRow key={shortid.generate()}>
                 <TableCell key={shortid.generate()}>
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
-                <TableCell key={shortid.generate()} align="center">{this.props.item.oldDate.name} </TableCell>
-                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {oldDay} - {this.getFormatt(this.props.item.oldDate.date)}</TableCell>
+                <TableCell key={shortid.generate()} align="center">{this.props.item.toranotOld.userDetails.name} </TableCell>
+                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {oldDay} - {this.getFormatt(this.props.item.toranotOld.date)}</TableCell>
 
 
                   </TableRow>
@@ -150,8 +150,8 @@ return  day + "/" + month + "/" + year;
                   <TableCell key={shortid.generate()}>
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
-                <TableCell key={shortid.generate()} align="center">{this.props.item.newDate.name} </TableCell>
-                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {newDay} - {this.getFormatt(this.props.item.newDate.date)}</TableCell>
+                <TableCell key={shortid.generate()} align="center">{this.props.item.toranotNew.userDetails.name} </TableCell>
+                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {newDay} - {this.getFormatt(this.props.item.toranotNew.date)}</TableCell>
 
 
                   </TableRow>
@@ -162,7 +162,7 @@ return  day + "/" + month + "/" + year;
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
                   <TableCell id="alltablepadding" key={shortid.generate()} align="center"> <IconButton onClick={() => {console.log("uur")}} style={{paddingBottom: "0", paddingTop: "0"}}>    <EmailIcon id="email-recive" onClick={this.handleOpenMail} /> </IconButton></TableCell>
-                <TableCell key={shortid.generate()} align="center">{this.getJob(this.props.item.oldDate.type)}</TableCell>
+                <TableCell key={shortid.generate()} align="center">{this.getJob(this.props.item.toranotOld.userDetails.type)}</TableCell>
                   {/* <TableCell id="tablepadding" key={shortid.generate()}  align="center"> </TableCell> */}
                  {this.renderIcons()}
 

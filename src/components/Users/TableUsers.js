@@ -47,7 +47,7 @@ export default class TableUsers extends React.Component {
       for(var i=0;i<this.props.userList[0].length;i++) {
        console.log("pass", this.props.userList[0][i]);
 
-        if(this.props.userList[0][i].type == this.props.roleValue && this.props.userList[0][i].name.toLowerCase().includes(lowercasedFilter) == true) {
+        if(this.props.userList[0][i].userDetails.type == this.props.roleValue && this.props.userList[0][i].userDetails.name.toLowerCase().includes(lowercasedFilter) == true) {
         var obi = {
             obiData: (
                 <ItemUser item={this.props.userList[0][i]} handleClick={this.handleClick} checkBoxStatus={true}  />
@@ -59,9 +59,9 @@ export default class TableUsers extends React.Component {
         
       }
       for(var i=0;i<this.props.userList[1].length;i++) {
-        console.log("pass", this.props.userList[1][i]);
+        console.log("pass", this.props.userList[1][i].userDetails);
 
-        if(this.props.userList[1][i].type == this.props.roleValue && this.props.userList[1][i].name.toLowerCase().includes(lowercasedFilter) == true ) {
+        if(this.props.userList[1][i].userDetails.type == this.props.roleValue && this.props.userList[1][i].userDetails.name.toLowerCase().includes(lowercasedFilter) == true ) {
        console.log("passnot" , this.props.userList[1][i]);
             var obi = {
                 obiData: (

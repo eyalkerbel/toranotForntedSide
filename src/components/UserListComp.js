@@ -13,10 +13,11 @@ export default function test(props) {
     });
 
     props.arri.forEach((el, i) => {
-        if (el.type === props.selectValue) {
-            //console.log("selecteduser",el);
+        console.log("selecteduserp",el);
+
+        if (el.userDetails.type === props.selectValue) {
             arri.push(<ListItem key={i} button onClick={() => props.selectUser(el)}>
-                <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.name} {el.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
+                <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
             </ListItem>
             )
         }

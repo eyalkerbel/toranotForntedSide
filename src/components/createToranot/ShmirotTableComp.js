@@ -175,6 +175,7 @@ import CONFIG from "../../configs/env"
         date.setDate(numOfDay)
         let obi = {
             date: date,
+            monthTab: this.props.tabValue,
             name: selectedUser.name,
             userid: selectedUser.userid,
             type: type,
@@ -189,23 +190,37 @@ import CONFIG from "../../configs/env"
         var user;
     //   this.props.addNotification(obi.date);
         var ThisOrNext = null;
-        console.log("database");
-        if (this.props.tabValue === 0) {
-            ThisOrNext = "settoranutthismonth";
-        } else if (this.props.tabValue === 1) {
-            ThisOrNext = "settoranutnextmonth";
-        }
-        fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
-            method: "POST",
-            headers: {
+        fetch(CONFIG.API.SETTORANOT, {
+                method: "POST",
+                headers: {
                 "Content-Type": "application/json;charset=utf-8",
                 Authorization: "Bearer " + localStorage.getItem("jwt")
             },
             body: JSON.stringify(obi)
         }).then(data => data.json()).then((jsoned) => {
-            this.props.fetchyfetch();
-            this.props.fotchyfetch(obi.userid);
-        });
+                this.props.fetchyfetch();
+                this.props.fotchyfetch(obi.userid);
+            });
+        
+
+
+        // console.log("database");
+        // if (this.props.tabValue === 0) {
+        //     ThisOrNext = "settoranutthismonth";
+        // } else if (this.props.tabValue === 1) {
+        //     ThisOrNext = "settoranutnextmonth";
+        // }
+        // fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json;charset=utf-8",
+        //         Authorization: "Bearer " + localStorage.getItem("jwt")
+        //     },
+        //     body: JSON.stringify(obi)
+        // }).then(data => data.json()).then((jsoned) => {
+        //     this.props.fetchyfetch();
+        //     this.props.fotchyfetch(obi.userid);
+        // });
     }
 
     preDelete = (user) => {
@@ -215,13 +230,10 @@ import CONFIG from "../../configs/env"
 
     deleteToranut = (user) => {
         var ThisOrNext = null
+
         console.log("delete " , user);
-        if (this.props.tabValue === 0) {
-            ThisOrNext = "deletetoranutthismonth";
-        } else if (this.props.tabValue === 1) {
-            ThisOrNext = "deletetoranutnextmonth";
-        }
-        fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
+      
+        fetch(CONFIG.API.DELETETORANOT, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -230,6 +242,21 @@ import CONFIG from "../../configs/env"
             body: JSON.stringify(user)
         })
             .then((jsoned) => this.props.fetchyfetch())
+        // console.log("delete " , user);
+        // if (this.props.tabValue === 0) {
+        //     ThisOrNext = "deletetoranutthismonth";
+        // } else if (this.props.tabValue === 1) {
+        //     ThisOrNext = "deletetoranutnextmonth";
+        // }
+        // fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json;charset=utf-8",
+        //         Authorization: "Bearer " + localStorage.getItem("jwt")
+        //     },
+        //     body: JSON.stringify(user)
+        // })
+        //     .then((jsoned) => this.props.fetchyfetch())
     }
 
 
