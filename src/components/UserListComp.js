@@ -13,7 +13,7 @@ export default function test(props) {
     });
 
     props.arri.forEach((el, i) => {
-        console.log("selecteduserp",el);
+        console.log("selecteduse ::",el);
 
         if (el.userDetails.type === props.selectValue) {
             arri.push(<ListItem key={i} button onClick={() => props.selectUser(el)}>
