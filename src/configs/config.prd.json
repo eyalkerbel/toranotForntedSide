@@ -27,6 +27,7 @@
         "CANCELREQUEST": "https://toranotapi.herokuapp.com/api/cancelrequest",
         "GETALLUSERS": "https://toranotapi.herokuapp.com/api/getallusers",
         "SENDCURRENTTORANIM": "https://toranotapi.herokuapp.com/api/sendcurrenttoranim",
+        "SENDNEXTMONTHTORANIM": "https://toranotapi.herokuapp.com/api/sendtoranimnextmonth",
         "DELETENOTIFICATION":  "https://toranotapi.herokuapp.com/api/deletenotifications",
         "SETTORANOT": "https://toranotapi.herokuapp.com/api/settoranot",
         "DELETETORANOT": "https://toranotapi.herokuapp.com/api/deletetoranot"

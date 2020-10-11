@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 
 import ShmirotTableComp from './ShmirotTableComp'
 import TabComp from '../TabComp'
-import UserListComp from '../UserListComp'
+import UserListComp from './UserListComp'
 import CONFIG from "../../configs/env"
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 

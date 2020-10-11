@@ -26,6 +26,7 @@
         "CANCELREQUEST": "https://nemoapi.azurewebsites.net/api/cancelrequest",
         "GETALLUSERS": "https://nemoapi.azurewebsites.net/api/getallusers",
         "SENDCURRENTTORANIM": "https://nemoapi.azurewebsites.net/api/sendcurrenttoranim",
+        "SENDNEXTMONTHTORANIM": "https://nemoapi.azurewebsites.net/api/sendtoranimnextmonth",
         "DELETENOTIFICATION":  "https://nemoapi.azurewebsites.net/api/deletenotifications",
         "SETTORANOT": "https://nemoapi.azurewebsites.net/api/settoranot",
         "DELETETORANOT": "https://nemoapi.azurewebsites.net/api/deletetoranot"

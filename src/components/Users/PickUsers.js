@@ -80,9 +80,14 @@ export default class PickUsers extends React.Component {
     sendDataToServer() {
       //  this.setState({arraySavingChanges: []});
       var arrayUsers = this.state.arraySavingChanges;
+      this.setState({arraySavingChanges: []});
+        var oneCheck = true;
       console.log("userList" , this.state.arrayUsers , arrayUsers );
       var  arrayUsersJson = {arrayUsers:arrayUsers};
-      this.setState({arraySavingChanges: []});
+
+
+      
+        if(this.state.monthValue == 0 ) {
         fetch(CONFIG.API.SENDCURRENTTORANIM , {
             method: "POST",
             headers: {
@@ -91,6 +96,16 @@ export default class PickUsers extends React.Component {
             },
             body: JSON.stringify(arrayUsersJson)
         }).then(dat => this.setState({arraySavingChanges: []}));
+    } else {
+        fetch(CONFIG.API.SENDNEXTMONTHTORANIM , {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                Authorization: "Bearer " + localStorage.getItem("jwt")
+            },
+            body: JSON.stringify(arrayUsersJson)
+        }).then(dat => this.setState({arraySavingChanges: []}));
+    }
     }
 
     searchUpdated(term) {

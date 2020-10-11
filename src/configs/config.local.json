@@ -27,6 +27,7 @@
         "CANCELREQUEST": "http://localhost:5000/api/cancelrequest",
         "GETALLUSERS": "http://localhost:5000/api/getallusers",
         "SENDCURRENTTORANIM": "http://localhost:5000/api/sendcurrenttoranim",
+        "SENDNEXTMONTHTORANIM": "http://localhost:5000/api/sendtoranimnextmonth",
         "DELETENOTIFICATION":  "http://localhost:5000/api/deletenotifications",
         "SETTORANOT": "http://localhost:5000/api/settoranot",
         "DELETETORANOT": "http://localhost:5000/api/deletetoranot"

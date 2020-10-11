@@ -11,9 +11,9 @@ export default function test(props) {
         if(keyA > keyB) return 1;
         return 0;
     });
-
+    console.log("arri " , props.arri);
     props.arri.forEach((el, i) => {
-        console.log("selecteduse ::",el);
+        console.log("selecteduse ::",el , props.selectValue);
 
         if (el.userDetails.type === props.selectValue) {
             arri.push(<ListItem key={i} button onClick={() => props.selectUser(el)}>
