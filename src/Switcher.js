@@ -22,16 +22,21 @@ import CONFIG from "./configs/env";
 import Notifications from '../src/components/Notifications';
 import ExchangeApprove from "./components/Approve/ExchageApprove";
 import PickUsers from "./components/Users/PickUsers";
-export default class Switcher extends React.Component {
+import { loginAction } from "./Actions/loginAction";
+import { connect } from "react-redux";
+
+ class Switcher extends React.Component {
   constructor() {
     super();
 
     this.state = { log: false,
        redirectState: true,
-      userDetails:"",
+      userDetails:null,
       info: [],
       exchanges: [],
-      loading:true
+      loading:true,
+      jwt: null,
+      ifToDirect:false
      };
   
     this.handleLogin = this.handleLogin.bind(this);
@@ -62,21 +67,35 @@ export default class Switcher extends React.Component {
 
 
   componentDidMount() {
-    var jwt = localStorage.getItem("jwt")
+    console.log("componentDidMountSwitcher");
+    var jwt = localStorage.getItem("jwt");
+    console.log("jwt" , jwt)
     var per = localStorage.getItem("permissionlvl")
     if (jwt !== null) {
-      this.setState({ log: true, permissionlvl: per });
+      this.setState({ log: true, permissionlvl: per,jwt:jwt});
     }
+    fetch(CONFIG.API.GETPERSONDATA, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: "Bearer " + localStorage.getItem("jwt")
+      }}).then(dat => dat.json()).then(userDetails => this.props.loginDispatch(userDetails.name,userDetails.sn,userDetails.password));
+      
+
+
   }
  
-  async getUserDatails(jsonData) {
+   getUserDatails(jsonData) {
    console.log("switcher",jsonData);
-  this.setState({userDetails:jsonData});
+   this.props.loginDispatch(jsonData.name, jsonData.sn, jsonData.password);
+
+  this.setState({userDetails:jsonData,ifToDirect:true});
   }
  
   handleLogin() {
-    console.log("rendring");
+    console.log("rendring" , this.state.userDetails);
     if (this.state.log === true) {
+
       return (
         <BrowserRouter>
         {/* <Notifications noti={this.state.noti} /> */}
@@ -105,7 +124,7 @@ export default class Switcher extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/signup" render={() => <SignUp getUserDatails={this.getUserDatails} />} />
-            <Route path="/login" render={() => <Login getUserDatails={this.getUserDatails}  />} />
+            <Route path="/login" render={() => <Login getUserDatails={this.getUserDatails}  ifToDirect={this.state.ifToDirect}  />} />
             <Route exact component={RedirectorLogin} />
           </Switch>
         </BrowserRouter>
@@ -116,3 +135,11 @@ export default class Switcher extends React.Component {
     return this.handleLogin();
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({  
+  loginDispatch: (username,sn,password) => dispatch(loginAction(username,sn,password))
+});
+
+
+export default connect(null, mapDispatchToProps)(Switcher);
+
