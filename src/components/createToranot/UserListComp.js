@@ -16,7 +16,7 @@ export default function test(props) {
         console.log("selecteduse ::",el , props.selectValue);
 
         if (el.userDetails.type === props.selectValue) {
-            arri.push(<ListItem key={i} button onClick={() => props.selectUser(el)}>
+            arri.push(<ListItem key={i} button onClick={() => props.selectUser(el.userDetails)}>
                 <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
             </ListItem>
             )
