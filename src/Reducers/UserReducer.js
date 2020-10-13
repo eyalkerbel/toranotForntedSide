@@ -5,11 +5,12 @@ const user = (state = INITIAL_STATE, action) => {
   console.log("user" , action.type);
     switch (action.type) {
       case "Login":
-       return {
-           name: action.name,
-           sn: action.sn,
-           password: action.password
-        };
+      //  return {
+      //      name: action.name,
+      //      sn: action.sn,
+      //      password: action.password
+      //   };
+        return action.user;
         case "LogOut":
          return INITIAL_STATE;
       default:

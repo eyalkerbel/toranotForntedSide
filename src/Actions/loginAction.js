@@ -1,11 +1,9 @@
 
 
 
-export const loginAction = (name,sn,password) =>  ({
+export const loginAction = (user) =>  ({
     type: "Login",
-    name:name,
-    sn: sn,
-    password:password
+    user:user
   });
 
 

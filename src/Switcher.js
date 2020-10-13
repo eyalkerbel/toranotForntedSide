@@ -24,7 +24,7 @@ import ExchangeApprove from "./components/Approve/ExchageApprove";
 import PickUsers from "./components/Users/PickUsers";
 import { loginAction } from "./Actions/loginAction";
 import { connect } from "react-redux";
-
+import {initActionMiddleware} from "./Actions/initActionMiddleware";
  class Switcher extends React.Component {
   constructor() {
     super();
@@ -74,20 +74,20 @@ import { connect } from "react-redux";
     if (jwt !== null) {
       this.setState({ log: true, permissionlvl: per,jwt:jwt});
     }
-    fetch(CONFIG.API.GETPERSONDATA, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: "Bearer " + localStorage.getItem("jwt")
-      }}).then(dat => dat.json()).then(userDetails => this.props.loginDispatch(userDetails.name,userDetails.sn,userDetails.password));
-      
+    // fetch(CONFIG.API.GETPERSONDATA, {
+    //   method: "POST",
+    //   headers: {
+    //       "Content-Type": "application/json;charset=utf-8",
+    //       Authorization: "Bearer " + localStorage.getItem("jwt")
+    //   }}).then(dat => dat.json()).then(userDetails => this.props.loginDispatch(userDetails.name,userDetails.sn,userDetails.password));
+    this.props.loginDispatch();
 
 
   }
  
    getUserDatails(jsonData) {
    console.log("switcher",jsonData);
-   this.props.loginDispatch(jsonData.name, jsonData.sn, jsonData.password);
+  // this.props.loginDispatch(jsonData.name, jsonData.sn, jsonData.password);
 
   this.setState({userDetails:jsonData,ifToDirect:true});
   }
@@ -137,7 +137,7 @@ import { connect } from "react-redux";
 }
 
 const mapDispatchToProps = (dispatch) => ({  
-  loginDispatch: (username,sn,password) => dispatch(loginAction(username,sn,password))
+  loginDispatch: () => dispatch(initActionMiddleware())
 });
 
 
