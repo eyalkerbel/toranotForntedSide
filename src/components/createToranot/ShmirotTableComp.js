@@ -3,7 +3,8 @@ import { Button, Fab } from "@material-ui/core";
 import {connect} from "react-redux";
 import CONFIG from "../../configs/env"
 // import user from "../Reducers/UserReducer";
- import {SetNotification} from "../../Actions/NotificationAction"
+ import {SetNotification} from "../../Actions/NotificationAction";
+ import {addToranot,deleteToranot} from "../../Actions/toranotsAction";
  class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
@@ -14,15 +15,10 @@ import CONFIG from "../../configs/env"
     }    
     
     InjectDayOfWeekForHaadafa = (arrina) => {
-    //    console.log("shmirotTableCompinject",this.props.fetchedHaadafot)
-    //     console.log("arrine",arrina);
-    console.log("selectedValue" , this.props.selectedUser.name);
+    //console.log("selectedValue" , this.props.selectedUser.name);
     if(this.props.selectedUser.name != "בחר משתמש" ){
-        const haadafot = this.props.fetchedHaadafot;
+        const haadafot = this.props.haadafot;
         const piority = this.props.piorityArray;
-      //  console.log("piority", this.props.piorityArray);
-        // console.log("haadfot",haadafot);
-        // console.log("piority",piority);
        // this.algoritemHaadafot(haadafot);
         haadafot.forEach(el => {
             let date1 = new Date(el.begindate)
@@ -51,29 +47,16 @@ import CONFIG from "../../configs/env"
         return (this.createTds(arrina))
     }
 
-    UNSAFE_componentWillMount() {
-       // this.fetchAllHaadafot();
-    }
-    
-    fetchAllHaadafot() {
-        fetch(CONFIG.API.GETALLHAADAFOT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(data => data.json())
-            .then(dat => {console.log("hi")})
-            .catch(err => console.log(err));
-    }
-    
-
-
     createMainArri = (num) => {
     //   console.log("shmirotTableComp",this.props.fetchedArri)
-       var temp = this.props.fetchedArri[num];
-
+      // var temp = this.props.fetchedArri[num];
+      var temp = [];
+        if(num == 0) {
+            temp = this.props.toranots.toranotsThisMonth;
+        } else {
+            temp = this.props.toranots.toranotsNextMonth;
+        }
+        console.log("toranust from redux" , temp)
       //  console.log(temp);
         var tempArri = [];
         temp.forEach(el => {
@@ -90,8 +73,7 @@ import CONFIG from "../../configs/env"
             var obi = {
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points
             }
-            //conosle.log("fetched" , )
-          console.log("objectr",obi.name);
+       //   console.log("objectr",obi.name);
             if (this.props.selectValue === parseInt(type)) {
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
@@ -102,7 +84,6 @@ import CONFIG from "../../configs/env"
 
             }
         })
-      //  console.log(tempArri);
         return (this.createTableBody(tempArri))
     }
 
@@ -131,7 +112,6 @@ import CONFIG from "../../configs/env"
                     let user = tempArri[x][g];
                     if (user.toran === 0) {
                         let xio = tempi2.pop()
-
                         tempi2.push(
                             <div key={g} className="shmirotDataHolder">
                                 <span className="shmirotToran">
@@ -142,7 +122,6 @@ import CONFIG from "../../configs/env"
                                 </Fab>
                             </div>)
                         tempi2.push(xio)
-
                     } else {
                         tempi2.push(
                             <div key={g} className="shmirotDataHolder">
@@ -180,92 +159,44 @@ import CONFIG from "../../configs/env"
             userid: selectedUser.userid,
             type: type,
             toran: toran,
-            points: selectedUser.points 
+            points: selectedUser.points,
+            userDetails: selectedUser
         }
         this.send(obi);
-        console.log("fsds");
+     //   console.log("fsds");
     }
 
     send = (obi) => {
+        var DataForRedux = {
+            date:obi.date,
+            monthTab: this.props.tabValue,
+            idUser: this.props.selectedUser._id,
+            userStatus: "unknown",
+            availableForExchange: true,
+            userDetails: this.props.selectedUser,
+            toran: obi.toran
+        }
         var user;
     //   this.props.addNotification(obi.date);
         var ThisOrNext = null;
-        fetch(CONFIG.API.SETTORANOT, {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            },
-            body: JSON.stringify(obi)
-        }).then(data => data.json()).then((jsoned) => {
-                this.props.fetchyfetch();
-                this.props.fotchyfetch(obi.userid);
-            });
-        
-
-
-        // console.log("database");
-        // if (this.props.tabValue === 0) {
-        //     ThisOrNext = "settoranutthismonth";
-        // } else if (this.props.tabValue === 1) {
-        //     ThisOrNext = "settoranutnextmonth";
-        // }
-        // fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json;charset=utf-8",
-        //         Authorization: "Bearer " + localStorage.getItem("jwt")
-        //     },
-        //     body: JSON.stringify(obi)
-        // }).then(data => data.json()).then((jsoned) => {
-        //     this.props.fetchyfetch();
-        //     this.props.fotchyfetch(obi.userid);
-        // });
+        if(this.props.selectedUser.name  != "בחר משתמש")
+        this.props.addToranot(obi,DataForRedux);
     }
 
     preDelete = (user) => {
-
         this.deleteToranut(user);
     }
 
     deleteToranut = (user) => {
         var ThisOrNext = null
-
-        console.log("delete " , user);
-      
-        fetch(CONFIG.API.DELETETORANOT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            },
-            body: JSON.stringify(user)
-        })
-            .then((jsoned) => this.props.fetchyfetch())
-        // console.log("delete " , user);
-        // if (this.props.tabValue === 0) {
-        //     ThisOrNext = "deletetoranutthismonth";
-        // } else if (this.props.tabValue === 1) {
-        //     ThisOrNext = "deletetoranutnextmonth";
-        // }
-        // fetch(`${CONFIG.MAINAPI}/${ThisOrNext}`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json;charset=utf-8",
-        //         Authorization: "Bearer " + localStorage.getItem("jwt")
-        //     },
-        //     body: JSON.stringify(user)
-        // })
-        //     .then((jsoned) => this.props.fetchyfetch())
+     //   console.log("delete " , user);
+        this.props.deleteToranot(user,this.props.tabValue);
     }
-
 
     createTds = (arri2) => {
         var allRowArri = [];
         var g = 0;
-        
         var started = false;
-        
         for (var i = 0; i < 6; i++) {
             var rowArri = [];
             var started2 = false;
@@ -298,7 +229,6 @@ import CONFIG from "../../configs/env"
                 else if (started2 === true) {
                     rowArri[x] = <div key={x} className="emptyCell"><span></span></div>;
                 }
-
                 g++;
             }
             allRowArri[i] = rowArri;
@@ -307,6 +237,7 @@ import CONFIG from "../../configs/env"
     }
 
     render() {
+        console.log("renderShmirotTable");
         return (
             <div style={{ width: "100%" }}>
                 <div className="shmirotHeadersContainer">
@@ -331,8 +262,23 @@ import CONFIG from "../../configs/env"
         );
     }
 }
-// const mapDispatchToProps = dispatch => ({
-//     addNotification:(date) => dispatch(SetNotification(date)),
-// })
+const mapDispatchToProps = dispatch => ({
+    addToranot:(toranot,toranotForRedux) => dispatch(addToranot(toranot,toranotForRedux)),
+    deleteToranot: (toranot,monthValue) => dispatch(deleteToranot(toranot,monthValue))
+})
+function mapStateToProps(state,ownProps) {
+    console.log("ownProps" , ownProps)
+    if(ownProps.selectedUser.name  != "בחר משתמש") {
+    return {
+    toranots: state.toranots,
+    haadafot: state.allHaadafot.filter(hadafa => hadafa.idUser == ownProps.selectedUser._id )
+    }
+    } else {
+        return {
+        toranots: state.toranots,
+        haadafot: []
+        }
+    }
+}
 
-export default connect(null,null)(ShmirotTableComp);
+export default connect(mapStateToProps,mapDispatchToProps)(ShmirotTableComp);

@@ -43,28 +43,18 @@ export default class CreateToranut extends React.Component {
     }
 
     selectUser = (el) => {
+        // console.log("")
         this.setState({ selectedUser: el })
-        this.fetchHaadafa(el);
+      //  this.fetchHaadafa(el);
        this.fetchPiority(el);
     }
 
     UNSAFE_componentWillMount() {
-        this.fetchyfetch();
+       // this.fetchyfetch();
         this.fotchyfetch();
     }
 
-    fetchyfetch() {
-        fetch(CONFIG.API.CREATETORANUT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(data => data.json())
-            .then(dat => this.forFetch(dat))
-            .catch(err => console.log(err));
-    }
+   
     fotchyfetch(userid) {
         fetch(CONFIG.API.GETPIORITY, {
             method: "POST",
@@ -74,30 +64,14 @@ export default class CreateToranut extends React.Component {
             }
         })
             .then(data =>  data.json())
-            .then(dat => this.forFetchTwho(dat,userid))
+            .then(dat =>{ this.forFetchTwho(dat,userid)
+            this.setState({loaded:true}) })
             .catch(err => console.log(err));
     }
 
     
 
-    fetchHaadafa = (userid) => {
-        var stringed = JSON.stringify(userid)
-        fetch(CONFIG.API.GETHAADAFOTBYUSER, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            },
-            body: stringed
-        })
-            .then(data => data.json())
-            .then(jsoned => {
-             ///   console.log("haadfot",jsoned);
-                this.setState({ fetchedHaadafot: jsoned });
-                }
-            )
-            .catch(err => console.log(err));
-    }
+   
 
     fetchPiority = (userid) => {
        // console.log("fetchPiorityasladindssndsdskdsksd",userid);
@@ -122,16 +96,16 @@ export default class CreateToranut extends React.Component {
 
 
 
-    forFetch(data) {
-        var user;
-        if(this.state.fetchedArri[this.state.tabValue] != undefined) {
-        this.setState({ fetchedArri: data});
-    }
-    else {
-        this.setState({ fetchedArri: data});
-    }
-        this.setState({ loaded: true });
-    }
+    // forFetch(data) {
+    //     var user;
+    //     if(this.state.fetchedArri[this.state.tabValue] != undefined) {
+    //     this.setState({ fetchedArri: data});
+    // }
+    // else {
+    //     this.setState({ fetchedArri: data});
+    // }
+    //     this.setState({ loaded: true });
+    // }
     forFetchTwho(data,id) {
         var user;
         if(this.state.paiorityArray != undefined) {
@@ -147,20 +121,20 @@ export default class CreateToranut extends React.Component {
 
 
     createTable = () => {
-        var arri = this.state.fetchedArri.slice(1);
-        console.log("part of array",arri);
-        arri.shift()
+    //    var arri = this.state.fetchedArri.slice(1);
+        //console.log("part of array",arri);
+       // arri.shift()
         return (
             <ShmirotTableComp
-               fotchyfetch={this.fotchyfetch.bind(this)}
-                fetchyfetch={this.fetchyfetch.bind(this)}
-                fetchedHaadafot={this.state.fetchedHaadafot}
+              // fotchyfetch={this.fotchyfetch.bind(this)}
+               // fetchyfetch={this.fetchyfetch.bind(this)}
+                // fetchedHaadafot={this.state.fetchedHaadafot}
                 selectedUser={this.state.selectedUser}
-                fetchedArri={arri}
+               // fetchedArri={arri}
                 tabValue={this.state.tabValue}
                 selectValue={this.state.selectValue}
                 toran={this.state.toran}
-                 userList ={this.state.fetchedArri[this.state.tabValue]}
+                // userList ={this.state.fetchedArri[this.state.tabValue]}
                  selectUser={this.selectUser}
                 piorityArray={this.state.fetchPiority}
                 fetchPiority={this.fetchPiority} />
@@ -182,7 +156,7 @@ export default class CreateToranut extends React.Component {
                         <div style={{ display: "flex", width: "100%", marginBottom: "20px" }}>
                             <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px" }}>
                                 <List style={{ height: "60vh", overflow: "auto", direction: "ltr", borderBottom: "2px solid teal" }}>
-                                    <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} arri={this.state.fetchedArri[this.state.tabValue]} />
+                                    <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} tabValue={this.state.tabValue} />
                                 </List>
                                 <RadioGroup defaultValue="0" aria-label="regular" name="customized-radios">
                                     <FormControlLabel onClick={() => this.radioHandler(0)} value="0" control={<Radio />} label="תורן" />

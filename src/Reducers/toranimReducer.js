@@ -2,7 +2,6 @@
 
 const INITIAL_STATE = {};
 const toranim = (state = INITIAL_STATE, action) => {
-   console.log("user" , action.type);
      switch (action.type) {
        case "INIT_TORANIM":
         return {
