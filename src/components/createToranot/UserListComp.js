@@ -1,18 +1,30 @@
 import React from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { connect } from 'react-redux';
 
-export default function test(props) {
+ function UserListComp(props) {
     var arri = [];
-    props.arri.sort(function(a,b){
+    var userList = [];
+    if(props.tabValue == 0) {
+        userList = props.toranim.toranimThisMonth;
+    } else {
+        userList = props.toranim.toranimNextMonth;
+    }
+    console.log("userList" , userList);
+   userList.sort(function(a,b){
         var keyA = a.points;
         var keyB = b.points;
         if(keyA < keyB) return -1;
         if(keyA > keyB) return 1;
         return 0;
     });
-    console.log("arri " , props.arri);
-    props.arri.forEach((el, i) => {
+    //console.log("arri " , props.arri);
+    console.log("toranim" , props.toranim);
+  
+
+
+    userList.forEach((el, i) => {
         console.log("selecteduse ::",el , props.selectValue);
 
         if (el.userDetails.type === props.selectValue) {
@@ -24,3 +36,10 @@ export default function test(props) {
     })
     return arri;
 }
+
+const mapStateToProps = state => ({
+    toranim: state.toranim
+})
+
+
+export default connect(mapStateToProps,null)(UserListComp);

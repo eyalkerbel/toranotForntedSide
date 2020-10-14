@@ -30,7 +30,8 @@
         "SENDNEXTMONTHTORANIM": "http://localhost:5000/api/sendtoranimnextmonth",
         "DELETENOTIFICATION":  "http://localhost:5000/api/deletenotifications",
         "SETTORANOT": "http://localhost:5000/api/settoranot",
-        "DELETETORANOT": "http://localhost:5000/api/deletetoranot"
+        "DELETETORANOT": "http://localhost:5000/api/deletetoranot",
+        "GETDATAFORREDUX": "http://localhost:5000/api/getdataforinitredux"
 
 
     },

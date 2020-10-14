@@ -8,7 +8,9 @@ import CONFIG from "../configs/env";
 import LoadingPage from "./LoadingPage";
 import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
-export default class HomePage extends React.Component {
+import { connect } from "react-redux";
+import {loginAction} from "../Actions/loginAction";
+ export default class HomePage extends React.Component {
  constructor(props) {
    super(props);
    this.state = {
@@ -255,3 +257,10 @@ console.log("notis" , temp , temp2);
     );
   }
 }
+
+// const mapDispatchToProps = (dispatch) => ({  
+//   loginDispatch: (username,sn,password) => dispatch(loginAction("personID","22222","blabla"))
+// });
+
+
+// export default connect(null, mapDispatchToProps)(HomePage);

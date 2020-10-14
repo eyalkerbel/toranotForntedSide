@@ -20,6 +20,8 @@ import {loginAction} from "../Actions/loginAction";
   }
 
   handlelog = () => {
+    console.log("logincred" , this.state.loginCred);
+
     if (this.state.loginCred.password !== "" && this.state.loginCred.username !== "") {
       this.setState({ isLoaded: true });
       var sendableJson = JSON.stringify(this.state.loginCred);
@@ -33,16 +35,24 @@ import {loginAction} from "../Actions/loginAction";
         body: sendableJson
       })
         .then(data => data.json())
-        .then(jsoned => {
+        .then(async jsoned => {
+         await this.props.getUserDatails(jsoned.details);
+
+          console.log("logincred" , this.state.loginCred);
+
+
           localStorage.setItem("jwt", jsoned.newpayload.token);
           localStorage.setItem(
             "permissionlvl",
             jsoned.newpayload.permissionlvl
           );
-          this.setState({userDetails:jsoned.details});
-          this.props.loginUser(this.state.loginCred.username,"",this.state.loginCred.password);
+         // this.setState({userDetails:jsoned.details});
+        //  this.props.loginUser(this.state.username,"",this.state.loginCred.password);
         })
-        .then(jsoned => this.setState({redirectstate: true}))
+        .then(jsoned =>{
+            console.log("finihs");
+          this.setState({redirectstate: true})
+      })
         .catch(error => this.handleFailedLogin());
     }
     else {
@@ -84,10 +94,12 @@ import {loginAction} from "../Actions/loginAction";
 
   componentDidUpdate() {
     if (this.state.redirectstate) {
-      window.location.reload()
+   window.location.reload();
+   this.props.loginDispatch("user" , 38338, "djjd");
 
     }
   }
+ 
   render() {
     return (
       <LoginSon isLoaded={this.state.isLoaded}

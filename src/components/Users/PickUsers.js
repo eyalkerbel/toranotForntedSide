@@ -150,3 +150,12 @@ export default class PickUsers extends React.Component {
         
     }
 }
+
+
+function mapStateToProps(state,ownProps) {
+    return {
+        toranimThisMonth: state.toranimThisMonth,
+        toranimNextMonth: state.toranimNextMonth
+    };
+
+}
