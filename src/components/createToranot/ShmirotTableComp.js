@@ -59,6 +59,7 @@ import CONFIG from "../../configs/env"
         console.log("toranust from redux" , temp)
       //  console.log(temp);
         var tempArri = [];
+        if(temp != undefined) {
         temp.forEach(el => {
            var date = new Date(el.date)
             var dayOfWeek = date.getDay()
@@ -84,6 +85,7 @@ import CONFIG from "../../configs/env"
 
             }
         })
+    }
         return (this.createTableBody(tempArri))
     }
 

@@ -6,6 +6,7 @@ import notification from './notifactionReducer';
 import toranim from "./toranimReducer";
 import myHaadafot from "./myHaadafotReducer";
 import allHaadafot from "./allHaadafotReducer";
+import {userNotification} from "./userNotificationReducer";
 export default combineReducers({
     user,
     users,
@@ -13,5 +14,6 @@ export default combineReducers({
     toranots,
     myHaadafot,
     allHaadafot,
-    notification
+    notification,
+    userNotification
 });

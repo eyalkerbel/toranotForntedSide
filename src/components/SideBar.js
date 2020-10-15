@@ -205,6 +205,16 @@ export default class SideBar extends React.Component {
                 <h2>שמירות שלי</h2>
               </ListItem>
             </NavLink>}
+            <NavLink to="/pick_friend_toranot_together">
+              <ListItem
+                className="listd"
+                button
+                onClick={() => this.handleSideBar()}
+              >
+                <i className="material-icons icons2">contacts</i>
+                <h2>תורניות עם חברים</h2>
+              </ListItem>
+            </NavLink>
             <NavLink to="/shmirottable">
               <ListItem
                 className="listd"

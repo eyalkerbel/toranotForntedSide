@@ -17,6 +17,7 @@ import ShmirotTable from "./components/ShmirotTable";
 import CreateToranut from "./components/createToranot/CreateToranut";
 import SendMessage from "./components/SendMessage";
 import MailBox from "./components/MailBox";
+import PickFriends from "./components/pickFriendsToranot/pickFriends";
 import {NotificationManager,NotificationContainer} from 'react-notifications';
 import CONFIG from "./configs/env";
 import Notifications from '../src/components/Notifications';
@@ -25,6 +26,7 @@ import PickUsers from "./components/Users/PickUsers";
 import { loginAction } from "./Actions/loginAction";
 import { connect } from "react-redux";
 import {initActionMiddleware} from "./Actions/initActionMiddleware";
+
  class Switcher extends React.Component {
   constructor() {
     super();
@@ -54,17 +56,6 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
     return <Redirect to="/mail" />
 
   }
-//   getMessage() {
-//     fetch(CONFIG.API.GETNOTIFACTION, {
-//       method:"POST",
-//       headers: {
-//         "Content-Type": "application/json;charset=utf-8",
-//         Authorization: "Bearer " + localStorage.getItem("jwt")
-//     }}).then(dat => dat.json()).then(data => this.handleNoti(data));
-// }
-// handleNoti(dataAll) {
-//   }
-
 
   componentDidMount() {
     console.log("componentDidMountSwitcher");
@@ -74,13 +65,8 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
     if (jwt !== null) {
       this.setState({ log: true, permissionlvl: per,jwt:jwt});
     }
-    // fetch(CONFIG.API.GETPERSONDATA, {
-    //   method: "POST",
-    //   headers: {
-    //       "Content-Type": "application/json;charset=utf-8",
-    //       Authorization: "Bearer " + localStorage.getItem("jwt")
-    //   }}).then(dat => dat.json()).then(userDetails => this.props.loginDispatch(userDetails.name,userDetails.sn,userDetails.password));
-    this.props.loginDispatch();
+   
+    this.props.loginDispatch(per);
 
 
   }
@@ -114,6 +100,8 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
             <Route path="/approve_change" render={() => <ExchangeApprove permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/mail" render={() => <MailBox permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/pickusers" render={() => <PickUsers permissionlvl={this.state.permissionlvl} />} />
+            <Route path="/pick_friend_toranot_together" render={() => <PickFriends permissionlvl={this.state.permissionlvl} />} />
+
             <Route exact component={RedirectorHome} />
             <NotificationContainer />
           </Switch>
@@ -137,7 +125,7 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
 }
 
 const mapDispatchToProps = (dispatch) => ({  
-  loginDispatch: () => dispatch(initActionMiddleware())
+  loginDispatch: (permissionlvl) => dispatch(initActionMiddleware(permissionlvl))
 });
 
 

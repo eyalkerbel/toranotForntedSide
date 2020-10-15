@@ -56,17 +56,20 @@ export default class CreateToranut extends React.Component {
 
    
     fotchyfetch(userid) {
-        fetch(CONFIG.API.GETPIORITY, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            }
-        })
-            .then(data =>  data.json())
-            .then(dat =>{ this.forFetchTwho(dat,userid)
-            this.setState({loaded:true}) })
-            .catch(err => console.log(err));
+        // fetch(CONFIG.API.GETPIORITY, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json;charset=utf-8",
+        //         Authorization: "Bearer " + localStorage.getItem("jwt")
+        //     }
+        // })
+        //     .then(data =>  data.json())
+        //     .then(dat =>{ this.forFetchTwho(dat,userid)
+        //     this.setState({loaded:true}) })
+        //     .catch(err => console.log(err));
+        this.forFetchTwho([],userid)
+        this.setState({loaded:true});
+
     }
 
     
@@ -75,23 +78,24 @@ export default class CreateToranut extends React.Component {
 
     fetchPiority = (userid) => {
        // console.log("fetchPiorityasladindssndsdskdsksd",userid);
-        var stringed = {
-            userid:userid,
-            piority: this.state.piorityArray
-        };
-        var p = JSON.stringify(stringed);
-        console.log("fetchPiority" , p);
-        fetch(CONFIG.API.GETPIORITYBYUSER, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            },
-            body: p
-        })
-            .then(data => data.json())
-            .then(jsoned =>  this.setState({ fetchPiority: jsoned }))
-            .catch(err => console.log(err));
+        // var stringed = {
+        //     userid:userid,
+        //     piority: this.state.piorityArray
+        // };
+        // var p = JSON.stringify(stringed);
+        // console.log("fetchPiority" , p);
+        // fetch(CONFIG.API.GETPIORITYBYUSER, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json;charset=utf-8",
+        //         Authorization: "Bearer " + localStorage.getItem("jwt")
+        //     },
+        //     body: p
+        // })
+        //     .then(data => data.json())
+        //     .then(jsoned =>  this.setState({ fetchPiority: jsoned }))
+        //     .catch(err => console.log(err));
+        this.setState({fetchPiority:[]});
     }
 
 
