@@ -84,10 +84,10 @@ export default class HaadafotSwitcher extends React.Component {
             }
             return false;
     } 
-   async getDataFromSon(x, y, count, g,checked) { //here we talk with component
+   async getDataFromSon(x, y, count, g,checked,kindDescription) { //here we talk with component
     console.log("passs");
-    var obi = { begindate: x, enddate: y, type: g };
-
+    var obi = { begindate: x, enddate: y, type: g,kindDescription:kindDescription };
+    console.log("obiNew" , obi);
     var tempi = this.state.childrenData;
     var temp2 = this.state.allChildren;
     console.log("tempi " , tempi);
@@ -100,7 +100,7 @@ export default class HaadafotSwitcher extends React.Component {
     //this.state.allChildren[count] = obi;
     tempi[count] = obi;
     temp2[count] = obi;
-    
+    console.log("tempiNew" , tempi);
     this.setState({ childrenData: tempi,allChildren: temp2 }, () => this.getDiff());
     }
     }

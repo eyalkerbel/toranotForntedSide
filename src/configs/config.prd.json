@@ -31,7 +31,9 @@
         "DELETENOTIFICATION":  "https://toranotapi.herokuapp.com/api/deletenotifications",
         "SETTORANOT": "https://toranotapi.herokuapp.com/api/settoranot",
         "DELETETORANOT": "https://toranotapi.herokuapp.com/api/deletetoranot",
-        "GETDATAFORREDUX": "https://toranotapi.herokuapp.com/api/getdataforinitredux"
+        "GETDATAFORREDUX": "https://toranotapi.herokuapp.com/api/getdataforinitredux",
+        "UPDATEFRIENDTORNOT": "https://toranotapi.herokuapp.com/api/updatefriendtoranot"
+
 
 
 

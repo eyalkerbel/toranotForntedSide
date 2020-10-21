@@ -31,7 +31,8 @@
         "DELETENOTIFICATION":  "http://localhost:5000/api/deletenotifications",
         "SETTORANOT": "http://localhost:5000/api/settoranot",
         "DELETETORANOT": "http://localhost:5000/api/deletetoranot",
-        "GETDATAFORREDUX": "http://localhost:5000/api/getdataforinitredux"
+        "GETDATAFORREDUX": "http://localhost:5000/api/getdataforinitredux",
+        "UPDATEFRIENDTORNOT": "http://localhost:5000/api/updatefriendtoranot"
 
 
     },

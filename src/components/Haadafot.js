@@ -22,13 +22,17 @@ export default class Haadafot extends React.Component {
       selectStart: false,
       selectEnd: false,
       isDeleted: false,
-      sEnd:false
+      sEnd:false,
+      kindValue:10,
+      kindDescription: "העדפה"
     };
     this.handleclicks = this.handleclicks.bind(this);
     this.handledate1 = this.handledate1.bind(this);
     this.handledate2 = this.handledate2.bind(this);
     this.sendToParent = this.sendToParent.bind(this);
+    this.handleKind = this.handleKind.bind(this);
   }
+
 
   componentDidMount() {
   //   var currentDate = new Date();
@@ -44,6 +48,7 @@ export default class Haadafot extends React.Component {
       this.setState({ selectedDate2: this.props.data.enddate });
       this.setState({ reason: this.props.data.type });
       var val = this.props.data.type;
+     var kindVal = this.props.data.kindDescription;
       switch (val) {
         case "ishi":
           this.setState({ values: 10, reason: "ishi" });
@@ -53,6 +58,17 @@ export default class Haadafot extends React.Component {
           break;
         case "hool":
           this.setState({ values: 30, reason: "hool" });
+          break;
+        default:
+          break;
+      }
+
+      switch (kindVal) {
+        case 10:
+          this.setState({ kindValue: kindVal, kindDescription: "העדפה" });
+          break;
+        case 20:
+          this.setState({ kindValue: kindVal, kindDescription: "אילוץ" });
           break;
         default:
           break;
@@ -79,9 +95,10 @@ export default class Haadafot extends React.Component {
     var count = this.props.compCount;
     var g = this.state.reason;
     var isChecked = this.state.isChecked;
-
+    var kindDescription = this.state.kindDescription;
+    console.log("kindDescription" , kindDescription);
     if((this.state.sEnd == true && this.state.selectStart == true) || (this.state.isChecked==true)) {
-    this.props.getDataFromSon(x, y, count, g, isChecked);
+    this.props.getDataFromSon(x, y, count, g);
     }
     if(this.state.isChecked == true) {
     this.setState({isChecked:false});
@@ -163,11 +180,22 @@ this.setState({selectedDate1:currentDate,selectedDate2:currentDate,
       isChecked: true,
     });
   }
+
+  handleKind(num) {
+    console.log("kindValue" , num);
+    switch (num) {
+      case 10:
+        this.setState({ kindValue: num, kindDescription: "העדפה" });
+        break;
+      case 20:
+        this.setState({ kindValue: num, kindDescription: "אילוץ" });
+        break;
+      default:
+        break;
+    }
+  }
   
-  // <input type="checkbox"
-  //   checked={this.state.isChecked}
-  //   onChange={this.toggleChange}
-  // />
+  
   render() {
     return (
       <div>
@@ -176,6 +204,7 @@ this.setState({selectedDate1:currentDate,selectedDate2:currentDate,
         <div className="haadafotholder">
           <p className="blobi">   תאריך תחילה</p>
           <p className="blobi">   תאריך סיום</p>
+          <p className="blobi">אילוץ/העדפה</p>
           <p className="blobi">   סוג אילוץ</p>
         </div>
         <div className="sidebutton">
@@ -184,6 +213,7 @@ this.setState({selectedDate1:currentDate,selectedDate2:currentDate,
           </Fab>
           </div>
         <div className="haadafotholder">
+      
           <MuiPickersUtilsProvider utils={DateFnsUtils} locale={he}>
             <DatePicker
               value={this.state.selectedDate1}
@@ -210,6 +240,43 @@ this.setState({selectedDate1:currentDate,selectedDate2:currentDate,
               leftArrowIcon={<i className="material-icons">chevron_right</i>}
             />
           </MuiPickersUtilsProvider>
+          <Select
+            className="blob"
+            value={this.state.kindValue}
+            inputProps={{
+              name: "age",
+              id: "age-simple"
+            }}
+          >
+        <MenuItem value={10}>
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "10px"
+                }}
+                onClick={() => this.handleKind(10)}
+              >
+                העדפה
+              </span>
+            </MenuItem>
+            <MenuItem value={20}>
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "10px"
+                }}
+                onClick={() => this.handleKind(20)}
+              >
+                אילוץ
+              </span>
+            </MenuItem>
+            </Select>
           <Select
             className="blob"
             value={this.state.values}

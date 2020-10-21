@@ -30,7 +30,9 @@
         "DELETENOTIFICATION":  "https://nemoapi.azurewebsites.net/api/deletenotifications",
         "SETTORANOT": "https://nemoapi.azurewebsites.net/api/settoranot",
         "DELETETORANOT": "https://nemoapi.azurewebsites.net/api/deletetoranot",
-        "GETDATAFORREDUX": "https://nemoapi.azurewebsites.net/api/getdataforinitredux"
+        "GETDATAFORREDUX": "https://nemoapi.azurewebsites.net/api/getdataforinitredux",
+        "UPDATEFRIENDTORNOT": "https://nemoapi.azurewebsites.net/api/updatefriendtoranot"
+
 
 
 

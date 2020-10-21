@@ -16,7 +16,7 @@ import CONFIG from "../../configs/env"
     
     InjectDayOfWeekForHaadafa = (arrina) => {
     //console.log("selectedValue" , this.props.selectedUser.name);
-    if(this.props.selectedUser.name != "בחר משתמש" ){
+    if(this.props.selectedUser != undefined){
         const haadafot = this.props.haadafot;
         const piority = this.props.piorityArray;
        // this.algoritemHaadafot(haadafot);
@@ -162,7 +162,8 @@ import CONFIG from "../../configs/env"
             type: type,
             toran: toran,
             points: selectedUser.points,
-            userDetails: selectedUser
+            userDetails: selectedUser,
+            friendDetails: this.props.friendToran
         }
         this.send(obi);
      //   console.log("fsds");
@@ -270,7 +271,7 @@ const mapDispatchToProps = dispatch => ({
 })
 function mapStateToProps(state,ownProps) {
     console.log("ownProps" , ownProps)
-    if(ownProps.selectedUser.name  != "בחר משתמש") {
+    if(ownProps.selectedUser  != undefined) {
     return {
     toranots: state.toranots,
     haadafot: state.allHaadafot.filter(hadafa => hadafa.idUser == ownProps.selectedUser._id )

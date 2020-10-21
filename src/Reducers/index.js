@@ -3,10 +3,11 @@ import user from './UserReducer';
 import users from './UsersReducer';
 import {toranots} from "./toranotsReducers";
 import notification from './notifactionReducer';
-import toranim from "./toranimReducer";
+import {toranim} from "./toranimReducer";
 import myHaadafot from "./myHaadafotReducer";
 import allHaadafot from "./allHaadafotReducer";
 import {userNotification} from "./userNotificationReducer";
+import {pending} from "./pendingReducer";
 export default combineReducers({
     user,
     users,
@@ -15,5 +16,6 @@ export default combineReducers({
     myHaadafot,
     allHaadafot,
     notification,
-    userNotification
+    userNotification,
+    pending
 });

@@ -17,7 +17,7 @@ import ShmirotTable from "./components/ShmirotTable";
 import CreateToranut from "./components/createToranot/CreateToranut";
 import SendMessage from "./components/SendMessage";
 import MailBox from "./components/MailBox";
-import PickFriends from "./components/pickFriendsToranot/pickFriends";
+import PickFriends from "./components/pickFriendsToranot/PickFriends";
 import {NotificationManager,NotificationContainer} from 'react-notifications';
 import CONFIG from "./configs/env";
 import Notifications from '../src/components/Notifications';
@@ -26,6 +26,7 @@ import PickUsers from "./components/Users/PickUsers";
 import { loginAction } from "./Actions/loginAction";
 import { connect } from "react-redux";
 import {initActionMiddleware} from "./Actions/initActionMiddleware";
+import LoadingPage from "./components/LoadingPage";
 
  class Switcher extends React.Component {
   constructor() {
@@ -65,9 +66,10 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
     if (jwt !== null) {
       this.setState({ log: true, permissionlvl: per,jwt:jwt});
     }
-   
-    this.props.loginDispatch(per);
+    // if (this.state.log === true) {
 
+    this.props.loginDispatch(per);
+    // }
 
   }
  
@@ -81,7 +83,7 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
   handleLogin() {
     console.log("rendring" , this.state.userDetails);
     if (this.state.log === true) {
-
+      if(this.props.pending == true) {
       return (
         <BrowserRouter>
         {/* <Notifications noti={this.state.noti} /> */}
@@ -107,6 +109,9 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
           </Switch>
         </BrowserRouter>
       );
+      } else {
+        return <LoadingPage />
+      }
     } else if (this.state.log === false) {
       return (
         <BrowserRouter>
@@ -127,7 +132,9 @@ import {initActionMiddleware} from "./Actions/initActionMiddleware";
 const mapDispatchToProps = (dispatch) => ({  
   loginDispatch: (permissionlvl) => dispatch(initActionMiddleware(permissionlvl))
 });
+const mapStateToProps = (state) => ({
+  pending: state.pending
+});
 
-
-export default connect(null, mapDispatchToProps)(Switcher);
+export default connect(mapStateToProps, mapDispatchToProps)(Switcher);
 

@@ -57,15 +57,16 @@ console.log("message",notiObject)
 } else {
 for(var i=0;i<data.length;i++) {
   if(data[i].seen == false) {
-
+if(data[i].toranot != null) {
 var date = data[i].toranot.date;
 var todayTime = new Date(data[i].toranot.date);
 var month = todayTime.getMonth() + 1;
 var day = todayTime.getDate();
 var year = todayTime.getFullYear();
 var formattedDate = day + "/" + month + "/" + year;
-
 var dats = new Date(date);
+
+}
 if(data[i].action == "addToranot") {
      message = " מנהל שיבץ אותך בתאריך ה" +formattedDate;
      action = "myShmirot";
@@ -94,6 +95,14 @@ if(data[i].action == "managerReject") {
   message = " מנהל דחה את ההחלפה שלך בתאריך " + formattedDate +  " עם " +  data[i].userDetails.name;
   action = "answerExchange";
 }
+if(data[i].action == "addToranotTogther") {
+  message = data[i].userDetails.name + " ביקש לעשות איתך את תורונות חודש הבא ";
+  action = "ToranotTogther";
+}
+if(data[i].action == "cancelToranotToghter") {
+  message = data[i].userDetails.name + " בטל את בקשה שלו לעשות איתך תורונות חודש הבא"
+}
+
 
 var notiObject = {
   action:action,

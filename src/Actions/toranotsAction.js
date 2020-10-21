@@ -50,8 +50,10 @@ export const addToranotNextMonth = (toranot) => ({
 
   export function addToranot(toranot,dataForRedux)  {
   var id  = shortid.generate();
+  //console.log("friendItem" , toranot.friendDetails);
     dataForRedux["_id"] = id;
-
+    var idFriend = shortid.generate();
+   // console.log("toranotObject" , toranot);
     return function(dispatch) {
       fetch(CONFIG.API.SETTORANOT, {
               method: "POST",
@@ -61,24 +63,58 @@ export const addToranotNextMonth = (toranot) => ({
           },
           body: JSON.stringify(toranot)
       }).then(data => data.json()).then((jsoned) => {
-        console.log("setTotanotIdInMiddleware") 
-         dispatch(setToranotID(id,jsoned._id,jsoned.monthTab))
-  //  jsoned["userDetails"] = toranot.userDetails;
-  //          console.log("new element" , jsoned);
-  //         if(toranot.monthTab == 0) {
-  //           dispatch(addToranotThisMonth(jsoned));
-  //       } else {
-  //         dispatch(addToranotNextMonth(jsoned))
-  //       }
-    });
-        //  jsoned["userDetails"] = toranot.userDetails;
-        //   console.log("new element" , jsoned);
+     // console.log("jsoned" , jsoned);
+        if(jsoned.length == 1) {
+      //  console.log("setTotanotIdInMiddleware") 
+         dispatch(setToranotID(id,jsoned[0]._id,jsoned[0].monthTab))
+         } else {
+          dispatch(setToranotID(id,jsoned[0]._id,jsoned[0].monthTab))
+          dispatch(setToranotID(idFriend,jsoned[1]._id,jsoned[1].monthTab))
 
-        
+         }
+
+ 
+    });     
           if(toranot.monthTab == 0) {
             dispatch(addToranotThisMonth(dataForRedux));
+            if(toranot.friendDetails != null) {
+              var dataReduxFriend = {
+                date:toranot.date,
+                monthTab:toranot.monthTab,
+                idUser: toranot.friendDetails.userDetails._id,
+                userStatus: "unknown",
+                availableForExchange: true,
+                userDetails: toranot.friendDetails.userDetails,
+                toran: toranot.toran,
+                _id: idFriend
+            };
+            //  var dataReduxFriend = dataForRedux;
+            //  dataReduxFriend["idUser"] = toranot.friendDetails.userDetails._id;
+            //   dataReduxFriend["_id"] = idFriend;
+            //  dataReduxFriend["userDetails"] = toranot.friendDetails.userDetails;
+              dispatch(addToranotThisMonth(dataReduxFriend));
+
+            }
         } else {
-          dispatch(addToranotNextMonth(dataForRedux))     
+          dispatch(addToranotNextMonth(dataForRedux))    
+          if(toranot.friendDetails != null) {
+            var dataReduxFriend = {
+              date:toranot.date,
+              monthTab:toranot.monthTab,
+              idUser: toranot.friendDetails.userDetails._id,
+              userStatus: "unknown",
+              availableForExchange: true,
+              userDetails: toranot.friendDetails.userDetails,
+              toran: toranot.toran,
+              _id: idFriend
+          };
+         //   var dataReduxFriend = dataForRedux;
+            // dataReduxFriend["idUser"] = toranot.friendDetails.userDetails._id;
+            // dataReduxFriend["_id"] = idFriend;
+            // dataReduxFriend["userDetails"] = toranot.friendDetails.userDetails;
+            dispatch(addToranotNextMonth(dataReduxFriend));
+
+          } 
          }
   }
 }

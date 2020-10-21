@@ -27,19 +27,15 @@ import CONFIG from "../configs/env";
              }
              if(this.props.info[i].action == "ApproveManager") {
               NotificationManager.info(this.props.info[i].message,"",3000,() => {this.ApproveManager() });
+             } 
+             if(this.props.info[i].action == "ToranotTogther") {
+              NotificationManager.info(this.props.info[i].message,"",3000,() => {this.toranotTogther() });
 
              }
          }
-        // for(var i=0;i<this.props.info.length;i++) {
-        //     // if(this.props.exchanges[i].seen == "false")
-        // NotificationManager.info(this.props.info[i],"action:",3000,() => {this.ReadAndDispaly(i)
-        // });
-        // }
-        // for(var i=0;i<this.props.exchanges.length;i++) {
-        //     NotificationManager.info(this.props.exchanges[i],"action:",3000,() => {this.ReadAndDispaly2(i)
-        //     });
-        //     }
+     
       }
+  
       MyShmirot(index) {
         this.props.history.push('/shmirot');
       }
@@ -60,6 +56,11 @@ import CONFIG from "../configs/env";
       ApproveManager() {
         this.props.history.push({  
           pathname: '/approve_change'
+        });
+      }
+      toranotTogther() {
+        this.props.history.push({  
+          pathname: '/pick_friend_toranot_together'
         });
       }
 

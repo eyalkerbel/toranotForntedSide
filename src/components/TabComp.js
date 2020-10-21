@@ -19,7 +19,7 @@ export default class TabComp extends React.Component {
         return (
             <AppBar position="static" style={{ backgroundColor: "white", display: "flex", flexDirection: "row" }}>
                 <div style={{ flex: "1", color: "teal", display: "flex", justifyContent: "center", alignItems: "center" }} className="diffselect" >
-                    {this.props.selectedUser.name}
+                    {this.props.selectedUser == undefined?"בחר משתמש" :  this.props.selectedUser.name}
                 </div>
                 <Select value={this.props.selectValue} onChange={this.handleSelect} style={{ flex: "2" }} className="diffselect">
                     <MenuItem value={0}>סמל תורן בפנים</MenuItem>

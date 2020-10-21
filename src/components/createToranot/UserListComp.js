@@ -8,14 +8,16 @@ class UserListComp extends React.Component {
 
         super(props);
         this.state ={
-            userList: []
+            userList: [],
+            userListThis: [],
+            userListNext: []
         }
     }
     componentWillMount() {
         var arri = [];
         var userList = [];
         if(this.props.tabValue == 0) {
-            console.log("props" , this.props)
+            console.log("propsUserLista" , this.props)
             userList = this.props.toranim.toranimThisMonth;
         } else {
             userList = this.props.toranim.toranimNextMonth;
@@ -29,24 +31,51 @@ class UserListComp extends React.Component {
             if(keyA > keyB) return 1;
             return 0;
         });
+
+        
+
+
     }
         //console.log("arri " , props.arri);
         this.setState({userList:userList});
         console.log("toranim" , this.props.toranim);
+
+        var userListThisMonth = this.props.toranim.toranimThisMonth;
+        var userListNextMonth = this.props.toranim.toranimNextMonth;
+        this.setState({userListThis:userListThisMonth,userListNext:userListNextMonth});
     }
     createUserList() {
         var arri = [];
-        if(this.state.userList != undefined) {
-        this.state.userList.forEach((el, i) => {
-            console.log("selecteduse ::",el , this.props.selectValue);
+        // if(this.state.userList != undefined) {
+        // this.state.userList.forEach((el, i) => {
+        //     console.log("selecteduse ::",el , this.props.selectValue);
     
-            if (el.userDetails.type === this.props.selectValue) {
-                arri.push(<ListItem key={i} button onClick={() => this.props.selectUser(el.userDetails)}>
-                    <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
-                </ListItem>
-                )
-            }
-        })
+        //     if (el.userDetails.type === this.props.selectValue) {
+        //         arri.push(<ListItem key={i} button onClick={() => this.props.selectUser(el.userDetails)}>
+        //             <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
+        //         </ListItem>
+        //         )
+        //     }
+        // })
+        var userList
+        if(this.props.tabValue == 0) {
+            userList = this.state.userListThis;
+        } else {
+            userList = this.state.userListNext;
+        }
+
+        if(userList != undefined) {
+           userList.forEach((el, i) => {
+              //  console.log("selecteduse ::",el , this.props.selectValue);
+        
+                if (el.userDetails.type === this.props.selectValue) {
+                    arri.push(<ListItem key={i} button onClick={() => this.props.selectUser(el)}>
+                        <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
+                    </ListItem>
+                    )
+                }
+            })
+
     }
         return arri;
     }

@@ -7,10 +7,13 @@ import {initToranim} from "./toranimAction";
 import {initMyHaadafot} from "./MyHaadafotAction";
 import {initAllHaadafot} from "./AllHaadafotAction";
 import {initUserNotification} from "./UserNotficiationsAction";
+import {initPending} from "./PendingAction";
 export const initActionMiddleware = (premssionlvl)  => {
     console.log("premss" , premssionlvl);
+    
     return function(dispatch)  {
-    fetch(CONFIG.API.GETDATAFORREDUX, {
+    console.log("hellllo");
+            fetch(CONFIG.API.GETDATAFORREDUX, {
         method:"POST",
               headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -25,6 +28,7 @@ export const initActionMiddleware = (premssionlvl)  => {
                 dispatch(initToranim(data[5],data[6]));
                 dispatch(initMyHaadafot(data[7]));
                 dispatch(initAllHaadafot(data[8]));
+                dispatch(initPending());
                 } else {
                     console.log("initActionMiddlewarerrr" , data[4]);
 
@@ -35,8 +39,9 @@ export const initActionMiddleware = (premssionlvl)  => {
                     dispatch(initToranim(data[5],data[6]));
                     dispatch(initMyHaadafot(data[7]));
                     dispatch(initAllHaadafot(data[8]));
+                    dispatch(initPending());
                 }
 
-            });
+            })
         }
 }

@@ -21,3 +21,22 @@
     height: 300px;
     overflow-y: scroll;
 }
+#checkbox-add-with-friend
+{
+    width: 20px;
+}
+
+.friend-list-container {
+    direction: rtl;
+}
+#name-in-friend-list {
+    position:absolute;
+    right:0;
+    margin-right: 3px;
+}
+
+.div-continer-friendlist-button {
+    float: left;
+    justify-content: flex-end;
+
+}
