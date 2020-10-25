@@ -4,7 +4,7 @@ import users from './UsersReducer';
 import {toranots} from "./toranotsReducers";
 import notification from './notifactionReducer';
 import {toranim} from "./toranimReducer";
-import myHaadafot from "./myHaadafotReducer";
+import {myHaadafot} from "./myHaadafotReducer";
 import allHaadafot from "./allHaadafotReducer";
 import {userNotification} from "./userNotificationReducer";
 import {pending} from "./pendingReducer";
