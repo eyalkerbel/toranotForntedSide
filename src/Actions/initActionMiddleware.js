@@ -9,16 +9,17 @@ import {initAllHaadafot} from "./AllHaadafotAction";
 import {initUserNotification} from "./UserNotficiationsAction";
 import {initPending} from "./PendingAction";
 export const initActionMiddleware = (premssionlvl)  => {
-    console.log("premss" , premssionlvl);
+  //  console.log("premss" , premssionlvl);
     
     return function(dispatch)  {
-    console.log("hellllo");
+   // console.log("hellllo");
             fetch(CONFIG.API.GETDATAFORREDUX, {
-        method:"POST",
-              headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: "Bearer " + localStorage.getItem("jwt")
-            }}).then(dat => dat.json()).then(data => {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json;charset=utf-8",
+                            Authorization: "Bearer " + localStorage.getItem("jwt")
+                        }
+            }).then(dat => dat.json()).then(data => {
                 if(premssionlvl == "admin")  {
                 console.log("initActionMiddleware" , data);
                 dispatch(loginAction(data[0]));
@@ -30,7 +31,7 @@ export const initActionMiddleware = (premssionlvl)  => {
                 dispatch(initAllHaadafot(data[8]));
                 dispatch(initPending());
                 } else {
-                    console.log("initActionMiddlewarerrr" , data[4]);
+              //      console.log("initActionMiddlewarerrr" ,data);
 
                     dispatch(loginAction(data[0]));
                     dispatch(initUsers(data[1]));

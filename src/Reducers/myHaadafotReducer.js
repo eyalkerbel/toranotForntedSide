@@ -5,7 +5,6 @@ const INITIAL_STATE = {};
  export const myHaadafot = (state = INITIAL_STATE, action) => {
       switch (action.type) {
         case INIT_MY_HAADAFOT:
-          console.log("initReduxer");
          return {
            haadafot: action.haadafot,
            numRemaining: action.numRemaining

@@ -49,6 +49,7 @@ import FriendList from "./FriendList";
     selectUser = (el) => {
         // console.log("")
         this.setState({ selectedUser: el});
+        this.setState({ifTogther:false});
 
       //  this.fetchHaadafa(el);
        this.fetchPiority(el);
@@ -116,7 +117,7 @@ import FriendList from "./FriendList";
 
     createTable = () => {
     //    var arri = this.state.fetchedArri.slice(1);
-        console.log("part of array",this.state.friendElemnt);
+        console.log("part of array",this.state);
         if(this.state.selectedUser.name != "בחר משתמש") {
             var friendId = this.state.selectedUser.friendId;
             var friendDetails;
@@ -197,7 +198,7 @@ import FriendList from "./FriendList";
                         </div>
                         <div style={{ display: "flex", width: "100%", marginBottom: "20px" }}>
                             <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px" }}>
-                                <List style={{ height: "40vh", overflow: "auto", direction: "ltr", borderBottom: "2px solid teal" }}>
+                                <List style={{ height: "30vh", overflow: "hidden", direction: "ltr", borderBottom: "2px solid teal" }}>
                                     <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} tabValue={this.state.tabValue} />
                                 </List>
                                {this.renderFriendList()}

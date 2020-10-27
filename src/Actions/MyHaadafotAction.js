@@ -11,9 +11,11 @@ export const CHANGE_ONE_HAADAFA = 'CHANGE_ONE_HAADAFA';
 export const SET_ONE_ID = 'SET_ONE_ID';
 export const INIT_MY_HAADAFOT_ENTIRE = 'INIT_MY_HAADAFOT_ENTIRE';
 export function initMyHaadafot(haadafot)  {
+  console.log("haadafot" , haadafot);
   return function(dispatch) {
    // console.log("get diff", this.props.myHaadafot);
     let final = 0;
+    if(haadafot != []) {
     haadafot.forEach(item => {
       if(item != null) {
         let begin = new Date(item.begindate)
@@ -22,6 +24,7 @@ export function initMyHaadafot(haadafot)  {
         final += (sub / (1000 * 3600 * 24)) + 1
       }
     });
+  }
     let f1 = 8 - final;
     console.log("f1 " , f1);
     dispatch(initMyHaadafotEntire(haadafot,f1));

@@ -136,7 +136,7 @@ class Haadafot extends React.Component {
       var idHaadafa = this.props.data._id;
       obi["_id"] = idHaadafa;
       //this.props.changeHaadafa(obi);
-      this.props.HaadafaMiddleWar(obi,"change");    }
+      this.props.HaadafaMiddleWar(obi,"change",0);    }
 
 
   }
@@ -147,7 +147,7 @@ class Haadafot extends React.Component {
     var idHaadafa = this.props.data._id;
     obi["_id"] = idHaadafa;
     //this.props.changeHaadafa(obi);
-    this.props.HaadafaMiddleWar(obi,"change");
+    this.props.HaadafaMiddleWar(obi,"change",0);
   }
 
    resetItem() {
@@ -204,29 +204,6 @@ calacaluateHowMuch(one , two) {
       } 
     }  
 
-    // let final = 0;
-    // let begin = new Date(day)
-    // let end = new Date(this.state.selectedDate2)
-    // let sub = end.getTime() - begin.getTime()
-    // final += (sub / (1000 * 3600 * 24)) + 1
-    // let f1 = 8 - final
-    // console.log(f1)
-    // //&& this.state.selectEnd
-    // if ((this.props.dayCount < 0 || f1 < 0) && this.state.sEnd == true ) {
-    // this.resetItem();
-    // //  this.setState({isChecked:true});
-    //  // this.setState({ selectedDate1: new Date().setHours(0, 0, 0, 0), selectedDate2: new Date().setHours(0, 0, 0, 0) });
-    //   alert("חרגת מכמות מקסימלית של אילוצים")
-    // } else {
-    //   this.setState({ selectedDate1: day,selectStart: true });
-    //   if(this.state.selectEnd==true) {
-    //     var obi = { begindate: day, enddate: this.state.selectedDate2, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
-    //     this.ChangeDBAndStore(obi);
-    //       }
-
-    // }
-
-    
   
 }
 addToStore() {
@@ -286,35 +263,6 @@ ChangeDBAndStore(obi,result) {
       }
   }
 
-
-
-
-  //   let final = 0;
-  //   let begin = new Date(this.state.selectedDate1)
-  //   let end = new Date(day)
-  //   let sub = end.getTime() - begin.getTime()
-  //   final += (sub / (1000 * 3600 * 24)) + 1
-  //   let f1 = 8 - final
-    
-  //   console.log(f1)
-
-  //   if ((this.props.dayCount < final || f1 < 0) && this.state.selectStart) {
-  //     this.resetItem();
-  //  // this.setState({isChecked:true});
-  //   //  this.setState({ selectedDate2: new Date().setHours(0, 0, 0, 0), selectedDate1: new Date().setHours(0, 0, 0, 0) });
-  //     alert("חרגת מכמות מקסימלית של אילוצים")
-  //     this.setState({ selectedDate2: day,sEnd:true });
-
-  //   } else {
-  //     this.setState({ selectedDate2: day,sEnd:true });
-  //   }
-  //   if(this.state.selectStart==true) {
-  //     var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
-
-  //     this.ChangeDBAndStore(obi);
-  //     this.props.updateOnAdd();
-
-  //     }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -352,7 +300,7 @@ ChangeDBAndStore(obi,result) {
         kindDescription = "העדפה";
         break;
       case 20:
-        this.setState({ kindValue: num, kindDescription: "אילוץ",selectKind:true });
+        this.setState({ kindValue: num, kindDescription: "אילוץ",selectKind:true,type: "none" });
         kindDescription = "אילוץ";
         break;
       default:
@@ -364,7 +312,7 @@ ChangeDBAndStore(obi,result) {
     var idHaadafa = this.props.data._id;
     obi["_id"] = idHaadafa;
     //this.props.changeHaadafa(obi);
-    this.props.HaadafaMiddleWar(obi,"change");
+    this.props.HaadafaMiddleWar(obi,"change",0);
     }
   }
   
@@ -451,6 +399,7 @@ ChangeDBAndStore(obi,result) {
               </span>
             </MenuItem>
             </Select>
+              {this.state.kindValue == 10? 
           <Select
             className="blob"
             value={this.state.values}
@@ -502,6 +451,15 @@ ChangeDBAndStore(obi,result) {
               </span>
             </MenuItem>
           </Select>
+          :   <Select
+            className="blob"
+            value="-"
+            inputProps={{
+              name: "age",
+              id: "age-simple"
+            }}
+          ></Select> }
+
         </div>
       </Paper>) : null 
       }

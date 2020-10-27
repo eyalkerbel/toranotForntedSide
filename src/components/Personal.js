@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CONFIG from "../configs/env"
+import { connect } from "react-redux";
 
 
 const useStyles = theme => ({
@@ -18,19 +19,6 @@ const useStyles = theme => ({
   },
 });
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-//   textField: {
-//     marginLeft: theme.spacing(1),
-//     marginRight: theme.spacing(1),
-//     width: '25ch',
-//     marginTop: theme.spacing(10)
-//   },
-// }));
-
  class Personal extends React.Component {
   constructor(props) {
     super(props);
@@ -42,20 +30,20 @@ const useStyles = theme => ({
   }
 
   componentWillMount() {
-    console.log("componentWillMount personal is");
-    fetch(CONFIG.API.GETPERSONDATA, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: "Bearer " + localStorage.getItem("jwt")
+  //   console.log("componentWillMount personal is");
+  //   fetch(CONFIG.API.GETPERSONDATA, {
+  //     method: "POST",
+  //     headers: {
+  //         "Content-Type": "application/json;charset=utf-8",
+  //         Authorization: "Bearer " + localStorage.getItem("jwt")
 
-      },
-      body: []
-  }).then(data => data.json())
-  .then(jsoned => {
-    console.log("jsnoed",jsoned.name);
-    this.setState({name: jsoned.name,sn:jsoned.sn,password:jsoned.password});
-  })
+  //     },
+  //     body: []
+  // }).then(data => data.json())
+  // .then(jsoned => {
+  //   console.log("jsnoed",jsoned.name);
+    this.setState({name: this.props.user.name,sn:this.props.user.sn,password:this.props.user.password});
+  // })
   }
 
   render() {
@@ -111,5 +99,11 @@ const useStyles = theme => ({
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
 
-export default withStyles(useStyles)(Personal)
+
+export default connect(mapStateToProps,null)(withStyles(useStyles)(Personal))

@@ -59,17 +59,17 @@ import LoadingPage from "./components/LoadingPage";
   }
 
   componentDidMount() {
-    console.log("componentDidMountSwitcher");
+    console.log("componentDidMountSwitcher" , this.state);
     var jwt = localStorage.getItem("jwt");
     console.log("jwt" , jwt)
     var per = localStorage.getItem("permissionlvl")
     if (jwt !== null) {
       this.setState({ log: true, permissionlvl: per,jwt:jwt});
+      this.props.loginDispatch(per);
     }
-    // if (this.state.log === true) {
-
-    this.props.loginDispatch(per);
-    // }
+  //  if (this.state.log === true) {
+    
+   // }
 
   }
  
@@ -81,7 +81,7 @@ import LoadingPage from "./components/LoadingPage";
   }
  
   handleLogin() {
-    console.log("rendring" , this.state.userDetails);
+    console.log("rendring" , this.state);
     if (this.state.log === true) {
       if(this.props.pending == true) {
       return (
@@ -109,9 +109,9 @@ import LoadingPage from "./components/LoadingPage";
           </Switch>
         </BrowserRouter>
       );
-      } else {
-        return <LoadingPage />
-      }
+     } else {
+       return <LoadingPage />
+     }
     } else if (this.state.log === false) {
       return (
         <BrowserRouter>
