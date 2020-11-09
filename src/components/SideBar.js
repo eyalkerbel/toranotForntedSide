@@ -167,7 +167,7 @@ export default class SideBar extends React.Component {
           <div className="cc2">
             <img
               className="mainlogo"
-              src={require("../images/logoNemo2.png")}
+              src={require("../images/phoneLogo.png")}
               alt=""
             ></img>
           </div>
