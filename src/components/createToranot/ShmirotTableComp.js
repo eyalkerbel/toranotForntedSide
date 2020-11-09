@@ -75,7 +75,7 @@ import CONFIG from "../../configs/env"
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points
             }
        //   console.log("objectr",obi.name);
-            if (this.props.selectValue === parseInt(type)) {
+          
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
                     tempArri[dayOfMonth].push(obi)
@@ -83,7 +83,6 @@ import CONFIG from "../../configs/env"
                     tempArri[dayOfMonth].push(obi)
                 }
 
-            }
         })
     }
         return (this.createTableBody(tempArri))
@@ -153,6 +152,8 @@ import CONFIG from "../../configs/env"
         if (this.props.tabValue === 1) {
             date = new Date(new Date().setMonth(date.getMonth() + 1))
         }
+        //console.log("here" , selectedUser.userDetails);
+        if(selectedUser != undefined) {
         date.setDate(numOfDay)
         let obi = {
             date: date,
@@ -167,6 +168,7 @@ import CONFIG from "../../configs/env"
         }
         this.send(obi);
      //   console.log("fsds");
+    }
     }
 
     send = (obi) => {
@@ -223,7 +225,7 @@ import CONFIG from "../../configs/env"
                             {arri2[g].num}
                         </span>
                         {arri2[g].names}
-                        <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >Add</Button>
+                        <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >הוסף</Button>
                     </div>;
                 }
                 else if (started === false) {

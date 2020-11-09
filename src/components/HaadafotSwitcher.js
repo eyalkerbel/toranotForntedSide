@@ -205,29 +205,7 @@ import { connect } from "react-redux";
     }
 
     saveDelete(value) {
-//         console.log("childernDataB" , this.state.childrenData);
-//         var temp = this.state.childrenData;
-//         var temp2 = this.state.allChildren;
-//         var myIndex;
-//         if(temp.length == 1) {
-//             console.log("hii");
-//             temp = [];
-//         }
-//         temp[value] = null;
-//         temp2[value] = null;
-//     //     } else {
-//     //    this.state.temp.forEach(function(element, index) {
-//     //        console.log("elemnt" , element);
-//     //     if(element.compCount == value) {
-//     //     myIndex = index;
-//     //     }
-//  //   });
-//    // console.log("value" , value , "index", myIndex);
-//       // temp.splice(myIndex,1);
-//     //  temp[myIndex] = null;
-//      //}
-//     console.log("childernData" , temp);
-//     this.setState({childrenData:temp,allChildren:temp2} ,() => this.getDiff()); 
+ 
         this.setState({canOneMore:true});
     }
     increaseArray() {

@@ -120,7 +120,8 @@ export default class ShmirotTableCompSmall extends React.Component {
                     console.log("mycolor " , backgroundColor);
 
                     if (user.toran === 0) {
-                        let xio = tempi2.pop()
+                    //    let xio = tempi2.pop()
+                   // let xio = tempi2.top();
                         if(this.props.exchangeStatus == "others") {
                              var ok=false;
                             if(user.isMine == false) {
@@ -138,7 +139,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                                 </span>
                                
                             </div>)
-                            tempi2.push(xio)
+                          //  tempi2.push(xio)
                             }
                         } else if(this.props.exchangeStatus == "my") {
                             var ok=false;

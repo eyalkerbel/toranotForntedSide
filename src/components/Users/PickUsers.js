@@ -5,8 +5,8 @@ import TabCompSmall from "../TabCompSmall";
 import TableUsers from './TableUsers';
 import Button from '@material-ui/core/Button';
 import SearchInput, {createFilter} from 'react-search-input'
-
-export default class PickUsers extends React.Component {
+import {connect} from "react-redux";
+class PickUsers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,8 +38,13 @@ export default class PickUsers extends React.Component {
             .catch(err => console.log(err));
     }
     forFetch(data) {
-        console.log("data" , data);
-        this.setState({loading:false,userList:data});
+        console.log("data" , this.props.jobs);
+        var roleValueInitinal = 0;
+        if(this.props.jobs.length !=0) {
+         roleValueInitinal = this.props.jobs[0]._id;
+        }
+
+        this.setState({loading:false,userList:data,roleValue:roleValueInitinal});
     }
     changeMonth(num) {
         this.setState({monthValue:num});
@@ -152,10 +157,15 @@ export default class PickUsers extends React.Component {
 }
 
 
+
+
 function mapStateToProps(state,ownProps) {
     return {
         toranimThisMonth: state.toranimThisMonth,
-        toranimNextMonth: state.toranimNextMonth
+        toranimNextMonth: state.toranimNextMonth,
+        jobs: state.jobs
     };
 
 }
+
+export default connect(mapStateToProps,null)(PickUsers);

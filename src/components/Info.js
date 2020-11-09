@@ -3,8 +3,15 @@ import Paper from "@material-ui/core/Paper";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import { connect } from "react-redux";
 
-export default class Info extends React.Component {
+ class Info extends React.Component {
+  // renderJobs() {
+  //   var temp = [];
+  //   for(var i=0;i<this.props.jobs.length;i++) {
+  //     temp.push
+  //   }
+  // }
   render() {
     return (
       <Paper className="maincontainer">
@@ -13,7 +20,21 @@ export default class Info extends React.Component {
           <div className="divider" />
         </div>
         <div style={{ marginBottom: "65px" }}>
+        {this.props.jobs.map(element => 
           <ExpansionPanel>
+            <ExpansionPanelSummary className="panels">
+              <i className="material-icons icons4">info</i>
+              <h1>{element.name}</h1>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails className="panels">
+              <p>כמות תורנים ביום: {element.numToranotPerDay}</p>
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails className="panels">
+              <p>תיאור: {element.description}</p>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        )}
+          {/* <ExpansionPanel>
             <ExpansionPanelSummary className="panels">
               <i className="material-icons icons4">info</i>
               <h1>חייל חובה חוץ</h1>
@@ -194,9 +215,19 @@ export default class Info extends React.Component {
             <ExpansionPanelDetails className="panels">
               <p>שמירה עם נשק: כן</p>
             </ExpansionPanelDetails>
-          </ExpansionPanel>
+          </ExpansionPanel> */}
         </div>
       </Paper>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    jobs:state.jobs
+  }
+
+}
+
+export default connect(mapStateToProps,null)(Info)

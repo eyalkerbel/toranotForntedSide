@@ -3,48 +3,60 @@ import { Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import LoadingPage from "../LoadingPage";
 import { NavLink } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
 
-export default function LoginSon(props) {
+const styles = theme => ({
+    moreWidth: {
+        width: 300
+    }
+    
+  });
+
+class LoginSon extends React.Component {
+
+    render() {
+        const { classes } = this.props;
+
     return (
         <Fragment>
         <div className="div-all">
-        {props.isLoaded ? (
+        {this.props.isLoaded ? (
                 <LoadingPage />
             ) : (
                     <div className="loginbackground">
-                        <Card className="loginholder">
+                        <Card className="loginholder" classes={classes.moreWidth}>
                             {/* <h1>התחבר לנמו</h1> */}
                             <div className="wrapper-mainlog2">
                             <img
                                 className="mainlogo2"
-                                src={require("../../images/logoNemo2.png")}
+                                src={require("../../images/castle.png")}
                                 alt=""
                             ></img>
                             </div>
                             {/* <div className="wrapper-inputs"> */}
                             <input
                                 style={{ marginTop: "30px" }}
-                                onChange={props.handeChange1}
-                                className={props.BorderColorState}
+                                onChange={this.props.handeChange1}
+                                className={this.props.BorderColorState}
                                 type="text"
                                 placeholder="ת.ז"
                                 id="input1"
                                 onKeyPress={event => {
                                     if (event.key === "Enter") {
-                                        props.handlelog();
+                                        this.props.handlelog();
                                     }
                                 }}
                             ></input>
                             <input
                                 style={{ marginTop: "20px" }}
-                                onChange={props.handeChange2}
-                                className={props.BorderColorState}
+                                onChange={this.props.handeChange2}
+                                className={this.props.BorderColorState}
                                 type="password"
                                 placeholder="סיסמה"
                                 id="input2"
                                 onKeyPress={event => {
                                     if (event.key === "Enter") {
-                                        props.handlelog();
+                                        this.props.handlelog();
                                     }
                                 }}
                             ></input>
@@ -54,7 +66,7 @@ export default function LoginSon(props) {
                                 style={{
                                     backgroundColor: "teal", color: "white", width: "100%", marginTop: "20px"
                                 }}
-                                onClick={() => props.handlelog()}
+                                onClick={() => this.props.handlelog()}
                             >
                                 <h3>התחבר</h3>
                             </Button>
@@ -64,9 +76,9 @@ export default function LoginSon(props) {
                                     style={{
                                         backgroundColor: "teal", color: "white", width: "100%", marginTop: "20px", marginBottom: "20px"
                                     }}
-                                    onClick={() => props.handlelog()}
+                                    onClick={() => this.props.handlelog()}
                                 >
-                                    <h3>הירשם לנמו</h3>
+                                    <h3>הירשם למבמצר</h3>
                                 </Button>
                             </NavLink>
                         </Card>
@@ -75,4 +87,8 @@ export default function LoginSon(props) {
                 </div>
                 </Fragment>
     )
+                }
 }
+
+
+export default withStyles(styles)(LoginSon);

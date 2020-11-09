@@ -43,6 +43,7 @@ import FriendList from "./FriendList";
     }
 
     bubbleSelect = (num) => {
+        console.log("numRole" , num);
         this.setState({ selectValue: num })
     }
 
@@ -57,6 +58,11 @@ import FriendList from "./FriendList";
 
     UNSAFE_componentWillMount() {
        // this.fetchyfetch();
+       var roleValueInitinal = 0;
+       if(this.props.jobs.length !=0) {
+        roleValueInitinal = this.props.jobs[0]._id;
+       }
+       this.setState({selectValue:roleValueInitinal});
         this.fotchyfetch();
     }
 
@@ -223,7 +229,8 @@ import FriendList from "./FriendList";
 }
 const mapStateToProps = state => ({
     toranim: state.toranim.toranimNextMonth,
-    myId: state.user._id
+    myId: state.user._id,
+    jobs: state.jobs
 })
 
 export default connect(mapStateToProps,null) (CreateToranut);

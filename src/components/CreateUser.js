@@ -3,9 +3,9 @@ import Paper from "@material-ui/core/Paper";
 import { Grid, TextField, RadioGroup, FormControlLabel, FormLabel, Radio, Button } from '@material-ui/core'
 import CONFIG from "../configs/env"
 import { Select, MenuItem } from "@material-ui/core";
+import {connect} from "react-redux";
 
-
-export default class CreateUser extends React.Component {
+ class CreateUser extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -14,16 +14,25 @@ export default class CreateUser extends React.Component {
             userid: null,
             permissionlvl: "user",
             type: 0,
+            indexType:0,
             status: "",
             loading: false
         }
     }
+    componentWillMount() {
+        var intinalType = 0;
+        if(this.props.jobs.length != 0) {
+            intinalType = this.props.jobs[0]._id;
+        }
+        this.setState({type:intinalType});
+    }
 
     handleSelect = (event) => {
-        this.setState({ type: event.target.value })
+        this.setState({ type: this.props.jobs[event.target.value]._id,indexType: event.target.value });
     }
 
     createForm = () => {
+
         return (
             <React.Fragment>
                 <Grid container spacing={3} style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto', marginTop: 16 }}>
@@ -34,14 +43,15 @@ export default class CreateUser extends React.Component {
                         <TextField required id="name" label="Name" fullWidth onChange={this.myChangeHandler2} value={this.state.name} />
                     </Grid>
                     <Grid item xs={12} md={12} className="lefttext">
-                        <Select value={this.state.type} onChange={this.handleSelect} style={{ width: "100%" }} >
-                            <MenuItem value={0}>סמל תורן בפנים</MenuItem>
-                            <MenuItem value={1}>קצין תורן בפנים</MenuItem>
+                        <Select value={this.state.indexType} onChange={this.handleSelect} style={{ width: "100%" }} >
+                        {this.props.jobs.map((element,index) => <MenuItem value={index}>{element.name}</MenuItem>)}
+
+                            {/* <MenuItem value={1}>קצין תורן בפנים</MenuItem>
                             <MenuItem value={2}>חייל חובה חוץ</MenuItem>
                             <MenuItem value={3}>נגד שער</MenuItem>
                             <MenuItem value={4}>ע' קצין תורן</MenuItem>
                             <MenuItem value={5}>קצין תורן</MenuItem>
-                            <MenuItem value={6}>מפקד תורן</MenuItem>
+                            <MenuItem value={6}>מפקד תורן</MenuItem> */}
 
                         </Select>
                     </Grid>
@@ -110,7 +120,6 @@ export default class CreateUser extends React.Component {
             name: "",
             userid: "",
             permissionlvl: "user",
-            type: 0,
             status: "success",
             loading: false
         })
@@ -120,6 +129,7 @@ export default class CreateUser extends React.Component {
     }
 
     render() {
+        console.log("renderCr" , this.props);
         return (
             <Fragment>
                 {this.props.permissionlvl === "admin" ?
@@ -138,3 +148,11 @@ export default class CreateUser extends React.Component {
         );
     }
 }
+
+
+function mapStateToProps(state) {
+    return {
+        jobs: state.jobs
+    }
+}
+export default connect(mapStateToProps,null)(CreateUser);

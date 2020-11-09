@@ -30,6 +30,16 @@ export default class SideBar extends React.Component {
       this.setState({
         dafi:
           <Fragment>
+           <NavLink to="/manage_jobs">
+              <ListItem
+                className="listd"
+                button
+                onClick={() => this.handleSideBar()}
+              >
+                <i className="material-icons icons2">person_add</i>
+                <h2>הגדר תפקידים</h2>
+              </ListItem>
+            </NavLink>
             <NavLink to="/pickusers">
               <ListItem
                 className="listd"
@@ -60,7 +70,7 @@ export default class SideBar extends React.Component {
                 <h2>ניהול שמירות</h2>
               </ListItem>
             </NavLink>
-
+           
           </Fragment>
 
 
@@ -164,10 +174,13 @@ export default class SideBar extends React.Component {
           anchor="right"
           open={this.state.sidebarstate}
         >
+        <div className="div-name-project">
+          מבצר הים
+        </div>
           <div className="cc2">
             <img
               className="mainlogo"
-              src={require("../images/phoneLogo.png")}
+              src={require("../images/castle.png")}
               alt=""
             ></img>
           </div>

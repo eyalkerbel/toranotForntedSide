@@ -95,7 +95,7 @@ import {loginAction} from "../Actions/loginAction";
   componentDidUpdate() {
     if (this.state.redirectstate) {
    window.location.reload();
-   this.props.loginDispatch("user" , 38338, "djjd");
+  // this.props.loginDispatch("user" , 38338, "djjd");
 
     }
   }
