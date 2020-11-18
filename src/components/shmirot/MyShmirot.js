@@ -354,9 +354,7 @@ getFromSonClick(index,num,indexAll) {
 
 
     renderTableData() {
-      // for(var i=0;i<toranot.length;i++) {
-        
-      // }
+      console.log("renderTableDataSmirot");
 
 
       var obi;
@@ -366,19 +364,20 @@ getFromSonClick(index,num,indexAll) {
       //   console.log("props" , this.props);
       var j=0;
         for (var i = 0; i <this.state.arri.length; i++) {
-          
+          console.log("arrinew" , this.state.arri);
           var month = this.state.arri[i].month;
           console.log("date -" , month , " monthToday" , monthToday);
           if((this.props.tabValue==0 && (month == monthToday)) || (this.props.tabValue==1 && (month == monthToday+1)) )  {
             var obi = {
               obiData: (
-                  <MyShmirotItem index={j} indexAll={i} item={this.state.arri[i]} updateParnetClick={this.getFromSonClick} />)            
+                  <MyShmirotItem key={shortid.generate()} index={j} indexAll={i} item={this.state.arri[i]} updateParnetClick={this.getFromSonClick} />)            
             };
             arrRender.push(obi.obiData);
             j++;
 
           }
         }
+        console.log("arrRender" ,arrRender);
           return arrRender;
         }
     

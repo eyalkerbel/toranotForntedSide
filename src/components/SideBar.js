@@ -50,6 +50,16 @@ export default class SideBar extends React.Component {
                 <h2>בחר משתמשים</h2>
               </ListItem>
             </NavLink>
+            <NavLink to="/change_user">
+              <ListItem
+                className="listd"
+                button
+                onClick={() => this.handleSideBar()}
+              >
+                <i className="material-icons icons2">person_add</i>
+                <h2>שנה משתמשים</h2>
+              </ListItem>
+            </NavLink>
             <NavLink to="/createuser">
               <ListItem
                 className="listd"
@@ -80,48 +90,10 @@ export default class SideBar extends React.Component {
 
   UNSAFE_componentWillMount() {
     this.adminIf()
-    // this.getMessage()
   }
-  //  getMessage() {
-  //     fetch(CONFIG.API.GETNOTIFACTION, {
-  //       method:"POST",
-  //       headers: {
-  //         "Content-Type": "application/json;charset=utf-8",
-  //         Authorization: "Bearer " + localStorage.getItem("jwt")
-  //     }}).then(dat => dat.json()).then(data => this.handleNoti(data));
-  // }
+ 
   handleNoti(data) {
-    // console.log("handleNoti",data)
-    // var temp = [];
-    // let message;
-    // let tempJson = "";
-    // for(var i=0;i<data.length;i++) {
-    // var date = data[i].date;
-    //   var dats =  new Date(date);
-    //   console.log("data",dats.getDate());
-    //   if(data[i].action == "place") {
-    //        message = "manager place you on date" + dats.getDate();
-    //     }
-    //    if(data[i].action == "delete") {
-    //    message = "manager remove you on date" + dats.getDate();
-       
-    //  }
-    //  tempJson = {
-    //    id: i,
-    //    title:"change",
-    //    message:message,
-    //    new: false,
-    //    tags: [{ 
-    //     type: 'success',
-    //     text: 'text'
-    // }],
-    //  };
-    //  console.log("tempJson",tempJson);
-    //  temp.push(tempJson);
-    //  console.log("message",message)
     
-   // }
-   // console.log("noti" , temp);
  var temp = [];
     this.setState({noti:temp,loading:false});
   }
@@ -278,7 +250,7 @@ export default class SideBar extends React.Component {
                 <h2>אנשי קשר</h2>
               </ListItem>
             </NavLink>
-            <NavLink to="/sendmessage">
+            {/* <NavLink to="/sendmessage">
               <ListItem
                 className="listd"
                 button
@@ -287,8 +259,8 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">send</i>
                 <h2>צור קשר</h2>
               </ListItem>
-            </NavLink>
-            <NavLink to="/mail">
+            </NavLink> */}
+            {/* <NavLink to="/mail">
               <ListItem
                 className="listd"
                 button
@@ -297,7 +269,7 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">mail</i>
                 <h2>תיבת דואר</h2>
               </ListItem>
-            </NavLink>
+            </NavLink> */}
             {this.state.dafi}
           </List>
         </Drawer>

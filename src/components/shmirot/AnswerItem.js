@@ -33,11 +33,14 @@ const styles = theme => ({
         width: "300px",
     },
     margin: {
-      margin: theme.spacing(1),
-      margin: "0",
-      padding: "0",
-      width: "30px",
-      height: "30px"
+      //  margin: theme.spacing(1),
+      // margin: "0",
+      // padding: "0",
+      // marginRight: "auto",
+      // marginTop: "auto",
+      // marginBottom: "auto",
+      //  minWidth: "10px",
+      height: "10px",
     },
     rejectDialog: {
         width: "70%",
@@ -73,11 +76,17 @@ const styles = theme => ({
       if(statusSendAgain) {
          return(
                   <TableCell id="tablepadding" key={shortid.generate()} align="center">
-                <HelpIcon />
-                <div id="button-regret">
+                   <div id="full-div">
+                   <div id="button-regret">
                   <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
          התחרטתי
         </Button>  
+                   </div>
+                   <div id="icon-status-answer">
+
+            
+                <HelpIcon />
+                </div>
         </div>
                 </TableCell>);
       }
@@ -85,39 +94,50 @@ const styles = theme => ({
         switch(status) {
             case "asking":
                 return(
-                  <TableCell id="tablepadding" key={shortid.generate()} align="center">
-                <HelpIcon />
-                <HelpIcon />
-                <div id="button-regret">
-                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
-         התחרטתי
-        </Button>  
-        </div>
-                </TableCell>);
-            case "reject":
-                return (
-                  <TableCell id="tablepadding" key={shortid.generate()} align="center">
-                <BlockIcon id="icon-disagree" style={{fill:"red"}} />
-                <HelpIcon />
-                <div id="button-regret">
-                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
-         התחרטתי
-        </Button>  
-        </div>  
-                </TableCell>);
-            default:
-              
-                return (
-                  <TableCell id="table-status" key={shortid.generate()} align="center">
-                  <div id="div-status">
-                  <DoneIcon style={{fill:"green"}} />
-                  {this.renderIconsManager(status)}
-                  </div>
+                  <TableCell key={shortid.generate()} align="center">
+                  <div id="full-div">
                   <div id="button-regret">
                   <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
          התחרטתי
         </Button>  
         </div>
+        <div id="icon-status-answer">
+        
+                <HelpIcon />
+                <HelpIcon />
+        </div>
+        </div>
+                </TableCell>);
+            case "reject":
+                return (
+                  <TableCell id="tablepadding" key={shortid.generate()} align="center">
+              <div id="full-div">
+              <div id="button-regret">
+                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
+         התחרטתי
+        </Button> 
+        </div>
+        <div id="icon-status-answer">
+                <BlockIcon id="icon-disagree" style={{fill:"red"}} />
+                <HelpIcon />
+        </div>      
+        </div>  
+                </TableCell>);
+            default:
+              
+                return (
+                  <TableCell id="tablepadding" key={shortid.generate()} align="center">
+                        <div id="full-div">
+                  <div id="button-regret">
+                  <Button variant="outlined" size="small" color="secondary" className={classes.margin} onClick={this.cancelRequest}>
+         התחרטתי
+        </Button>  
+        </div>
+                  <div id="icon-status-answer">
+                  <DoneIcon style={{fill:"green"}} />
+                  {this.renderIconsManager(status)}
+                  </div>
+                </div>
                   </TableCell>);
          
               

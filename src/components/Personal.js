@@ -17,6 +17,9 @@ const useStyles = theme => ({
     width: '25ch',
     marginTop: theme.spacing(10)
   },
+  label: {
+    left: "50%"
+  }
 });
 
  class Personal extends React.Component {
@@ -65,6 +68,8 @@ const useStyles = theme => ({
           margin="normal"
           InputLabelProps={{
             shrink: true,
+            classes: {root: classes.label}
+
           }}
         />
 
@@ -77,6 +82,8 @@ const useStyles = theme => ({
           margin="normal"
           InputLabelProps={{
             shrink: true,
+           classes: {root: classes.label}
+          
           }}
         />
          <TextField
@@ -88,6 +95,8 @@ const useStyles = theme => ({
           margin="normal"
           InputLabelProps={{
             shrink: true,
+            classes: {root: classes.label}
+
           }}
         />
         

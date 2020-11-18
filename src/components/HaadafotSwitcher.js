@@ -275,7 +275,7 @@ import { connect } from "react-redux";
                     compCount={this.state.compCount}
                     dayCount={this.state.dayCount}
                     saveDelete={this.saveDelete}
-                    hasSend={true}
+                    hasSend={true} updateOnAdd={this.updateOnAdd}
                 />
             );
             var x = this.state.compCount + 1;
@@ -303,7 +303,7 @@ import { connect } from "react-redux";
                         <div className="header-container">
                             <h1 className="header">העדפות ואילוצים</h1>
                             <div className="divider" />
-                            <h3 style={{ color: "red", marginTop: "4px" }}></h3>
+                            <h3 style={{ color: "red", marginTop: "4px" }}>ניתן לבחור עד 8 אילוצים</h3>
                             <h3 style={{ color: "grey", marginTop: "4px" }}>יש לך עוד <span style={{ color: "teal" }}>{this.props.numRemaining}</span> העדפות ואילוצים להזין.</h3>
                         </div>
                         {/* {this.state.arri.map(item => item)} */}
@@ -319,7 +319,6 @@ import { connect } from "react-redux";
                                 onClick={() => this.forMethod()}
                                 className="fobi1"
                                 style={{}}
-                                disabled={this.state.showPlus}
                             >
                                 <i className="material-icons">add</i>
                             </Fab>

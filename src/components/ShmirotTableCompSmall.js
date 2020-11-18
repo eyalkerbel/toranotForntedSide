@@ -20,10 +20,12 @@ export default class ShmirotTableCompSmall extends React.Component {
     createMainArri = (num) => {
         var temp = this.props.fetchedArri[num][0];
         var tempMy = this.props.fetchedArri[num][1];
-       console.log("tempMy" , temp);
+        console.log("propsFetchArri" , temp);
+      // console.log("tempMy" , temp);
         var tempArri = [];
         if(temp != undefined && tempMy != undefined) {
         temp.forEach(el => {
+            console.log("el" , el);
             var isMine = false;
             for(var i=0;i<tempMy.length;i++) {
                 if(el.date == tempMy[i].date) {
@@ -33,7 +35,9 @@ export default class ShmirotTableCompSmall extends React.Component {
             var date = new Date(el.date)
             var dayOfWeek = date.getDay()
             var dayOfMonth = date.getDate()
-            var type = el.userDetails.type
+            var type = el.userDetails.type;
+            console.log("type" , type , this.props.selectValue );
+
             var name = el.userDetails.name
             var userid = el.userDetails.userid
             var id = el._id
@@ -44,7 +48,8 @@ export default class ShmirotTableCompSmall extends React.Component {
             var obi = {
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, isMine,userStauts
             }
-            if (this.props.selectValue === parseInt(type)) {
+            if (this.props.selectValue === type) {
+                console.log("c" , tempArri);
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
                     tempArri[dayOfMonth].push(obi)
@@ -85,6 +90,7 @@ export default class ShmirotTableCompSmall extends React.Component {
 
 
     createTableBody = (tempArri) => {
+        console.log("tempArri" , tempArri);
         if(this.props.newData != null) {
        // console.log("newDated" , this.props.newData.date);
         }
@@ -100,10 +106,10 @@ export default class ShmirotTableCompSmall extends React.Component {
         for (var i = dayOfWeek2; i < lastDay + dayOfWeek2; i++) {
             var tempi2 = []
             if (tempArri[x] != null) {
-                console.log("sizeTempArri" , tempArri[x].length);
+               // console.log("sizeTempArri" , tempArri[x].length);
                 for (var g = 0; g < tempArri[x].length; g++) {
                     let user = tempArri[x][g];
-                    console.log("userData" , user);
+                 //   console.log("userData" , user);
                     var backgroundColor;
 
                     switch(tempArri[x][g].userStauts) {
@@ -117,7 +123,7 @@ export default class ShmirotTableCompSmall extends React.Component {
                             backgroundColor = "teal";
                             break;
                     }
-                    console.log("mycolor " , backgroundColor);
+                   // console.log("mycolor " , backgroundColor);
 
                     if (user.toran === 0) {
                     //    let xio = tempi2.pop()
@@ -190,7 +196,7 @@ export default class ShmirotTableCompSmall extends React.Component {
 
                 }
             }
-            console.log("tempi2" , tempi2 , x );
+          //  console.log("tempi2" , tempi2 , x );
             arri2[i] = {
                 num: x,
                 names: tempi2,
@@ -213,7 +219,7 @@ export default class ShmirotTableCompSmall extends React.Component {
             for (var x = 0; x < 7; x++) {
                 if (arri2[g] != null) {
 
-                    console.log("createTds" , arri2[g].names);
+                  //  console.log("createTds" , arri2[g].names);
                     started2 = true
                     started = true;
                     rowArri[x] = <div key={x}
@@ -235,7 +241,7 @@ export default class ShmirotTableCompSmall extends React.Component {
             }
             allRowArri[i] = rowArri;
         }
-        console.log("allROWarri" , allRowArri);
+       // console.log("allROWarri" , allRowArri);
         return allRowArri
     }
 

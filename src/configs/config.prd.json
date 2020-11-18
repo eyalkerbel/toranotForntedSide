@@ -32,12 +32,9 @@
         "SETTORANOT": "https://toranotapi.herokuapp.com/api/settoranot",
         "DELETETORANOT": "https://toranotapi.herokuapp.com/api/deletetoranot",
         "GETDATAFORREDUX": "https://toranotapi.herokuapp.com/api/getdataforinitredux",
-        "UPDATEFRIENDTORNOT": "https://toranotapi.herokuapp.com/api/updatefriendtoranot"
+        "UPDATEFRIENDTORNOT": "https://toranotapi.herokuapp.com/api/updatefriendtoranot",
+        "ADDJOBS": "https://toranotapi.herokuapp.com/api/addjobs"
 
-
-
-
-    
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"
 }

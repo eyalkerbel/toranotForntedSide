@@ -16,6 +16,8 @@ import rootReducer from "./Reducers/index";
 import 'react-notifications/src/notifications.scss';
 import { combineReducers, applyMiddleware,compose } from 'redux'
 import {NotificationManager,NotificationContainer} from 'react-notifications';
+import { authProvider } from './authProvider';
+import { AzureAD } from 'react-aad-msal';
 
 import thunk from 'redux-thunk';
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,12 +29,14 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
+  // <AzureAD provider={authProvider} forceLogin={true}>
+   <Provider store={store}> 
   <div className="height100">
   <NotificationContainer />
     <Switcher />
   </div>
-  </Provider>,
+   </Provider>,
+  // </AzureAD>,
   document.getElementById("root")
 );
 

@@ -27,7 +27,8 @@ import { loginAction } from "./Actions/loginAction";
 import { connect } from "react-redux";
 import {initActionMiddleware} from "./Actions/initActionMiddleware";
 import LoadingPage from "./components/LoadingPage";
-
+import DefineJobs from "./components/DefineJobs/DefineJobs";
+import ChangeUser from "./components/ChangeUser/ChangeUser";
  class Switcher extends React.Component {
   constructor() {
     super();
@@ -103,7 +104,8 @@ import LoadingPage from "./components/LoadingPage";
             <Route path="/mail" render={() => <MailBox permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/pickusers" render={() => <PickUsers permissionlvl={this.state.permissionlvl} />} />
             <Route path="/pick_friend_toranot_together" render={() => <PickFriends permissionlvl={this.state.permissionlvl} />} />
-
+            <Route path="/manage_jobs" render={() => <DefineJobs permissionlvl={this.state.permissionlvl} />} />
+            <Route path="/change_user" render={() => <ChangeUser permissionlvl={this.state.permissionlvl} />} />
             <Route exact component={RedirectorHome} />
             <NotificationContainer />
           </Switch>

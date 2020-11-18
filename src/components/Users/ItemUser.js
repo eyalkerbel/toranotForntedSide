@@ -49,8 +49,8 @@ export default class ItemUser extends React.Component {
 
                     </TableCell>
                       {/* <TableCell  key={shortid.generate()} align="center">{this.props.item.name}</TableCell> */}
+                       <TableCell key={shortid.generate()} align="center"></TableCell>
                        <TableCell  key={shortid.generate()} align="center"></TableCell>
-                       <TableCell   key={shortid.generate()} align="center"></TableCell>
                        </TableRow>
                        );  
     }

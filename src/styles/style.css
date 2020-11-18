@@ -2,7 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Heebo', cursive;
 }
 html {
   height: 100%;
@@ -10,6 +10,8 @@ html {
 body {
   background-color: ghostwhite;
   height: 100%;
+  font-family: 'Heebo', cursive;
+
 }
 
 
@@ -17,7 +19,12 @@ body {
   table-layout:fixed;
 }
 
+#full-div { 
+  position: fixed;
 
+  /* display: flex;
+  flex-direction: row; */
+}
 #tablepadding{
    padding-bottom: 0 !important;
   /* padding-top: "2px"; */ 
@@ -44,10 +51,31 @@ body {
   padding-top: 0 !important;
 }
 #button-regret {
-  padding-bottom: 10px;
-  height: 10px;
+  /* height: 10px; */
+  width: 52px;
+  /* width: 30%; */
+  /* margin-top: 0; */
+  /* padding-top: auto;
+  padding-bottom: auto; */
+  margin-bottom: auto;
+  margin-right: 0;
+  /* overflow: hidden; */
+  display: inline-block;
+  float: left;
 }
+#icon-status-answer{
+  /* margin-right: 17px; */
+  width: 90px;
+  margin-bottom: auto;
+  display: inline-block;
+  float: left;
 
+}
+#alltablepadding3{
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+ /* padding-top: "2px"; */ 
+}
 #alltablepadding{
   padding: 0 !important;
   padding-left: 0 !important;
@@ -126,8 +154,9 @@ body {
   flex-direction: column;
   margin-bottom: 3%;
 }
-
-
+.cell-with-not-padding {
+  padding: 0 !important;
+}
 .cancel-button {
  
 }
@@ -342,7 +371,17 @@ position: relative;
 /* sidebar */
 .MuiDrawer-paper {
   background-color: white !important;
-  width: 250px !important;
+  width: 280px !important;
+}
+
+.div-name-project {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  font-weight: bold;
+  font-family: 'Hebbo';
+  font-size:30px
+
 }
 
 .MuiToolbar-root {
@@ -488,6 +527,7 @@ a {
   width: 50% !important;
   max-width: 100% !important;
   font-size: 1.4rem !important;
+  font-family: 'Bungee Inline', cursive;
 }
 
 .MuiTableRow-root {

@@ -15,9 +15,10 @@ import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import ThumbUpRoundedIcon from '@material-ui/icons/ThumbUpRounded';
 import IconButton from '@material-ui/core/IconButton';
 import EmailIcon from '@material-ui/icons/Email';
+import {connect} from "react-redux";
 
 
-export default class ItemApprove extends React.Component {
+class ItemApprove extends React.Component {
     constructor(props) {
         super(props);
     
@@ -29,7 +30,14 @@ export default class ItemApprove extends React.Component {
     this.declineChange = this.declineChange.bind(this);
     this.handleOpenMail = this.handleOpenMail.bind(this);
     }
-
+    returnType() {
+      const {type} = this.props.item.toranotOld.userDetails;
+      for(var i=0;i<this.props.jobs.length;i++) {
+        if(type == this.props.jobs[i]._id) {
+          return this.props.jobs[i].description;
+        }
+      }
+    }
 
     renderIcons() {
       switch(undefined) {
@@ -140,7 +148,7 @@ return  day + "/" + month + "/" + year;
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
                 <TableCell key={shortid.generate()} align="center">{this.props.item.toranotOld.userDetails.name} </TableCell>
-                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {oldDay} - {this.getFormatt(this.props.item.toranotOld.date)}</TableCell>
+                  <TableCell id="" key={shortid.generate()}  align="center"> {oldDay} - {this.getFormatt(this.props.item.toranotOld.date)}</TableCell>
 
 
                   </TableRow>
@@ -151,7 +159,7 @@ return  day + "/" + month + "/" + year;
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
                 <TableCell key={shortid.generate()} align="center">{this.props.item.toranotNew.userDetails.name} </TableCell>
-                  <TableCell id="no_margin_sides" key={shortid.generate()}  align="center"> {newDay} - {this.getFormatt(this.props.item.toranotNew.date)}</TableCell>
+                  <TableCell id="" key={shortid.generate()}  align="center"> {newDay} - {this.getFormatt(this.props.item.toranotNew.date)}</TableCell>
 
 
                   </TableRow>
@@ -161,8 +169,8 @@ return  day + "/" + month + "/" + year;
                   <TableCell key={shortid.generate()}>
                 {/* <Table><TableBody> */}
                   <TableRow key={shortid.generate()}>
-                  <TableCell id="alltablepadding" key={shortid.generate()} align="center"> <IconButton onClick={() => {console.log("uur")}} style={{paddingBottom: "0", paddingTop: "0"}}>    <EmailIcon id="email-recive" onClick={this.handleOpenMail} /> </IconButton></TableCell>
-                <TableCell key={shortid.generate()} align="center">{this.getJob(this.props.item.toranotOld.userDetails.type)}</TableCell>
+                  <TableCell id="alltablepadding3" key={shortid.generate()} align="center"> <IconButton onClick={() => {console.log("uur")}} style={{paddingBottom: "0", paddingTop: "0"}}>    <EmailIcon id="email-recive" onClick={this.handleOpenMail} /> </IconButton></TableCell>
+                <TableCell key={shortid.generate()} align="center">{this.returnType()}</TableCell>
                   {/* <TableCell id="tablepadding" key={shortid.generate()}  align="center"> </TableCell> */}
                  {this.renderIcons()}
 
@@ -177,3 +185,13 @@ return  day + "/" + month + "/" + year;
 ); }
 
 }
+
+
+function mapStateToProps(state) {
+  return {
+    userState: state.user,
+    jobs: state.jobs
+  }
+}
+
+export default connect(mapStateToProps,null)(ItemApprove);

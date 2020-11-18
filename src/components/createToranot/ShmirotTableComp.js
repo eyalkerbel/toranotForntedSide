@@ -75,7 +75,7 @@ import CONFIG from "../../configs/env"
                 date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points
             }
        //   console.log("objectr",obi.name);
-          
+          console.log("type" , type , this.props.selectValue);
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
                     tempArri[dayOfMonth].push(obi)
@@ -85,6 +85,7 @@ import CONFIG from "../../configs/env"
 
         })
     }
+    console.log("tempArri" , tempArri);
         return (this.createTableBody(tempArri))
     }
 

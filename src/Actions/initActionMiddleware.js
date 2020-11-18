@@ -8,6 +8,7 @@ import {initMyHaadafot} from "./MyHaadafotAction";
 import {initAllHaadafot} from "./AllHaadafotAction";
 import {initUserNotification} from "./UserNotficiationsAction";
 import {initPending} from "./PendingAction";
+import {initJobs} from "./jobsAction";
 export const initActionMiddleware = (premssionlvl)  => {
   //  console.log("premss" , premssionlvl);
     
@@ -29,6 +30,7 @@ export const initActionMiddleware = (premssionlvl)  => {
                 dispatch(initToranim(data[5],data[6]));
                 dispatch(initMyHaadafot(data[7]));
                 dispatch(initAllHaadafot(data[8]));
+                dispatch(initJobs(data[9]));
                 dispatch(initPending());
                 } else {
               //      console.log("initActionMiddlewarerrr" ,data);
@@ -40,6 +42,7 @@ export const initActionMiddleware = (premssionlvl)  => {
                     dispatch(initToranim(data[5],data[6]));
                     dispatch(initMyHaadafot(data[7]));
                     dispatch(initAllHaadafot(data[8]));
+                    dispatch(initJobs(data[9]));
                     dispatch(initPending());
                 }
 

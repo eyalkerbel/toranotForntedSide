@@ -5,8 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import TableRow from "@material-ui/core/TableRow";
 import shortid from 'shortid';
-
-export default class MyShmirotItem extends React.Component {
+import {connect} from "react-redux";
+ class MyShmirotItem extends React.Component {
 
     constructor(props){
         super(props);
@@ -18,11 +18,21 @@ export default class MyShmirotItem extends React.Component {
     }
 
     handleclicks(num) {
+      console.log("numy", num );
       this.props.updateParnetClick(this.props.index,num,this.props.indexAll);
-    }
 
+    }
+    returnType() {
+      const {type} = this.props.userState;
+      for(var i=0;i<this.props.jobs.length;i++) {
+        if(type == this.props.jobs[i]._id) {
+          return this.props.jobs[i].description;
+        }
+      }
+    }
     renderSelect() {
       var values = 10;
+      console.log("userStatuss" , this.props.item);
       switch(this.props.item.userStatus) {
         case "nothappy":
             values=20;
@@ -93,17 +103,18 @@ export default class MyShmirotItem extends React.Component {
         </TableCell>);
       }
 
-
+UNSAFE_componentWillReceiveProps() {
+  console.log("recvie");
+}
 
     render() {
-      
-
- console.log("props" , this.props);
+      console.log("renderItemm");
+ console.log("renderItem" , this.props);
          return(
          <TableRow key={shortid.generate()}> 
                   <TableCell id="tablepadding" key={shortid.generate()} align="center">{this.props.item.formattedDate}</TableCell>
                     <TableCell id="tablepadding" key={shortid.generate()} align="center">{this.props.item.dayOfWeek}</TableCell>
-                    <TableCell id="tablepadding" key={shortid.generate()} align="center">{this.props.item.type}</TableCell>
+                    <TableCell id="tablepadding" key={shortid.generate()} align="center">{this.returnType()}</TableCell>
                     {this.renderSelect()}
                     </TableRow>
                     );
@@ -111,3 +122,11 @@ export default class MyShmirotItem extends React.Component {
 
 }
 
+function mapStateToProps(state) {
+  return {
+    userState: state.user,
+    jobs: state.jobs
+  }
+}
+
+export default connect(mapStateToProps,null)(MyShmirotItem);

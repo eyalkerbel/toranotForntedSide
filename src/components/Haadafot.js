@@ -10,9 +10,28 @@ import Fab from "@material-ui/core/Fab";
 import { setMonth } from "date-fns";
 import { connect } from "react-redux";
 import {addHaadafa,deleteHaadafa,changeHaadafa,HaadafaMiddleWar} from "../Actions/MyHaadafotAction";
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
+
+
+const styles = theme => ({
+  tableCellNoPadding: {
+     padding: 0,
+    },
+    textField: {
+      width: '100%'
+  },
+  input2: {
+      height: 43,
+  
+    }
+
+
+});
+
 class Haadafot extends React.Component {
   
-  constructor(props) {
+ constructor(props) {
     super(props);
     this.state = {
       selectedDate1: new Date().setHours(0, 0, 0, 0),
@@ -28,7 +47,8 @@ class Haadafot extends React.Component {
       sEnd:false,
       kindValue:10,
       kindDescription: "העדפה",
-      sendedAlready:false
+      sendedAlready:false,
+      description: ""
     };
     this.handleclicks = this.handleclicks.bind(this);
     this.handledate1 = this.handledate1.bind(this);
@@ -52,7 +72,7 @@ class Haadafot extends React.Component {
     if (this.props.data != null) {
       this.setState({ selectedDate1: this.props.data.begindate });
       this.setState({ selectedDate2: this.props.data.enddate,selectStart:true,selectEnd:true });
-      this.setState({ reason: this.props.data.type });
+      this.setState({description: this.props.data.type });
       var val = this.props.data.type;
      var kindVal = this.props.data.kindDescription;
      console.log("kindValuCompoent" , kindVal)
@@ -181,7 +201,7 @@ calacaluateHowMuch(one , two) {
       if(result >= 0) {
         this.setState({ selectedDate1: day,selectStart: true });
         if(this.state.selectEnd==true) {
-          var obi = { begindate: day, enddate: this.state.selectedDate2, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
+          var obi = { begindate: day, enddate: this.state.selectedDate2, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
           this.ChangeDBAndStore(obi,before-after);
         }  
       } else {
@@ -192,7 +212,7 @@ calacaluateHowMuch(one , two) {
       this.setState({ selectedDate1: day,selectStart: true });
 
       if(this.state.selectEnd==true) {
-        var obi = { begindate: day, enddate: this.state.selectedDate2, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
+        var obi = { begindate: day, enddate: this.state.selectedDate2, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
         var result = this.calacaluateHowMuch(day,this.state.selectedDate2);
         if(this.props.numRemaining - result >= 0) {
           this.ChangeDBAndStore(obi,-result);
@@ -201,6 +221,8 @@ calacaluateHowMuch(one , two) {
               this.resetItem();
               alert("חרגת מכמות מקסימלית של אילוצים");
             }
+      } else {
+        this.setState({selectedDate2:day})
       } 
     }  
 
@@ -235,7 +257,7 @@ ChangeDBAndStore(obi,result) {
       var result = this.props.numRemaining-after+before;
       if(result >= 0) {
         this.setState({ selectedDate2: day,sEnd:true });
-        var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
+        var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
       this.ChangeDBAndStore(obi,before-after);
       this.props.updateOnAdd();
       }
@@ -247,7 +269,7 @@ ChangeDBAndStore(obi,result) {
     this.setState({ selectedDate2: day,sEnd:true });
 
     if(this.state.selectStart==true) {
-      var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.reason,kindDescription:this.state.kindDescription,idUser:this.props.myId };
+      var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
       var result = this.calacaluateHowMuch(this.state.selectedDate1,day);
         if(this.props.numRemaining - result >= 0) {
       this.ChangeDBAndStore(obi,-result);
@@ -260,6 +282,7 @@ ChangeDBAndStore(obi,result) {
 
       } else {
    //     this.setState({selectedDate2:day});
+   this.setState({selectedDate1:day});
       }
   }
 
@@ -308,14 +331,28 @@ ChangeDBAndStore(obi,result) {
     }
     if(this.props.hasSend == true) {
       console.log("change Haadfaf");
-    var obi = { begindate: this.state.selectedDate1, enddate: this.state.selectedDate2, type: this.state.reason,kindDescription:kindDescription,idUser:this.props.myId };
+    var obi = { begindate: this.state.selectedDate1, enddate: this.state.selectedDate2, type: this.state.description,kindDescription:kindDescription,idUser:this.props.myId };
     var idHaadafa = this.props.data._id;
     obi["_id"] = idHaadafa;
     //this.props.changeHaadafa(obi);
     this.props.HaadafaMiddleWar(obi,"change",0);
     }
   }
-  
+  changeDescription(description) {
+    this.setState({description:description});
+
+}
+  onBlurDescription(value) {
+  //  this.setState({description:description});
+    if(this.props.hasSend == true) {
+      console.log("change Haadfaf");
+      var obi = { begindate: this.state.selectedDate1, enddate: this.state.selectedDate2, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
+      var idHaadafa = this.props.data._id;
+      obi["_id"] = idHaadafa;
+      //this.props.changeHaadafa(obi);
+      this.props.HaadafaMiddleWar(obi,"change",0);    }
+  }
+
   
   render() {
     console.log("renderhaadafa" , this.state);
@@ -362,7 +399,8 @@ ChangeDBAndStore(obi,result) {
               leftArrowIcon={<i className="material-icons">chevron_right</i>}
             />
           </MuiPickersUtilsProvider>
-          <Select
+          
+       <Select
             className="blob"
             value={this.state.kindValue}
             inputProps={{
@@ -399,7 +437,7 @@ ChangeDBAndStore(obi,result) {
               </span>
             </MenuItem>
             </Select>
-              {this.state.kindValue == 10? 
+              {/* {this.state.kindValue == 10? 
           <Select
             className="blob"
             value={this.state.values}
@@ -458,8 +496,12 @@ ChangeDBAndStore(obi,result) {
               name: "age",
               id: "age-simple"
             }}
-          ></Select> }
-
+          ></Select> }  */}
+          <TextField className="blob" required="true" value={this.state.description}  onBlur={(e) => this.onBlurDescription(e)}
+           onChange={(event) => this.changeDescription(event.target.value)} inputProps={{
+              name: "age",
+              id: "age-simple"
+            }} />
         </div>
       </Paper>) : null 
       }
@@ -484,4 +526,4 @@ return {
 
 }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Haadafot);
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Haadafot));

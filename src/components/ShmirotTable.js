@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import LoadingPage from "./LoadingPage";
 import CONFIG from "../configs/env"
 import Button from "@material-ui/core/Button";
+import {connect} from "react-redux";
 
 import ShmirotTableCompSmall from './ShmirotTableCompSmall'
 import TabCompSmall from './TabCompSmall';
@@ -87,6 +88,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
     UNSAFE_componentWillMount() {
         console.log("UNSAFE_componentWillMount");
+        var roleValueInitinal = 0;
+        if(this.props.jobs.length !=0) {
+         roleValueInitinal = this.props.jobs[0]._id;
+        }
+        this.setState({selectValue:roleValueInitinal});
         this.fetchyfetch();
      //   this.fetchToranot();
     }
@@ -239,5 +245,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
         );
     }
 }
-export default withStyles(styles)(ShmirotTable);
+const mapStateToProps = state => ({
+    toranim: state.toranim.toranimNextMonth,
+    myId: state.user._id,
+    jobs: state.jobs
+})
+
+
+export default connect(mapStateToProps,null)(withStyles(styles)(ShmirotTable));
 //
