@@ -146,3 +146,29 @@
   background-color: #d32f2f !important;
   margin-right: 10px !important;
 }
+
+.full-map-key {
+  border: 5px solid teal;
+  width: 290px;
+  height: 180px;
+}
+.header-map-key {
+  margin-top: 3px;
+  height: 30px;
+  width: 100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  font-size: 20px;
+}
+.list-map-key {
+  display: flex;
+}
+
+.map-key-nameColor {
+  width: 40px;
+}
+
+.map-key-description {
+  margin-right: 10px;
+  /* width: 40px; */
+}

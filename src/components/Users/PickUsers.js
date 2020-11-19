@@ -6,6 +6,7 @@ import TableUsers from './TableUsers';
 import Button from '@material-ui/core/Button';
 import SearchInput, {createFilter} from 'react-search-input'
 import {connect} from "react-redux";
+import {middleWare} from "../../Actions/toranimAction";
 class PickUsers extends React.Component {
     constructor(props) {
         super(props);
@@ -156,7 +157,11 @@ class PickUsers extends React.Component {
     }
 }
 
-
+function mapDispatchToProps(dispatch) {
+    return {
+        ChangeToranim: dispatch(middleWare())
+    };
+}
 
 
 function mapStateToProps(state,ownProps) {
@@ -168,4 +173,4 @@ function mapStateToProps(state,ownProps) {
 
 }
 
-export default connect(mapStateToProps,null)(PickUsers);
+export default connect(mapStateToProps,mapDispatchToProps)(PickUsers);

@@ -1,4 +1,4 @@
-import {ADD_FREIND_TORAN,INIT_TORANIM} from "../Actions/toranimAction";
+import {ADD_FREIND_TORAN,INIT_TORANIM,SET_COLOR} from "../Actions/toranimAction";
 
 const INITIAL_STATE = {};
 export const toranim = (state = INITIAL_STATE, action) => {
@@ -6,7 +6,8 @@ export const toranim = (state = INITIAL_STATE, action) => {
        case INIT_TORANIM:
         return {
            toranimThisMonth:action.toranimThisMonth,
-           toranimNextMonth:action.toranimNextMonth
+           toranimNextMonth:action.toranimNextMonth,
+           colors: []
         }; 
       case ADD_FREIND_TORAN:
         return {
@@ -21,6 +22,34 @@ export const toranim = (state = INITIAL_STATE, action) => {
            })
 
         };
+      case SET_COLOR:
+        return {
+          ...state, 
+          colors:[...state.colors , {idUser: action.idUser,color: action.color}]
+        }
+        // if(action.monthTab == 0) {
+        //   return {
+        //     ...state,
+        //     toranimThisMonth: state.toranimThisMonth.map(item => {
+        //       if(action.id != item._id) {
+        //         return item;
+        //       } else {
+        //         return {...item,item,color:action.color};
+        //       }
+        //     })
+        //   };
+        // } else {
+        //   return {
+        //   ...state,
+        //   toranimNextMonth: state.toranimNextMonth.map(item => {
+        //     if(action.id != item._id) {
+        //       return item;
+        //     } else {
+        //       return {...item,color:action.color};
+        //     }
+        //   })
+        // };
+        //}
       default:
           return state;  
       }

@@ -1,6 +1,14 @@
 import React from "react";
 import CONFIG from "../configs/env"
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+const styles = theme => ({
+    dialogPaper: {
+        width: "300px",
+    }
+   
+  });
+
 
 export default class ShmirotTableCompSmall extends React.Component {
 
@@ -246,6 +254,7 @@ export default class ShmirotTableCompSmall extends React.Component {
     }
 
     render() {
+        const {classes} = this.props;
         return (
             <div style={{ width: "100%" }}>
                 <div style={{ width: "100%", textAlign: "center", border: "teal 1px solid", marginTop: "10px", borderRadius: "", overflow: "hidden", padding: "" }}>

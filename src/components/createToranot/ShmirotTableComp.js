@@ -71,8 +71,9 @@ import CONFIG from "../../configs/env"
             var toran = el.toran;
             var points = el.userDetails.points;
             var chosen = false
+            var idUser = el.userDetails._id;
             var obi = {
-                date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points
+                date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points,idUser
             }
        //   console.log("objectr",obi.name);
           console.log("type" , type , this.props.selectValue);
@@ -92,9 +93,17 @@ import CONFIG from "../../configs/env"
     getLstDayOfMonth = (date) => {
         return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
     }
+    getColor(id) {
+        for(var i=0;i<this.props.colors.length;i++) {
+            console.log("colorsss" , this.props.colors[i].idUser , id);
+            if(this.props.colors[i].idUser ==  id) {
+                console.log("propsColor" , this.props.colors[i].color);
+                return this.props.colors[i].color;
+            }
+        }
+    } 
 
-
-    createTableBody = (tempArri) => {
+      createTableBody(tempArri)  {
         //console.log("tempArri",tempArri);
         var d = new Date();
         if (this.props.tabValue === 1) {
@@ -114,9 +123,11 @@ import CONFIG from "../../configs/env"
                     let user = tempArri[x][g];
                     if (user.toran === 0) {
                         let xio = tempi2.pop()
+                       const color =  this.getColor(tempArri[x][g].idUser);
+                        console.log("color" , color);
                         tempi2.push(
                             <div key={g} className="shmirotDataHolder">
-                                <span className="shmirotToran">
+                                <span style={{backgroundColor: color}} className="shmirotToran">
                                     {tempArri[x][g].name}
                                 </span>
                                 <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
@@ -198,6 +209,23 @@ import CONFIG from "../../configs/env"
      //   console.log("delete " , user);
         this.props.deleteToranot(user,this.props.tabValue);
     }
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps', nextProps);
+        if (this.props !== nextProps) {
+        //  this.setState(nextProps);
+        
+        }
+       }
+    getAmountShmirotPerDay() {
+        for(var i=0;i<this.props.jobs.length;i++) {
+            if(this.props.jobs[i]._id == this.props.selectValue) {
+                return this.props.jobs[i].numToranotPerDay;
+            }
+        }
+    }
+    clickDiv(x) {
+        console.log("clickDiv" , x);
+    }
 
     createTds = (arri2) => {
         var allRowArri = [];
@@ -221,7 +249,7 @@ import CONFIG from "../../configs/env"
                         status2 = true;
                     }
                    // rowArri[x] = <div key={x} style={{ backgroundColor: status? "lightblue" : "white"}} className="shmirotCell" >
-                   rowArri[x] = <div key={x} style={status? status? {background:"lightblue"}: {background:"white"} : status2? {background:"lightgreen"}:{background:"white"}} className="shmirotCell" >
+                   rowArri[x] = <div onClick={this.clickDiv} key={x} style={status? status? {background:"lightblue"}: {background:"white"} : status2? {background:"lightgreen"}:{background:"white"}} className="shmirotCell" >
                         <span className="cellDate">
                             {arri2[g].num}
                         </span>
@@ -241,6 +269,7 @@ import CONFIG from "../../configs/env"
         }
         return allRowArri
     }
+    
 
     render() {
         console.log("renderShmirotTable");
@@ -281,6 +310,8 @@ function mapStateToProps(state,ownProps) {
     }
     } else {
         return {
+        jobs: state.jobs,
+        colors: state.toranim.colors,
         toranots: state.toranots,
         haadafot: []
         }

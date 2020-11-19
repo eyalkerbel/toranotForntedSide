@@ -8,6 +8,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Notifications from "react-notifications-menu";
 import CONFIG from "../configs/env";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Clock from 'react-live-clock';
 
 export default class SideBar extends React.Component {
   constructor() {
@@ -135,6 +136,9 @@ export default class SideBar extends React.Component {
             
           </div>
           <div className="homemadetoolbar2">
+          <h1>
+            <Clock format="D/M/YYYY, h:mm:ss " interval={1000} ticking={true} />
+          </h1>
             <IconButton onClick={() => this.deleteSession()} className="item1">
               <i className="material-icons" style={{ color: "ghostwhite" }}>verified_user</i>
             </IconButton>

@@ -695,7 +695,7 @@ a {
 }
 
 .shmirotToran {
-  background-color: teal;
+  /* background-color: teal; */
   border-radius: 4px; 
   flex: 1; 
   color: white;

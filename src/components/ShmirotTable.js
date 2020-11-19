@@ -14,9 +14,15 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { List } from '@material-ui/core';
+import { ListItem } from '@material-ui/core';
+
   const styles = theme => ({
     dialogPaper: {
         width: "300px",
+    },
+    itemList: {
+        width: "100%"
     },
     cancelButton: {
         background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(238,9,11,1) 0%, rgba(255,0,0,1) 100%, rgba(121,9,9,1) 100%)",
@@ -212,6 +218,41 @@ import DialogTitle from '@material-ui/core/DialogTitle';
                                 {this.createTable()}
                             </div>
                         </div>
+                        <div className="full-map-key">
+                        <div className="header-map-key">
+                             מקרא:
+                        </div>
+                        <div className="list-map-key">
+                                <List style={{overflow: "hidden", direction: "rtl",width: "100%" }}>
+                                 <ListItem style={{ justifyContent: "flex-start"}}>
+                                    <div className="map-key-nameColor">
+                                        אדום:
+                                    </div>
+                                    <div className="map-key-description">
+                                        לא מרוצה
+                                    </div>
+                                 </ListItem> 
+                                 <ListItem style={{ justifyContent: "flex-start"}}>
+                                    <div className="map-key-nameColor">
+                                       תכלת:
+                                    </div>
+                                    <div className="map-key-description">
+                                        לא ידוע
+                                    </div>
+                                 </ListItem>
+                                 <ListItem style={{ justifyContent: "flex-start"}}>
+                                    <div className="map-key-nameColor">
+                                        ירוק:
+                                    </div>
+                                    <div className="map-key-description">
+                                       מרוצה
+                                    </div>
+                                 </ListItem>  
+                                </List>
+                                </div>
+
+                        </div>
+
                         <Dialog PaperProps={{ classes: {root: classes.dialogPaper} }}
         open={this.state.open}
         onClose={this.handleClose}

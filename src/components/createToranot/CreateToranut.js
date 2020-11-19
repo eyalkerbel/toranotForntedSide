@@ -11,7 +11,7 @@ import UserListComp from './UserListComp'
 import CONFIG from "../../configs/env"
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import FriendList from "./FriendList";
-
+import {setColor} from "../../Actions/toranimAction";
  class CreateToranut extends React.Component {
     constructor() {
         super();
@@ -62,9 +62,44 @@ import FriendList from "./FriendList";
        if(this.props.jobs.length !=0) {
         roleValueInitinal = this.props.jobs[0]._id;
        }
+
+
+       this.setColorsInRedux();
+
        this.setState({selectValue:roleValueInitinal});
         this.fotchyfetch();
     }
+    setColorsInRedux() {
+        for(var i=0;i<this.props.toranimThisM.length;i++) {
+            this.props.setColor(this.props.toranimThisM[i].idUser,this.getRandomColor(),0);
+       }
+       for(var i=0;i<this.props.toranimNextM.length;i++) {
+           var checkExist = false;
+            for(var j=0;j<this.props.toranimThisM.length;j++) {
+                if(this.props.toranimThisM[j].idUser == this.props.toranimNextM[i].idUser) {
+                    checkExist = true;
+                    console.log("foundOne");
+                }
+            }
+            if(checkExist == false) {
+                console.log("notfound");
+                this.props.setColor(this.props.toranimNextM[i].idUser,this.getRandomColor(),1);
+
+            }    
+
+       }  
+    }
+
+
+     getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+      
 
    
     fotchyfetch(userid) {
@@ -203,7 +238,7 @@ import FriendList from "./FriendList";
                             <TabComp selectedUser={this.state.selectedUser.userDetails} bubbleTabs={this.bubbleTabs} bubbleSelect={this.bubbleSelect} tabValue={this.state.tabValue} selectValue={this.state.selectValue} />
                         </div>
                         <div style={{ display: "flex", width: "100%", marginBottom: "20px" }}>
-                            <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px" }}>
+                            <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px"}}>
                                 <List style={{ height: "30vh", overflow: "hidden", direction: "ltr", borderBottom: "2px solid teal" }}>
                                     <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} tabValue={this.state.tabValue} />
                                 </List>
@@ -227,10 +262,20 @@ import FriendList from "./FriendList";
         );
     }
 }
+function mapDispatchToProps(dispatch) {
+    return {
+        setColor:(id,color,monthTab) => dispatch(setColor(id,color,monthTab))
+    };
+}
+
+
 const mapStateToProps = state => ({
+    colors:state.toranim.colors,
+    toranimThisM: state.toranim.toranimThisMonth,
+    toranimNextM: state.toranim.toranimNextMonth,
     toranim: state.toranim.toranimNextMonth,
     myId: state.user._id,
     jobs: state.jobs
 })
 
-export default connect(mapStateToProps,null) (CreateToranut);
+export default connect(mapStateToProps,mapDispatchToProps) (CreateToranut);
