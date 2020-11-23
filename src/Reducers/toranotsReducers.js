@@ -22,12 +22,12 @@
           case DELETE_TORANOT_THIS_MONTH:
             return {
               ...state,
-              toranotsThisMonth: state.toranotsThisMonth.filter(item => item._id != action.toranot.id)
+              toranotsThisMonth: state.toranotsThisMonth.filter(item => item._id != action.toranot._id)
             }
             case DELETE_TORANOT_NEXT_MONTH:
               return {
                 ...state,
-                toranotsNextMonth: state.toranotsNextMonth.filter(item => item._id != action.toranot.id)
+                toranotsNextMonth: state.toranotsNextMonth.filter(item => item._id != action.toranot._id)
               }
               case SET_TORANOT__ID:
                 console.log("setToranotId");

@@ -24,6 +24,7 @@ import { Select, MenuItem } from "@material-ui/core";
     }
 
     render() {
+        console.log("renderTabComp" , this.props);
         return (
             <AppBar position="static" style={{ backgroundColor: "white", display: "flex", flexDirection: "row" }}>
                 <div style={{ flex: "1", color: "teal", display: "flex", justifyContent: "center", alignItems: "center" }} className="diffselect" >

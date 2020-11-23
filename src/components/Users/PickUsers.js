@@ -157,11 +157,11 @@ class PickUsers extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        ChangeToranim: dispatch(middleWare())
-    };
-}
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         ChangeToranim: dispatch(middleWare())
+//     };
+//}
 
 
 function mapStateToProps(state,ownProps) {
@@ -173,4 +173,4 @@ function mapStateToProps(state,ownProps) {
 
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(PickUsers);
+export default connect(mapStateToProps,null)(PickUsers);

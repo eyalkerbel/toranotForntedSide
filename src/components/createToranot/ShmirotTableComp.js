@@ -5,17 +5,28 @@ import CONFIG from "../../configs/env"
 // import user from "../Reducers/UserReducer";
  import {SetNotification} from "../../Actions/NotificationAction";
  import {addToranot,deleteToranot} from "../../Actions/toranotsAction";
+ import ShmirotCell from "./ShmirotCell";
+ import shortid from 'shortid'; 
+ import DialogCell from "./DialogCell";
  class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             priorityHaadafot: [],
-            usersPiorrity: []
+            usersPiorrity: [],
+            CurrentCellData: null,
+            openDailog: false,
+            currentGooi: null,
+            currentDateDialog: null
         };
+        this.getColor = this.getColor.bind(this);
+        this.preSend = this.preSend.bind(this);
+        this.createTableBody = this.createTableBody.bind(this);
+        this.openCellDialog = this.openCellDialog.bind(this);
+        this.closeDialog = this.closeDialog.bind(this);
     }    
     
     InjectDayOfWeekForHaadafa = (arrina) => {
-    //console.log("selectedValue" , this.props.selectedUser.name);
     if(this.props.selectedUser != undefined){
         const haadafot = this.props.haadafot;
         const piority = this.props.piorityArray;
@@ -48,7 +59,6 @@ import CONFIG from "../../configs/env"
     }
 
     createMainArri = (num) => {
-    //   console.log("shmirotTableComp",this.props.fetchedArri)
       // var temp = this.props.fetchedArri[num];
       var temp = [];
         if(num == 0) {
@@ -56,8 +66,6 @@ import CONFIG from "../../configs/env"
         } else {
             temp = this.props.toranots.toranotsNextMonth;
         }
-        console.log("toranust from redux" , temp)
-      //  console.log(temp);
         var tempArri = [];
         if(temp != undefined) {
         temp.forEach(el => {
@@ -67,26 +75,26 @@ import CONFIG from "../../configs/env"
             var type = el.userDetails.type
             var name = el.userDetails.name
             var userid = el.userDetails.userid
-            var id = el._id
+            var _id = el._id
             var toran = el.toran;
             var points = el.userDetails.points;
             var chosen = false
             var idUser = el.userDetails._id;
+            var shmiraType = el.shmiraType;
             var obi = {
-                date, dayOfWeek, dayOfMonth, type, name, userid, id, toran, chosen, points,idUser
+                date, dayOfWeek, dayOfMonth, type, name, userid, _id, toran, chosen, points,idUser,shmiraType
             }
-       //   console.log("objectr",obi.name);
-          console.log("type" , type , this.props.selectValue);
+        if (this.props.selectValue === type) {
                 if (tempArri[dayOfMonth] == null) {
                     tempArri[dayOfMonth] = [];
                     tempArri[dayOfMonth].push(obi)
                 } else {
                     tempArri[dayOfMonth].push(obi)
                 }
-
+            }
         })
+        
     }
-    console.log("tempArri" , tempArri);
         return (this.createTableBody(tempArri))
     }
 
@@ -95,16 +103,13 @@ import CONFIG from "../../configs/env"
     }
     getColor(id) {
         for(var i=0;i<this.props.colors.length;i++) {
-            console.log("colorsss" , this.props.colors[i].idUser , id);
-            if(this.props.colors[i].idUser ==  id) {
-                console.log("propsColor" , this.props.colors[i].color);
+           if(this.props.colors[i].idUser ==  id) {
                 return this.props.colors[i].color;
             }
         }
     } 
 
       createTableBody(tempArri)  {
-        //console.log("tempArri",tempArri);
         var d = new Date();
         if (this.props.tabValue === 1) {
             d.setMonth(d.getMonth() + 1);
@@ -119,22 +124,20 @@ import CONFIG from "../../configs/env"
 
             if (tempArri[x] != null) {
                 for (var g = 0; g < tempArri[x].length; g++) {
-
                     let user = tempArri[x][g];
+                    console.log("user" , user)
                     if (user.toran === 0) {
-                        let xio = tempi2.pop()
+                        // let xio = tempi2.pop()
                        const color =  this.getColor(tempArri[x][g].idUser);
-                        console.log("color" , color);
-                        tempi2.push(
-                            <div key={g} className="shmirotDataHolder">
+                        tempi2[user.shmiraType] = <div key={g} className="shmirotDataHolder">
                                 <span style={{backgroundColor: color}} className="shmirotToran">
-                                    {tempArri[x][g].name}
+                                    {user.name}
                                 </span>
                                 <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
                                     <i style={{ fontSize: "20px" }} className="material-icons">delete</i>
                                 </Fab>
-                            </div>)
-                        tempi2.push(xio)
+                            </div>
+                        // tempi2.push(xio)
                     } else {
                         tempi2.push(
                             <div key={g} className="shmirotDataHolder">
@@ -159,7 +162,8 @@ import CONFIG from "../../configs/env"
         return (this.InjectDayOfWeekForHaadafa(arri2))
     }
 
-    preSend = (numOfDay, selectedUser, type, toran) => {
+    preSend = (numOfDay, selectedUser, type, toran,shmiraType) => {
+        console.log("preSend" , shmiraType );
         let date = new Date();
         if (this.props.tabValue === 1) {
             date = new Date(new Date().setMonth(date.getMonth() + 1))
@@ -176,10 +180,11 @@ import CONFIG from "../../configs/env"
             toran: toran,
             points: selectedUser.points,
             userDetails: selectedUser,
-            friendDetails: this.props.friendToran
+            friendDetails: this.props.friendToran,
+            shmiraType: shmiraType
         }
+
         this.send(obi);
-     //   console.log("fsds");
     }
     }
 
@@ -191,13 +196,15 @@ import CONFIG from "../../configs/env"
             userStatus: "unknown",
             availableForExchange: true,
             userDetails: this.props.selectedUser,
-            toran: obi.toran
+            toran: obi.toran,
+            shmiraType: obi.shmiraType
         }
         var user;
     //   this.props.addNotification(obi.date);
         var ThisOrNext = null;
         if(this.props.selectedUser.name  != "בחר משתמש")
         this.props.addToranot(obi,DataForRedux);
+        // this.setState({curre})
     }
 
     preDelete = (user) => {
@@ -206,12 +213,10 @@ import CONFIG from "../../configs/env"
 
     deleteToranut = (user) => {
         var ThisOrNext = null
-     //   console.log("delete " , user);
-        this.props.deleteToranot(user,this.props.tabValue);
+       this.props.deleteToranot(user,this.props.tabValue);
     }
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps', nextProps);
-        if (this.props !== nextProps) {
+       if (this.props !== nextProps) {
         //  this.setState(nextProps);
         
         }
@@ -223,8 +228,15 @@ import CONFIG from "../../configs/env"
             }
         }
     }
+    openCellDialog(shmirotCellData,currentGooi,currentDateDialog) {
+        if(this.props.selectedUser != undefined)
+        {
+            console.log("currentCellData" , shmirotCellData);
+        this.setState({CurrentCellData:shmirotCellData,openDailog: true,currentGooi:currentGooi,currentDateDialog:currentDateDialog});
+        }
+    }
+
     clickDiv(x) {
-        console.log("clickDiv" , x);
     }
 
     createTds = (arri2) => {
@@ -249,13 +261,15 @@ import CONFIG from "../../configs/env"
                         status2 = true;
                     }
                    // rowArri[x] = <div key={x} style={{ backgroundColor: status? "lightblue" : "white"}} className="shmirotCell" >
-                   rowArri[x] = <div onClick={this.clickDiv} key={x} style={status? status? {background:"lightblue"}: {background:"white"} : status2? {background:"lightgreen"}:{background:"white"}} className="shmirotCell" >
-                        <span className="cellDate">
-                            {arri2[g].num}
-                        </span>
-                        {arri2[g].names}
-                        <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >הוסף</Button>
-                    </div>;
+                //    rowArri[x] = <div onClick={this.clickDiv} key={x} style={status? status? {background:"lightblue"}: {background:"white"} : status2? {background:"lightgreen"}:{background:"white"}} className="shmirotCell" >
+                //         <span className="cellDate">
+                //             {arri2[g].num}
+                //         </span>
+                //         {arri2[g].names}
+                //         <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >הוסף</Button>
+                //     </div>;
+                    rowArri[x] = <ShmirotCell openCellDialog={this.openCellDialog} key={shortid.generate()} x={x} status2={status2} status={status} g={g} arri2={arri2} preSend={this.preSend} gooi={gooi} {...this.props} />
+
                 }
                 else if (started === false) {
                     rowArri[x] = <div key={x} className="emptyCell"><span></span></div>;
@@ -269,10 +283,12 @@ import CONFIG from "../../configs/env"
         }
         return allRowArri
     }
-    
+    closeDialog() {
+        this.setState({openDailog:false});
+    }
 
     render() {
-        console.log("renderShmirotTable");
+        const amountPerDay = this.getAmountShmirotPerDay();
         return (
             <div style={{ width: "100%" }}>
                 <div className="shmirotHeadersContainer">
@@ -293,6 +309,8 @@ import CONFIG from "../../configs/env"
                         )
                     })}
                 </div>
+                <DialogCell toranots={this.props.toranots} preSend={this.preSend} open={this.state.openDailog} handleClose={this.closeDialog} cellData={this.state.CurrentCellData} amountPerDay={amountPerDay} selectedUser={this.props.selectedUser} 
+                preDelete={this.preDelete} selectValue={this.props.selectValue} toran={this.props.toran} gooi={this.state.currentGooi} tabValue={this.props.tabValue} currentDateDialog={this.state.currentDateDialog} />
             </div>
         );
     }
@@ -302,9 +320,10 @@ const mapDispatchToProps = dispatch => ({
     deleteToranot: (toranot,monthValue) => dispatch(deleteToranot(toranot,monthValue))
 })
 function mapStateToProps(state,ownProps) {
-    console.log("ownProps" , ownProps)
     if(ownProps.selectedUser  != undefined) {
     return {
+        jobs: state.jobs,
+    colors: state.toranim.colors,
     toranots: state.toranots,
     haadafot: state.allHaadafot.filter(hadafa => hadafa.idUser == ownProps.selectedUser._id )
     }
@@ -313,7 +332,7 @@ function mapStateToProps(state,ownProps) {
         jobs: state.jobs,
         colors: state.toranim.colors,
         toranots: state.toranots,
-        haadafot: []
+        haadafots: []
         }
     }
 }

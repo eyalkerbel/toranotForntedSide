@@ -6,6 +6,7 @@ import "./styles/login.css";
 import "./styles/userList.css";
 import "./styles/searchBar.css";
 import "./styles/job.css";
+import "./styles/DialogCell.css";
 import Switcher from "./Switcher";
 import * as serviceWorker from './serviceWorker';
 import user from './Reducers/UserReducer'

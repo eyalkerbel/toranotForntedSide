@@ -43,8 +43,8 @@ import {setColor} from "../../Actions/toranimAction";
     }
 
     bubbleSelect = (num) => {
-        console.log("numRole" , num);
-        this.setState({ selectValue: num })
+        console.log("numRole" , num );
+        this.setState({ selectValue: num,selectedUser: {name: "בחר משתמש" } })
     }
 
     selectUser = (el) => {
@@ -226,6 +226,7 @@ import {setColor} from "../../Actions/toranimAction";
     }
 
     render() {
+        console.log("CreateToranot" , this.state);
         return (
             <Fragment>
                 {this.state.loaded ? (
