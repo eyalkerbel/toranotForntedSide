@@ -16,8 +16,10 @@ import {connect} from "react-redux";
 import ButtonInDialog from "./ButtonInDialog";
 const styles = theme => ({
     dialogPaper: {
-        width: "70%",
+        width: "100%",
         height: "500px",
+        paddingRight: "0 !important",
+        paddingLeft: "0 !important"
       
         
     },
@@ -90,13 +92,13 @@ class DialogCell extends React.Component {
             }
           return false;
       }
-      renderBody() {
+      renderBody(postion) {
          
 
           var arri=[];
           console.log("amountPerDay" , this.props);
         for(var i=0;i<this.props.amountPerDay;i++) {
-            var shmiraType = this.hasShmiraType(i);
+            var shmiraType = this.hasShmiraType(i+postion);
             console.log("shmira type" , shmiraType ,i)
             console.log("succseed");
             arri.push(<ListItem style={{ justifyContent: "flex-start"}}>
@@ -104,7 +106,7 @@ class DialogCell extends React.Component {
                                      {this.state.arrayOfShapes[i]}
                                     </div>
                                     {  shmiraType == false?
-                                    <ButtonInDialog {...this.props} shmiraType={i} />
+                                    <ButtonInDialog {...this.props} shmiraType={i+postion} />
                                    : shmiraType
                                    
                                     }
@@ -119,47 +121,31 @@ class DialogCell extends React.Component {
         const {classes} = this.props;
         console.log("shapes" ,this.state.arrayOfShapes);
         return (
-            <Dialog PaperProps={{ classes: {root: classes.dialogPaper} }} open={this.props.open} onClose={this.handleClose}>
+            <Dialog  repositionOnUpdate={false}
+            style={{ padding: '0px 0px 0px 0px' }}
+            PaperProps={{ classes: {root: classes.dialogPaper} }} open={this.props.open} onClose={this.handleClose}>
             <DialogTitle id="alert-dialog-slide-title">שיבוץ תורנים</DialogTitle>
           <DialogContent classes={{root: classes.dialogPaper }}>
-              <div id="div_full_dialog">
-          
           {this.props.open? 
-            <div className="list-map-key">
+              <div id="div_full_dialog_Cell">
+                <div id="div_right_dialog">
+               
+                            <div className="list-map-key">
                                 <List style={{overflow: "hidden", direction: "rtl",width: "100%" }}>
-                               { this.renderBody()}
-                                {/*     
-                                 <ListItem style={{ justifyContent: "flex-start"}}>
-                                    <div className="map-key-nameColor">
-                                        אדום:
-                                    </div>
-                                    <div className="map-key-description">
-                                        לא מרוצה
-                                    </div>
-                                 </ListItem> 
-                                 <ListItem style={{ justifyContent: "flex-start"}}>
-                                    <div className="map-key-nameColor">
-                                       תכלת:
-                                    </div>
-                                    <div className="map-key-description">
-                                        לא ידוע
-                                    </div>
-                                 </ListItem>
-                                 <ListItem style={{ justifyContent: "flex-start"}}>
-                                    <div className="map-key-nameColor">
-                                        ירוק:
-                                    </div>
-                                    <div className="map-key-description">
-                                       מרוצה
-                                    </div>
-                                 </ListItem>   */}
-                                </List>
-                                </div>
+                               { this.renderBody(0)}
+                               </List>
+                            </div>
+                </div>
+                <div className="divider3">
 
-           
-           
-            : null}
-          </div>
+                </div>
+                <div id="div_left_dialog">
+                { this.renderBody(5)}
+
+                </div>
+                </div> : null}
+          
+                         
           </DialogContent>
           <DialogActions>
           

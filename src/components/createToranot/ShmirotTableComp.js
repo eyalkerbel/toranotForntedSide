@@ -133,9 +133,9 @@ import CONFIG from "../../configs/env"
                                 <span style={{backgroundColor: color}} className="shmirotToran">
                                     {user.name}
                                 </span>
-                                <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
+                                {/* <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
                                     <i style={{ fontSize: "20px" }} className="material-icons">delete</i>
-                                </Fab>
+                                </Fab> */}
                             </div>
                         // tempi2.push(xio)
                     } else {

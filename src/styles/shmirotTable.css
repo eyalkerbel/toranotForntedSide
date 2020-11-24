@@ -10,6 +10,13 @@
   min-height: 100% !important;
 }
 
+.divider2{
+  width: 100%;
+  border-bottom: solid lightgray 1px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0,-50%);
+}
 .shmirot-table-content{
   display: flex;
    width: 100%;
@@ -128,6 +135,7 @@
   display: flex;
   min-height: 12vh;
   padding: 5px;
+  overflow: hidden;
 }
 .shmirotHeadersContainer{
   width: 100%;
@@ -136,7 +144,17 @@
   margin-top: 10px;
   overflow: hidden;
 }
+.full-cell-details {
+  width: 100%;
+  height: 100%;
+  position: relative;
 
+}
+.secondRowCell {
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+}
 
 .fobi1 {
   background-color: teal !important;
@@ -171,4 +189,14 @@
 .map-key-description {
   margin-right: 10px;
   /* width: 40px; */
+}
+
+.row-xs-12 {
+  white-space: nowrap !important;
+  max-height: 100%;
+  overflow: auto;
+}
+.row-xs-3 {
+  float: none !important;
+  display: inline-block !important;
 }
