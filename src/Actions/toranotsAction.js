@@ -1,6 +1,6 @@
 import CONFIG from "../configs/env";
 import shortid from 'shortid';
-
+import {changePoints, ChangePoints} from "./usersAction";
 export const INIT_TORANOTS = 'INIT_TORANOTS';
 export const ADD_TORANOT_THIS_MONTH = 'ADD_TORANOT_THIS_MONTH';
 export const ADD_TORANOT_NEXT_MONTH = 'ADD_TORANOT_NEXT_MONTH';
@@ -67,6 +67,7 @@ export const addToranotNextMonth = (toranot) => ({
         if(jsoned.length == 1) {
       //  console.log("setTotanotIdInMiddleware") 
          dispatch(setToranotID(id,jsoned[0]._id,jsoned[0].monthTab))
+
          } else {
           dispatch(setToranotID(id,jsoned[0]._id,jsoned[0].monthTab))
           dispatch(setToranotID(idFriend,jsoned[1]._id,jsoned[1].monthTab))
@@ -74,7 +75,11 @@ export const addToranotNextMonth = (toranot) => ({
          }
 
  
-    });     
+    });
+           dispatch(changePoints(dataForRedux.idUser,"add"));
+          if(toranot.friendDetails != null) {
+            dispatch(changePoints(toranot.friendDetails.userDetails._id,"add"));
+          }
           if(toranot.monthTab == 0) {
             dispatch(addToranotThisMonth(dataForRedux));
             if(toranot.friendDetails != null) {
@@ -93,10 +98,11 @@ export const addToranotNextMonth = (toranot) => ({
             //   dataReduxFriend["_id"] = idFriend;
             //  dataReduxFriend["userDetails"] = toranot.friendDetails.userDetails;
               dispatch(addToranotThisMonth(dataReduxFriend));
-
+            //  dispatch(changePoints(toranot.friendDetails.userDetails._id,'add'));
             }
         } else {
-          dispatch(addToranotNextMonth(dataForRedux))    
+          dispatch(addToranotNextMonth(dataForRedux))
+     //     dispatch(changePoints(id,'add'));    
           if(toranot.friendDetails != null) {
             var dataReduxFriend = {
               date:toranot.date,
@@ -113,7 +119,7 @@ export const addToranotNextMonth = (toranot) => ({
             // dataReduxFriend["_id"] = idFriend;
             // dataReduxFriend["userDetails"] = toranot.friendDetails.userDetails;
             dispatch(addToranotNextMonth(dataReduxFriend));
-
+            dispatch(toranot.friendDetails.userDetails._id,"add");
           } 
          }
   }
@@ -128,6 +134,8 @@ export function deleteToranot(toranot,monthValue) {
       },
       body: JSON.stringify(toranot)
   });
+dispatch(changePoints(toranot.idUser,"delete"));
+
    if(monthValue == 0){
     dispatch(deleteToranotThisMonth(toranot));
   } else {

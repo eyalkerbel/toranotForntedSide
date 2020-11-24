@@ -44,6 +44,14 @@ class UserListComp extends React.Component {
         var userListNextMonth = this.props.toranim.toranimNextMonth;
         this.setState({userListThis:userListThisMonth,userListNext:userListNextMonth});
     }
+
+    getPointtById(id) {
+        for(var i=0;i<this.props.users.length;i++) {
+            if(this.props.users[i]._id == id ) {
+                return this.props.users[i].points;
+            }
+        }
+    }
     createUserList() {
         var arri = [];
         // if(this.state.userList != undefined) {
@@ -69,8 +77,10 @@ class UserListComp extends React.Component {
               //  console.log("selecteduse ::",el , this.props.selectValue);
         
                 if (el.userDetails.type === this.props.selectValue) {
+                    var points = this.getPointtById(el.userDetails._id);
+                    console.log("points" , points)
                     arri.push(<ListItem key={i} button onClick={() => this.props.selectUser(el)}>
-                        <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {el.userDetails.points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
+                        <ListItemText draggable="true" primary={<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", flex: 1 }}><span> {el.userDetails.name} {points} </span><i className="material-icons" style={{ marginLeft: "5px", color: "teal" }}>person</i></div>}></ListItemText>
                     </ListItem>
                     )
                 }
@@ -90,7 +100,8 @@ class UserListComp extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    toranim: state.toranim
+    toranim: state.toranim,
+    users: state.users
 })
 
 
