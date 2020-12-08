@@ -170,7 +170,7 @@ this.setState({fetchArray:jsoned,fetched:true});
         blop: (
           <Paper className="maincontainer">
             <div className="header-container">
-              <h1 className="header">שמירות שלי</h1>
+              <h1 className="header">תורניות שלי</h1>
               <div className="divider" />
             </div>
             <div>
@@ -268,7 +268,7 @@ getDataFromAnswer(temp) {
         {this.state.fetched ==true ? (
           <Paper className="maincontainer">
             <div className="header-container">
-              <h1 className="header">שמירות שלי</h1>
+              <h1 className="header">תורניות שלי</h1>
               <div className="divider" />
             </div>
                 <div>

@@ -78,7 +78,7 @@ class LoginSon extends React.Component {
                                     }}
                                     onClick={() => this.props.handlelog()}
                                 >
-                                    <h3>הירשם למבמצר</h3>
+                                    <h3>הירשם למבצר</h3>
                                 </Button>
                             </NavLink>
                         </Card>

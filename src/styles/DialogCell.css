@@ -2,6 +2,11 @@
     width: 40px;
     text-align: center;
 }
+.list-item-shape-display {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 #div_full_dialog_Cell{
@@ -15,10 +20,14 @@
   }
 
 #div_right_dialog {
-    width: 50%;
+    width: 49%;
+    overflow-y: scroll;
+    height: 100%;
 }
 #div_left_dialog {
-    width: 50%;
+    width: 49%;
+    overflow-y: scroll;
+    height: 100%;
 
 }
 .divider3 {

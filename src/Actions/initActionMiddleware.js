@@ -9,7 +9,9 @@ import {initAllHaadafot} from "./AllHaadafotAction";
 import {initUserNotification} from "./UserNotficiationsAction";
 import {initPending} from "./PendingAction";
 import {initJobs} from "./jobsAction";
+import {SetColor,setAllColors} from "./toranimAction";
 export const initActionMiddleware = (premssionlvl)  => {
+  
   //  console.log("premss" , premssionlvl);
     
     return function(dispatch)  {
@@ -45,7 +47,44 @@ export const initActionMiddleware = (premssionlvl)  => {
                     dispatch(initJobs(data[9]));
                     dispatch(initPending());
                 }
+                var toranimThisMonth = data[5];
+                var ids = [];
+                for(var i=0;i<toranimThisMonth.length;i++) {
+                   ids.push(toranimThisMonth[i].idUser);
+                }
 
-            })
+                var toranimNextMonth = data[6];
+                // var temp = toranimNextMonth.map(el => !toranimThisMonth.idUser.includes(el.idUser));
+                var tempAdd =[];
+                for(var i=0;i<toranimNextMonth.length;i++) {
+                  var equal = false;
+                  for(var j=0;j<toranimThisMonth.length;j++) {
+                    if(toranimThisMonth[j].idUser == toranimNextMonth[i].idUser) {
+                      equal = true;
+                    }
+                  } 
+                  if(equal == false) {
+                    ids.push(toranimNextMonth[i].idUser);
+                  }
+                }
+                console.log("ids "  , ids);
+                console.log("toranim" , toranimThisMonth , toranimNextMonth);
+                var colors = [];
+                for(var i=0;i<data[1].length;i++) {
+                  colors.push({idUser:data[1][i]._id,color:getRandomColor()});
+                }
+                dispatch(setAllColors(colors));
+
+
+            });
         }
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }

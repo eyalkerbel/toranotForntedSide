@@ -17,9 +17,9 @@ export default class TabComp extends React.Component {
 
     render() {
         return (
-            <AppBar position="static" style={{ backgroundColor: "white", display: "flex", flexDirection: "row" }}>
+            <AppBar position="static" style={{  display: "flex", flexDirection: "row" }}>
                 <Select value={this.props.selectValue} onChange={this.handleSelect} style={{ flex: "2" }} className="diffselect">
-                    <MenuItem value={0}>שמירות שלי</MenuItem>
+                    <MenuItem value={0}>תורניות שלי</MenuItem>
                     <MenuItem value={1}>בקשות להחלפות</MenuItem>
                     <MenuItem value={2}>תשובות של החלפות</MenuItem>
                 </Select>

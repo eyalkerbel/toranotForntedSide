@@ -16,32 +16,46 @@ class ShmiortCell extends React.Component {
     openCellDialog() {
         this.props.openCellDialog(this.props.arri2[this.props.g],this.props.gooi,this.props.arri2[this.props.g].num);
     }
-
+    componentWillReceiveProps(nextProps){
+    }
 
     render() {
         const {classes} = this.props;
-        // console.log("ShmiortCellprops" , this.props.arri2[this.props.g]);
+        console.log("nextProps" , this.props);
+
         return (
-        <div onClick={this.openCellDialog} key={this.props.x} style={this.props.status? this.props.status? {background:"lightblue"}: {background:"white"} : this.props.status2? {background:"lightgreen"}:{background:"white"}} className="shmirotCell" >
+        <div onClick={this.openCellDialog} key={this.props.x} style={(this.props.status? this.props.status? {background:"lightblue"}: {background:"white"} : this.props.status2? {background:"lightgreen"}:null)} className="shmirotCell" >
             <span className="cellDate">
                 {this.props.arri2[this.props.g].num}
             </span>
             <div className="full-cell-details">
              <div class="row-xs-12">
-                {this.props.arri2[this.props.g]!= []?  this.props.arri2[this.props.g].names.map((el,index) => index < 5? <div class="row-xs-3">{el}</div> : null)
+             {this.props.arri2[this.props.g]!= []?  (this.props.arri2[this.props.g].names.map((el,index) => {
+                    if(index < (this.props.amountToranim)) {
+                        console.log("boomm");
+                        return <div class="row-xs-3">{el}</div>
+                    } else {
+                        return null;
+                    }
+                }))
                 : null}
             </div>
             <div className="divider2">
            
             </div>
-            <div className="secondRowCell">
+            {/* <div className="secondRowCell"> */}
             <div class="row-xs-12">
-                {this.props.arri2[this.props.g]!= []?  this.props.arri2[this.props.g].names.map((el,index) => index > 4? <div class="row-xs-3">{el}</div> : null)
+                {this.props.arri2[this.props.g]!= []?  (this.props.arri2[this.props.g].names.map((el,index) => {
+                    if(index > (this.props.amountToranim-1)) {
+                        console.log("boom2"  ,index);
+                        return <div class="row-xs-3">{el}</div>
+                    } else {
+                        return null;
+                    }
+                }))
                 : null}
             </div>
-            </div>
-            {/* <Divider classes={{root: classes.horizontalLine}} /> */}
-
+            {/* </div> */}
             </div>    
         </div>
         );

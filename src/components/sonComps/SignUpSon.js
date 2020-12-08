@@ -74,7 +74,7 @@ export default function LoginSon(props) {
                                 <MenuItem style={{ justifyContent: "center" }} value={4}>ע' קצין תורן</MenuItem>
                                 <MenuItem style={{ justifyContent: "center" }} value={5}>קצין תורן</MenuItem>
                                 <MenuItem style={{ justifyContent: "center" }} value={6}>מפקד תורן</MenuItem>
-                                <MenuItem style={{ justifyContent: "center" }} value={999}>לא עולה שמירות</MenuItem>
+                                <MenuItem style={{ justifyContent: "center" }} value={999}>לא עולה תורניות</MenuItem>
                             </Select>
                             <Button
                                 id="submitbtn"

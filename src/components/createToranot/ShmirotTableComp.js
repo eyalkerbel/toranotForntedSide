@@ -8,6 +8,8 @@ import CONFIG from "../../configs/env"
  import ShmirotCell from "./ShmirotCell";
  import shortid from 'shortid'; 
  import DialogCell from "./DialogCell";
+ import {Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle} from 'react-shapes';
+
  class ShmirotTableComp extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,9 @@ import CONFIG from "../../configs/env"
             CurrentCellData: null,
             openDailog: false,
             currentGooi: null,
-            currentDateDialog: null
+            currentDateDialog: null,
+            amountToranim: null,
+            arrayOfShapes: null
         };
         this.getColor = this.getColor.bind(this);
         this.preSend = this.preSend.bind(this);
@@ -25,7 +29,15 @@ import CONFIG from "../../configs/env"
         this.openCellDialog = this.openCellDialog.bind(this);
         this.closeDialog = this.closeDialog.bind(this);
     }    
-    
+    UNSAFE_componentWillMount() {
+        const amount = this.getAmountShmirotPerDay(this.props);
+        var arri =[];
+        arri.push(<Rectangle width={10} height={10} fill={{color:'white'}}  />)
+        arri.push(<Triangle width={10} height={10} fill={{color:'white'}}  />)
+        arri.push(<Circle r={5} fill={{color:'white'}}  />)
+        this.setState({amountToranim:amount,arrayOfShapes:arri});
+          
+    }
     InjectDayOfWeekForHaadafa = (arrina) => {
     if(this.props.selectedUser != undefined){
         const haadafot = this.props.haadafot;
@@ -130,7 +142,8 @@ import CONFIG from "../../configs/env"
                         // let xio = tempi2.pop()
                        const color =  this.getColor(tempArri[x][g].idUser);
                         tempi2[user.shmiraType] = <div key={g} className="shmirotDataHolder">
-                                <span style={{backgroundColor: color}} className="shmirotToran">
+                                <span style={{backgroundColor: color,marginRight:"4px"}} className="shmirotToran">
+                                {this.state.arrayOfShapes[(user.shmiraType%this.state.amountToranim) % 3]}
                                     {user.name}
                                 </span>
                                 {/* <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
@@ -139,15 +152,14 @@ import CONFIG from "../../configs/env"
                             </div>
                         // tempi2.push(xio)
                     } else {
-                        tempi2.push(
-                            <div key={g} className="shmirotDataHolder">
+                        tempi2[user.shmiraType] =  <div key={g} className="shmirotDataHolder">
                                 <span className="shmirotAtooda">
                                     {tempArri[x][g].name}
                                 </span>
                                 <Fab onClick={() => this.preDelete(user)} className="deleteShmiraButton">
                                     <i style={{ fontSize: "20px" }} className="material-icons">delete</i>
                                 </Fab>
-                            </div>)
+                            </div>
                     }
 
                 }
@@ -216,15 +228,17 @@ import CONFIG from "../../configs/env"
        this.props.deleteToranot(user,this.props.tabValue);
     }
     componentWillReceiveProps(nextProps) {
-       if (this.props !== nextProps) {
         //  this.setState(nextProps);
+        console.log("reciverProps");
+        const amount = this.getAmountShmirotPerDay(nextProps);
+        this.setState({amountToranim:amount});
         
-        }
        }
-    getAmountShmirotPerDay() {
-        for(var i=0;i<this.props.jobs.length;i++) {
-            if(this.props.jobs[i]._id == this.props.selectValue) {
-                return this.props.jobs[i].numToranotPerDay;
+       comon
+    getAmountShmirotPerDay(nextProps) {
+        for(var i=0;i<nextProps.jobs.length;i++) {
+            if(nextProps.jobs[i]._id == nextProps.selectValue) {
+                return nextProps.jobs[i].numToranotPerDay;
             }
         }
     }
@@ -268,7 +282,7 @@ import CONFIG from "../../configs/env"
                 //         {arri2[g].names}
                 //         <Button onClick={() => this.preSend(gooi, this.props.selectedUser, this.props.selectValue, this.props.toran)} variant="outlined" style={{ border: "solid 1px teal", color: "teal" }} >הוסף</Button>
                 //     </div>;
-                    rowArri[x] = <ShmirotCell openCellDialog={this.openCellDialog} key={shortid.generate()} x={x} status2={status2} status={status} g={g} arri2={arri2} preSend={this.preSend} gooi={gooi} {...this.props} />
+                    rowArri[x] = <ShmirotCell amountToranim={this.state.amountToranim} openCellDialog={this.openCellDialog} key={shortid.generate()} x={x} status2={status2} status={status} g={g} arri2={arri2} preSend={this.preSend} gooi={gooi} {...this.props} />
 
                 }
                 else if (started === false) {
@@ -288,9 +302,8 @@ import CONFIG from "../../configs/env"
     }
 
     render() {
-        const amountPerDay = this.getAmountShmirotPerDay();
         return (
-            <div style={{ width: "100%" }}>
+            <div >
                 <div className="shmirotHeadersContainer">
                     <div className="shmirotheaders">
                         <div className="shmirotheaders-items"><span>ראשון</span></div>
@@ -309,7 +322,7 @@ import CONFIG from "../../configs/env"
                         )
                     })}
                 </div>
-                <DialogCell toranots={this.props.toranots} preSend={this.preSend} open={this.state.openDailog} handleClose={this.closeDialog} cellData={this.state.CurrentCellData} amountPerDay={amountPerDay} selectedUser={this.props.selectedUser} 
+                <DialogCell toranots={this.props.toranots} preSend={this.preSend} open={this.state.openDailog} handleClose={this.closeDialog} cellData={this.state.CurrentCellData} amountPerDay={this.state.amountToranim} selectedUser={this.props.selectedUser} 
                 preDelete={this.preDelete} selectValue={this.props.selectValue} toran={this.props.toran} gooi={this.state.currentGooi} tabValue={this.props.tabValue} currentDateDialog={this.state.currentDateDialog} />
             </div>
         );

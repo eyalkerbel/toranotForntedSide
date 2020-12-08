@@ -33,7 +33,8 @@
         "DELETETORANOT": "http://localhost:5000/api/deletetoranot",
         "GETDATAFORREDUX": "http://localhost:5000/api/getdataforinitredux",
         "UPDATEFRIENDTORNOT": "http://localhost:5000/api/updatefriendtoranot",
-        "ADDJOBS": "http://localhost:5000/api/addjobs"
+        "ADDJOBS": "http://localhost:5000/api/addjobs",
+        "DELETENOTIFICATIONID" : "http://localhost:5000/api/deletenotificationbyid"
 
 
     },

@@ -6,6 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import {deleteJob,changeJob,middleWareJob} from "../../Actions/jobsAction";
 import {connect} from "react-redux";
+import {ThemeContext} from '../../ColorMode/colors';
+
 const styles = theme => ({
     tableCellNoPadding: {
        padding: 0,
@@ -38,6 +40,8 @@ const styles = theme => ({
         this.onBlurDescription = this.onBlurDescription.bind(this);
         this.onBlurNum = this.onBlurNum.bind(this);
     }
+    static contextType = ThemeContext;
+
     deleteItem() {
        // this.props.deleteMe(this.props.data._id);
        this.props.middleWareJob("delete" , this.props.data);
@@ -91,9 +95,9 @@ const styles = theme => ({
           <i className="material-icons">delete</i>
           </Fab>
           </div>
-            <TextField value={this.state.name} required="true" onBlur={(e) => this.onBlurName(e)} onChange={(event) => this.changeName(event.target.value)} /> </TableCell>
-            <TableCell align="center" >  <TextField value={this.state.numToranim} required="true"  onBlur={(e) => this.onBlurNum(e)}  id="standard-number" type="number" InputLabelProps={{shrink: true,}} onChange={(value) => this.changeNum(value)} /></TableCell>
-            <TableCell id="tablepadding2" align="center"><div style={{width:"100%",height:"100%"}}>
+            <TextField value={this.state.name} style={{ color: this.context.bodyText}} required="true" onBlur={(e) => this.onBlurName(e)} onChange={(event) => this.changeName(event.target.value)} /> </TableCell>
+            <TableCell align="center" style={{ color: this.context.bodyText}} >  <TextField     InputProps={{ inputProps: { min: 0, max: 5 } }} value={this.state.numToranim} required="true"  onBlur={(e) => this.onBlurNum(e)}  id="standard-number" type="number" InputLabelProps={{shrink: true,}} onChange={(value) => this.changeNum(value)} /></TableCell>
+            <TableCell id="tablepadding2" style={{ color: this.context.bodyText}} align="center"><div style={{width:"100%",height:"100%"}}>
             <TextField className="full-textfield" required="true" value={this.state.description}  onBlur={(e) => this.onBlurDescription(e)} onChange={(event) => this.changeDescription(event.target.value)} InputProps={{ classes: { input: this.props.classes.input2 }}} /></div>
             </TableCell>
         </TableRow>)

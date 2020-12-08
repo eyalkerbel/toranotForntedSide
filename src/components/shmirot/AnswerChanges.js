@@ -383,7 +383,7 @@ render() {
         <Table id="table-style"> 
                   <TableHead>
                   <TableRow key={shortid.generate()} align="center">
-                    <TableCell key={shortid.generate()} align="center">שמירות שלי</TableCell>
+                    <TableCell key={shortid.generate()} align="center">תורניות שלי</TableCell>
                     <TableCell key={shortid.generate()} align="center"> בקשות להחלפה שלי</TableCell>
                 </TableRow>
                     <TableRow key={shortid.generate()} align="center">

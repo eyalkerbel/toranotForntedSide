@@ -32,7 +32,8 @@
         "DELETETORANOT": "https://nemoapi.azurewebsites.net/api/deletetoranot",
         "GETDATAFORREDUX": "https://nemoapi.azurewebsites.net/api/getdataforinitredux",
         "UPDATEFRIENDTORNOT": "https://nemoapi.azurewebsites.net/api/updatefriendtoranot",
-        "ADDJOBS": "https://nemoapi.azurewebsites.net/api/addjobs"
+        "ADDJOBS": "https://nemoapi.azurewebsites.net/api/addjobs",
+        "DELETENOTIFICATIONID" : "https://nemoapi.azurewebsites.net/api/deletenotificationbyid"
     },
     "MAINAPI": "https://nemoapi.azurewebsites.net/api"
 }

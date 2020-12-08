@@ -3,12 +3,16 @@
   margin: 0;
   padding: 0;
   font-family: 'Heebo', cursive;
+  
+}
+.DarkMode {
+  background-color: violet !important;
+  height: 100%;
 }
 html {
   height: 100%;
 }
 body {
-  background-color: ghostwhite;
   height: 100%;
   font-family: 'Heebo', cursive;
 
@@ -271,16 +275,15 @@ position: relative;
   }
 
 .header {
-  color: teal;
+  /* color: teal; */
   margin-bottom: 15px;
-  font-size: 3rem;
+  /* font-size: 3rem; */
 }
 
 .divider {
   width: 100%;
   border-bottom: solid lightgray 1px;
 }
-
 
 .form-bottom {
   margin-top: 9px;
@@ -317,12 +320,12 @@ position: relative;
 /* homepage */
 .infocard {
   display: flex;
-  background-color: ghostwhite !important;
+  /* background-color: ghostwhite !important; */
   width: 28%;
   border-radius: 10px !important;
   text-align: center;
   justify-content: center;
-  border: solid 1px teal;
+  /* border: solid 1px #28cca7; */
   min-height: 30vh;
   /* padding-right: 2%;
   padding-left: 2%; */
@@ -357,24 +360,24 @@ position: relative;
 
 .icons {
   font-size: 80px !important;
-  color: teal !important;
+  /* color: #28cca7 !important; */
   margin-top: 5%;
 }
 
 .infocard h1 {
-  color: teal;
+  /* color: teal; */
 }
-
+.infocard p {
+  /* color: teal; */
+}
 .cc3 p {
   margin-bottom: 5%;
   font-size: 1rem;
 }
 
 /* sidebar */
-.MuiDrawer-paper {
-  background-color: white !important;
-  width: 280px !important;
-}
+
+
 
 .div-name-project {
   display: flex;
@@ -394,29 +397,10 @@ position: relative;
 .header1 {
   display: flex;
   flex-direction: row !important;
-  background-color: teal !important;
+  /* background-color: teal !important; */
 }
 
-.homemadetoolbar {
-  flex: 1;
-  height: 55px;
-  background-color: teal;
-  padding-left: 24px;
-  padding-right: 24px;
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
-}
-.homemadetoolbar2 {
-  flex: 1;
-  height: 55px;
-  background-color: teal;
-  padding-left: 24px;
-  padding-right: 24px;
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-}
+
 
 .backarrow {
   position: relative;
@@ -426,6 +410,7 @@ position: relative;
 .mainlogo {
   width: 200px;
   margin: 30px auto 20px auto;
+  color: white;
 }
 
 
@@ -437,7 +422,7 @@ position: relative;
 }
 
 .listd {
-  color: teal !important;
+  /* color: teal !important; */
   /* text-align: center !important; */
   /* justify-content: center !important; */
   padding: 10px !important;
@@ -522,7 +507,7 @@ a {
 }
 
 .MuiTabs-indicator {
-  background-color: teal !important;
+  /* background-color: teal !important; */
 }
 
 .MuiTab-root {
@@ -641,7 +626,7 @@ a {
 /* dont know yet */
 
 .MuiButton-contained {
-  background-color: teal !important;
+  /* background-color: teal !important; */
   width: 130px;
   height: 50px;
 }
@@ -682,7 +667,7 @@ a {
 
 .diffselect {
   font-size: 1.4rem !important;
-  color: teal !important;
+  /* color: teal !important; */
 }
 
 @media (max-width: 800px) {
@@ -701,8 +686,17 @@ a {
   border-radius: 4px; 
   flex: 1; 
   color: white;
-  padding: 2px; 
-  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75)
+  padding: 0; 
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  /* min-width: 30px; */
+  height: 20px;
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: larger;
+
 }
 
 .shmirotAtooda {
@@ -735,6 +729,7 @@ a {
 .cellDate {
   text-align: right;
   color: grey;
+  height: 15px;
 }
 
 

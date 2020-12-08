@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import TableJobs from "./TableJobs";
 import {addJob,saveAll,deleteNotCompleted,middleWareJob} from "../../Actions/jobsAction";
 import shortid from 'shortid';
+import {ThemeContext} from '../../ColorMode/colors';
+
 class DefineJobs extends React.Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,8 @@ class DefineJobs extends React.Component {
         }
         this.save = this.save.bind(this);
     }
+    static contextType = ThemeContext;
+
     componentWillUnmount() {
         this.props.deleteNotCompleted();
     }
@@ -46,7 +50,7 @@ class DefineJobs extends React.Component {
       return(<Fragment>
          <Paper className="maincontainer">
                 <div className="header-container">
-                  <h1 className="header">ניהול תפקידים</h1>
+                  <h1 className="header" style={{color: this.context.exteme}} >ניהול תפקידים</h1>
                   </div>
                   <div className="table-job-holder">
           <TableJobs jobs={this.props.jobs} arrayJobs={this.state.arrayJobs} />

@@ -55,7 +55,7 @@ class PickFriends extends React.Component {
             );
                 }
         else {
-            return <div>אין לך שמירות בחודש הבא</div>;
+            return <div>אין לך תורניות בחודש הבא</div>;
         }
         
     }

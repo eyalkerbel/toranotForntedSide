@@ -25,7 +25,7 @@ export function initMyHaadafot(haadafot)  {
       }
     });
   }
-    let f1 = 8 - final;
+    let f1 = 4 - final;
     console.log("f1 " , f1);
     dispatch(initMyHaadafotEntire(haadafot,f1));
   }

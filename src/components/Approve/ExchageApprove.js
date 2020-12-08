@@ -1,3 +1,4 @@
+import styleExport from "../themeStyle";
 import React, {Fragment}  from "react";
 import shortid from 'shortid';
 import Paper from "@material-ui/core/Paper";
@@ -16,6 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from "@material-ui/core/styles";
+
 const styles = theme => ({
   dialogPaper: {
       width: "300px",
@@ -23,7 +25,7 @@ const styles = theme => ({
   },
 });
 
-export default class ExchangeApprove extends React.Component {
+ class ExchangeApprove extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -113,11 +115,12 @@ export default class ExchangeApprove extends React.Component {
     render() {
         console.log("approves" , this.state.exchangeToApprove)
         console.log("exchangeApprvoe");
+        const {classes} = this.props;
         return (
             <Fragment>
             {this.state.fetched ==true? (
               <Paper className="maincontainer">
-                <div className="header-container">
+                <div className={`header-container ${classes.headerStyle}`}>
                   <h1 className="header">אישורי החלפות</h1>
                   <div className="divider" />
                 </div>
@@ -125,8 +128,8 @@ export default class ExchangeApprove extends React.Component {
             <Table> 
                       <TableHead>
                       <TableRow key={shortid.generate()} align="center">
-                        <TableCell key={shortid.generate()} align="center">פרטי היזם</TableCell>
-                        <TableCell key={shortid.generate()} align="center">פרטי המחליף</TableCell>
+                        <TableCell key={shortid.generate()} align="center">פרטי תורן 1</TableCell>
+                        <TableCell key={shortid.generate()} align="center">פרטי תורן 2</TableCell>
                         <TableCell key={shortid.generate()} align="center">תצוגת מנהל</TableCell>
 
                     </TableRow>
@@ -171,3 +174,5 @@ export default class ExchangeApprove extends React.Component {
         );
     }
 }
+
+export default withStyles(styleExport)(ExchangeApprove);

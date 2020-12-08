@@ -7,10 +7,13 @@ import TableRow from "@material-ui/core/TableRow";
 import { connect } from "react-redux";
 import { Tab } from "material-ui";
 import JobItem from "./JobItem";
+import {ThemeContext} from '../../ColorMode/colors';
+
 class TableJobs extends React.Component {
     constructor(props) {
         super(props);
     }
+    static contextType = ThemeContext;
 
     renderJobs() {
         var temp = [];
@@ -24,12 +27,12 @@ class TableJobs extends React.Component {
         console.log("renderTable",this.props);
         return (
             
-        <Table>
+        <Table  >
             <TableHead>
-                <TableRow>
-                    <TableCell align="center" >תפקיד</TableCell>
-                    <TableCell align="center">כמות תורנים ליום</TableCell>
-                    <TableCell align="center">תיאור</TableCell>
+                <TableRow style={{ color: this.context.titleText}}>
+                    <TableCell style={{ color: this.context.titleText}}   align="center" >תפקיד</TableCell>
+                    <TableCell style={{ color: this.context.titleText}} align="center">כמות תורנים ליום</TableCell>
+                    <TableCell style={{ color: this.context.titleText}} align="center">תיאור</TableCell>
                 </TableRow>
             </TableHead>
         <TableBody>

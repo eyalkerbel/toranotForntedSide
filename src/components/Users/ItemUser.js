@@ -16,15 +16,10 @@ export default class ItemUser extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentWillMount() {
-        console.log("itempUserProps" , this.props);
-        // console.log("shalom" ,this.props);
+     
     }
-    // UNSAFE_componentWillReceiveProps(props) {
-    //     console.log("nexprops" , props.checkBoxStatus);
-    //     this.setState({checked:props.checkBoxStatus})
-    // }
+   
     handleChange() {
-        console.log("handleChange");
         if(this.state.checked == false) {
         this.setState({checked:true});
         } else {

@@ -59,14 +59,7 @@ class Haadafot extends React.Component {
   }
 
 
-  componentDidMount() {
-  //   var currentDate = new Date();
-  //   currentDate.setMonth(currentDate.getMonth()+1);
-  //   currentDate.setDate(1);
-
-  //   this.setState({selectedDate1:currentDate,selectedDate2:currentDate});
-  //  this.sendToParent();
-  }
+  
   UNSAFE_componentWillMount() {
     console.log("componentWillMountHaadafot" );
     if (this.props.data != null) {
@@ -108,14 +101,7 @@ class Haadafot extends React.Component {
     this.setState({selectedDate1:currentDate,selectedDate2:currentDate});
     }
   }
-  componentDidUpdate() {
-    // if(this.state.isChecked == false) {
-    // this.sendToParent();
-    // } else {
-    //   this.props.saveDelete(this.props.compCount);
-    // }
-  
-  }
+
   sendToParent() {
     var x = this.state.selectedDate1;
     var y = this.state.selectedDate2;
@@ -216,7 +202,9 @@ calacaluateHowMuch(one , two) {
         var result = this.calacaluateHowMuch(day,this.state.selectedDate2);
         if(this.props.numRemaining - result >= 0) {
           this.ChangeDBAndStore(obi,-result);
+          if(this.state.description != "")  {
           this.props.updateOnAdd();
+          }
             } else {
               this.resetItem();
               alert("חרגת מכמות מקסימלית של אילוצים");
@@ -224,17 +212,11 @@ calacaluateHowMuch(one , two) {
       } else {
         this.setState({selectedDate2:day})
       } 
-    }  
-
-  
-}
-addToStore() {
-  
+    }    
 }
 
 ChangeDBAndStore(obi,result) {
   if(this.props.hasSend == false) {
-         // this.props.addHaadafa(obi)
           this.props.HaadafaMiddleWar(obi,"add",result);
           this.props.updateOnAdd();   
 
@@ -268,11 +250,12 @@ ChangeDBAndStore(obi,result) {
   } else {
     this.setState({ selectedDate2: day,sEnd:true });
 
-    if(this.state.selectStart==true) {
+    if(this.state.selectStart==true ) {
       var obi = { begindate: this.state.selectedDate1, enddate: day, type: this.state.description,kindDescription:this.state.kindDescription,idUser:this.props.myId };
       var result = this.calacaluateHowMuch(this.state.selectedDate1,day);
         if(this.props.numRemaining - result >= 0) {
       this.ChangeDBAndStore(obi,-result);
+      if(this.state.description != "") 
       this.props.updateOnAdd();
         } else {
           this.resetItem();
@@ -294,12 +277,6 @@ ChangeDBAndStore(obi,result) {
   }
   
    toggleChange  = async () => {
-    
-   // this.props.addDeleteArray(this.props.compCount,!this.state.isChecked);
-
-    // this.setState({
-    //   isChecked: true,
-    // });
     console.log("sender" , this.state.sendedAlready);
     if(this.props.hasSend == true) {
    // this.props.deleteHaadafa(this.props.data._id);
@@ -363,8 +340,8 @@ ChangeDBAndStore(obi,result) {
         <div className="haadafotholder">
           <p className="blobi">   תאריך תחילה</p>
           <p className="blobi">   תאריך סיום</p>
-          <p className="blobi">אילוץ/העדפה</p>
-          <p className="blobi">   סוג אילוץ</p>
+          {/* <p className="blobi">אילוץ/העדפה</p> */}
+          <p className="blobi">   הערה</p>
         </div>
         <div className="sidebutton">
         <Fab size="small" onClick={() => this.toggleChange()}>
@@ -400,103 +377,6 @@ ChangeDBAndStore(obi,result) {
             />
           </MuiPickersUtilsProvider>
           
-       <Select
-            className="blob"
-            value={this.state.kindValue}
-            inputProps={{
-              name: "age",
-              id: "age-simple"
-            }}
-          >
-        <MenuItem value={10}>
-              <span
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px"
-                }}
-                onClick={() => this.handleKind(10)}
-              >
-                העדפה
-              </span>
-            </MenuItem>
-            <MenuItem value={20}>
-              <span
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px"
-                }}
-                onClick={() => this.handleKind(20)}
-              >
-                אילוץ
-              </span>
-            </MenuItem>
-            </Select>
-              {/* {this.state.kindValue == 10? 
-          <Select
-            className="blob"
-            value={this.state.values}
-            inputProps={{
-              name: "age",
-              id: "age-simple"
-            }}
-          >
-            <MenuItem value={10}>
-              <span
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px"
-                }}
-                onClick={() => this.handleclicks(10)}
-              >
-                אישי
-              </span>
-            </MenuItem>
-            <MenuItem value={20}>
-              <span
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px"
-                }}
-                onClick={() => this.handleclicks(20)}
-              >
-                לימודים
-              </span>
-            </MenuItem>
-            <MenuItem value={30}>
-              <span
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px"
-                }}
-                onClick={() => this.handleclicks(30)}
-              >
-                חול
-              </span>
-            </MenuItem>
-          </Select>
-          :   <Select
-            className="blob"
-            value="-"
-            inputProps={{
-              name: "age",
-              id: "age-simple"
-            }}
-          ></Select> }  */}
           <TextField className="blob" required="true" value={this.state.description}  onBlur={(e) => this.onBlurDescription(e)}
            onChange={(event) => this.changeDescription(event.target.value)} inputProps={{
               name: "age",

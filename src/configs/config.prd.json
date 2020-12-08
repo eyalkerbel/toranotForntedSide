@@ -33,7 +33,9 @@
         "DELETETORANOT": "https://toranotapi.herokuapp.com/api/deletetoranot",
         "GETDATAFORREDUX": "https://toranotapi.herokuapp.com/api/getdataforinitredux",
         "UPDATEFRIENDTORNOT": "https://toranotapi.herokuapp.com/api/updatefriendtoranot",
-        "ADDJOBS": "https://toranotapi.herokuapp.com/api/addjobs"
+        "ADDJOBS": "https://toranotapi.herokuapp.com/api/addjobs",
+        "DELETENOTIFICATIONID" : "https://toranotapi.herokuapp.com/api/deletenotificationbyid"
+
 
     },
     "MAINAPI": "https://toranotapi.herokuapp.com/api"

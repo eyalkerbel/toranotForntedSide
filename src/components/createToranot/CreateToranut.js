@@ -1,17 +1,21 @@
+import styleExport from "../themeStyle";
 import React, { Fragment } from "react";
 import Paper from "@material-ui/core/Paper";
 import LoadingPage from "../LoadingPage";
-
+import {Button} from "@material-ui/core";
 import List from '@material-ui/core/List';
 import { connect } from "react-redux";
-
 import ShmirotTableComp from './ShmirotTableComp'
-import TabComp from '../TabComp'
+import TabComp from './TabComp'
 import UserListComp from './UserListComp'
 import CONFIG from "../../configs/env"
 import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import FriendList from "./FriendList";
 import {setColor} from "../../Actions/toranimAction";
+import TabCompHeaders from "./TabCompHeaders";
+import DailogEditUsers from "./DailogEditUsers";
+import { makeStyles,withStyles  } from '@material-ui/core/styles';
+
  class CreateToranut extends React.Component {
     constructor() {
         super();
@@ -27,70 +31,59 @@ import {setColor} from "../../Actions/toranimAction";
             piorityArray: [],
             fetchPiority: [],
             friendElement: null,
-            ifTogther: false
+            ifTogther: false,
+            dailogUsers: false
         };
         this.changeInSelectFriend = this.changeInSelectFriend.bind(this);
+        this.openDialogEditUser = this.openDialogEditUser.bind(this);
+        this.closeDailogPickUsers = this.closeDailogPickUsers.bind(this);
     }
 
     radioHandler = (num) => {
         this.setState({ toran: num })
     }
-
+    openDialogEditUser() {
+        this.setState({dailogUsers: true});
+    }
 
     //appbar functions
     bubbleTabs = (num) => {
         this.setState({ tabValue: num });
     }
-
     bubbleSelect = (num) => {
-        console.log("numRole" , num );
         this.setState({ selectValue: num,selectedUser: {name: "בחר משתמש" } })
     }
-
     selectUser = (el) => {
-        // console.log("")
         this.setState({ selectedUser: el});
         this.setState({ifTogther:false});
-
-      //  this.fetchHaadafa(el);
        this.fetchPiority(el);
     }
 
     UNSAFE_componentWillMount() {
-       // this.fetchyfetch();
        var roleValueInitinal = 0;
        if(this.props.jobs.length !=0) {
         roleValueInitinal = this.props.jobs[0]._id;
        }
-
-
-       this.setColorsInRedux();
-
+    //    this.setColorsInRedux();
        this.setState({selectValue:roleValueInitinal});
         this.fotchyfetch();
     }
-    setColorsInRedux() {
-        for(var i=0;i<this.props.toranimThisM.length;i++) {
-            this.props.setColor(this.props.toranimThisM[i].idUser,this.getRandomColor(),0);
-       }
-       for(var i=0;i<this.props.toranimNextM.length;i++) {
-           var checkExist = false;
-            for(var j=0;j<this.props.toranimThisM.length;j++) {
-                if(this.props.toranimThisM[j].idUser == this.props.toranimNextM[i].idUser) {
-                    checkExist = true;
-                    console.log("foundOne");
-                }
-            }
-            if(checkExist == false) {
-                console.log("notfound");
-                this.props.setColor(this.props.toranimNextM[i].idUser,this.getRandomColor(),1);
-
-            }    
-
-       }  
-    }
-
-
+    // setColorsInRedux() {
+    //     for(var i=0;i<this.props.toranimThisM.length;i++) {
+    //         this.props.setColor(this.props.toranimThisM[i].idUser,this.getRandomColor(),0);
+    //    }
+    //    for(var i=0;i<this.props.toranimNextM.length;i++) {
+    //        var checkExist = false;
+    //         for(var j=0;j<this.props.toranimThisM.length;j++) {
+    //             if(this.props.toranimThisM[j].idUser == this.props.toranimNextM[i].idUser) {
+    //                 checkExist = true;
+    //             }
+    //         }
+    //         if(checkExist == false) {
+    //             this.props.setColor(this.props.toranimNextM[i].idUser,this.getRandomColor(),1);
+    //         }    
+    //    }  
+    // }
      getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -100,72 +93,41 @@ import {setColor} from "../../Actions/toranimAction";
         return color;
       }
       
-
-   
     fotchyfetch(userid) {
-        // fetch(CONFIG.API.GETPIORITY, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json;charset=utf-8",
-        //         Authorization: "Bearer " + localStorage.getItem("jwt")
-        //     }
-        // })
-        //     .then(data =>  data.json())
-        //     .then(dat =>{ this.forFetchTwho(dat,userid)
-        //     this.setState({loaded:true}) })
-        //     .catch(err => console.log(err));
         this.forFetchTwho([],userid)
         this.setState({loaded:true});
-
     }
-
-    
-
-   
-
     fetchPiority = (userid) => {
-      
         this.setState({fetchPiority:[]});
     }
 
-
-
- 
     forFetchTwho(data,id) {
-        var user;
         if(this.state.paiorityArray != undefined) {
         this.setState({ piorityArray: data});
-    }
-    else {
-        console.log("forFetchTwho",data , "id" , id);
+    } else {
         this.setState({ piorityArray: data});
         this.fetchPiority(id);
     }
     }
 
     changeInSelectFriend(friendElemnt,status) {
-        console.log("changeInSelectFriend" , status);
         if(status == false) {
-            console.log("succss");
             this.setState({friendElement:friendElemnt,ifTogther:true});
         
         } else {
             this.setState({friendElement:null,ifTogther:false});
         }
     }
-   
-
-
+    closeDailogPickUsers() {
+        this.setState({dailogUsers:false});
+        // this.setColorsInRedux();
+    }
     createTable = () => {
-    //    var arri = this.state.fetchedArri.slice(1);
-        console.log("part of array",this.state);
         if(this.state.selectedUser.name != "בחר משתמש") {
             var friendId = this.state.selectedUser.friendId;
             var friendDetails;
-       //     var renderComp = false;
         if(this.state.ifTogther == true) {
             for(var i=0;i<this.props.toranim.length;i++) {
-                //       console.log("friendid" , friendId , this.state.selectedUser.userDetails._id ,this.props.toranim[i]);
                        if(friendId == this.props.toranim[i].idUser && this.state.selectedUser.userDetails._id == this.props.toranim[i].friendId) {
                            friendDetails = this.props.toranim[i];
                     }
@@ -176,41 +138,29 @@ import {setColor} from "../../Actions/toranimAction";
     } else {
             friendDetails = null;
         }
-    
-        console.log("friendDetails" , friendDetails);
-       // arri.shift()
         return (
             <ShmirotTableComp
-              // fotchyfetch={this.fotchyfetch.bind(this)}
-               // fetchyfetch={this.fetchyfetch.bind(this)}
-                // fetchedHaadafot={this.state.fetchedHaadafot}
                 selectedUser={this.state.selectedUser.userDetails}
-               // fetchedArri={arri}
                 tabValue={this.state.tabValue}
                 selectValue={this.state.selectValue}
                 toran={this.state.toran}
-                // userList ={this.state.fetchedArri[this.state.tabValue]}
                  selectUser={this.selectUser}
                 piorityArray={this.state.fetchPiority}
                 fetchPiority={this.fetchPiority}
-                friendToran={friendDetails} />
+     friendToran={friendDetails} />
         )
     }
     renderFriendList() {
-       // console.log("renderFriendList" , this.state.selectedUser);
         if(this.state.selectedUser.name != "בחר משתמש") {
         var friendId = this.state.selectedUser.friendId;
         var friendDetails;
         var renderComp = false;
-
         for(var i=0;i<this.props.toranim.length;i++) {
-     //       console.log("friendid" , friendId , this.state.selectedUser.userDetails._id ,this.props.toranim[i]);
             if(friendId == this.props.toranim[i].idUser && this.state.selectedUser.userDetails._id == this.props.toranim[i].friendId) {
                 friendDetails = this.props.toranim[i];
                 renderComp = true;
             }
         }
-        console.log("renderif" , renderComp , this.state.selectValue);
         if(renderComp == true) {
       return <List style={{ height: "10vh", overflow: "auto", direction: "ltr", borderBottom: "2px solid teal" }}>
         <FriendList friendDetails={friendDetails} updateParent={this.changeInSelectFriend} selectedUser={this.state.selectedUser} selectValue={this.state.selectValue} selectUser={this.selectUser} tabValue={this.state.tabValue} />
@@ -219,28 +169,28 @@ import {setColor} from "../../Actions/toranimAction";
         else {
             return null;
         }
-    }
-        else {
+    }   else {
             return null;
         }
     }
-
     render() {
+        const {classes} = this.props;
         console.log("CreateToranot" , this.state);
         return (
             <Fragment>
                 {this.state.loaded ? (
                     <Paper className="maincontainer" >
-                        <div className="header-container">
-                            <h1 className="header">יצירת שמירה</h1>
+                        <div className={`header-container ${classes.headerStyle}`}>
+                            <h1 className="header">יצירה תורניות</h1>
                             <div className="divider" />
                         </div>
                         <div>
+                            <TabCompHeaders />
                             <TabComp selectedUser={this.state.selectedUser.userDetails} bubbleTabs={this.bubbleTabs} bubbleSelect={this.bubbleSelect} tabValue={this.state.tabValue} selectValue={this.state.selectValue} />
                         </div>
                         <div style={{ display: "flex", width: "100%", marginBottom: "20px" }}>
                             <div style={{ flex: "1", border: "2px solid teal", marginTop: "10px"}}>
-                                <List style={{ height: "30vh", overflow: "hidden", direction: "ltr", borderBottom: "2px solid teal" }}>
+                                <List style={{ height: "50vh", overflow: "hidden", direction: "ltr", borderBottom: "2px solid teal" }}>
                                     <UserListComp selectValue={this.state.selectValue} selectUser={this.selectUser} tabValue={this.state.tabValue} />
                                 </List>
                                {this.renderFriendList()}
@@ -248,11 +198,15 @@ import {setColor} from "../../Actions/toranimAction";
                                     <FormControlLabel onClick={() => this.radioHandler(0)} value="0" control={<Radio />} label="תורן" />
                                     <FormControlLabel onClick={() => this.radioHandler(1)} value="1" control={<Radio />} label="עתודה" />
                                 </RadioGroup>
+                                <Button onClick={() => this.openDialogEditUser()}>
+                                    שנה משתמשים
+                                </Button>
                             </div>
-                            <div style={{ flex: "7" }}>
+                            <div style={{ flex: "7" , minWidth: "0" }}>
                                 {this.createTable()}
                             </div>
                         </div>
+                        <DailogEditUsers open={this.state.dailogUsers} handleClose={this.closeDailogPickUsers} />
                     </Paper>
                 ) : (
                         <LoadingPage >
@@ -269,7 +223,6 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-
 const mapStateToProps = state => ({
     colors:state.toranim.colors,
     toranimThisM: state.toranim.toranimThisMonth,
@@ -279,4 +232,4 @@ const mapStateToProps = state => ({
     jobs: state.jobs
 })
 
-export default connect(mapStateToProps,mapDispatchToProps) (CreateToranut);
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styleExport) (CreateToranut));

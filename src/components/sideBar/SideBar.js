@@ -1,19 +1,76 @@
 import React, { Fragment } from "react";
 import "material-icons";
 import Drawer from "@material-ui/core/Drawer";
-import { List, ListItem, AppBar, Divider } from "@material-ui/core";
+import { List, ListItem, AppBar, Divider, Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import { NavLink } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
-import Notifications from "react-notifications-menu";
-import CONFIG from "../configs/env";
+import { withStyles } from "@material-ui/core/styles";
+// import ActionMenu from 'material-ui/svg-icons/action/menu';
+import MenuIcon from '@material-ui/icons/Menu';
+import CONFIG from "../../configs/env";
+import {connect} from "react-redux";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Clock from 'react-live-clock';
+import NotificationBox from "./NotificationBox";
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+// import Notifications from "react-notifications-menu";
 
-export default class SideBar extends React.Component {
+const useStyles = (theme) => ({
+  headerStyle: {
+      color: theme.palette.text.default 
+  },
+  textRegualar: {
+    color: theme.palette.text.primary +" !important",
+  },
+  borderStyle : {
+    borderColor: theme.palette.text.secondary,
+    border: "solid 1px"
+  }
+  
+});
+
+
+
+const styles2 = {
+
+  largeIcon: {
+    width: 30,
+    height: 60,
+  },
+
+};
+
+
+const styles = theme => ({
+  cancelButton: {
+    backgroundColor: "white",
+    color: "black",
+    
+    
+} ,
+myComponent: {
+  "& .MuiButtonBase-root": {
+    color: theme.palette.text.primary
+  }
+},
+  appBar: {
+    color : theme.palette.text.primary
+} , 
+iconMenu: {
+  backgroundColor: theme.palette.text.primary
+} , textRegualar: {
+  color: theme.palette.text.primary +" !important",
+},
+
+});
+class SideBar extends React.Component {
   constructor() {
     super();
-    this.state = { sidebarstate: false, backstyle: { visibility: "hidden" }, dafi: null,noti:[],loading:true,notifaction:[{
+    this.state = {textButton: "Dark" ,sidebarstate: false, backstyle: { visibility: "hidden" }, dafi: null,noti:[],loading:true,notifaction:[{
       id: 1,
       title: 'some title', // not required
       message: 'The notification text', 
@@ -25,12 +82,18 @@ export default class SideBar extends React.Component {
     this.deleteSession = this.deleteSession.bind(this);
     this.adminIf = this.adminIf.bind(this);
   }
-
+  changeDarkMode() {
+    console.log("changeDarkMode")
+    if(this.state.textButton == "Dark") {
+      this.setState({textButton : "Light"}) 
+    } else {
+      this.setState({textButton : "Dark"});
+    }
+    this.props.changeDarkMode();
+  }
   adminIf() {
     if (localStorage.getItem("permissionlvl") === "admin") {
-      this.setState({
-        dafi:
-          <Fragment>
+     return (<Fragment>
            <NavLink to="/manage_jobs">
               <ListItem
                 className="listd"
@@ -38,10 +101,10 @@ export default class SideBar extends React.Component {
                 onClick={() => this.handleSideBar()}
               >
                 <i className="material-icons icons2">person_add</i>
-                <h2>הגדר תפקידים</h2>
+                <h2>הגדר בעלי תפקידים</h2>
               </ListItem>
             </NavLink>
-            <NavLink to="/pickusers">
+            {/* <NavLink to="/pickusers">
               <ListItem
                 className="listd"
                 button
@@ -50,8 +113,8 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">person_add</i>
                 <h2>בחר משתמשים</h2>
               </ListItem>
-            </NavLink>
-            <NavLink to="/change_user">
+            </NavLink> */}
+            {/* <NavLink to="/change_user">
               <ListItem
                 className="listd"
                 button
@@ -60,7 +123,7 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">person_add</i>
                 <h2>שנה משתמשים</h2>
               </ListItem>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/createuser">
               <ListItem
                 className="listd"
@@ -78,19 +141,19 @@ export default class SideBar extends React.Component {
                 onClick={() => this.handleSideBar()}
               >
                 <i className="material-icons icons2">person_add</i>
-                <h2>ניהול שמירות</h2>
+                <h2>ניהול תורניות</h2>
               </ListItem>
             </NavLink>
            
-          </Fragment>
+          </Fragment>)
 
 
-      })
     }
   }
 
-  UNSAFE_componentWillMount() {
-    this.adminIf()
+  UNSAFE_componentdMount() {
+    // console.log("coponetnWillMountSideBar");
+    // this.adminIf()
   }
  
   handleNoti(data) {
@@ -113,6 +176,8 @@ export default class SideBar extends React.Component {
     }
   }
   render() {
+    const {classes} = this.props;
+    console.log("renderSideBar");
     return (
       <Fragment>
         <Backdrop
@@ -120,10 +185,12 @@ export default class SideBar extends React.Component {
           onClick={() => this.handleSideBar()}
           style={{ zIndex: "200" }}
         />
-        <AppBar position="fixed" className="header1">
+        <AppBar position="fixed" className="header1" color={'secondary'}>
           <div className="homemadetoolbar">
-            <IconButton onClick={() => this.handleSideBar()} edge="start">
-              <i className="material-icons" style={{ color: "ghostwhite" }}>menu</i>
+            <IconButton  iconStyle={styles2.largeIcon}    onClick={() => this.handleSideBar()} edge="start">
+            {/* <ActionMenu /> */}
+            <MenuIcon fontSize="large"  htmlColor="white"  />
+              {/* <i className="material-icons" style={{ color: "ghostwhite"}} size="large">menu</i> */}
             </IconButton>
             <IconButton
               style={this.state.backstyle}
@@ -131,37 +198,65 @@ export default class SideBar extends React.Component {
               onClick={() => this.handleSideBar()}
               edge="start"
             >
-              <i className="material-icons" style={{ color: "ghostwhite" }}>keyboard_arrow_right</i>
+              <i  className="material-icons" style={{ color: "ghostwhite" }}>keyboard_arrow_right</i>
             </IconButton>
+            <div className="divider-horizontal"></div>
+            <div id="display-name-homePage"> <span>ברוך הבא, {this.props.user.name} </span> </div>
             
+            <div className="divider-horizontal"></div>
+            <div id="notiification-box">
+            <NotificationBox />
+            {/* <Notifications /> */}
           </div>
+          </div>
+          <div id="middle-menu">
+          <div id="dispaly-project-name">
+                מערכת לניהול תורניות
+              </div>
+              </div>
           <div className="homemadetoolbar2">
-          <h1>
-            <Clock format="D/M/YYYY, h:mm:ss " interval={1000} ticking={true} />
-          </h1>
-            <IconButton onClick={() => this.deleteSession()} className="item1">
+        
+          <div id="div-drak-mode">
+          {/* <Button  className={classes.cancelButton}  size="small" onClick={() => this.changeDarkMode()} >{this.state.textButton} MODE</Button> */}
+          {this.state.textButton == "Dark"?<Brightness4Icon onClick={() => this.changeDarkMode()}/> :<Brightness7Icon onClick={() => this.changeDarkMode()} /> }
+          </div>
+          <div className="divider-horizontal"></div>
+        <div className="clock-menu">
+          <h2>
+            <Clock format="D/M/YYYY" interval={1000} ticking={true} />
+            <div className="divider-horizontal"></div>
+            <Clock format="h:mm:ss " interval={1000} ticking={true} />
+
+          </h2>
+          </div>
+
+          <div className="divider-horizontal"></div>
+          <div className="log-out">
+            <IconButton onClick={() => this.deleteSession()}  className="item1">
               <i className="material-icons" style={{ color: "ghostwhite" }}>verified_user</i>
             </IconButton>
+            </div>
           </div>
         </AppBar>
         <Drawer
-          className="Drawer"
+          className="Drawer "
           variant="persistent"
           anchor="right"
           open={this.state.sidebarstate}
         >
-        <div className="div-name-project">
+        {/* <div className="div-name-project">
           מבצר הים
-        </div>
+        </div> */}
           <div className="cc2">
             <img
               className="mainlogo"
-              src={require("../images/castle.png")}
+              src={require("../../images/castle.png")}
               alt=""
             ></img>
           </div>
-          <List>
+          <List className={classes.myComponent} >
             <Divider />
+
             <NavLink to="/">
               <ListItem
                 alignItems="center"
@@ -176,11 +271,12 @@ export default class SideBar extends React.Component {
             {localStorage.getItem("permissionlvl") === "admin"?
             <NavLink to="/approve_change">
               <ListItem
-                className="listd"
+                //className={`listd ${classes.textRegualar}` }
+                className={"listd"}
                 button
                 onClick={() => this.handleSideBar()}>
                 <i className="material-icons icons2">calendar_today</i>
-                <h2>אישורי החלפות</h2>
+                <h2 className={classes.textRegualar}>אישורי החלפות</h2>
               </ListItem>
             </NavLink> 
             :
@@ -191,10 +287,10 @@ export default class SideBar extends React.Component {
                 onClick={() => this.handleSideBar()}
               >
                 <i className="material-icons icons2">calendar_today</i>
-                <h2>שמירות שלי</h2>
+                <h2 className={classes.textRegualar}>תורניות שלי</h2>
               </ListItem>
             </NavLink>}
-            <NavLink to="/pick_friend_toranot_together">
+            {/* <NavLink to="/pick_friend_toranot_together">
               <ListItem
                 className="listd"
                 button
@@ -203,7 +299,7 @@ export default class SideBar extends React.Component {
                 <i className="material-icons icons2">contacts</i>
                 <h2>תורניות עם חברים</h2>
               </ListItem>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/shmirottable">
               <ListItem
                 className="listd"
@@ -211,7 +307,7 @@ export default class SideBar extends React.Component {
                 onClick={() => this.handleSideBar()}
               >
                 <i className="material-icons icons2">calendar_today</i>
-                <h2>לוח שמירות</h2>
+                <h2 className={classes.textRegualar}>לוח תורניות</h2>
               </ListItem>
             </NavLink>
             <NavLink to="/haadafot">
@@ -241,7 +337,7 @@ export default class SideBar extends React.Component {
                 onClick={() => this.handleSideBar()}
               >
                 <i className="material-icons icons2">info</i>
-                <h2>מידע על שמירות</h2>
+                <h2>מידע על תורניות</h2>
               </ListItem>
             </NavLink>
             <NavLink to="/contacts">
@@ -254,30 +350,18 @@ export default class SideBar extends React.Component {
                 <h2>אנשי קשר</h2>
               </ListItem>
             </NavLink>
-            {/* <NavLink to="/sendmessage">
-              <ListItem
-                className="listd"
-                button
-                onClick={() => this.handleSideBar()}
-              >
-                <i className="material-icons icons2">send</i>
-                <h2>צור קשר</h2>
-              </ListItem>
-            </NavLink> */}
-            {/* <NavLink to="/mail">
-              <ListItem
-                className="listd"
-                button
-                onClick={() => this.handleSideBar()}
-              >
-                <i className="material-icons icons2">mail</i>
-                <h2>תיבת דואר</h2>
-              </ListItem>
-            </NavLink> */}
-            {this.state.dafi}
+            {this.adminIf()}
+
           </List>
         </Drawer>
       </Fragment>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+} 
+
+export default connect(mapStateToProps,null)(withStyles(styles)(SideBar));

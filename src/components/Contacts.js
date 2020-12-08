@@ -3,12 +3,19 @@ import Paper from "@material-ui/core/Paper";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from "react-redux";
 
-export default class Contacts extends React.Component {
+import styleExport from "./themeStyle";
+import { makeStyles,withStyles  } from '@material-ui/core/styles';
+
+class Contacts extends React.Component {
   render() {
+    const {classes} = this.props;
+
     return (
       <Paper className="maincontainer">
-        <div className="header-container">
+        <div className={`header-container ${classes.headerStyle}`}>
           <h1 className="header">אנשי קשר</h1>
           <div className="divider" />
         </div>
@@ -90,3 +97,4 @@ export default class Contacts extends React.Component {
     );
   }
 }
+export default (connect(null,null))(withStyles(styleExport)(Contacts));

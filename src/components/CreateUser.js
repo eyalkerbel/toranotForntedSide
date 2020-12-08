@@ -4,6 +4,11 @@ import { Grid, TextField, RadioGroup, FormControlLabel, FormLabel, Radio, Button
 import CONFIG from "../configs/env"
 import { Select, MenuItem } from "@material-ui/core";
 import {connect} from "react-redux";
+import styleExport from "./themeStyle";
+import {ThemeContext} from '.././ColorMode/colors';
+
+import { makeStyles,withStyles } from '@material-ui/core/styles';
+
 
  class CreateUser extends React.Component {
     constructor() {
@@ -19,6 +24,8 @@ import {connect} from "react-redux";
             loading: false
         }
     }
+    static contextType = ThemeContext;
+
     componentWillMount() {
         var intinalType = 0;
         if(this.props.jobs.length != 0) {
@@ -30,44 +37,45 @@ import {connect} from "react-redux";
     handleSelect = (event) => {
         this.setState({ type: this.props.jobs[event.target.value]._id,indexType: event.target.value });
     }
+   
 
     createForm = () => {
+        const {classes} = this.props;
+        const inputClass = {
+        fontSize: 24,
+        color: this.context.theme
+        };
+        const labelClass = {
+            right:0,color:this.context.exteme,fontSize: 24
+        };
 
         return (
             <React.Fragment>
                 <Grid container spacing={3} style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto', marginTop: 16 }}>
                     <Grid item xs={12} md={12}>
-                        <TextField required id="userid" label="User ID" fullWidth onChange={this.myChangeHandler1} value={this.state.userid} />
+                        <TextField InputProps={{style: inputClass}}  InputLabelProps={{style: labelClass}} required id="userid" label="ת.ז" fullWidth onChange={this.myChangeHandler1} value={this.state.userid} />
                     </Grid>
                     <Grid item xs={12} md={12}>
-                        <TextField required id="name" label="Name" fullWidth onChange={this.myChangeHandler2} value={this.state.name} />
+                        <TextField label="שם משתמש" id="standard-full-width" InputProps={{style: inputClass}}  InputLabelProps={{style: labelClass}} required id="name"  fullWidth onChange={this.myChangeHandler2} value={this.state.name} />
                     </Grid>
                     <Grid item xs={12} md={12} className="lefttext">
-                        <Select value={this.state.indexType} onChange={this.handleSelect} style={{ width: "100%" }} >
+                        <Select value={this.state.indexType} onChange={this.handleSelect} style={{ width: "100%",color: this.context.exteme }} >
                         {this.props.jobs.map((element,index) => <MenuItem value={index}>{element.name}</MenuItem>)}
-
-                            {/* <MenuItem value={1}>קצין תורן בפנים</MenuItem>
-                            <MenuItem value={2}>חייל חובה חוץ</MenuItem>
-                            <MenuItem value={3}>נגד שער</MenuItem>
-                            <MenuItem value={4}>ע' קצין תורן</MenuItem>
-                            <MenuItem value={5}>קצין תורן</MenuItem>
-                            <MenuItem value={6}>מפקד תורן</MenuItem> */}
-
                         </Select>
                     </Grid>
                     <Grid item xs={12} md={12}>
-                        <TextField required id="password" label="Password" fullWidth onChange={this.myChangeHandler3} value={this.state.password} />
+                        <TextField  InputProps={{style: inputClass}}  InputLabelProps={{style: labelClass}} required id="password" label="סיסמא" fullWidth onChange={this.myChangeHandler3} value={this.state.password} />
                     </Grid>
                     <Grid item xs={12} md={12} Align="right" >
-                        <FormLabel component="legend">Permission Level</FormLabel>
-                        <RadioGroup defaultValue="regular" aria-label="regular" name="customized-radios">
-                            <FormControlLabel onClick={() => this.radioHandler(1)} value="regular" control={<Radio />} label="Regular" />
-                            <FormControlLabel onClick={() => this.radioHandler(2)} value="administrator" control={<Radio />} label="Administrator" />
+                        <FormLabel style={{color:this.context.exteme}}   component="legend">רמת הרשאה</FormLabel>
+                        <RadioGroup  defaultValue="regular" aria-label="regular" name="customized-radios">
+                            <FormControlLabel style={{color:this.context.exteme}}  onClick={() => this.radioHandler(1)} value="regular" control={<Radio className={classes.labelControl} />} label="רגיל" />
+                            <FormControlLabel style={{color:this.context.exteme}}   onClick={() => this.radioHandler(2)} value="administrator" control={<Radio className={classes.labelControl} />} label="מנהל" />
                         </RadioGroup>
                     </Grid>
                     <Grid item xs={12} md={12} >
                         <h1 style={{ color: this.state.status === "failed" ? "red" : "green" }}>{this.state.status}</h1>
-                        <Button disabled={this.state.loading ? true : false} onClick={() => this.sendDataToServer()} variant="contained" style={{ width: "100%", height: "50px" }}>Submit</Button>
+                        <Button disabled={this.state.loading ? true : false} onClick={() => this.sendDataToServer()} variant="contained" style={{ width: "100%", height: "50px",backgroundColor: this.context.bodyText }}>Submit</Button>
                     </Grid>
                 </Grid>
             </React.Fragment >
@@ -130,12 +138,13 @@ import {connect} from "react-redux";
 
     render() {
         console.log("renderCr" , this.props);
+        const {classes} = this.props;
         return (
             <Fragment>
                 {this.props.permissionlvl === "admin" ?
                     <Paper className="maincontainer">
-                        <div className="header-container">
-                            <h1 className="header">Create User Panel</h1>
+                    <div className={`header-container ${classes.headerStyle}`}>
+                            <h1 className="header">צור משתמש</h1>
                             <div className="divider" />
                         </div>
                         <div style={{ flexGrow: 1 }}>
@@ -155,4 +164,4 @@ function mapStateToProps(state) {
         jobs: state.jobs
     }
 }
-export default connect(mapStateToProps,null)(CreateUser);
+export default connect(mapStateToProps,null)(withStyles(styleExport)(CreateUser));

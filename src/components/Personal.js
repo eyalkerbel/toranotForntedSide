@@ -1,26 +1,46 @@
+import styleExport from "./themeStyle";
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CONFIG from "../configs/env"
 import { connect } from "react-redux";
+import NotificationBox from "./sideBar/NotificationBox";
 
+// const useStyles = theme => ({
+//  root: {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//   },
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: '25ch',
+//     marginTop: theme.spacing(10)
+//   },
+//   label: {
+//     // display: "inline-block",
+//     // textAlign: "right",
+//     color: theme.palette.text.primary,
+//     right: "0 !important",
+//     width: "100px"
+//   }
+// });
 
-const useStyles = theme => ({
- root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+const styles2 = {
+  container: {
+      display: 'flex',
+      flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '25ch',
-    marginTop: theme.spacing(10)
+      width: 300,
+      margin: 100,
   },
-  label: {
-    left: "50%"
+  //style for font size
+  resize:{
+    fontSize:50
+  },
   }
-});
 
  class Personal extends React.Component {
   constructor(props) {
@@ -33,18 +53,7 @@ const useStyles = theme => ({
   }
 
   componentWillMount() {
-  //   console.log("componentWillMount personal is");
-  //   fetch(CONFIG.API.GETPERSONDATA, {
-  //     method: "POST",
-  //     headers: {
-  //         "Content-Type": "application/json;charset=utf-8",
-  //         Authorization: "Bearer " + localStorage.getItem("jwt")
-
-  //     },
-  //     body: []
-  // }).then(data => data.json())
-  // .then(jsoned => {
-  //   console.log("jsnoed",jsoned.name);
+ 
     this.setState({name: this.props.user.name,sn:this.props.user.sn,password:this.props.user.password});
   // })
   }
@@ -54,55 +63,61 @@ const useStyles = theme => ({
     console.log(this.state);
     return (
       <Paper className="maincontainer">
-        <div className="header-container">
+        <div className={`header-container ${classes.headerStyle}`}>
           <h1 className="header">פרטים אישיים</h1>
           <div className="divider" />
-          {/* <h3 style={{ marginTop: "30px" }}>עמוד זה בפיתוח..</h3> */}
-          <div className={classes.root}>
+          <div id="full-personal-details-div">
           <TextField
           id="standard-full-width"
-          label="name"
-          style={{ marginTop: 40 }}
+          label="שם"
+           style={{ marginTop: 40,width:"100%" }}
           placeholder={this.state.name}
-          fullWidth
           margin="normal"
           InputLabelProps={{
+            style: {
+              fontSize: 34,
+              textAlign: "right",
+            },
             shrink: true,
-            classes: {root: classes.label}
-
-          }}
+           classes: {root: classes.label}
+          }} 
+          inputProps={{style: {fontSize: 30}}} 
         />
 
         <TextField
-          id="standard-full-width"
-          label="sn"
-          style={{ marginTop: 40 }}
+          label="ת.ז"
+          style={{width:"100%" }}
           placeholder={this.state.sn}
-          fullWidth
           margin="normal"
           InputLabelProps={{
+            style: {
+              fontSize: 34,
+              textAlign: "right",
+              left: "100px !important"
+            },
             shrink: true,
            classes: {root: classes.label}
-          
           }}
+          inputProps={{style: {fontSize: 30}}} 
         />
          <TextField
-          id="standard-full-width"
-          label="password"
-          style={{ marginTop: 40 }}
+          label="סיסמא"
+          style={{width:"100%",fontText: "50px" }}
           placeholder={this.state.password}
-          fullWidth
           margin="normal"
           InputLabelProps={{
+            style: {
+              fontSize: 34
+            },
             shrink: true,
-            classes: {root: classes.label}
-
-          }}
+           classes: {root: classes.label}
+          }} 
+          inputProps={{style: {fontSize: 34}}} 
         />
-        
+      
+        </div>
+        </div>
 
-        </div>
-        </div>
       </Paper>
     );
   }
@@ -115,4 +130,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,null)(withStyles(useStyles)(Personal))
+export default connect(mapStateToProps,null)(withStyles(styleExport)(Personal))

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch , Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/sideBar/SideBar";
 // import Tfasim from "./components/Tfasim";
 import Contacts from "./components/Contacts";
 import Personal from "./components/Personal";
@@ -13,7 +13,7 @@ import SignUp from "./components/SignUp";
 import CreateUser from "./components/CreateUser";
 import RedirectorLogin from "./components/RedirectorLogin"
 import RedirectorHome from "./components/RedirectorHome"
-import ShmirotTable from "./components/ShmirotTable";
+import ShmirotTable from "./components/ShmirotTable/ShmirotTable";
 import CreateToranut from "./components/createToranot/CreateToranut";
 import SendMessage from "./components/SendMessage";
 import MailBox from "./components/MailBox";
@@ -22,13 +22,41 @@ import {NotificationManager,NotificationContainer} from 'react-notifications';
 import CONFIG from "./configs/env";
 import Notifications from '../src/components/Notifications';
 import ExchangeApprove from "./components/Approve/ExchageApprove";
-import PickUsers from "./components/Users/PickUsers";
+import UsersSelect from "./components/Users/UsersSelect";
 import { loginAction } from "./Actions/loginAction";
 import { connect } from "react-redux";
 import {initActionMiddleware} from "./Actions/initActionMiddleware";
 import LoadingPage from "./components/LoadingPage";
 import DefineJobs from "./components/DefineJobs/DefineJobs";
 import ChangeUser from "./components/ChangeUser/ChangeUser";
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./components/globalStyles";
+import { lightTheme, darkTheme } from "./components/Themes"
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {ThemeContext} from './ColorMode/colors';
+
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+const themeLight = createMuiTheme({
+  palette: {
+    background: {
+      default: "#303030"
+    }
+  }
+});
+
+const themeDark = createMuiTheme({
+  palette: {
+    background: {
+      default: "#222222"
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  }
+});
+
+
+
  class Switcher extends React.Component {
   constructor() {
     super();
@@ -40,17 +68,18 @@ import ChangeUser from "./components/ChangeUser/ChangeUser";
       exchanges: [],
       loading:true,
       jwt: null,
-      ifToDirect:false
+      ifToDirect:false,
+      DarkMode:false
      };
   
     this.handleLogin = this.handleLogin.bind(this);
     this.getUserDatails = this.getUserDatails.bind(this);
-
+    this.changeDarkMode = this.changeDarkMode.bind(this);
   }
-
+  static contextType = ThemeContext;
 
     componentWillMount() {
-      console.log("componentWillMount Swticher");
+      
     }
    
   ReadAndDispaly(i) {
@@ -66,31 +95,32 @@ import ChangeUser from "./components/ChangeUser/ChangeUser";
     var per = localStorage.getItem("permissionlvl")
     if (jwt !== null) {
       this.setState({ log: true, permissionlvl: per,jwt:jwt});
-      this.props.loginDispatch(per);
+       this.props.loginDispatch(per);
+
     }
-  //  if (this.state.log === true) {
-    
-   // }
 
   }
  
    getUserDatails(jsonData) {
    console.log("switcher",jsonData);
-  // this.props.loginDispatch(jsonData.name, jsonData.sn, jsonData.password);
 
   this.setState({userDetails:jsonData,ifToDirect:true});
   }
+  changeDarkMode() {
+    this.props.changeDarkMode();
+  }
  
   handleLogin() {
-    console.log("rendring" , this.state);
+    console.log("rendring" , this.props);
     if (this.state.log === true) {
       if(this.props.pending == true) {
+
       return (
         <BrowserRouter>
-        {/* <Notifications noti={this.state.noti} /> */}
-          <SideBar />
+        <SideBar changeDarkMode={this.changeDarkMode} />
+        <div style={{width:"100%" , height: "100%" , backgroundColor: this.context.bodyBackGround}}>
           <Switch>
-            <Route path="/home" render={() => <HomePage  />} />
+           <Route path="/home" render={() => <HomePage  />} />
             <Route path="/haadafot" component={HaadafotSwitcher} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/personal" render={() => <Personal userDetails={this.state.userDetails} noti={this.state.noti} /> } />
@@ -102,16 +132,17 @@ import ChangeUser from "./components/ChangeUser/ChangeUser";
             <Route path="/sendmessage" render={() => <SendMessage permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/approve_change" render={() => <ExchangeApprove permissionlvl={this.state.permissionlvl} /> } />
             <Route path="/mail" render={() => <MailBox permissionlvl={this.state.permissionlvl} /> } />
-            <Route path="/pickusers" render={() => <PickUsers permissionlvl={this.state.permissionlvl} />} />
+            {/* <Route path="/pickusers" render={() => <UsersSelect permissionlvl={this.state.permissionlvl} />} /> */}
             <Route path="/pick_friend_toranot_together" render={() => <PickFriends permissionlvl={this.state.permissionlvl} />} />
             <Route path="/manage_jobs" render={() => <DefineJobs permissionlvl={this.state.permissionlvl} />} />
             <Route path="/change_user" render={() => <ChangeUser permissionlvl={this.state.permissionlvl} />} />
             <Route exact component={RedirectorHome} />
             <NotificationContainer />
           </Switch>
-        </BrowserRouter>
-      );
-     } else {
+          </div>
+          </BrowserRouter>);
+      
+        } else {
        return <LoadingPage />
      }
     } else if (this.state.log === false) {
@@ -127,6 +158,8 @@ import ChangeUser from "./components/ChangeUser/ChangeUser";
     }
   }
   render() {
+    console.log("componentWillMount Swticher" , this.context);
+
     return this.handleLogin();
   }
 }

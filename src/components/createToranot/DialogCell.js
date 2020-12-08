@@ -39,11 +39,17 @@ class DialogCell extends React.Component {
     componentWillMount() {
         var arri = [];
         arri.push(<Rectangle width={20} height={20} fill={{color:'black'}}  />)
-        arri.push(<Circle r={14} fill={{color:'#2409ba'}}  />)
-        arri.push(<Ellipse rx={5} ry={15} fill={{color:'#2409ba'}}  />)
         arri.push(<Triangle width={15} height={15} fill={{color:'#2409ba'}}  />)
-        arri.push(<Rectangle width={20} height={20} fill={{color:'pink'}}  />)
-        arri.push(<Line x1={25} x2={35} y1={25} y2={35} stroke={{color:'#E65243'}} />)
+        arri.push(<Circle r={14} fill={{color:'#2409ba'}}  />)
+
+        // arri.push(<Ellipse rx={5} ry={15} fill={{color:'#2409ba'}}  />)
+        // arri.push(<Triangle width={15} height={15} fill={{color:'#2409ba'}}  />)
+        // arri.push(<Rectangle width={20} height={20} fill={{color:'pink'}}  />)
+        // arri.push(<Line x1={25} x2={35} y1={25} y2={35} stroke={{color:'#E65243'}} />)
+        // arri.push(<Rectangle width={20} height={20} fill={{color:'black'}}  />)
+        // arri.push(<Rectangle width={20} height={20} fill={{color:'black'}}  />)
+        // arri.push(<Rectangle width={20} height={20} fill={{color:'black'}}  />)
+
         this.setState({arrayOfShapes:arri});
         // arri.push(<Circle r={20} fill={{color:'black'}}  />);
         // arri.push(<Ellipse rx={30} ry={10}  fill={{color:'black'}}  />)
@@ -65,7 +71,7 @@ class DialogCell extends React.Component {
                     var arrayData = nextProps.toranots.toranotsNextMonth.filter(el => nextProps.currentDateDialog == new Date(el.date).getDate());
                   }
                   this.setState({usersDay: arrayData});
-         
+
         }
     }
         preDelete(user) {
@@ -87,23 +93,20 @@ class DialogCell extends React.Component {
                                     <i style={{ fontSize: "20px" }} className="material-icons">delete</i>
                                 </Fab>
                             </div>)
-                    }
-                }
-            }
+                    }}         }
           return false;
       }
       renderBody(postion) {
-         
-
           var arri=[];
           console.log("amountPerDay" , this.props);
         for(var i=0;i<this.props.amountPerDay;i++) {
-            var shmiraType = this.hasShmiraType(i+postion);
-            console.log("shmira type" , shmiraType ,i)
+            var addingValue = i+postion;
+            var shmiraType = this.hasShmiraType(addingValue);
+            console.log("shmira type" , shmiraType ,i , postion)
             console.log("succseed");
             arri.push(<ListItem style={{ justifyContent: "flex-start"}}>
                                     <div className="list-item-shape">
-                                     {this.state.arrayOfShapes[i]}
+                                     {this.state.arrayOfShapes[i % 3]}
                                     </div>
                                     {  shmiraType == false?
                                     <ButtonInDialog {...this.props} shmiraType={i+postion} />
@@ -140,7 +143,10 @@ class DialogCell extends React.Component {
 
                 </div>
                 <div id="div_left_dialog">
-                { this.renderBody(5)}
+                <List style={{overflow: "hidden", direction: "rtl",width: "100%" }}>
+                { this.renderBody(parseInt(this.props.amountPerDay))}
+                </List>
+
 
                 </div>
                 </div> : null}

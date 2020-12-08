@@ -31,17 +31,42 @@ class UserListComp extends React.Component {
             if(keyA > keyB) return 1;
             return 0;
         });
-
-        
-
-
     }
-        //console.log("arri " , props.arri);
         this.setState({userList:userList});
         console.log("toranim" , this.props.toranim);
 
         var userListThisMonth = this.props.toranim.toranimThisMonth;
         var userListNextMonth = this.props.toranim.toranimNextMonth;
+        this.setState({userListThis:userListThisMonth,userListNext:userListNextMonth});
+    }
+
+    componentWillReceiveProps(props) {
+        this.makeUserList(props);
+    }
+    makeUserList(props) {
+        var arri = [];
+        var userList = [];
+        if(props.tabValue == 0) {
+            console.log("propsUserLista" , this.props)
+            userList = props.toranim.toranimThisMonth;
+        } else {
+            userList = props.toranim.toranimNextMonth;
+        }
+        console.log("userList" , userList);
+        if(userList != undefined) {
+       userList.sort(function(a,b){
+            var keyA = a.points;
+            var keyB = b.points;
+            if(keyA < keyB) return -1;
+            if(keyA > keyB) return 1;
+            return 0;
+        });
+    }
+        this.setState({userList:userList});
+        console.log("toranim" , props.toranim);
+
+        var userListThisMonth = props.toranim.toranimThisMonth;
+        var userListNextMonth = props.toranim.toranimNextMonth;
         this.setState({userListThis:userListThisMonth,userListNext:userListNextMonth});
     }
 
@@ -91,7 +116,7 @@ class UserListComp extends React.Component {
     }
   render() {
     return (
-        <div>
+        <div style={{overflow:'scroll',height:"100%"}}>
         {this.createUserList()}
         </div>
         );

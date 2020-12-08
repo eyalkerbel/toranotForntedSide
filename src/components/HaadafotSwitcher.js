@@ -1,3 +1,4 @@
+import styleExport from "./themeStyle";
 import React, { Fragment } from "react";
 import Paper from "@material-ui/core/Paper";
 import Haadafot from "./Haadafot";
@@ -6,6 +7,7 @@ import { Button } from "@material-ui/core";
 import LoadingPage from "./LoadingPage";
 import CONFIG from "../configs/env"
 import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
 
  class HaadafotSwitcher extends React.Component {
     constructor() {
@@ -50,7 +52,7 @@ import { connect } from "react-redux";
             final += (sub / (1000 * 3600 * 24)) + 1
           }
         });
-        let f1 = 8 - final;
+        let f1 = 4 - final;
         console.log("f1 " , f1);
         this.setState({ dayCount: f1 }, () => this.limiter())
      //  return f1;
@@ -296,14 +298,15 @@ import { connect } from "react-redux";
 
     render() {
       //  {console.log("arri" , this.state.arri)}
+      const {classes} = this.props;
         return (
             <Fragment>
                 {this.state.loaded ? (
                     <Paper className="maincontainer">
-                        <div className="header-container">
+                    <div className={`header-container ${classes.headerStyle}`}>
                             <h1 className="header">העדפות ואילוצים</h1>
                             <div className="divider" />
-                            <h3 style={{ color: "red", marginTop: "4px" }}>ניתן לבחור עד 8 אילוצים</h3>
+                            <h3 style={{ color: "red", marginTop: "4px" }}>ניתן לבחור עד 4 אילוצים</h3>
                             <h3 style={{ color: "grey", marginTop: "4px" }}>יש לך עוד <span style={{ color: "teal" }}>{this.props.numRemaining}</span> העדפות ואילוצים להזין.</h3>
                         </div>
                         {/* {this.state.arri.map(item => item)} */}
@@ -352,4 +355,4 @@ const mapStateToProps = state => ({
     numRemaining:state.myHaadafot.numRemaining
   });
 
-  export default connect(mapStateToProps,null)(HaadafotSwitcher);
+  export default connect(mapStateToProps,null)((withStyles(styleExport)(HaadafotSwitcher)))

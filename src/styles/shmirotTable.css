@@ -9,7 +9,24 @@
   box-sizing: border-box;
   min-height: 100% !important;
 }
+#div-label-in-cell{
+  display: flex;
+  flex-direction: column;
+   align-items: center;
+    margin: 3px 5px 3px 5px;
+    height: 20px;
+}
 
+.maincontainer-dialog {
+  width: 80%;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  padding-bottom: 0;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  min-height: 100% !important;
+}
 .divider2{
   width: 100%;
   border-bottom: solid lightgray 1px;
@@ -48,38 +65,46 @@
     flex-direction: row;
     width: 100%;
     font-weight: 600;
-    font-size: 1.1rem
+    font-size: 1.1rem;
+    min-width: 0; /* this one right here does it!*/
+    flex-flow:row nowrap;
+
+
 }
 .shmirotheaders-items {
    border: solid 1px teal;
    flex: 1;
   flex-direction: column;
   display: flex;
+   min-width: 0
 }
-@media (max-width: 100px) {
+/* @media (max-width: 100px) {
   .shmirotheaders {
     display: none;
-}
+} */
 
 .shmirotHeader{
   border: solid 1px teal;
-  flex: 1; 
+  flex: 1 1 0; 
   flex-direction: column;
   display: flex;
+  flex-flow:row nowrap;
+  min-width: 0; /* this one right here does it!*/
+
 }
 
 
 
 
 .shmirotdivs {
-  display: "flex";
-  width: 100%;
-  flex-direction: column;
-}
+  display: flex;
+  flex-direction: row;
 
 }
 
-.shmirotdivs {
+
+
+.shmirotdivs-demo {
   display: flex;
   width: 100%;
   flex: 1;
@@ -97,18 +122,17 @@
   width: 100%;
 }
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
   .maincontainer {
     width: 100%;
   }
 
-}
-@media only screen and (max-width:430px) {
+} */
+/* @media only screen and (max-width:430px) {
   .shmirotheaders-items{
-    width: 14.285%;
-    /* flex: 0 0; */
+    
   }
-}
+}  */
 
 .emptyCell {
   border: solid 1px teal;
@@ -136,6 +160,9 @@
   min-height: 12vh;
   padding: 5px;
   overflow: hidden;
+  /* flex-flow:row nowrap; */
+  /* min-width: 0; this one right here does it! */
+
 }
 .shmirotHeadersContainer{
   width: 100%;
@@ -143,6 +170,8 @@
   border: teal 1px solid;
   margin-top: 10px;
   overflow: hidden;
+
+  
 }
 .full-cell-details {
   width: 100%;
@@ -152,10 +181,12 @@
 }
 .secondRowCell {
   width: 100%;
-  height: 100%;
+  height: 50%;
   margin-top: 10px;
 }
-
+.oneRowCell {
+  /* height: 50%; */
+}
 .fobi1 {
   background-color: teal !important;
   margin-left: 10px !important;
@@ -194,9 +225,42 @@
 .row-xs-12 {
   white-space: nowrap !important;
   max-height: 100%;
+  height: 50%;
+  width: 100%;
   overflow: auto;
+  /* overflow: scroll; */
+  
 }
+.row-xs-12-2 {
+  white-space: nowrap !important;
+  max-height: 100%;
+  overflow: auto;
+  /* height: 50%;
+  max-width: 170px; */
+
+  /* position: absolute;
+    top: 70%;
+    transform: translate(0,-50%); */
+}
+
 .row-xs-3 {
   float: none !important;
   display: inline-block !important;
+}
+
+
+.after-pick-one {
+  width: 100%;
+  height: 25%;
+}
+#change-second-button-shmirot-table {
+  /* align-self: flex-end; */
+  justify-content: center;  
+}
+
+.dispay-my-data {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
 }
